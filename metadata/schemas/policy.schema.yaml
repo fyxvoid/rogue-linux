@@ -1,0 +1,27 @@
+$schema: http://json-schema.org/draft-07/schema#
+type: object
+properties:
+  filesystem:
+    type: object
+    properties:
+      read:
+        type: array
+        items:
+          type: string
+      write:
+        type: array
+        items:
+          type: string
+
+  network:
+    type: object
+    properties:
+      outbound:
+        type: boolean
+
+  capabilities:
+    type: array
+    items:
+      type: string
+
+additionalProperties: false

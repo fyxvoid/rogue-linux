@@ -1,0 +1,42 @@
+$schema: http://json-schema.org/draft-07/schema#
+type: object
+required:
+  - name
+  - version
+  - category
+  - source
+
+properties:
+  name:
+    type: string
+
+  version:
+    type: string
+
+  category:
+    type: string
+
+  summary:
+    type: string
+
+  source:
+    type: object
+    required: [kind, url, file]
+    properties:
+      kind:
+        type: string
+        enum: [tarball, git]
+      url:
+        type: string
+      file:
+        type: string
+
+  depends:
+    type: object
+    properties:
+      build:
+        type: array
+        items:
+          type: string
+
+additionalProperties: false
