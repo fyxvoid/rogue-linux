@@ -1,68 +1,62 @@
-# rogue-linux
+# Rogue Linux ▐ COGMAN ▌
 
-A minimal, deterministic Linux distribution build system.
+A minimal, deterministic, and AI-assisted Linux distribution build system.
 
-## What This Project Is
-Rogue Linux is a metadata-driven build system for creating Linux distributions. It is designed to be deterministic—given the same inputs, it produces the same outputs. It uses a strict two-stage pipeline to separate planning (what to do) from execution (actually doing it). It prioritizes correctness and speed over convenience.
+## 🛡️ Executive Summary
+Rogue Linux is a metadata-driven infrastructure for constructing sovereign operating systems. It utilizes a strict, two-stage **modular architecture** that separates planning (Rust) from execution (C), ensuring absolute predictability and near-zero build overhead.
 
-## What This Project Is NOT
-- **Not a package manager**: It doesn't handle runtime updates or repository syncing.
-- **Not an init system**: It builds the OS; it doesn't manage services at boot.
-- **Not a runtime configuration tool**: It builds stable images.
-- **Not AI-driven execution**: AI is used for advice, not for deciding what code runs on your hardware.
+## ✨ Key Features
+- **Deterministic Pipeline**: Identical inputs yield bit-identical build plans.
+- **Modular Cogman**:
+    - **Planner (Rust)**: High-safety dependency resolution and validation.
+    - **Executor (C)**: High-performance, isolated instruction runner.
+    - **Advisor (AI)**: Local LLM (`Qwen2.5-3B`) for context-aware failure analysis, gated by build flags.
+- **Rogue Labs**: Integrated hybrid cloud/local testing environment with OpenVPN support.
+- **Cyberpunk SSG**: High-performance website engine (76KB payload) for package indexing and community.
+- **Production-Ready Metadata**: 166 packages verified with strict `package.toml` schema (v1.0).
 
-## Core Component: cogman
-`cogman` is the engine that drives rogue-linux. 
-- **What it does**: Resolves dependencies, generates build plans, and executes them in isolated environments.
-- **What it never does**: Improvises. If a step isn't in the plan, it won't happen.
-- **Planner vs Executor**: The system is split into a Rust planner (`cogman-planner`) and a C executor (`cogman-exec`).
-- **Why?**: Rust handles complex metadata and graphs safely. C executes the resulting plan with near-zero overhead and absolute obedience.
+## 📊 Performance Benchmarks
+The modular refactor (Rust/C) achieved massive reductions in overhead compared to the legacy Python implementation.
 
-## High-Level Architecture
-1. **TOML**: You define your package metadata in TOML.
-2. **Plan**: The planner validates the metadata and emits a binary `.plan` file.
-3. **Executor**: The C executor maps the plan and runs the steps.
+```mermaid
+gantt
+    title Build System Overhead (ms)
+    dateFormat  X
+    axisFormat %s
+    section Legacy (Python)
+    Load & Resolve : 0, 450
+    section Current (Rust)
+    Load & Resolve : 0, 8
+```
 
-This one-directional flow means you can verify exactly what a build will do before it ever touches your filesystem.
+| Metric | Legacy (Python) | Current (Modular) | Improvement |
+|--------|-----------------|-------------------|-------------|
+| **Planner Latency** | ~450ms | **~8ms** | **56x Faster** |
+| **Peak Memory (RSS)** | ~85MB | **~4MB** | **21x Reduction** |
+| **Exec Overhead** | ~45ms/proc | **~0.9ms/proc** | **50x Faster** |
 
-## Performance Summary
-The rewrite from legacy Python to Rust/C changed everything:
-- **Planner**: 30x to 80x faster resolution.
-- **Executor**: 50x less overhead on process startup.
-- **Memory**: 20x reduction in peak usage.
+## 🏗️ Architecture
+```mermaid
+graph LR
+    TOML[package.toml] --> Planner[Rust Planner]
+    Planner -->|Binary Plan| Exec[C Executor]
+    Exec -->|Isolated Build| RootFS[/mnt/rogue]
+    
+    subgraph "AI Gating"
+    Planner -.->|Failure Context| Advisor[AI Advisor]
+    Advisor -.->|Butler Advice| User[Operator]
+    end
+```
 
-Speed comes from Rust's `serde` for metadata and a "stateless" C executor that removes runtime logic entirely. For details, see [docs/BENCHMARKING.md](docs/BENCHMARKING.md).
+## 🗺️ Documentation Map
+- **[ARCHITECTURE](./docs/architecture/ARCHITECTURE.md)**: Deep dive into the two-stage logic.
+- **[AI STRATEGY](./docs/architecture/ai_architecture.md)**: Model selection and safety boundaries.
+- **[METADATA](./docs/implementation/METADATA.md)**: Defining packages for Rogue Linux.
+- **[HISTORY](./docs/project/HISTORY.md)**: The journey from LFS to Cyberpunk.
+- **[VERIFICATION](./docs/VERIFICATION_AUDIT.md)**: Final audit results.
 
-## Testing & Validation
-We don't guess. The system is verified by a suite of 500–600 generated test cases covering metadata failures, graph cycles, and plan correctness. We only move toward rootfs construction when the tooling is 100% validated for determinism. See [docs/TESTING.md](docs/TESTING.md).
+## 🚀 Status
+The **Infrastructure Hardening** phase is complete. The build system, website, and AI advisor are fully verified. The project is currently positioned for the final **Rootfs Construction** phase.
 
-## AI Assistance (Clear Boundaries)
-AI is used in the planner for **Advisory Only** tasks—like explaining why a build failed.
-- AI is optional (gated by a build flag).
-- AI never executes code or modifies the binary plan.
-- AI runs locally.
-- See [docs/AI-BOUNDARIES.md](docs/AI-BOUNDARIES.md).
-
-## Documentation Map
-Detailed deep-dives are in the `docs/` directory:
-- [ARCHITECTURE.md](docs/ARCHITECTURE.md): The two-stage design.
-- [METADATA.md](docs/METADATA.md): How to define packages.
-- [TESTING.md](docs/TESTING.md): Our validation strategy.
-- [BENCHMARKING.md](docs/BENCHMARKING.md): Performance results.
-- [ROOTFS-INTERFACE.md](docs/ROOTFS-INTERFACE.md): How we talk to the filesystem.
-- [AI-BOUNDARIES.md](docs/AI-BOUNDARIES.md): Strict rules for LLM usage.
-
-## Project Status
-The **Toolchain and Validation** phase is complete. The binaries are stable, documentation is authoritative, and the performance baseline is set. **Rootfs work is intentionally not started yet**; we build the tool correctly before we build the system.
-
-## How to Read This Repo
-1. Start with [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). It’s the mental model.
-2. Read [docs/METADATA.md](docs/METADATA.md) to see how components are defined.
-3. If you care about numbers, check [docs/BENCHMARKING.md](docs/BENCHMARKING.md).
-
-Deep dives into failure models and lifecycle live in `docs/` as well.
-
-## Philosophy
-- **Determinism over convenience**: We would rather a build fail than be "guessable."
-- **Planning over improvisation**: The host system is never a side effect.
-- **Boring systems are good systems**: No magic, just a pipeline.
+---
+*"Boring systems are good systems. Precision is our primary aesthetic."*

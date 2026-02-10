@@ -1,0 +1,233 @@
+/* Rogue Linux - Page Specifics */
+
+/* Hero Section */
+.hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 0 2rem;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    filter: blur(50px);
+}
+
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.hero p {
+    font-size: 1.4rem;
+    max-width: 700px;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+}
+
+/* Glass Cards */
+.card,
+.plan,
+.login-card,
+.pkg-item,
+.category,
+.sidebar-widget {
+    background: rgba(10, 15, 30, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: 2px solid rgba(0, 243, 255, 0.3);
+    padding: 2.5rem;
+    border-radius: 4px;
+    /* Slightly boxy for tech feel */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover,
+.plan:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 40px rgba(0, 243, 255, 0.1);
+    background: rgba(10, 15, 30, 0.6);
+}
+
+.card h3,
+.plan h2 {
+    color: var(--primary-color);
+    font-family: var(--font-heading);
+    margin-top: 0;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+/* Grid Layouts */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    padding: 6rem 10%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+/* Package List */
+.search-bar {
+    width: 100%;
+    padding: 1.2rem;
+    margin-bottom: 3rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-family: var(--font-main);
+    font-size: 1.3rem;
+    outline: none;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.05);
+}
+
+.search-bar::placeholder {
+    color: rgba(0, 243, 255, 0.3);
+}
+
+.pkg-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.pkg-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 2px solid var(--secondary-color);
+}
+
+.pkg-item:hover {
+    border-top-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.pkg-name {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.pkg-ver {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Pricing Special */
+.price {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.features-list li::before {
+    content: "Deploying ::";
+    color: var(--accent-color);
+    margin-right: 10px;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Login */
+.login-container {
+    padding: 4rem 0;
+}
+
+.input-group label {
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 60vh;
+        padding: 4rem 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+        margin: 2rem auto;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+        padding: 4rem 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .pkg-list {
+        grid-template-columns: 1fr;
+    }
+
+    .forum-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    .forum-grid aside {
+        order: -1;
+    }
+
+    .thread {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .thread-meta {
+        margin-top: 0.5rem;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+    }
+}

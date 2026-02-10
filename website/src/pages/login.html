@@ -1,0 +1,25 @@
+<!-- title: Access Control -->
+
+<div class="login-container">
+    <div class="login-card">
+        <h2 class="glitch" data-text="ACCESS CONTROL">ACCESS CONTROL</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Identity Verification Required</p>
+
+        <form onsubmit="event.preventDefault(); alert('ACCESS GRANTED... Redirecting to Dashboard');">
+            <div class="input-group">
+                <label>OPERATOR ID</label>
+                <input type="text" placeholder="username">
+            </div>
+            <div class="input-group">
+                <label>ACCESS KEY</label>
+                <input type="password" placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">AUTHENTICATE</button>
+        </form>
+
+        <p style="margin-top: 1.5rem; font-size: 0.8rem;">
+            <a href="#" style="color: var(--text-muted); text-decoration: none; margin-right: 1rem;">Forgot Key?</a>
+            <a href="#" style="color: var(--primary-color); text-decoration: none;">Register Identity</a>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rogue Linux | Access Control</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+    <div class="logo-container">
+        <img src="assets/images/rogue_linux_logo.png" alt="Rogue Linux" class="logo-img">
+        <span class="logo-text">
+            <span class="brand-rogue">ROGUE</span>
+            <span class="brand-linux">LINUX</span>
+        </span>
+    </div>
+    <div class="links">
+        <a href="index.html">Home</a>
+        <a href="packages.html">Packages</a>
+        <a href="community.html">Community</a>
+        <a href="pricing.html">Cogman Pricing</a>
+        <a href="login.html" style="color: var(--secondary-color);">Login</a>
+    </div>
+</nav>
+    <main>
+        <!-- title: Access Control -->
+
+<div class="login-container">
+    <div class="login-card">
+        <h2 class="glitch" data-text="ACCESS CONTROL">ACCESS CONTROL</h2>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">Identity Verification Required</p>
+
+        <form onsubmit="event.preventDefault(); alert('ACCESS GRANTED... Redirecting to Dashboard');">
+            <div class="input-group">
+                <label>OPERATOR ID</label>
+                <input type="text" placeholder="username">
+            </div>
+            <div class="input-group">
+                <label>ACCESS KEY</label>
+                <input type="password" placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">AUTHENTICATE</button>
+        </form>
+
+        <p style="margin-top: 1.5rem; font-size: 0.8rem;">
+            <a href="#" style="color: var(--text-muted); text-decoration: none; margin-right: 1rem;">Forgot Key?</a>
+            <a href="#" style="color: var(--primary-color); text-decoration: none;">Register Identity</a>
+        </p>
+    </div>
+</div>
+    </main>
+    <footer>
+    <p>&copy; 2026 Rogue Linux Project. Kernel & Packages are Open Source.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,56 @@
+/* Rogue Linux - Holographic Void Theme */
+:root {
+    /* Palette */
+    --bg-color: #020205;
+    /* Void Black */
+    --bg-alt: #050510;
+    --text-color: #e0e6ed;
+    --text-muted: #8892b0;
+
+    --primary-color: #00f3ff;
+    /* Holographic Blue */
+    --secondary-color: #bc13fe;
+    /* Electric Violet */
+    --accent-color: #00ff9d;
+    /* Data Green */
+
+    /* Effects */
+    --glass-bg: rgba(10, 15, 30, 0.6);
+    --glass-border: 1px solid rgba(0, 243, 255, 0.1);
+    --glass-highlight: 1px solid rgba(0, 243, 255, 0.3);
+
+    --neon-glow: 0 0 10px rgba(0, 243, 255, 0.3);
+    --neon-strong: 0 0 20px rgba(0, 243, 255, 0.5);
+
+    /* Typography */
+    --font-main: 'JetBrains Mono', 'Courier New', monospace;
+    --font-heading: 'Orbitron', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(rgba(0, 243, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    color: var(--text-color);
+    font-family: var(--font-main);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}

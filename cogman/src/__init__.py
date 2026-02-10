@@ -1,0 +1,3 @@
+"""
+Cogman Core Package
+"""
