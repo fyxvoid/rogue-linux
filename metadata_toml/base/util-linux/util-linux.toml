@@ -1,0 +1,46 @@
+[identity]
+name = "util-linux"
+version = "2.40"
+category = "base"
+summary = """
+Essential Linux system utilities including mount fdisk and more
+"""
+
+[source]
+kind = "tarball"
+file = "util-linux-2.40.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/ncurses", "base/readline"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting util-linux source, sir."
+tar -xf tar/util-linux-2.40.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring util-linux, sir."
+cd build
+../source/util-linux-2.40/configure --prefix=/usr \
+  --disable-chfn-chsh \
+  --disable-login \
+  --disable-nologin \
+  --disable-su \
+  --disable-setpriv \
+  --disable-runuser \
+  --disable-pylibmount \
+  --disable-static \
+  --without-python
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building util-linux, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing util-linux into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

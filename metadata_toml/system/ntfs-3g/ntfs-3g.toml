@@ -1,0 +1,38 @@
+[identity]
+name = "ntfs-3g"
+version = "2022.10.3"
+category = "system"
+summary = """
+NTFS filesystem driver for read-write access
+"""
+
+[source]
+kind = "tarball"
+file = "ntfs-3g-2022.10.3.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "system/fuse"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting ntfs-3g source, sir."
+tar -xf tar/ntfs-3g-2022.10.3.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring ntfs-3g, sir."
+cd build
+../source/ntfs-3g-2022.10.3/configure --prefix=/usr \
+  --disable-static
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building ntfs-3g, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing ntfs-3g into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

@@ -1,0 +1,37 @@
+[identity]
+name = "pigz"
+version = "2.8"
+category = "additional"
+summary = """
+Parallel implementation of gzip for multi-core compression
+"""
+
+[source]
+kind = "tarball"
+file = "pigz-2.8.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "libs/compression/zlib"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting pigz source, sir."
+tar -xf tar/pigz-2.8.tar.xz -C source
+""", """
+echo "[COGMAN] Building pigz, sir."
+cd source/pigz-2.8
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building pigz, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing pigz into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

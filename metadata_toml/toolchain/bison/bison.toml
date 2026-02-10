@@ -1,0 +1,38 @@
+[identity]
+name = "bison"
+version = "3.8.2"
+category = "toolchain"
+summary = """
+GNU Bison parser generator for LALR grammars
+"""
+
+[source]
+kind = "tarball"
+file = "bison-3.8.2.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "toolchain/m4"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting bison source, sir."
+tar -xf tar/bison-3.8.2.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring bison, sir."
+cd build
+../source/bison-3.8.2/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building bison, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing bison into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

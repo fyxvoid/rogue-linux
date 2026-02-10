@@ -1,0 +1,41 @@
+[identity]
+name = "e2fsprogs"
+version = "1.47.0"
+category = "base"
+summary = """
+Ext2/3/4 filesystem utilities including mkfs and fsck
+"""
+
+[source]
+kind = "tarball"
+file = "e2fsprogs-1.47.0.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/util-linux"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting e2fsprogs source, sir."
+tar -xf tar/e2fsprogs-1.47.0.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring e2fsprogs, sir."
+cd build
+../source/e2fsprogs-1.47.0/configure --prefix=/usr \
+  --sysconfdir=/etc \
+  --enable-elf-shlibs \
+  --disable-fsck \
+  --disable-uuidd
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building e2fsprogs, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing e2fsprogs into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

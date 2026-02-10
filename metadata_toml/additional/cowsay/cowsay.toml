@@ -1,0 +1,37 @@
+[identity]
+name = "cowsay"
+version = "3.04"
+category = "additional"
+summary = """
+Configurable talking ASCII cow for terminal
+"""
+
+[source]
+kind = "tarball"
+file = "cowsay-3.04.tar.xz"
+
+[dependencies]
+build = ["toolchain/perl"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting cowsay source, sir."
+tar -xf tar/cowsay-3.04.tar.xz -C source
+""", """
+echo "[COGMAN] Building cowsay, sir."
+cd source/cowsay-3.04
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building cowsay, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing cowsay into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

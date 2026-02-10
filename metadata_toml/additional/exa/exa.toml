@@ -1,0 +1,33 @@
+[identity]
+name = "exa"
+version = "0.10.1"
+category = "additional"
+summary = """
+Modern replacement for ls with color and Git support
+"""
+
+[source]
+kind = "tarball"
+file = "exa-0.10.1.tar.xz"
+
+[dependencies]
+build = ["scripting/rust/rust"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting exa source, sir."
+tar -xf tar/exa-0.10.1.tar.xz -C source
+""", """
+echo "[COGMAN] Building exa with Cargo, sir."
+cd source/exa-0.10.1
+cargo build --release
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Installing exa, sir."
+cd source/exa*
+install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"
+"""]
+
+[policy]

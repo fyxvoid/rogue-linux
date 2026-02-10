@@ -1,0 +1,5 @@
+steps:
+  - cd source/toybox-0.8.11 && make -j$(nproc)
+  - mkdir -p $PKGROOT/bin
+  - cp source/toybox-0.8.11/toybox $PKGROOT/bin/toybox
+

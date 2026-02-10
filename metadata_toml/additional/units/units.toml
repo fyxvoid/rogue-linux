@@ -1,0 +1,38 @@
+[identity]
+name = "units"
+version = "2.23"
+category = "additional"
+summary = """
+Unit conversion and calculation program
+"""
+
+[source]
+kind = "tarball"
+file = "units-2.23.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting units source, sir."
+tar -xf tar/units-2.23.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring units, sir."
+cd build
+../source/units-2.23/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building units, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing units into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

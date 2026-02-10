@@ -1,0 +1,38 @@
+[identity]
+name = "dosfstools"
+version = "4.2"
+category = "base"
+summary = """
+FAT filesystem utilities for creating and checking FAT volumes
+"""
+
+[source]
+kind = "tarball"
+file = "dosfstools-4.2.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting dosfstools source, sir."
+tar -xf tar/dosfstools-4.2.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring dosfstools, sir."
+cd build
+../source/dosfstools-4.2/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building dosfstools, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing dosfstools into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

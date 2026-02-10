@@ -1,0 +1,38 @@
+[identity]
+name = "toilet"
+version = "0.3"
+category = "additional"
+summary = """
+Display large colorful text in the terminal
+"""
+
+[source]
+kind = "tarball"
+file = "toilet-0.3.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting toilet source, sir."
+tar -xf tar/toilet-0.3.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring toilet, sir."
+cd build
+../source/toilet-0.3/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building toilet, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing toilet into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

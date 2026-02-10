@@ -1,0 +1,38 @@
+[identity]
+name = "diffutils"
+version = "3.10"
+category = "base"
+summary = """
+GNU file comparison utilities including diff and cmp
+"""
+
+[source]
+kind = "tarball"
+file = "diffutils-3.10.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting diffutils source, sir."
+tar -xf tar/diffutils-3.10.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring diffutils, sir."
+cd build
+../source/diffutils-3.10/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building diffutils, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing diffutils into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

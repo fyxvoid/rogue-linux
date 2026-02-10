@@ -1,0 +1,31 @@
+[identity]
+name = "iproute2"
+version = "6.7.0"
+category = "networking"
+description = """
+Advanced IP routing and network device configuration utilities, providing ip, ss, tc, and related tools.
+"""
+
+[build]
+steps = ["""
+echo "[COGMAN] Extracting iproute2 source, sir."
+tar -xf tar/iproute2-6.7.0.tar.xz -C source --strip-components=1
+""", """
+echo "[COGMAN] Preparing iproute2 build configuration, sir."
+sed -i 's|^PREFIX=.*|PREFIX=/usr|' source/Makefile
+sed -i 's|^SBINDIR=.*|SBINDIR=/usr/bin|' source/Makefile
+sed -i 's|^LIBDIR=.*|LIBDIR=/usr/lib|' source/Makefile
+""", """
+echo "[COGMAN] Building iproute2, sir."
+cd source
+make
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Installing iproute2 into pkgroot, sir."
+cd source
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

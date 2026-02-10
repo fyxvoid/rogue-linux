@@ -40,14 +40,18 @@ mkdir_p(const char *path)
     for (p = tmp + 1; *p; p++) {
         if (*p == '/') {
             *p = '\0';
-            if (mkdir(tmp, 0755) != 0 && errno != EEXIST)
+            if (mkdir(tmp, 0755) != 0 && errno != EEXIST) {
+                log_err("mkdir(%s) failed: %s", tmp, strerror(errno));
                 return -1;
+            }
             *p = '/';
         }
     }
 
-    if (mkdir(tmp, 0755) != 0 && errno != EEXIST)
+    if (mkdir(tmp, 0755) != 0 && errno != EEXIST) {
+        log_err("mkdir(%s) failed: %s", tmp, strerror(errno));
         return -1;
+    }
 
     log_debug("mkdir_p: %s", path);
     return 0;

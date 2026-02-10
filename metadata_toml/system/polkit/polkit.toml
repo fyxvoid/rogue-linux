@@ -1,0 +1,37 @@
+[identity]
+name = "polkit"
+version = "124"
+category = "system"
+summary = """
+Authorization framework for controlling system-wide privileges
+"""
+
+[source]
+kind = "tarball"
+file = "polkit-124.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/dbus", "libs/general/glib"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting polkit source, sir."
+tar -xf tar/polkit-124.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring polkit with Meson, sir."
+cd build
+meson setup ../source/polkit-124 . --prefix=/usr --buildtype=release
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building polkit, sir."
+cd build
+ninja
+""", """
+echo "[COGMAN] Installing polkit into staging root, sir."
+cd build
+DESTDIR="$PKGROOT" ninja install
+"""]
+
+[policy]

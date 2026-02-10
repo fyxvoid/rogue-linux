@@ -1,0 +1,16 @@
+[identity]
+name = "pkg"
+version = "1.0"
+category = "base"
+summary = "test"
+
+[identity.source]
+kind = "tarball"
+file = "pkg.tar.xz"
+
+[build]
+system = "make"
+steps = "echo build"
+
+[installer]
+steps = ["echo install"]

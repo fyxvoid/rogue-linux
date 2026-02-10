@@ -1,0 +1,37 @@
+[identity]
+name = "pixz"
+version = "1.0.7"
+category = "additional"
+summary = """
+Parallel indexed xz compression for multi-core systems
+"""
+
+[source]
+kind = "tarball"
+file = "pixz-1.0.7.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "libs/compression/xz"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting pixz source, sir."
+tar -xf tar/pixz-1.0.7.tar.xz -C source
+""", """
+echo "[COGMAN] Building pixz, sir."
+cd source/pixz-1.0.7
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building pixz, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing pixz into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

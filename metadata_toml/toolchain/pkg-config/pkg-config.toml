@@ -1,0 +1,38 @@
+[identity]
+name = "pkg-config"
+version = "0.29.2"
+category = "toolchain"
+summary = """
+Package configuration query tool for compiler and linker flags
+"""
+
+[source]
+kind = "tarball"
+file = "pkg-config-0.29.2.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "toolchain/glibc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting pkg-config source, sir."
+tar -xf tar/pkg-config-0.29.2.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring pkg-config, sir."
+cd build
+../source/pkg-config-0.29.2/configure --prefix=/usr \
+  --with-internal-glib
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building pkg-config, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing pkg-config into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

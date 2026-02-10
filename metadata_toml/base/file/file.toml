@@ -1,0 +1,38 @@
+[identity]
+name = "file"
+version = "5.45"
+category = "base"
+summary = """
+File type identification utility using magic numbers
+"""
+
+[source]
+kind = "tarball"
+file = "file-5.45.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "libs/compression/zlib"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting file source, sir."
+tar -xf tar/file-5.45.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring file, sir."
+cd build
+../source/file-5.45/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building file, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing file into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

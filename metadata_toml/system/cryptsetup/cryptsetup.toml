@@ -1,0 +1,38 @@
+[identity]
+name = "cryptsetup"
+version = "2.7.0"
+category = "system"
+summary = """
+Disk encryption setup utility using dm-crypt and LUKS
+"""
+
+[source]
+kind = "tarball"
+file = "cryptsetup-2.7.0.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "libs/crypto/openssl", "system/lvm2", "libs/general/json-c"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting cryptsetup source, sir."
+tar -xf tar/cryptsetup-2.7.0.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring cryptsetup, sir."
+cd build
+../source/cryptsetup-2.7.0/configure --prefix=/usr \
+  --disable-ssh-token
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building cryptsetup, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing cryptsetup into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

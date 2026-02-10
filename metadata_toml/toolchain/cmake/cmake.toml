@@ -1,0 +1,38 @@
+[identity]
+name = "cmake"
+version = "3.29.0"
+category = "toolchain"
+summary = """
+Cross-platform build system generator
+"""
+
+[source]
+kind = "tarball"
+file = "cmake-3.29.0.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "libs/general/curl", "libs/general/libarchive", "libs/general/libuv"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting cmake source, sir."
+tar -xf tar/cmake-3.29.0.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring cmake with CMake, sir."
+cd build
+cmake ../source/cmake-3.29.0 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_USE_SYSTEM_LIBRARIES=ON
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building cmake, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing cmake into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

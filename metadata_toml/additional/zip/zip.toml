@@ -1,0 +1,37 @@
+[identity]
+name = "zip"
+version = "3.0"
+category = "additional"
+summary = """
+Compression and file packaging utility for ZIP archives
+"""
+
+[source]
+kind = "tarball"
+file = "zip-3.0.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting zip source, sir."
+tar -xf tar/zip-3.0.tar.xz -C source
+""", """
+echo "[COGMAN] Building zip, sir."
+cd source/zip-3.0
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building zip, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing zip into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

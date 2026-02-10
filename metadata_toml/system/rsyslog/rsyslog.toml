@@ -1,0 +1,38 @@
+[identity]
+name = "rsyslog"
+version = "8.2312.0"
+category = "system"
+summary = """
+Enhanced system logging daemon with modular architecture
+"""
+
+[source]
+kind = "tarball"
+file = "rsyslog-8.2312.0.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "libs/general/json-c", "libs/general/libevent"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting rsyslog source, sir."
+tar -xf tar/rsyslog-8.2312.0.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring rsyslog, sir."
+cd build
+../source/rsyslog-8.2312.0/configure --prefix=/usr \
+  --sysconfdir=/etc
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building rsyslog, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing rsyslog into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

@@ -1,0 +1,39 @@
+[identity]
+name = "emacs"
+version = "29.3"
+category = "editors"
+summary = """
+GNU Emacs extensible self-documenting text editor
+"""
+
+[source]
+kind = "tarball"
+file = "emacs-29.3.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/ncurses", "libs/general/glib"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting emacs source, sir."
+tar -xf tar/emacs-29.3.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring emacs, sir."
+cd build
+../source/emacs-29.3/configure --prefix=/usr \
+  --with-modules \
+  --without-x
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building emacs, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing emacs into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

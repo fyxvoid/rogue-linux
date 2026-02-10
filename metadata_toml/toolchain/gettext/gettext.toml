@@ -1,0 +1,38 @@
+[identity]
+name = "gettext"
+version = "0.22.5"
+category = "toolchain"
+summary = """
+GNU internationalization and localization framework
+"""
+
+[source]
+kind = "tarball"
+file = "gettext-0.22.5.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "toolchain/glibc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting gettext source, sir."
+tar -xf tar/gettext-0.22.5.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring gettext, sir."
+cd build
+../source/gettext-0.22.5/configure --prefix=/usr \
+  --disable-static
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building gettext, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing gettext into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

@@ -1,0 +1,38 @@
+[identity]
+name = "kexec-tools"
+version = "2.0.28"
+category = "kernel"
+summary = """
+Kexec fast reboot utilities for Linux kernel
+"""
+
+[source]
+kind = "tarball"
+file = "kexec-tools-2.0.28.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "libs/compression/xz"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting kexec-tools source, sir."
+tar -xf tar/kexec-tools-2.0.28.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring kexec-tools, sir."
+cd build
+../source/kexec-tools-2.0.28/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building kexec-tools, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing kexec-tools into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

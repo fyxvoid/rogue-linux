@@ -1,0 +1,38 @@
+[identity]
+name = "time"
+version = "1.9"
+category = "additional"
+summary = """
+GNU time command for measuring execution time
+"""
+
+[source]
+kind = "tarball"
+file = "time-1.9.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting time source, sir."
+tar -xf tar/time-1.9.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring time, sir."
+cd build
+../source/time-1.9/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building time, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing time into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

@@ -1,0 +1,18 @@
+[identity]
+name = "libC"
+version = "1.0"
+category = "base"
+summary = "test"
+
+[identity.source]
+kind = "tarball"
+file = "libC.tar"
+
+
+
+[build]
+system = "make"
+steps = ["echo build libC"]
+
+[installer]
+steps = ["echo install libC"]

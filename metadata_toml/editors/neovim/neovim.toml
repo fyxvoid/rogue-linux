@@ -1,0 +1,37 @@
+[identity]
+name = "neovim"
+version = "0.9.5"
+category = "editors"
+summary = """
+Hyperextensible Vim-based text editor
+"""
+
+[source]
+kind = "tarball"
+file = "neovim-0.9.5.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "toolchain/cmake", "libs/general/libuv", "libs/general/msgpack", "base/util-linux"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting neovim source, sir."
+tar -xf tar/neovim-0.9.5.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring neovim with CMake, sir."
+cd build
+cmake ../source/neovim-0.9.5 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building neovim, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing neovim into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

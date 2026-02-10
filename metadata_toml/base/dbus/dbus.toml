@@ -1,0 +1,41 @@
+[identity]
+name = "dbus"
+version = "1.14.10"
+category = "base"
+summary = """
+Message bus system for inter-process communication
+"""
+
+[source]
+kind = "tarball"
+file = "dbus-1.14.10.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/expat"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting dbus source, sir."
+tar -xf tar/dbus-1.14.10.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring dbus, sir."
+cd build
+../source/dbus-1.14.10/configure --prefix=/usr \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
+  --disable-static \
+  --disable-doxygen-docs
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building dbus, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing dbus into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

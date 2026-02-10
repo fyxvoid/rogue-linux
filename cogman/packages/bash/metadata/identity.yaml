@@ -1,0 +1,16 @@
+name: bash
+version: 5.2.21
+category: base
+summary: GNU Bourne-Again Shell
+source:
+  kind: tarball
+  file: bash-5.2.21.tar.xz
+depends:
+  build:
+    - toolchain/gcc
+    - base/ncurses
+    - base/readline
+    - base/glibc
+  runtime:
+    - base/ncurses
+    - base/readline

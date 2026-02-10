@@ -1,0 +1,11 @@
+[identity]
+name = "p"
+version = "1"
+category = "c"
+summary = "s"
+[identity.source]
+kind = "tarball"
+file = "f"
+[build]
+system = "make"
+steps = []

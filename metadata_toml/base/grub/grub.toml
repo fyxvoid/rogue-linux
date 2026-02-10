@@ -1,0 +1,40 @@
+[identity]
+name = "grub"
+version = "2.12"
+category = "base"
+summary = """
+GRand Unified Bootloader for BIOS and UEFI systems
+"""
+
+[source]
+kind = "tarball"
+file = "grub-2.12.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "toolchain/flex", "toolchain/bison"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting grub source, sir."
+tar -xf tar/grub-2.12.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring grub, sir."
+cd build
+../source/grub-2.12/configure --prefix=/usr \
+  --sysconfdir=/etc \
+  --disable-efiemu \
+  --disable-werror
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building grub, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing grub into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

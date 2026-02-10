@@ -1,0 +1,19 @@
+[identity]
+        name = "cycA"
+        version = "1.0"
+        category = "base"
+        summary = "test"
+
+        [identity.source]
+        kind = "tarball"
+        file = "cycA.tar"
+
+        [identity.depends]
+build = ["base/cycB"]
+
+        [build]
+        system = "make"
+        steps = ["echo build cycA"]
+
+        [installer]
+        steps = ["echo install cycA"]

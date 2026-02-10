@@ -1,0 +1,38 @@
+[identity]
+name = "expat"
+version = "2.6.2"
+category = "base"
+summary = """
+XML parsing library for C with stream-oriented interface
+"""
+
+[source]
+kind = "tarball"
+file = "expat-2.6.2.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting expat source, sir."
+tar -xf tar/expat-2.6.2.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring expat, sir."
+cd build
+../source/expat-2.6.2/configure --prefix=/usr \
+  --disable-static
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building expat, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing expat into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

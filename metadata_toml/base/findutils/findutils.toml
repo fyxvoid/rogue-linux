@@ -1,0 +1,38 @@
+[identity]
+name = "findutils"
+version = "4.9.0"
+category = "base"
+summary = """
+GNU file searching utilities including find and xargs
+"""
+
+[source]
+kind = "tarball"
+file = "findutils-4.9.0.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting findutils source, sir."
+tar -xf tar/findutils-4.9.0.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring findutils, sir."
+cd build
+../source/findutils-4.9.0/configure --prefix=/usr \
+  --localstatedir=/var/lib/locate
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building findutils, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing findutils into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

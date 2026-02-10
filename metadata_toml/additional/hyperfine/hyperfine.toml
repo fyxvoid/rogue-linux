@@ -1,0 +1,33 @@
+[identity]
+name = "hyperfine"
+version = "1.18.0"
+category = "additional"
+summary = """
+Command-line benchmarking tool with statistical analysis
+"""
+
+[source]
+kind = "tarball"
+file = "hyperfine-1.18.0.tar.xz"
+
+[dependencies]
+build = ["scripting/rust/rust"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting hyperfine source, sir."
+tar -xf tar/hyperfine-1.18.0.tar.xz -C source
+""", """
+echo "[COGMAN] Building hyperfine with Cargo, sir."
+cd source/hyperfine-1.18.0
+cargo build --release
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Installing hyperfine, sir."
+cd source/hyperfine*
+install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"
+"""]
+
+[policy]

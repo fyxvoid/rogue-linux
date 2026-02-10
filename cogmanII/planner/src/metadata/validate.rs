@@ -42,7 +42,7 @@ pub fn validate(meta: &PackageMetadata) -> Result<(), PlannerError> {
     }
 
     // Builder: at least one command
-    if meta.builder.steps.commands.is_empty() {
+    if meta.build.steps.is_empty() {
         errors.push("builder.steps.commands must not be empty".into());
     }
 

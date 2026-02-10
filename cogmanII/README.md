@@ -1,146 +1,51 @@
 # cogmanII
 
-A clean-room reimplementation of `cogman` using a high-performance stack:
-**TOML** for metadata, **Rust** for planning, **C** for execution.
+> **Status**: [FROZEN] Pre-Rootfs Integration
+> **Architecture Contract**: [ARCHITECTURE.md](ARCHITECTURE.md)
 
-## Architecture
+A deterministic, clean-room build orchestrator for Rogue Linux.
+**Rust** Planner (decisions) + **C** Executor (actions).
 
-```
-TOML metadata ──→ Rust planner ──→ binary plan ──→ C executor
-      │                │                │               │
-   metadata/       planner/          .plan file     executor/
-   (human)        (decisions)        (mmap-able)    (machine)
-```
+## The Human Mental Model
 
-**One-directional data flow.** No feedback loops, no runtime configuration.
+1.  **Input**: You define a package in a simple TOML file (identity, build steps).
+2.  **Plan**: The Rust Planner reads your TOML and resolves the dependency graph.
+3.  **Resolve**: It calculates the exact, topological build order required.
+4.  **Emit**: It generates a single, immutable `.plan` binary file.
+5.  **Execution**: The C Executor maps this file into memory.
+6.  **Timeline**: It plays the plan like a tape (Mkdir → Exec → Copy → Verify).
+7.  **Isolation**: Each step runs in a fresh, isolated process; no state leaks.
+8.  **Output**: If successful, a directory map is created at `$PKGROOT`.
+9.  **Handoff**: This directory is passed to the rootfs builder for merging.
+10. **Philosophy**: No magic, no runtime solving, just deterministic execution.
 
-### cogman → cogmanII Mapping
+## Usage
 
-| cogman component | cogmanII equivalent | Language |
-|---|---|---|
-| `metadata/loader.py` | `planner/src/parse.rs` | YAML → TOML |
-| `metadata/verifier.py` | `planner/src/validate.rs` | Python → Rust |
-| *(not implemented)* | `planner/src/graph.rs` | — → Rust |
-| `builder/builder.py` | `planner/src/variants.rs` | Python → Rust |
-| `core/executor.py` | `executor/src/proc.c` | Python → C |
-| `deployer/*.py` | `executor/src/fs.c` | Python → C |
-| `core/log/voice.py` | `executor/src/log.c` | Python → C |
+### 1. Build a Plan
+```bash
+# Binary mode (default)
+cogmanII build metadata/profiles/base.toml -o install.plan
 
-## Install Variants
-
-cogmanII supports exactly **two** installation variants, mutually exclusive:
-
-### Binary Install (default)
-
-Installs prebuilt binaries. No compilation on the target machine.
-
-```
-cogmanII build --binary metadata/profiles/bash.toml -o plan.bin
-cogmanII-exec plan.bin
+# Native build mode
+cogmanII build --build --native metadata/profiles/base.toml -o build.plan
 ```
 
-Steps: extract archive → verify → copy into rootfs.
-
-### Native Build
-
-Compiles packages on the user's machine. Optional CPU-native optimizations.
-
-```
-cogmanII build --build metadata/profiles/bash.toml -o plan.bin
-cogmanII build --build --native metadata/profiles/bash.toml -o plan.bin
+### 2. Execute a Plan
+```bash
+# Execute (requires root or permission to write to /mnt/rogue/pkgroot)
+sudo cogmanII-exec install.plan
 ```
 
-Steps: create tmpdir → extract → configure → build → verify → install → cleanup.
+## Project Structure
 
-The `--native` flag injects:
-```
-CFLAGS="-march=native -mtune=native -O2"
-CXXFLAGS="-march=native -mtune=native -O2"
-```
+- **planner/**: Rust. Logic, graphs, decisions.
+- **executor/**: C. Syscalls, process lifecycle, strict obedience.
+- **metadata/**: TOML. Single source of truth.
 
-### Temporary Build Directory Lifecycle
+## Documentation
 
-```
-create → build → verify → install → cleanup
-```
-
-- All native builds occur in `/tmp/cogmanII-build-<name>/`
-- Verification checks artifact presence before installation
-- Failed verification aborts — no partial installs
-- `--keep-tmp` preserves temp dirs for debugging
-
-## CLI
-
-```
-cogmanII build   <metadata.toml> [--binary|--build] [--native] [--keep-tmp] [-o plan.bin]
-cogmanII install <metadata.toml> [-o plan.bin]
-cogmanII deploy  <metadata.toml> [--binary|--build] [--native] [--keep-tmp] [-o plan.bin]
-
-cogmanII-exec <plan.bin>
-```
-
-| Flag | Meaning |
-|---|---|
-| `--binary` | Binary install variant (default) |
-| `--build` | Native build variant |
-| `--native` | CPU-native optimizations (requires `--build`) |
-| `--keep-tmp` | Preserve temporary build directories |
-| `-o` | Output plan file (default: stdout) |
-| `--rootfs` | Target rootfs path (default: `/mnt/rogue`) |
-
-## Plan Artifact Format
-
-Binary, mmap-friendly, zero-copy:
-
-```
-┌──────────────────────────────┐
-│ PlanHeader      (64 bytes)   │  magic: "CGM2PLAN", version, variant, step_count
-├──────────────────────────────┤
-│ StepRecord[0]  (128 bytes)   │  op, fail_policy, offsets into string table
-│ StepRecord[1]  (128 bytes)   │
-│ ...                          │
-├──────────────────────────────┤
-│ String Table   (variable)    │  null-terminated command strings, env pairs
-└──────────────────────────────┘
-```
-
-The C executor `mmap()`s this file and walks it without allocating or parsing.
-
-## Building
-
-### Planner (Rust)
-
-```
-cd planner
-cargo build --release
-```
-
-Binary: `planner/target/release/cogman2-planner`
-
-### Executor (C)
-
-```
-cd executor
-make
-```
-
-Binary: `executor/cogmanII-exec`
-
-## Why cogmanII Is Faster
-
-| Factor | cogman | cogmanII |
-|---|---|---|
-| Startup | Python interpreter (~50ms) | Native binary (~1ms) |
-| Metadata parse | PyYAML + jsonschema | `serde` + typed structs |
-| Plan transfer | In-memory Python dicts | mmap'd flat binary |
-| Execution | `subprocess.run()` via shell | `fork()/execve()` direct |
-| Memory | Python runtime (~30MB RSS) | C executor (~1MB RSS) |
-| Dependency resolution | Not implemented | `petgraph` topological sort |
-
-## Design Philosophy
-
-- **dwm-style minimalism**: small, sharp, explicit
-- **No plugin systems**: compile what you need
-- **No dynamic configuration**: all decisions at plan time
-- **Determinism over convenience**: same input → same plan → same result
-- **Speed over extensibility**: one purpose, done well
+See [ARCHITECTURE.md](ARCHITECTURE.md) for:
+- Identity & Boundaries (The "Never" List)
+- Metadata Schema v1.0
+- Failure Philosophy
+- System Interfaces

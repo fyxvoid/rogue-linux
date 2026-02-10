@@ -1,0 +1,16 @@
+[identity]
+name = "manual"
+version = "1.0"
+category = "base"
+summary = "test"
+
+[identity.source]
+kind = "tarball"
+file = "manual.tar"
+
+[build]
+system = "make"
+steps = ["ls"]
+
+[installer]
+steps = ["ls"]

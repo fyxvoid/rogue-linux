@@ -1,0 +1,37 @@
+[identity]
+name = "fish"
+version = "3.7.0"
+category = "additional"
+summary = """
+Friendly interactive shell with autosuggestions
+"""
+
+[source]
+kind = "tarball"
+file = "fish-3.7.0.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "toolchain/cmake", "base/ncurses", "libs/general/pcre2"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting fish source, sir."
+tar -xf tar/fish-3.7.0.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring fish with CMake, sir."
+cd build
+cmake ../source/fish-3.7.0 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building fish, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing fish into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

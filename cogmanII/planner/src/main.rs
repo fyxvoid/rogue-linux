@@ -80,44 +80,69 @@ fn run_plan(
     log_ok("Metadata validation passed");
 
     // Step 3: Resolve dependency graph
-    log_info("Resolving dependency graph");
-    let mut dep_graph = graph::DepGraph::new();
-    let pkg_key = format!("{}/{}", meta.identity.category, meta.identity.name);
-    dep_graph.add_package(&pkg_key);
-    for dep in &meta.identity.depends.build {
-        dep_graph.add_dep(&pkg_key, dep);
-    }
-    match graph::topo::resolve_order(&dep_graph) {
-        Ok(order) => {
-            log_info(&format!(
-                "Build order resolved: {} package(s)",
-                order.order.len()
-            ));
-        }
-        Err(e) => die(&format!("Dependency resolution failed: {}", e)),
+    log_info("Resolving dependency graph (recursive)");
+    
+    // Infer metadata root: parent -> parent -> parent
+    // e.g. metadata/group/pkg/pkg.toml -> metadata/group/pkg -> metadata/group -> metadata
+    let metadata_dir = metadata_path
+        .parent()
+        .and_then(|p| p.parent())
+        .and_then(|p| p.parent())
+        .map(|p| p.to_path_buf())
+        .unwrap_or_else(|| {
+            log_err("Could not infer metadata root from input path. Expected 'metadata/group/pkg/file.toml'");
+            PathBuf::from(".") // Fallback to CWD?
+        });
+        
+    let mut loader = graph::resolve::RecursiveLoader::new(metadata_dir);
+    if let Err(e) = loader.inject_root(&meta) {
+        die(&format!("Dependency loading failed: {}", e));
     }
 
-    // Step 4: Generate variant-specific steps
+    // Step 4: Generate variant-specific steps for ALL packages in unresolved order
     let variant_name = match variant {
         Variant::Binary => "binary",
         Variant::Native => {
             if native_opt { "native (optimized)" } else { "native" }
         }
     };
+    
+    // We must resolve the full build order list
+    let build_list = match graph::topo::resolve_order(&loader.graph) {
+        Ok(order) => order.order,
+        Err(e) => die(&format!("Dependency resolution failed: {}", e)),
+    };
+    
     log_info(&format!(
-        "Planning {} install for '{}'", variant_name, meta.identity.name
+        "Build order resolved: {} package(s)",
+        build_list.len()
     ));
 
-    let mut steps = variants::plan_variant(&meta, rootfs, variant, native_opt);
+    log_info(&format!(
+        "Planning {} install for {} package(s)", variant_name, build_list.len()
+    ));
 
+    let mut all_steps = Vec::new();
+
+    for pkg_name in &build_list {
+        // Retrieve metadata from loader cache
+        let pkg_meta = match loader.metadata.get(pkg_name) {
+            Some(m) => m,
+            None => die(&format!("Metadata missing for resolved package: {}", pkg_name)),
+        };
+
+        let mut pkg_steps = variants::plan_variant(pkg_meta, rootfs, variant, native_opt);
+        all_steps.append(&mut pkg_steps);
+    }
+    
     // If --keep-tmp, remove cleanup steps from the plan
     if keep_tmp {
-        steps.retain(|s| s.op != plan::StepOp::Cleanup);
+        all_steps.retain(|s| s.op != plan::StepOp::Cleanup);
         log_info("Temporary directories will be preserved (--keep-tmp)");
     }
 
     // Step 5: Emit binary plan artifact
-    log_info(&format!("Emitting plan with {} step(s)", steps.len()));
+    log_info(&format!("Emitting plan with {} step(s)", all_steps.len()));
     match output {
         Some(ref path) => {
             let mut file = match std::fs::File::create(path) {
@@ -126,14 +151,14 @@ fn run_plan(
                     "Cannot create plan file {}: {}", path.display(), e
                 )),
             };
-            if let Err(e) = plan::emit_plan(&steps, variant, &mut file) {
+            if let Err(e) = plan::emit_plan(&all_steps, variant, &mut file) {
                 die(&format!("Failed to write plan: {}", e));
             }
             log_ok(&format!("Plan written to {}", path.display()));
         }
         None => {
             let mut stdout = std::io::stdout().lock();
-            if let Err(e) = plan::emit_plan(&steps, variant, &mut stdout) {
+            if let Err(e) = plan::emit_plan(&all_steps, variant, &mut stdout) {
                 die(&format!("Failed to write plan: {}", e));
             }
             log_ok("Plan written to stdout");

@@ -1,0 +1,43 @@
+[identity]
+name = "ncurses"
+version = "6.4-20230520"
+category = "base"
+summary = """
+Terminal handling library for screen-oriented programs
+"""
+
+[source]
+kind = "tarball"
+file = "ncurses-6.4-20230520.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting ncurses source, sir."
+tar -xf tar/ncurses-6.4-20230520.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring ncurses, sir."
+cd build
+../source/ncurses-6.4-20230520/configure --prefix=/usr \
+  --with-shared \
+  --without-debug \
+  --without-normal \
+  --with-cxx-shared \
+  --enable-pc-files \
+  --enable-widec
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building ncurses, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing ncurses into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

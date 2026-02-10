@@ -1,0 +1,37 @@
+[identity]
+name = "man-pages"
+version = "6.06"
+category = "base"
+summary = """
+Linux manual pages documenting kernel and C library APIs
+"""
+
+[source]
+kind = "tarball"
+file = "man-pages-6.06.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting man-pages source, sir."
+tar -xf tar/man-pages-6.06.tar.xz -C source
+""", """
+echo "[COGMAN] Building man-pages, sir."
+cd source/man-pages-6.06
+make -j$(nproc) prefix=/usr
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building man-pages, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing man-pages into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

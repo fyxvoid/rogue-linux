@@ -1,0 +1,33 @@
+[identity]
+name = "helix"
+version = "24.03"
+category = "editors"
+summary = """
+Post-modern modal text editor written in Rust
+"""
+
+[source]
+kind = "tarball"
+file = "helix-24.03.tar.xz"
+
+[dependencies]
+build = ["scripting/rust/rust"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting helix source, sir."
+tar -xf tar/helix-24.03.tar.xz -C source
+""", """
+echo "[COGMAN] Building helix with Cargo, sir."
+cd source/helix-24.03
+cargo build --release
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Installing helix, sir."
+cd source/helix*
+install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"
+"""]
+
+[policy]

@@ -1,0 +1,37 @@
+[identity]
+name = "sysvinit"
+version = "3.08"
+category = "base"
+summary = """
+System V style init process and related utilities
+"""
+
+[source]
+kind = "tarball"
+file = "sysvinit-3.08.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting sysvinit source, sir."
+tar -xf tar/sysvinit-3.08.tar.xz -C source
+""", """
+echo "[COGMAN] Building sysvinit, sir."
+cd source/sysvinit-3.08
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building sysvinit, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing sysvinit into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

@@ -1,0 +1,38 @@
+[identity]
+name = "screen"
+version = "4.9.1"
+category = "additional"
+summary = """
+Terminal multiplexer with detach and multi-display support
+"""
+
+[source]
+kind = "tarball"
+file = "screen-4.9.1.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/ncurses"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting screen source, sir."
+tar -xf tar/screen-4.9.1.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring screen, sir."
+cd build
+../source/screen-4.9.1/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building screen, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing screen into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

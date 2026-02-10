@@ -1,0 +1,13 @@
+name: zlib
+version: 1.3.1
+category: base
+summary: Compression library
+source:
+  kind: tarball
+  file: zlib-1.3.1.tar.gz
+depends:
+  build:
+    - toolchain/gcc
+    - base/glibc
+  runtime:
+    - base/glibc

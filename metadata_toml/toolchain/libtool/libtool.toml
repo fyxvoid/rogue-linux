@@ -1,0 +1,38 @@
+[identity]
+name = "libtool"
+version = "2.4.7"
+category = "toolchain"
+summary = """
+GNU Libtool generic library support script
+"""
+
+[source]
+kind = "tarball"
+file = "libtool-2.4.7.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "toolchain/automake"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting libtool source, sir."
+tar -xf tar/libtool-2.4.7.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring libtool, sir."
+cd build
+../source/libtool-2.4.7/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building libtool, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing libtool into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

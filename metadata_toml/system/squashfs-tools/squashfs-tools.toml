@@ -1,0 +1,37 @@
+[identity]
+name = "squashfs-tools"
+version = "4.6.1"
+category = "system"
+summary = """
+SquashFS compressed filesystem creation and extraction tools
+"""
+
+[source]
+kind = "tarball"
+file = "squashfs-tools-4.6.1.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "libs/compression/zlib", "libs/compression/xz", "libs/compression/lz4", "libs/compression/zstd"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting squashfs-tools source, sir."
+tar -xf tar/squashfs-tools-4.6.1.tar.xz -C source
+""", """
+echo "[COGMAN] Building squashfs-tools, sir."
+cd source/squashfs-tools-4.6.1
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building squashfs-tools, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing squashfs-tools into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

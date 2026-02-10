@@ -1,0 +1,39 @@
+[identity]
+name = "bash"
+version = "5.2.21"
+category = "base"
+summary = """
+GNU Bourne Again SHell interactive shell and scripting language
+"""
+
+[source]
+kind = "tarball"
+file = "bash-5.2.21.tar.gz"
+
+[dependencies]
+build = ["base/ncurses", "base/readline", "toolchain/gcc", "toolchain/glibc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting bash source, sir."
+tar -xf tar/bash-5.2.21.tar.gz -C source
+""", """
+echo "[COGMAN] Configuring bash, sir."
+cd build
+../source/bash-5.2.21/configure --prefix=/usr \
+  --without-bash-malloc \
+  --with-installed-readline
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building bash, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing bash into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

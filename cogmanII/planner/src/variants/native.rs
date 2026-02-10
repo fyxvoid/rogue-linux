@@ -54,7 +54,7 @@ pub fn plan(
     });
 
     // Phase 2: Builder steps (extract, configure)
-    for cmd in &meta.builder.steps.commands {
+    for cmd in &meta.build.steps {
         steps.push(PlanStep {
             op: StepOp::Exec,
             command: cmd.clone(),

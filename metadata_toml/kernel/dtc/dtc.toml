@@ -1,0 +1,37 @@
+[identity]
+name = "dtc"
+version = "1.7.0"
+category = "kernel"
+summary = """
+Device Tree Compiler for embedded system hardware description
+"""
+
+[source]
+kind = "tarball"
+file = "dtc-1.7.0.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting dtc source, sir."
+tar -xf tar/dtc-1.7.0.tar.xz -C source
+""", """
+echo "[COGMAN] Building dtc, sir."
+cd source/dtc-1.7.0
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building dtc, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing dtc into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

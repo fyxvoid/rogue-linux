@@ -1,0 +1,40 @@
+[identity]
+name = "eudev"
+version = "3.2.14"
+category = "base"
+summary = """
+Userspace device manager for Linux kernel device events
+"""
+
+[source]
+kind = "tarball"
+file = "eudev-3.2.14.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/kmod"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting eudev source, sir."
+tar -xf tar/eudev-3.2.14.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring eudev, sir."
+cd build
+../source/eudev-3.2.14/configure --prefix=/usr \
+  --sysconfdir=/etc \
+  --enable-manpages \
+  --disable-static
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building eudev, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing eudev into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

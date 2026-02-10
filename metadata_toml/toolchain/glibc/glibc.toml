@@ -1,0 +1,40 @@
+[identity]
+name = "glibc"
+version = "2.39"
+category = "toolchain"
+summary = """
+GNU C Library providing core system libraries and POSIX API implementation
+"""
+
+[source]
+kind = "tarball"
+file = "glibc-2.39.tar.xz"
+
+[dependencies]
+build = ["toolchain/linux-headers", "toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting glibc source, sir."
+tar -xf tar/glibc-2.39.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring glibc, sir."
+cd build
+../source/glibc-2.39/configure --prefix=/usr \
+  --disable-werror \
+  --enable-stack-protector=strong \
+  --with-headers=/usr/include
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building glibc, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing glibc into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

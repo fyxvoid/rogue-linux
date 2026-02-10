@@ -1,0 +1,32 @@
+[identity]
+name = "fzf"
+version = "0.46.1"
+category = "additional"
+summary = """
+Command-line fuzzy finder for interactive filtering
+"""
+
+[source]
+kind = "tarball"
+file = "fzf-0.46.1.tar.xz"
+
+[dependencies]
+build = ["scripting/go/go"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting fzf source, sir."
+tar -xf tar/fzf-0.46.1.tar.xz -C source
+""", """
+echo "[COGMAN] Building fzf with Go, sir."
+cd source/fzf-0.46.1
+go build -o ../../build/ ./...
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Installing fzf, sir."
+install -Dm755 build/* "$PKGROOT/usr/bin/"
+"""]
+
+[policy]

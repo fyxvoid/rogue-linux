@@ -1,0 +1,38 @@
+[identity]
+name = "at"
+version = "3.2.5"
+category = "system"
+summary = """
+Job scheduler for one-time command execution
+"""
+
+[source]
+kind = "tarball"
+file = "at-3.2.5.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/linux-pam"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting at source, sir."
+tar -xf tar/at-3.2.5.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring at, sir."
+cd build
+../source/at-3.2.5/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building at, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing at into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

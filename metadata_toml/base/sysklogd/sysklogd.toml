@@ -1,0 +1,37 @@
+[identity]
+name = "sysklogd"
+version = "1.5.1"
+category = "base"
+summary = """
+System logging daemons syslogd and klogd
+"""
+
+[source]
+kind = "tarball"
+file = "sysklogd-1.5.1.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting sysklogd source, sir."
+tar -xf tar/sysklogd-1.5.1.tar.xz -C source
+""", """
+echo "[COGMAN] Building sysklogd, sir."
+cd source/sysklogd-1.5.1
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building sysklogd, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing sysklogd into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

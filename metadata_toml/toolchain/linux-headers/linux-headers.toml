@@ -1,0 +1,34 @@
+[identity]
+name = "linux-headers"
+version = "6.8.2"
+category = "toolchain"
+summary = """
+Linux kernel headers for userspace API definitions
+"""
+
+[source]
+kind = "tarball"
+file = "linux-headers-6.8.2.tar.xz"
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting linux-headers source, sir."
+tar -xf tar/linux-headers-6.8.2.tar.xz -C source
+""", """
+echo "[COGMAN] Building linux-headers, sir."
+cd source/linux-headers-6.8.2
+make -j$(nproc) headers_install INSTALL_HDR_PATH=$PKGROOT/usr
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building linux-headers, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing linux-headers into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

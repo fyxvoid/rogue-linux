@@ -1,0 +1,13 @@
+name: toybox
+version: 0.8.11
+category: base
+summary: All-in-one Linux command line
+source:
+  kind: tarball
+  file: toybox-0.8.11.tar.gz
+depends:
+  build:
+    - toolchain/gcc
+    - base/glibc
+  runtime:
+    - base/glibc

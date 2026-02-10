@@ -1,0 +1,37 @@
+[identity]
+name = "systemd"
+version = "255"
+category = "system"
+summary = """
+System and service manager for Linux
+"""
+
+[source]
+kind = "tarball"
+file = "systemd-255.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/dbus", "base/linux-pam", "base/libcap", "base/kmod", "base/util-linux"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting systemd source, sir."
+tar -xf tar/systemd-255.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring systemd with Meson, sir."
+cd build
+meson setup ../source/systemd-255 . --prefix=/usr --buildtype=release -Ddefault-dnssec=no -Dfirstboot=false
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building systemd, sir."
+cd build
+ninja
+""", """
+echo "[COGMAN] Installing systemd into staging root, sir."
+cd build
+DESTDIR="$PKGROOT" ninja install
+"""]
+
+[policy]

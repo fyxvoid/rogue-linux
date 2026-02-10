@@ -1,0 +1,38 @@
+[identity]
+name = "sed"
+version = "4.9"
+category = "base"
+summary = """
+GNU Stream Editor for filtering and transforming text
+"""
+
+[source]
+kind = "tarball"
+file = "sed-4.9.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "toolchain/glibc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting sed source, sir."
+tar -xf tar/sed-4.9.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring sed, sir."
+cd build
+../source/sed-4.9/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building sed, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing sed into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

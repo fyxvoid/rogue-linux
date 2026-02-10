@@ -1,0 +1,38 @@
+[identity]
+name = "gzip"
+version = "1.13"
+category = "base"
+summary = """
+GNU Gzip compression utility
+"""
+
+[source]
+kind = "tarball"
+file = "gzip-1.13.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting gzip source, sir."
+tar -xf tar/gzip-1.13.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring gzip, sir."
+cd build
+../source/gzip-1.13/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building gzip, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing gzip into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

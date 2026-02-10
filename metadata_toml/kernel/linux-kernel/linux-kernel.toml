@@ -1,0 +1,37 @@
+[identity]
+name = "linux-kernel"
+version = "6.8.2"
+category = "kernel"
+summary = """
+Linux kernel providing the core operating system
+"""
+
+[source]
+kind = "tarball"
+file = "linux-kernel-6.8.2.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "toolchain/binutils", "base/kmod", "base/libelf"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting linux-kernel source, sir."
+tar -xf tar/linux-kernel-6.8.2.tar.xz -C source
+""", """
+echo "[COGMAN] Building linux-kernel, sir."
+cd source/linux-kernel-6.8.2
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building linux-kernel, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing linux-kernel into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

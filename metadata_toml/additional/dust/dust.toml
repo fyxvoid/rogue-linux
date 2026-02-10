@@ -1,0 +1,33 @@
+[identity]
+name = "dust"
+version = "0.9.0"
+category = "additional"
+summary = """
+More intuitive version of du for disk usage analysis
+"""
+
+[source]
+kind = "tarball"
+file = "dust-0.9.0.tar.xz"
+
+[dependencies]
+build = ["scripting/rust/rust"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting dust source, sir."
+tar -xf tar/dust-0.9.0.tar.xz -C source
+""", """
+echo "[COGMAN] Building dust with Cargo, sir."
+cd source/dust-0.9.0
+cargo build --release
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Installing dust, sir."
+cd source/dust*
+install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"
+"""]
+
+[policy]

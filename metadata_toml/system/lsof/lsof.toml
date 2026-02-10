@@ -1,0 +1,38 @@
+[identity]
+name = "lsof"
+version = "4.99.3"
+category = "system"
+summary = """
+List open files utility showing file descriptor information
+"""
+
+[source]
+kind = "tarball"
+file = "lsof-4.99.3.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting lsof source, sir."
+tar -xf tar/lsof-4.99.3.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring lsof, sir."
+cd build
+../source/lsof-4.99.3/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building lsof, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing lsof into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

@@ -1,0 +1,30 @@
+[identity]
+name = "iputils"
+version = "20240117"
+category = "networking"
+description = """
+Core network diagnostic utilities including ping, arping, tracepath, and clockdiff.
+"""
+
+[build]
+steps = ["""
+echo "[COGMAN] Extracting iputils source, sir."
+tar -xf tar/iputils-20240117.tar.xz -C source --strip-components=1
+""", """
+echo "[COGMAN] Configuring iputils with Meson, sir."
+cd source
+meson setup builddir \
+  --prefix=/usr \
+  --buildtype=release
+""", """
+echo "[COGMAN] Building iputils, sir."
+ninja -C source/builddir
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Installing iputils into pkgroot, sir."
+ninja -C source/builddir install
+"""]
+
+[policy]

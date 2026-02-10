@@ -8,16 +8,18 @@ use serde::Deserialize;
 
 /// Top-level package metadata (single .toml file).
 #[allow(dead_code)]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct PackageMetadata {
     pub identity: Identity,
-    pub builder: Builder,
+    #[allow(missing_docs)]
+    pub build: Builder,
     pub installer: Installer,
+    #[serde(default)]
     pub policy: Policy,
 }
 
 #[allow(dead_code)]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Identity {
     pub name: String,
     pub version: String,
@@ -29,7 +31,7 @@ pub struct Identity {
 }
 
 #[allow(dead_code)]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Source {
     pub kind: SourceKind,
     pub file: String,
@@ -43,7 +45,7 @@ pub enum SourceKind {
 }
 
 #[allow(dead_code)]
-#[derive(Debug, Deserialize, Default)]
+#[derive(Debug, Deserialize, Default, Clone)]
 pub struct Depends {
     #[serde(default)]
     pub build: Vec<String>,
@@ -64,42 +66,38 @@ pub enum BuildSystem {
 }
 
 #[allow(dead_code)]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Builder {
     pub system: BuildSystem,
     #[serde(default)]
     pub configure: Configure,
-    pub steps: BuilderSteps,
+    pub steps: Vec<String>,
 }
 
 #[allow(dead_code)]
-#[derive(Debug, Deserialize, Default)]
+#[derive(Debug, Deserialize, Default, Clone)]
 pub struct Configure {
     #[serde(default)]
     pub flags: Vec<String>,
 }
 
-#[derive(Debug, Deserialize)]
-pub struct BuilderSteps {
-    pub commands: Vec<String>,
-}
+// BuilderSteps struct removed
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Installer {
     pub steps: Vec<String>,
     #[serde(default)]
     pub verify: Option<Verify>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Verify {
     #[serde(default)]
     pub expected_files: Vec<String>,
     pub checksum: Option<String>,
 }
 
-#[allow(dead_code)]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Default, Clone)]
 pub struct Policy {
     #[serde(default)]
     pub filesystem: Filesystem,
@@ -110,7 +108,7 @@ pub struct Policy {
 }
 
 #[allow(dead_code)]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Filesystem {
     #[serde(default = "default_read")]
     pub read: Vec<String>,
@@ -136,7 +134,7 @@ fn default_write() -> Vec<String> {
 }
 
 #[allow(dead_code)]
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Network {
     #[serde(default)]
     pub outbound: bool,

@@ -1,0 +1,37 @@
+[identity]
+name = "hexedit"
+version = "1.6"
+category = "additional"
+summary = """
+View and edit files in hexadecimal or ASCII
+"""
+
+[source]
+kind = "tarball"
+file = "hexedit-1.6.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/ncurses"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting hexedit source, sir."
+tar -xf tar/hexedit-1.6.tar.xz -C source
+""", """
+echo "[COGMAN] Building hexedit, sir."
+cd source/hexedit-1.6
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building hexedit, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing hexedit into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

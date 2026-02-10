@@ -1,0 +1,37 @@
+[identity]
+name = "xxd-tool"
+version = "9.1"
+category = "additional"
+summary = """
+Make a hexdump or do the reverse from binary to hex
+"""
+
+[source]
+kind = "tarball"
+file = "xxd-tool-9.1.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting xxd-tool source, sir."
+tar -xf tar/xxd-tool-9.1.tar.xz -C source
+""", """
+echo "[COGMAN] Building xxd-tool, sir."
+cd source/xxd-tool-9.1
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building xxd-tool, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing xxd-tool into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

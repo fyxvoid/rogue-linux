@@ -1,0 +1,38 @@
+[identity]
+name = "psmisc"
+version = "23.7"
+category = "base"
+summary = """
+Signal and process tree utilities including pstree and killall
+"""
+
+[source]
+kind = "tarball"
+file = "psmisc-23.7.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/ncurses"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting psmisc source, sir."
+tar -xf tar/psmisc-23.7.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring psmisc, sir."
+cd build
+../source/psmisc-23.7/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building psmisc, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing psmisc into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

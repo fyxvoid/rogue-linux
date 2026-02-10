@@ -1,0 +1,38 @@
+[identity]
+name = "readline"
+version = "8.2"
+category = "base"
+summary = """
+GNU Readline library for command line editing
+"""
+
+[source]
+kind = "tarball"
+file = "readline-8.2.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/ncurses"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting readline source, sir."
+tar -xf tar/readline-8.2.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring readline, sir."
+cd build
+../source/readline-8.2/configure --prefix=/usr \
+  --with-curses
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building readline, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing readline into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

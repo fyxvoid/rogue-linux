@@ -1,0 +1,18 @@
+[identity]
+name = "libB"
+version = "1.0"
+category = "base"
+summary = "test"
+
+[identity.source]
+kind = "tarball"
+file = "libB.tar"
+
+
+
+[build]
+system = "make"
+steps = ["echo build libB"]
+
+[installer]
+steps = ["echo install libB"]

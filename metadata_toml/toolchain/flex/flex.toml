@@ -1,0 +1,38 @@
+[identity]
+name = "flex"
+version = "2.6.4"
+category = "toolchain"
+summary = """
+Fast Lexical Analyzer generator
+"""
+
+[source]
+kind = "tarball"
+file = "flex-2.6.4.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "toolchain/m4"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting flex source, sir."
+tar -xf tar/flex-2.6.4.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring flex, sir."
+cd build
+../source/flex-2.6.4/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building flex, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing flex into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

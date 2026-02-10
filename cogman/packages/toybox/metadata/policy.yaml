@@ -1,0 +1,8 @@
+filesystem:
+  read:
+    - /
+  write:
+    - /bin
+network:
+  outbound: false
+capabilities: []

@@ -1,0 +1,5 @@
+steps:
+  - rm -rf source
+  - mkdir -p source
+  - tar -xf /home/rogue/workspace/rogue-linux/tar/toybox-0.8.11.tar.gz -C source
+  - cd source/toybox-0.8.11 && make defconfig

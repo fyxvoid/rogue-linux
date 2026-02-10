@@ -1,0 +1,38 @@
+[identity]
+name = "xz-utils"
+version = "5.4.6"
+category = "base"
+summary = """
+XZ compression utilities and liblzma library
+"""
+
+[source]
+kind = "tarball"
+file = "xz-utils-5.4.6.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting xz-utils source, sir."
+tar -xf tar/xz-utils-5.4.6.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring xz-utils, sir."
+cd build
+../source/xz-utils-5.4.6/configure --prefix=/usr \
+  --disable-static
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building xz-utils, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing xz-utils into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

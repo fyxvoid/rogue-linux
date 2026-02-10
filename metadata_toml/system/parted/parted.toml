@@ -1,0 +1,38 @@
+[identity]
+name = "parted"
+version = "3.6"
+category = "system"
+summary = """
+GNU Parted disk partitioning tool
+"""
+
+[source]
+kind = "tarball"
+file = "parted-3.6.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/util-linux"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting parted source, sir."
+tar -xf tar/parted-3.6.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring parted, sir."
+cd build
+../source/parted-3.6/configure --prefix=/usr \
+  --disable-static
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building parted, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing parted into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

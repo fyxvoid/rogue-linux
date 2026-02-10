@@ -1,0 +1,37 @@
+[identity]
+name = "openrc"
+version = "0.54"
+category = "base"
+summary = """
+Dependency-based init system for Unix-like systems
+"""
+
+[source]
+kind = "tarball"
+file = "openrc-0.54.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/linux-pam"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting openrc source, sir."
+tar -xf tar/openrc-0.54.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring openrc with Meson, sir."
+cd build
+meson setup ../source/openrc-0.54 . --prefix=/usr --buildtype=release
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building openrc, sir."
+cd build
+ninja
+""", """
+echo "[COGMAN] Installing openrc into staging root, sir."
+cd build
+DESTDIR="$PKGROOT" ninja install
+"""]
+
+[policy]

@@ -1,0 +1,37 @@
+[identity]
+name = "kakoune"
+version = "2023.08.05"
+category = "editors"
+summary = """
+Modal code editor with multiple selections
+"""
+
+[source]
+kind = "tarball"
+file = "kakoune-2023.08.05.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting kakoune source, sir."
+tar -xf tar/kakoune-2023.08.05.tar.xz -C source
+""", """
+echo "[COGMAN] Building kakoune, sir."
+cd source/kakoune-2023.08.05
+make -j$(nproc)
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building kakoune, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing kakoune into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

@@ -1,0 +1,39 @@
+[identity]
+name = "kmod"
+version = "32"
+category = "base"
+summary = """
+Linux kernel module management utilities
+"""
+
+[source]
+kind = "tarball"
+file = "kmod-32.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "libs/compression/xz", "libs/compression/zlib", "libs/compression/zstd"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting kmod source, sir."
+tar -xf tar/kmod-32.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring kmod, sir."
+cd build
+../source/kmod-32/configure --prefix=/usr \
+  --sysconfdir=/etc \
+  --with-openssl
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building kmod, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing kmod into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

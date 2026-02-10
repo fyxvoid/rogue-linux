@@ -1,0 +1,38 @@
+[identity]
+name = "htop"
+version = "3.3.0"
+category = "system"
+summary = """
+Interactive process viewer and system monitor
+"""
+
+[source]
+kind = "tarball"
+file = "htop-3.3.0.tar.xz"
+
+[dependencies]
+build = ["toolchain/gcc", "base/ncurses"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting htop source, sir."
+tar -xf tar/htop-3.3.0.tar.xz -C source
+""", """
+echo "[COGMAN] Configuring htop, sir."
+cd build
+../source/htop-3.3.0/configure --prefix=/usr \
+  
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Building htop, sir."
+cd build
+make -j$(nproc)
+""", """
+echo "[COGMAN] Installing htop into staging root, sir."
+cd build
+make install DESTDIR="$PKGROOT"
+"""]
+
+[policy]

@@ -1,0 +1,33 @@
+[identity]
+name = "bat"
+version = "0.24.0"
+category = "additional"
+summary = """
+Cat clone with syntax highlighting and Git integration
+"""
+
+[source]
+kind = "tarball"
+file = "bat-0.24.0.tar.xz"
+
+[dependencies]
+build = ["scripting/rust/rust"]
+
+[build]
+steps = ["rm -rf source build", "mkdir -p source build", """
+echo "[COGMAN] Extracting bat source, sir."
+tar -xf tar/bat-0.24.0.tar.xz -C source
+""", """
+echo "[COGMAN] Building bat with Cargo, sir."
+cd source/bat-0.24.0
+cargo build --release
+"""]
+
+[installer]
+steps = ["""
+echo "[COGMAN] Installing bat, sir."
+cd source/bat*
+install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"
+"""]
+
+[policy]
