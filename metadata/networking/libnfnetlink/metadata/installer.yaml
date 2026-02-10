@@ -1,5 +1,0 @@
-steps:
-  - |
-    echo "[COGMAN] Installing libnfnetlink into pkgroot, sir."
-    cd source
-    make install DESTDIR="$PKGROOT"

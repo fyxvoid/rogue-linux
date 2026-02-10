@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing w3af Python package, sir."
-      cd source/w3af*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

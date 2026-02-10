@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing bat, sir."
-      cd source/bat*
-      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

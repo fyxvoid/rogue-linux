@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing mobsf-cli Python package, sir."
-      cd source/mobsf-cli*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

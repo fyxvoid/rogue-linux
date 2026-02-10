@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing pcredz Python package, sir."
-      cd source/pcredz*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

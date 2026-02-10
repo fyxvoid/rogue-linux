@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing domi-owned Python package, sir."
-      cd source/domi-owned*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

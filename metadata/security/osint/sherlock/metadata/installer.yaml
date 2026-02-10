@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing sherlock Python package, sir."
-      cd source/sherlock*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

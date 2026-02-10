@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing socialscan Python package, sir."
-      cd source/socialscan*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing altdns Python package, sir."
-      cd source/altdns*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing wlan-audit Python package, sir."
-      cd source/wlan-audit*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

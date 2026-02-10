@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing pwndbg Python package, sir."
-      cd source/pwndbg*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

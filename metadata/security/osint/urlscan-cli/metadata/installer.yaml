@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing urlscan-cli Python package, sir."
-      cd source/urlscan-cli*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

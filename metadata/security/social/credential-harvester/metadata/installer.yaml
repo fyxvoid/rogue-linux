@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing credential-harvester Python package, sir."
-      cd source/credential-harvester*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

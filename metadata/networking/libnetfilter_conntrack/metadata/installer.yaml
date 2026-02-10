@@ -1,5 +1,0 @@
-steps:
-  - |
-    echo "[COGMAN] Installing libnetfilter_conntrack into pkgroot, sir."
-    cd source
-    make install DESTDIR="$PKGROOT"

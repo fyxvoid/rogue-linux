@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing trevorspray Python package, sir."
-      cd source/trevorspray*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

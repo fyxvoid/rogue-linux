@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing jinja2 Python package, sir."
-      cd source/jinja2*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

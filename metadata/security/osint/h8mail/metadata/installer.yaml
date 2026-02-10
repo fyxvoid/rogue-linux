@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing h8mail Python package, sir."
-      cd source/h8mail*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

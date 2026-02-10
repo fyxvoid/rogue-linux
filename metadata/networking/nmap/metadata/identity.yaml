@@ -1,8 +1,0 @@
-name: nmap
-version: "7.98"
-category: networking
-
-description: >
-  Network exploration and security auditing tool.
-  Provides port scanning, service detection, OS fingerprinting,
-  and scripting via NSE.

@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing suricata-update Python package, sir."
-      cd source/suricata-update*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

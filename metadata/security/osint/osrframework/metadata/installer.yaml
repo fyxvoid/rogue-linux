@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing osrframework Python package, sir."
-      cd source/osrframework*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

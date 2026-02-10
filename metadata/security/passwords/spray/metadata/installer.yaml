@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing spray Python package, sir."
-      cd source/spray*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

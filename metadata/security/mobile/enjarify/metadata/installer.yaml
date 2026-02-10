@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing enjarify Python package, sir."
-      cd source/enjarify*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

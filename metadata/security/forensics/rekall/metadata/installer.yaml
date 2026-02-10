@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing rekall Python package, sir."
-      cd source/rekall*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

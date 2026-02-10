@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing pycparser Python package, sir."
-      cd source/pycparser*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

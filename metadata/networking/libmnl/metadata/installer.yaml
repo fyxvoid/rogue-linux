@@ -1,5 +1,0 @@
-steps:
-  - |
-    echo "[COGMAN] Installing libmnl into pkgroot, sir."
-    cd source
-    make install

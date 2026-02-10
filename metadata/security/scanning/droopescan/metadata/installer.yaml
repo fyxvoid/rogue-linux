@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing droopescan Python package, sir."
-      cd source/droopescan*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

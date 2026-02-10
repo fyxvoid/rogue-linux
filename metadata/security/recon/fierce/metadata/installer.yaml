@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing fierce Python package, sir."
-      cd source/fierce*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

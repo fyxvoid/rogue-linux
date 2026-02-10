@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing email2phonenumber Python package, sir."
-      cd source/email2phonenumber*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -89,9 +89,17 @@ def benchmark_cogman_current(pkg, variant, iteration, writer):
     plan_file = os.path.join(TMP_ROOT, f"{pkg}-{variant}.plan")
     
     # PLAN
-    toml_path = os.path.join(COGMAN_ROOT, f"metadata/packages/{pkg}/{pkg}.toml")
-    if not os.path.exists(toml_path):
-        toml_path = os.path.join(COGMAN_ROOT, f"metadata/profiles/bash.toml")
+    # Search in categories
+    toml_path = None
+    for cat in ["base", "system", "toolchain"]:
+        candidate = os.path.join(WORKSPACE, f"packages/{cat}/{pkg}/{pkg}.toml")
+        if os.path.exists(candidate):
+            toml_path = candidate
+            break
+    
+    if not toml_path:
+        # Fallback to absolute if it was already one, or just fail
+        toml_path = os.path.join(WORKSPACE, f"packages/base/{pkg}/{pkg}.toml")
     
     # Needs to output to a temp rootfs to avoid /mnt/rogue issues
     rootfs = os.path.join(TMP_ROOT, "cogman")

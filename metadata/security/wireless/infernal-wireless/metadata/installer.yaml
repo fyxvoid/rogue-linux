@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing infernal-wireless Python package, sir."
-      cd source/infernal-wireless*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

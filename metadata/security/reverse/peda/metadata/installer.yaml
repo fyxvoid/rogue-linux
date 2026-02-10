@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing peda Python package, sir."
-      cd source/peda*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

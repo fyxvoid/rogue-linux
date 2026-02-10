@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing metagoofil Python package, sir."
-      cd source/metagoofil*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

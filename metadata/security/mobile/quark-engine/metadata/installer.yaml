@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing quark-engine Python package, sir."
-      cd source/quark-engine*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

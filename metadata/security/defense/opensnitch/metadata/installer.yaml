@@ -1,4 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing opensnitch, sir."
-      install -Dm755 build/* "$PKGROOT/usr/bin/"

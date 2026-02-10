@@ -3,136 +3,152 @@ import os
 import sys
 import yaml
 
+# CONFIGURATION
 ROOT = "/home/rogue/workspace/rogue-linux"
 SRC = os.path.join(ROOT, "metadata")
-DEST = os.path.join(ROOT, "metadata_toml")
+DEST = os.path.join(ROOT, "packages") # Final canonical location
+REMOVE_YAML = True
 
-def dump_toml_val(val):
+def dump_val(val, indent=0):
+    padding = "  " * indent
     if isinstance(val, bool):
         return "true" if val else "false"
-    elif isinstance(val, int) or isinstance(val, float):
+    elif isinstance(val, (int, float)):
         return str(val)
     elif isinstance(val, str):
         if "\n" in val:
-            # Multiline string
             return '"""\n' + val + '"""'
-        else:
-            return '"' + val.replace('"', '\\"') + '"'
+        return '"' + val.replace('"', '\\"') + '"'
     elif isinstance(val, list):
-        items = [dump_toml_val(x) for x in val]
+        items = [dump_val(x) for x in val]
         return "[" + ", ".join(items) + "]"
-    else:
-        return '"' + str(val) + '"'
+    elif isinstance(val, dict):
+        # We don't really want inline dicts in TOML for this schema
+        # but if we had them, we'd handle them here.
+        return "{ " + ", ".join(f'{k} = {dump_val(v)}' for k, v in val.items()) + " }"
+    return '"' + str(val) + '"'
 
 def convert_package(group, pkg, pkg_dir):
     meta_dir = os.path.join(pkg_dir, "metadata")
     if not os.path.exists(meta_dir):
         return
 
-    # Read YAMLs
-    try:
-        with open(os.path.join(meta_dir, "identity.yaml"), "r") as f:
-            identity = yaml.safe_load(f)
-    except FileNotFoundError:
-        print(f"Skipping {group}/{pkg}: No identity.yaml")
+    # Files to load
+    files = {
+        "identity": os.path.join(meta_dir, "identity.yaml"),
+        "builder": os.path.join(meta_dir, "builder.yaml"),
+        "installer": os.path.join(meta_dir, "installer.yaml"),
+        "policy": os.path.join(meta_dir, "policy.yaml")
+    }
+
+    data = {}
+    for key, path in files.items():
+        if os.path.exists(path):
+            with open(path, "r") as f:
+                data[key] = yaml.safe_load(f) or {}
+
+    if "identity" not in data:
+        print(f"Skipping {group}/{pkg}: No identity data")
         return
 
-    builder = {}
-    try:
-        with open(os.path.join(meta_dir, "builder.yaml"), "r") as f:
-            builder = yaml.safe_load(f) or {}
-    except FileNotFoundError:
-        pass
-
-    installer = {}
-    try:
-        with open(os.path.join(meta_dir, "installer.yaml"), "r") as f:
-            installer = yaml.safe_load(f) or {}
-    except FileNotFoundError:
-        pass
-
-    policy = {}
-    try:
-        with open(os.path.join(meta_dir, "policy.yaml"), "r") as f:
-            policy = yaml.safe_load(f) or {}
-    except FileNotFoundError:
-        pass
-    
-    # Generate TOML Content
     lines = []
     
-    # [identity]
+    # 1. [identity]
     lines.append("[identity]")
-    for k, v in identity.items():
-        if k == "source" or k == "depends": continue # Handle separately?
-        lines.append(f'{k} = {dump_toml_val(v)}')
+    identity = data["identity"]
+    for k in ["name", "version", "category", "summary"]:
+        if k in identity:
+            lines.append(f'{k} = {dump_val(identity[k])}')
+    
+    # [source]
+    if "source" in identity:
+        lines.append("")
+        lines.append("[identity.source]")
+        for k, v in identity["source"].items():
+            lines.append(f'{k} = {dump_val(v)}')
+
+    # [depends]
+    if "depends" in identity:
+        lines.append("")
+        lines.append("[identity.depends]")
+        for k, v in identity["depends"].items():
+            lines.append(f'{k} = {dump_val(v)}')
     lines.append("")
 
-    # [source] (from identity['source'])
-    if 'source' in identity:
-        lines.append("[source]")
-        for k, v in identity['source'].items():
-            lines.append(f'{k} = {dump_toml_val(v)}')
-        lines.append("")
-
-    # [dependencies] (from identity['depends'])
-    if 'depends' in identity:
-        lines.append("[dependencies]")
-        for k, v in identity['depends'].items():
-             # k is 'build', 'runtime', etc.
-             # v is list
-             lines.append(f'{k} = {dump_toml_val(v)}')
-        lines.append("")
-        
-    # [build] (from builder)
+    # 2. [build] (was builder)
+    builder = data.get("builder", {})
     if builder:
         lines.append("[build]")
         for k, v in builder.items():
-            lines.append(f'{k} = {dump_toml_val(v)}')
-        lines.append("")
+            if k == "configure": continue # Handle nested
+            lines.append(f'{k} = {dump_val(v)}')
         
-    # [installer] (from installer)
-    # verify goes to [installer.verify] or just verify key?
-    # cogmanII expects [installer.verify] table?
-    # Let's check installer keys.
-    installer_steps = installer.get('steps', [])
-    installer_verify = installer.get('verify', [])
-
-    lines.append("[installer]")
-    if installer_steps:
-        lines.append(f'steps = {dump_toml_val(installer_steps)}')
-    lines.append("")
-    
-    if installer_verify:
-        lines.append("[installer.verify]")
-        lines.append(f'paths = {dump_toml_val(installer_verify)}')
+        if "configure" in builder:
+            lines.append("")
+            lines.append("[build.configure]")
+            for k, v in builder["configure"].items():
+                lines.append(f'{k} = {dump_val(v)}')
         lines.append("")
 
-    # [policy]
+    # 3. [installer]
+    installer = data.get("installer", {})
+    if installer:
+        lines.append("[installer]")
+        if "steps" in installer:
+            lines.append(f'steps = {dump_val(installer["steps"])}')
+        
+        if "verify" in installer:
+            lines.append("")
+            lines.append("[installer.verify]")
+            v = installer["verify"]
+            if isinstance(v, list): # Legacy format
+                lines.append(f'expected_files = {dump_val(v)}')
+            elif isinstance(v, dict):
+                for vk, vv in v.items():
+                    lines.append(f'{vk} = {dump_val(vv)}')
+        lines.append("")
+
+    # 4. [policy]
+    policy = data.get("policy", {})
     if policy:
         lines.append("[policy]")
-        # Policy structure is nested (filesystem -> read -> list).
-        # Simple recursion? Or manual flatten?
-        # My dumper handles basic types, but dicts?
-        # Recursively dump tables?
-        # Since policy is nested, I should use [policy.filesystem] etc?
-        # Simple approach: just ignore for now, or print as strings if needed?
-        # cogmanII policy support is minimal. I'll comment out for now or try basics.
-        pass # Skip policy for now to avoid complexity in MVP script
+        for k, v in policy.items():
+            if isinstance(v, dict):
+                lines.append("")
+                lines.append(f"[policy.{k}]")
+                for subk, subv in v.items():
+                    lines.append(f'{subk} = {dump_val(subv)}')
+            else:
+                lines.append(f'{k} = {dump_val(v)}')
+        lines.append("")
 
-    # Write
+    # Write TOML
     dest_dir = os.path.join(DEST, group, pkg)
     os.makedirs(dest_dir, exist_ok=True)
     dest_file = os.path.join(dest_dir, f"{pkg}.toml")
     
     with open(dest_file, "w") as f:
         f.write("\n".join(lines))
-    print(f"Converted {group}/{pkg} -> {dest_file}")
+    
+    print(f"Migrated {group}/{pkg} -> {dest_file}")
+
+    # Cleanup YAMLs
+    if REMOVE_YAML:
+        for path in files.values():
+            if os.path.exists(path):
+                os.remove(path)
+        # Try to remove the metadata dir if empty
+        try:
+            os.rmdir(meta_dir)
+            # Try to remove pkg dir if empty
+            # os.rmdir(pkg_dir) # Maybe too aggressive?
+        except OSError:
+            pass
 
 def main():
     if not os.path.exists(SRC):
         print(f"Source metadata dir not found: {SRC}")
-        sys.exit(1)
+        return
         
     for group in os.listdir(SRC):
         group_dir = os.path.join(SRC, group)
@@ -142,9 +158,7 @@ def main():
             pkg_dir = os.path.join(group_dir, pkg)
             if not os.path.isdir(pkg_dir): continue
             
-            # Check if it has metadata folder
-            if os.path.exists(os.path.join(pkg_dir, "metadata", "identity.yaml")):
-                convert_package(group, pkg, pkg_dir)
+            convert_package(group, pkg, pkg_dir)
 
 if __name__ == "__main__":
     main()

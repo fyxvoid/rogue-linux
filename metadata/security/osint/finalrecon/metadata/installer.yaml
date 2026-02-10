@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing finalrecon Python package, sir."
-      cd source/finalrecon*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

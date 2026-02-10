@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing objection Python package, sir."
-      cd source/objection*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

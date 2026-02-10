@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing webtech Python package, sir."
-      cd source/webtech*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

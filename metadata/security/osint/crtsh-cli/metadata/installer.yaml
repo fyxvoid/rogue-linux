@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing crtsh-cli Python package, sir."
-      cd source/crtsh-cli*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

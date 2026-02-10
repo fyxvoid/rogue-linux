@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing zoxide, sir."
-      cd source/zoxide*
-      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

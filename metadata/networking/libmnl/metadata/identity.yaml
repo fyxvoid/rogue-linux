@@ -1,6 +1,0 @@
-name: libmnl
-version: "1.0.5"
-category: networking
-
-description: >
-  Minimalistic user-space library for Netlink communication.

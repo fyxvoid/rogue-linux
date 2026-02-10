@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing helix, sir."
-      cd source/helix*
-      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

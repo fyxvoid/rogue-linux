@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing donpapi Python package, sir."
-      cd source/donpapi*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

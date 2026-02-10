@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing ignorant Python package, sir."
-      cd source/ignorant*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

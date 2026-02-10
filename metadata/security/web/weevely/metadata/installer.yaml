@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing weevely Python package, sir."
-      cd source/weevely*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

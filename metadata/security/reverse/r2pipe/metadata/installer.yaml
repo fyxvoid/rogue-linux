@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing r2pipe Python package, sir."
-      cd source/r2pipe*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing spyse-cli Python package, sir."
-      cd source/spyse-cli*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

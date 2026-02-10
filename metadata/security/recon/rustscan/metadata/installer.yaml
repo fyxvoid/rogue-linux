@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing rustscan, sir."
-      cd source/rustscan*
-      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

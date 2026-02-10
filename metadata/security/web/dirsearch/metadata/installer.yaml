@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing dirsearch Python package, sir."
-      cd source/dirsearch*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

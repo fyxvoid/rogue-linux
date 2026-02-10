@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing gallery-dl Python package, sir."
-      cd source/gallery-dl*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

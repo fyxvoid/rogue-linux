@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing prowler Python package, sir."
-      cd source/prowler*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

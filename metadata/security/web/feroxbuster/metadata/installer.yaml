@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing feroxbuster, sir."
-      cd source/feroxbuster*
-      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

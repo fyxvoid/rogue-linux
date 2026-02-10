@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing chainsaw, sir."
-      cd source/chainsaw*
-      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

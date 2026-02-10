@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing house Python package, sir."
-      cd source/house*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

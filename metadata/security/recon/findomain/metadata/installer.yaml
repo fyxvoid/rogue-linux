@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing findomain, sir."
-      cd source/findomain*
-      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

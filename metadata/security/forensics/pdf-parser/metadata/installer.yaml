@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing pdf-parser Python package, sir."
-      cd source/pdf-parser*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

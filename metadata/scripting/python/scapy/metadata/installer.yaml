@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing scapy Python package, sir."
-      cd source/scapy*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing fail2ban Python package, sir."
-      cd source/fail2ban*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

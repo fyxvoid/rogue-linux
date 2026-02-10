@@ -1,9 +1,0 @@
-filesystem:
-  read:
-    - /
-  write:
-    - /tools
-
-capabilities: []
-network:
-  outbound: false

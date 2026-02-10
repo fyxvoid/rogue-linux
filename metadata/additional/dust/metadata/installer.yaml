@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing dust, sir."
-      cd source/dust*
-      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

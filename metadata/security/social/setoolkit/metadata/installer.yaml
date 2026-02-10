@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing setoolkit Python package, sir."
-      cd source/setoolkit*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

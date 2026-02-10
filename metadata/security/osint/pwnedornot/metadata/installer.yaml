@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing pwnedornot Python package, sir."
-      cd source/pwnedornot*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

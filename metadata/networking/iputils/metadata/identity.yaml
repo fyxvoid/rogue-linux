@@ -1,7 +1,0 @@
-name: iputils
-version: "20240117"
-category: networking
-
-description: >
-  Core network diagnostic utilities including ping, arping,
-  tracepath, and clockdiff.

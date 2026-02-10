@@ -1,4 +1,0 @@
-steps:
-  - |
-    echo "[COGMAN] Installing iputils into pkgroot, sir."
-    ninja -C source/builddir install

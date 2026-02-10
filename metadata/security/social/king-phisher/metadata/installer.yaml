@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing king-phisher Python package, sir."
-      cd source/king-phisher*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

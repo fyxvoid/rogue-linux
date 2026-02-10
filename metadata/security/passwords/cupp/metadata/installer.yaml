@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing cupp Python package, sir."
-      cd source/cupp*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

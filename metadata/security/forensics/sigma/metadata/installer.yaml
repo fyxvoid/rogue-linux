@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing sigma Python package, sir."
-      cd source/sigma*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing creds Python package, sir."
-      cd source/creds*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

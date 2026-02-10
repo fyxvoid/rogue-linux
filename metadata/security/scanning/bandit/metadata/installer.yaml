@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing bandit Python package, sir."
-      cd source/bandit*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

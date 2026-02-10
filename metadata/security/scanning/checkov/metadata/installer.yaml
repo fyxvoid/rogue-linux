@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing checkov Python package, sir."
-      cd source/checkov*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

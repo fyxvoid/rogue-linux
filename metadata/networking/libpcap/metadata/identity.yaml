@@ -1,7 +1,0 @@
-name: libpcap
-version: "1.10.4"
-category: networking
-
-description: >
-  System-independent interface for user-level packet capture,
-  used by network analysis and security tools such as nmap.

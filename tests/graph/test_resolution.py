@@ -16,12 +16,12 @@ class TestGraph(unittest.TestCase):
         if os.path.exists(CASE_DIR):
             shutil.rmtree(CASE_DIR)
         os.makedirs(CASE_DIR, exist_ok=True)
-        # Create metadata dir for planner convention
-        os.makedirs(os.path.join(CASE_DIR, "metadata"), exist_ok=True)
+        # Create packages dir for planner convention
+        os.makedirs(os.path.join(CASE_DIR, "packages"), exist_ok=True)
         
     def create_pkg(self, name, deps=None, category="base"):
-        # structure: metadata/category/name/name.toml
-        cat_dir = os.path.join(CASE_DIR, "metadata", category)
+        # structure: packages/category/name/name.toml
+        cat_dir = os.path.join(CASE_DIR, "packages", category)
         pkg_dir = os.path.join(cat_dir, name)
         os.makedirs(pkg_dir, exist_ok=True)
         

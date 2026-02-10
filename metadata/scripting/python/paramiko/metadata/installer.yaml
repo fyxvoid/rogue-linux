@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing paramiko Python package, sir."
-      cd source/paramiko*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

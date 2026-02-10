@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing fierce-osint Python package, sir."
-      cd source/fierce-osint*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

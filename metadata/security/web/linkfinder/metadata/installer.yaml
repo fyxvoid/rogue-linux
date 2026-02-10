@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing linkfinder Python package, sir."
-      cd source/linkfinder*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

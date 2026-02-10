@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing certifi Python package, sir."
-      cd source/certifi*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

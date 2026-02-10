@@ -1,5 +1,0 @@
-steps:
-  - |
-    echo "[COGMAN] Installing libpcap into pkgroot, sir."
-    cd build
-    make install DESTDIR="$PKGROOT"

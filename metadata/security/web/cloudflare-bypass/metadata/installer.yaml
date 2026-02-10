@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing cloudflare-bypass Python package, sir."
-      cd source/cloudflare-bypass*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

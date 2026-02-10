@@ -1,4 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing age, sir."
-      install -Dm755 build/* "$PKGROOT/usr/bin/"

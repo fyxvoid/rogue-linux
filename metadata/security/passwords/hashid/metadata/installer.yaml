@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing hashid Python package, sir."
-      cd source/hashid*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr

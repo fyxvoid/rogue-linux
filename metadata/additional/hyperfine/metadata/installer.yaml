@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing hyperfine, sir."
-      cd source/hyperfine*
-      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

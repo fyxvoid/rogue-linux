@@ -1,5 +1,0 @@
-steps:
-  - |
-      echo "[COGMAN] Installing spiderfoot Python package, sir."
-      cd source/spiderfoot*
-      python3 setup.py install --root="$PKGROOT" --prefix=/usr
