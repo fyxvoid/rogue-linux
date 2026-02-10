@@ -1,0 +1,17 @@
+name: libelf
+version: "0.190"
+category: base
+
+summary: >
+  Library for reading and writing ELF object files.
+  Required by debuggers, linkers, and binary analysis tools.
+
+source:
+  kind: tarball
+  file: elfutils-0.190.tar.bz2
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/glibc
+    - libs/compression/zlib

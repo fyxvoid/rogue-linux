@@ -1,0 +1,7 @@
+name: libtasn1
+version: "4.19.0"
+category: libs/crypto
+
+description: >
+  ASN.1 parsing and encoding library used by gnutls and other
+  cryptographic software.

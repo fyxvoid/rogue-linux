@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building coreutils, sir."
+      cd build
+      make -j1
+
+  - |
+      echo "[COGMAN] Installing coreutils into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

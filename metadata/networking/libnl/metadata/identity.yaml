@@ -1,0 +1,8 @@
+name: libnl
+version: "3.9.0"
+category: networking
+
+description: >
+  Netlink protocol library suite providing APIs to communicate
+  with the Linux kernel networking subsystem. Required by iproute2
+  and many advanced networking tools.

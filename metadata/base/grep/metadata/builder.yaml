@@ -1,0 +1,15 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting grep source, sir."
+      tar -xf tar/grep-3.11.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring grep, sir."
+      cd build
+
+      ../source/grep-3.11/configure \
+        --prefix=/usr \
+        --disable-static

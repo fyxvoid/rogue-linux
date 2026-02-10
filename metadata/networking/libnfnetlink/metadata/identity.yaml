@@ -1,0 +1,7 @@
+name: libnfnetlink
+version: "1.0.2"
+category: networking
+
+description: >
+  Low-level library for netfilter netlink communication.
+  Required by conntrack, nftables, and packet inspection tools.

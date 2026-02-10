@@ -1,0 +1,10 @@
+filesystem:
+  write:
+    - /usr/bin
+    - /usr/lib
+    - /usr/include
+
+capabilities: []
+
+network:
+  outbound: false

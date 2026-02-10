@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building gawk, sir."
+      cd build
+      make -j1
+
+  - |
+      echo "[COGMAN] Installing gawk into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

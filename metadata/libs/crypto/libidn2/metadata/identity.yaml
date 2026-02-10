@@ -1,0 +1,7 @@
+name: libidn2
+version: "2.3.7"
+category: libs/crypto
+
+description: >
+  Internationalized Domain Names (IDNA2008) library.
+  Depends on libunistring and is required by gnutls.

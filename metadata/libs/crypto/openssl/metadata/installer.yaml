@@ -1,0 +1,5 @@
+steps:
+  - |
+    echo "[COGMAN] Installing OpenSSL into pkgroot, sir."
+    cd source
+    make install DESTDIR="$PKGROOT"

@@ -1,0 +1,15 @@
+steps:
+  - echo "[COGMAN] Extracting xz source, sir."
+  - |
+      rm -rf source/*
+      tar -xf tar/xz-5.6.2.tar.xz -C source --strip-components=1
+
+  - echo "[COGMAN] Configuring xz, sir."
+  - |
+      cd source && \
+      ./configure \
+        --prefix=/usr \
+        --disable-static
+
+  - echo "[COGMAN] Building xz, sir."
+  - make -C source -j1

@@ -1,0 +1,20 @@
+name: mpfr
+version: "4.2.1"
+
+category: toolchain
+
+description: >
+  GNU MPFR Library.
+  A C library for multiple-precision floating-point computations
+  with correct rounding. Required for building GCC.
+
+source:
+  type: tarball
+  url: https://ftp.gnu.org/gnu/mpfr/mpfr-4.2.1.tar.xz
+  tar: mpfr-4.2.1.tar.xz
+
+build:
+  system: autotools
+
+dependencies:
+  - toolchain/gmp

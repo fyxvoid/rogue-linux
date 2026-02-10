@@ -1,0 +1,5 @@
+steps:
+  - |
+    echo "[COGMAN] Installing iproute2 into pkgroot, sir."
+    cd source
+    make install DESTDIR="$PKGROOT"

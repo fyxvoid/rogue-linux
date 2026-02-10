@@ -1,0 +1,16 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gawk source, sir."
+      tar -xf tar/gawk-5.3.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring gawk, sir."
+      cd build
+
+      CFLAGS="-std=gnu99" \
+      ../source/gawk-5.3.0/configure \
+        --prefix=/usr \
+        --disable-static

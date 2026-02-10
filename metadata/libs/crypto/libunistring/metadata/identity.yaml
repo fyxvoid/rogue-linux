@@ -1,0 +1,6 @@
+name: libunistring
+version: "1.1"
+category: libs/crypto
+
+description: >
+  Unicode string handling library required by libidn2 and gnutls.

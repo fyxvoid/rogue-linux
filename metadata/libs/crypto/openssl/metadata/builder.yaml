@@ -1,0 +1,21 @@
+steps:
+  - |
+    echo "[COGMAN] Extracting OpenSSL source, sir."
+    tar -xf tar/openssl-3.2.1.tar.gz -C source --strip-components=1
+
+  - |
+    echo "[COGMAN] Configuring OpenSSL, sir."
+    export CPPFLAGS="-I$PKGROOT/usr/include"
+    export LDFLAGS="-L$PKGROOT/usr/lib"
+
+    cd source
+    ./Configure \
+      linux-x86_64 \
+      shared \
+      --prefix=/usr \
+      --openssldir=/etc/ssl
+
+  - |
+    echo "[COGMAN] Building OpenSSL, sir."
+    cd source
+    make

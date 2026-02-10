@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Installing libcap into staging root, sir."
+      cd source/libcap-2.69
+
+      make \
+        prefix=/usr \
+        lib=lib \
+        DESTDIR="$PKGROOT" \
+        install

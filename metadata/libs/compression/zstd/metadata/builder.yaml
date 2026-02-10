@@ -1,0 +1,8 @@
+steps:
+  - echo "[COGMAN] Extracting zstd source, sir."
+  - |
+      rm -rf source/*
+      tar -xf tar/zstd-1.5.6.tar.gz -C source --strip-components=1
+
+  - echo "[COGMAN] Building zstd, sir."
+  - make -C source -j1

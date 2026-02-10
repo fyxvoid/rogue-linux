@@ -1,0 +1,7 @@
+name: iproute2
+version: "6.7.0"
+category: networking
+
+description: >
+  Advanced IP routing and network device configuration utilities,
+  providing ip, ss, tc, and related tools.

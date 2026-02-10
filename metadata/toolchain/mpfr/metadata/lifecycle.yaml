@@ -1,0 +1,24 @@
+install:
+  - mkdir -p build-mpfr
+  - |
+      sh -c '
+        cd build-mpfr
+
+        env -i \
+          PATH=/usr/bin:/bin \
+          CC=/usr/bin/gcc \
+          CXX=/usr/bin/g++ \
+          CFLAGS="-O2" \
+          CXXFLAGS="-O2" \
+          ../configure \
+            --prefix=/tools \
+            --disable-shared \
+            --enable-static \
+            --with-gmp=/tools
+      '
+  - make -C build-mpfr -j1
+  - make -C build-mpfr -j1 install DESTDIR=$PKGROOT
+
+uninstall:
+  - rm -rf $PKGROOT/tools/lib/libmpfr*
+  - rm -rf $PKGROOT/tools/include/mpfr.h

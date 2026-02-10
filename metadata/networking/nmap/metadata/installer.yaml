@@ -1,0 +1,5 @@
+steps:
+  - |
+    echo "[COGMAN] Installing nmap into pkgroot, sir."
+    cd source
+    make install DESTDIR="$PKGROOT"

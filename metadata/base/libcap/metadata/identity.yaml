@@ -1,0 +1,17 @@
+name: libcap
+version: "2.69"
+category: base
+
+summary: >
+  POSIX capabilities library enabling fine-grained privilege
+  management without full root access.
+
+source:
+  kind: tarball
+  file: libcap-2.69.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/glibc
+    - libs/compression/zlib

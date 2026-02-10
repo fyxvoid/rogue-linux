@@ -1,0 +1,10 @@
+filesystem:
+  read:
+    - /
+  write:
+    - /usr
+
+network:
+  outbound: false
+
+capabilities: []

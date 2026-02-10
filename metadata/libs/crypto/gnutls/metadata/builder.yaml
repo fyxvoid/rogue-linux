@@ -1,0 +1,22 @@
+steps:
+  - |
+    echo "[COGMAN] Extracting gnutls source, sir."
+    tar -xf tar/gnutls-3.8.6.tar.xz -C source --strip-components=1
+
+  - |
+    echo "[COGMAN] Configuring gnutls, sir."
+    export PKG_CONFIG_PATH="$PKGROOT/usr/lib/pkgconfig"
+    export CPPFLAGS="-I$PKGROOT/usr/include"
+    export LDFLAGS="-L$PKGROOT/usr/lib"
+
+    cd build
+    ../source/configure \
+      --prefix=/usr \
+      --disable-static \
+      --without-p11-kit \
+      --without-tpm \
+      --without-tpm2 \
+      --without-idn \
+      --without-zlib \
+      --with-included-libtasn1=no \
+      --with-included-unistring=no

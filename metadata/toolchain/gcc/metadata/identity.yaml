@@ -1,0 +1,16 @@
+name: gcc
+version: "14.1.0"
+category: toolchain
+
+summary: >
+  GNU Compiler Collection rebuilt against the system C library,
+  providing the final C and C++ compiler for the bootstrap system.
+
+source:
+  kind: tarball
+  file: gcc-14.1.0.tar.xz
+
+depends:
+  build:
+    - toolchain/binutils
+    - toolchain/glibc

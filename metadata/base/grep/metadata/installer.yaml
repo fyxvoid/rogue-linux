@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building grep, sir."
+      cd build
+      make -j1
+
+  - |
+      echo "[COGMAN] Installing grep into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

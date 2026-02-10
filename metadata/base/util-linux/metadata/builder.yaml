@@ -1,0 +1,23 @@
+steps:
+  - rm -rf build source
+  - mkdir -p build source
+
+  - |
+      echo "[COGMAN] Extracting util-linux source, sir."
+      tar -xf tar/util-linux-2.39.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring util-linux (pass 2), sir."
+      cd build
+
+      ../source/util-linux-2.39/configure \
+        --prefix=/usr \
+        --disable-static \
+        --without-python \
+        --disable-asciidoc \
+        --disable-bash-completion \
+        --disable-chown-install \
+        --enable-libcap \
+        --enable-libuuid \
+        --enable-mount \
+        --enable-libmount

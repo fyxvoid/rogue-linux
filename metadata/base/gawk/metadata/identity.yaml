@@ -1,0 +1,19 @@
+name: gawk
+version: "5.3.0"
+category: base
+
+summary: >
+  GNU awk — pattern scanning and processing language
+  used extensively by build systems and scripts.
+
+source:
+  kind: tarball
+  file: gawk-5.3.0.tar.xz
+
+depends:
+  build:
+    - base/grep
+    - base/sed
+    - base/coreutils
+    - toolchain/gcc
+    - toolchain/glibc

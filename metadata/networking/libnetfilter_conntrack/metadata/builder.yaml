@@ -1,0 +1,16 @@
+steps:
+  - |
+    echo "[COGMAN] Extracting libnetfilter_conntrack source, sir."
+    tar -xf tar/libnetfilter_conntrack-1.0.9.tar.bz2 -C source --strip-components=1
+
+  - |
+    echo "[COGMAN] Configuring libnetfilter_conntrack, sir."
+    cd source
+    ./configure \
+      --prefix=/usr \
+      --disable-static
+
+  - |
+    echo "[COGMAN] Building libnetfilter_conntrack, sir."
+    cd source
+    make

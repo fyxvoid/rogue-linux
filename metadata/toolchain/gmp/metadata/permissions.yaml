@@ -1,0 +1,10 @@
+filesystem:
+  read:
+    - /
+  write:
+    - /tools
+
+network:
+  outbound: false
+
+capabilities: []

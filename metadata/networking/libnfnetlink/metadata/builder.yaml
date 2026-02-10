@@ -1,0 +1,16 @@
+steps:
+  - |
+    echo "[COGMAN] Extracting libnfnetlink source, sir."
+    tar -xf tar/libnfnetlink-1.0.2.tar -C source --strip-components=1
+
+  - |
+    echo "[COGMAN] Configuring libnfnetlink, sir."
+    cd source
+    ./configure \
+      --prefix=/usr \
+      --disable-static
+
+  - |
+    echo "[COGMAN] Building libnfnetlink, sir."
+    cd source
+    make

@@ -1,0 +1,14 @@
+steps:
+  - |
+    echo "[COGMAN] Extracting libmnl source, sir."
+    tar -xf tar/libmnl-1.0.5.tar -C source --strip-components=1
+
+  - |
+    echo "[COGMAN] Configuring libmnl, sir."
+    cd source
+    ./configure --prefix=/usr
+
+  - |
+    echo "[COGMAN] Building libmnl, sir."
+    cd source
+    make

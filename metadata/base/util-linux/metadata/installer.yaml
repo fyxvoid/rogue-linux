@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building util-linux (pass 2), sir."
+      cd build
+      make -j1
+
+  - |
+      echo "[COGMAN] Installing util-linux into staging root, sir."
+      cd build
+      make -k install DESTDIR="$PKGROOT"

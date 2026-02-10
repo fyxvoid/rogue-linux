@@ -1,0 +1,20 @@
+steps:
+  - rm -rf build source
+  - mkdir -p build source
+
+  - |
+      echo "[COGMAN] Extracting elfutils source, sir."
+      tar -xf tar/elfutils-0.190.tar.bz2 -C source
+
+  - |
+      echo "[COGMAN] Configuring libelf, sir."
+      cd build
+
+      ../source/elfutils-0.190/configure \
+        --prefix=/usr \
+        --disable-debuginfod \
+        --disable-libdebuginfod \
+        --without-bzlib \
+        --without-lzma \
+        --without-zstd \
+        CFLAGS="-Wno-error"

@@ -1,0 +1,16 @@
+name: sed
+version: "4.9"
+category: base
+
+summary: >
+  GNU stream editor used for filtering and transforming text.
+
+source:
+  kind: tarball
+  file: sed-4.9.tar.xz
+
+depends:
+  build:
+    - base/coreutils
+    - toolchain/gcc
+    - toolchain/glibc

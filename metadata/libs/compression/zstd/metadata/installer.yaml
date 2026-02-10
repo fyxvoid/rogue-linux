@@ -1,0 +1,3 @@
+steps:
+  - echo "[COGMAN] Installing zstd into pkgroot, sir."
+  - make -C source install PREFIX=/usr DESTDIR="$PKGROOT"

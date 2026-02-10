@@ -1,0 +1,16 @@
+name: binutils
+version: "2.43"
+category: toolchain
+
+summary: >
+  GNU binary utilities rebuilt against the system C library,
+  forming the final assembler and linker for the bootstrap toolchain.
+
+source:
+  kind: tarball
+  file: binutils-2.43.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/glibc

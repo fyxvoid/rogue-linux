@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building bash, sir."
+      cd build
+      make -j1
+
+  - |
+      echo "[COGMAN] Installing bash into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,5 @@
+steps:
+  - |
+    echo "[COGMAN] Installing nettle into pkgroot, sir."
+    cd build
+    make install DESTDIR="$PKGROOT"

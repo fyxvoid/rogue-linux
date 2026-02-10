@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing Linux API headers into staging root, sir."
+      cd source/linux-6.7
+      make headers_install INSTALL_HDR_PATH="$PKGROOT/usr"

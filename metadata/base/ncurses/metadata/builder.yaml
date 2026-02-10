@@ -1,0 +1,22 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ncurses source, sir."
+      tar -xf tar/ncurses-6.4.tar.gz -C source
+
+  - |
+      echo "[COGMAN] Configuring ncurses, sir."
+      cd build
+
+      ../source/ncurses-6.4/configure \
+        --prefix=/usr \
+        --mandir=/usr/share/man \
+        --with-shared \
+        --without-debug \
+        --without-normal \
+        --enable-pc-files \
+        --enable-widec \
+        --without-cxx \
+        --without-cxx-binding

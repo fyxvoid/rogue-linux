@@ -1,0 +1,21 @@
+steps:
+  - |
+    echo "[COGMAN] Extracting libidn2 source, sir."
+    tar -xf tar/libidn2-2.3.7.tar.gz -C source --strip-components=1
+
+  - |
+    echo "[COGMAN] Configuring libidn2, sir."
+    export PKG_CONFIG_PATH="$PKGROOT/usr/lib/pkgconfig"
+    export CPPFLAGS="-I$PKGROOT/usr/include"
+    export LDFLAGS="-L$PKGROOT/usr/lib"
+
+    cd build
+    ../source/configure \
+      --prefix=/usr \
+      --disable-static \
+      --without-included-unistring
+
+  - |
+    echo "[COGMAN] Building libidn2, sir."
+    cd build
+    make

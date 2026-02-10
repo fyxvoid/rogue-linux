@@ -1,0 +1,14 @@
+steps:
+  - |
+      echo "[COGMAN] Building ncurses, sir."
+      cd build
+      make -j1
+
+  - |
+      echo "[COGMAN] Installing ncurses into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"
+
+  - |
+      echo "[COGMAN] Providing linker compatibility symlinks, sir."
+      ln -sf libncursesw.so "$PKGROOT/usr/lib/libncurses.so"

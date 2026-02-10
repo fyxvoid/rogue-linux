@@ -1,0 +1,20 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting Binutils source (pass 2), sir."
+      tar -xf tar/binutils-2.43.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring Binutils (pass 2), sir."
+      cd build
+
+      ../source/binutils-2.43/configure \
+        --prefix=/usr \
+        --with-sysroot=/ \
+        --disable-nls \
+        --disable-werror \
+        --disable-gprofng \
+        --disable-libctf \
+        --disable-multilib

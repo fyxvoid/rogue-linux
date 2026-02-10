@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building readline, sir."
+      cd build
+      make -j1
+
+  - |
+      echo "[COGMAN] Installing readline into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

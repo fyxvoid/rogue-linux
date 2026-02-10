@@ -1,0 +1,16 @@
+name: libstdc++
+version: "14.1.0"
+category: toolchain
+
+summary: >
+  GNU C++ standard library, built from GCC sources,
+  providing the C++ runtime for the bootstrap system.
+
+source:
+  kind: tarball
+  file: gcc-14.1.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/glibc

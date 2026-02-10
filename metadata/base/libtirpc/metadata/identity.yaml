@@ -1,0 +1,16 @@
+name: libtirpc
+version: "1.3.4"
+category: base
+
+summary: >
+  Transport-independent RPC library, providing SunRPC
+  functionality outside of glibc.
+
+source:
+  kind: tarball
+  file: libtirpc-1.3.4.tar.bz2
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/glibc

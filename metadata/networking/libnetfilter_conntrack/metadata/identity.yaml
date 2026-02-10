@@ -1,0 +1,8 @@
+name: libnetfilter_conntrack
+version: "1.0.9"
+category: networking
+
+description: >
+  Userspace library providing an API to the kernel connection tracking
+  subsystem via netlink. Required for conntrack-based tools and advanced
+  packet inspection.

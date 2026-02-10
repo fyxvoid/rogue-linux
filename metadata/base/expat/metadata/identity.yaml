@@ -1,0 +1,16 @@
+name: expat
+version: "2.6.2"
+category: base
+
+summary: >
+  Fast, non-validating XML parser written in C.
+  Used by configuration systems and network libraries.
+
+source:
+  kind: tarball
+  file: expat-2.6.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/glibc

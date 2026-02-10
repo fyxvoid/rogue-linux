@@ -1,0 +1,3 @@
+steps:
+  - echo "[COGMAN] Installing xz into pkgroot, sir."
+  - make -C source install DESTDIR="$PKGROOT"

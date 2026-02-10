@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building expat, sir."
+      cd build
+      make -j1
+
+  - |
+      echo "[COGMAN] Installing expat into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

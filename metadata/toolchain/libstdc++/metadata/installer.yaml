@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building bootstrap libstdc++, sir."
+      cd build
+      make -j$(nproc) all-target-libstdc++-v3
+
+  - |
+      echo "[COGMAN] Installing bootstrap libstdc++, sir."
+      cd build
+      make install-target-libstdc++-v3 DESTDIR="$PKGROOT"

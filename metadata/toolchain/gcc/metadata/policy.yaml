@@ -1,0 +1,12 @@
+filesystem:
+  read:
+    - /
+  write:
+    - /usr
+    - /lib
+    - /lib64
+
+network:
+  outbound: false
+
+capabilities: []

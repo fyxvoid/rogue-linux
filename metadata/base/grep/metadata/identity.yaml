@@ -1,0 +1,17 @@
+name: grep
+version: "3.11"
+category: base
+
+summary: >
+  GNU grep searches text using regular expressions.
+
+source:
+  kind: tarball
+  file: grep-3.11.tar.xz
+
+depends:
+  build:
+    - base/sed
+    - base/coreutils
+    - toolchain/gcc
+    - toolchain/glibc

@@ -1,0 +1,5 @@
+steps:
+  - |
+    echo "[COGMAN] Installing libnl into pkgroot, sir."
+    cd source
+    make install DESTDIR="$PKGROOT"

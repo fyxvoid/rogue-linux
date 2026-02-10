@@ -1,0 +1,16 @@
+name: ncurses
+version: "6.4"
+category: base
+
+summary: >
+  Terminal handling library providing character-cell display,
+  keyboard input, and terminal capability abstraction.
+
+source:
+  kind: tarball
+  file: ncurses-6.4.tar.gz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/glibc

@@ -1,0 +1,8 @@
+steps:
+  - echo "[COGMAN] Extracting bzip2 source, sir."
+  - |
+      rm -rf source/*
+      tar -xf tar/bzip2-1.0.8.tar.gz -C source --strip-components=1
+
+  - echo "[COGMAN] Building bzip2, sir."
+  - make -C source -j1 CFLAGS="-O2 -fPIC"

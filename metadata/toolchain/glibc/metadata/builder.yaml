@@ -1,0 +1,24 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting glibc source, sir."
+      tar -xf tar/glibc-2.39.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Preparing glibc build directory, sir."
+      cd build
+
+      ../source/glibc-2.39/configure \
+        --prefix=/usr \
+        --host=$(uname -m)-linux-gnu \
+        --build=$(../source/glibc-2.39/scripts/config.guess) \
+        --enable-kernel=4.14 \
+        --with-headers=/usr/include \
+        libc_cv_slibdir=/usr/lib
+
+  - |
+      echo "[COGMAN] Building glibc, sir."
+      cd build
+      make -j$(nproc)

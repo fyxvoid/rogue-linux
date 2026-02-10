@@ -1,0 +1,7 @@
+name: gnutls
+version: "3.8.6"
+category: libs/crypto
+
+description: >
+  Secure communication library implementing the TLS and DTLS
+  protocols, used by networking and security tools.

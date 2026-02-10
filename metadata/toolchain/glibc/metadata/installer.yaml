@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing glibc into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

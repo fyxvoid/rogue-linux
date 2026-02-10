@@ -1,0 +1,7 @@
+name: nettle
+version: "3.9.1"
+category: libs/crypto
+
+description: >
+  Low-level cryptographic library providing hash functions,
+  ciphers, and public-key algorithms.
