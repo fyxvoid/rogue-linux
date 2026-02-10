@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting wifi-pumpkin source, sir."
+      tar -xf tar/wifi-pumpkin-3.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building wifi-pumpkin Python package, sir."
+      cd source/wifi-pumpkin-3.0
+      python3 setup.py build
+

@@ -1,0 +1,4 @@
+steps:
+  - |
+      echo "[COGMAN] Installing tfsec, sir."
+      install -Dm755 build/* "$PKGROOT/usr/bin/"

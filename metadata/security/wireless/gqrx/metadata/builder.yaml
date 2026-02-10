@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gqrx source, sir."
+      tar -xf tar/gqrx-2.17.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring gqrx with CMake, sir."
+      cd build
+      cmake ../source/gqrx-2.17.5 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

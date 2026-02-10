@@ -1,0 +1,15 @@
+name: reaver
+version: "1.6.6"
+category: security/wireless
+
+summary: >
+  WiFi Protected Setup brute force attack tool
+
+source:
+  kind: tarball
+  file: reaver-1.6.6.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

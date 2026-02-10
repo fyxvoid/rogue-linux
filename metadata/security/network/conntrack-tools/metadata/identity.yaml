@@ -1,0 +1,17 @@
+name: conntrack-tools
+version: "1.4.8"
+category: security/network
+
+summary: >
+  Connection tracking userspace tools for netfilter
+
+source:
+  kind: tarball
+  file: conntrack-tools-1.4.8.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libnetfilter_conntrack
+    - networking/core/libmnl
+    - networking/core/libnl

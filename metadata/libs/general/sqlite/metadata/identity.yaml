@@ -1,0 +1,14 @@
+name: sqlite
+version: "3.45.1"
+category: libs/general
+
+summary: >
+  Self-contained serverless SQL database engine
+
+source:
+  kind: tarball
+  file: sqlite-3.45.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

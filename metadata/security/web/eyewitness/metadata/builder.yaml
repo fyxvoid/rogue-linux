@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting eyewitness source, sir."
+      tar -xf tar/eyewitness-20231127.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building eyewitness Python package, sir."
+      cd source/eyewitness-20231127
+      python3 setup.py build
+

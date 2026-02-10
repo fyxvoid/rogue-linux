@@ -1,0 +1,16 @@
+name: iaito
+version: "5.8.8"
+category: security/reverse
+
+summary: >
+  Official graphical interface for radare2 reverse engineering
+
+source:
+  kind: tarball
+  file: iaito-5.8.8.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - security/reverse/radare2

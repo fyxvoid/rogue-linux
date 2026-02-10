@@ -1,0 +1,16 @@
+name: r2ghidra
+version: "5.8.8"
+category: security/reverse
+
+summary: >
+  Ghidra decompiler integration for radare2
+
+source:
+  kind: tarball
+  file: r2ghidra-5.8.8.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - security/reverse/radare2

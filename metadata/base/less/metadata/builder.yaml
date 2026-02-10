@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting less source, sir."
+      tar -xf tar/less-643.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring less, sir."
+      cd build
+      ../source/less-643/configure --prefix=/usr \
+        --sysconfdir=/etc
+

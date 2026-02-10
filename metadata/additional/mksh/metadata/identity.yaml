@@ -1,0 +1,14 @@
+name: mksh
+version: "59c"
+category: additional
+
+summary: >
+  MirBSD Korn Shell POSIX compatible shell
+
+source:
+  kind: tarball
+  file: mksh-59c.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

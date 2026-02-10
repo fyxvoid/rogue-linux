@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting giflib source, sir."
+      tar -xf tar/giflib-5.2.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building giflib, sir."
+      cd source/giflib-5.2.2
+      make -j$(nproc)
+

@@ -1,0 +1,16 @@
+name: skipfish
+version: "2.10b"
+category: security/scanning
+
+summary: >
+  Active web application security reconnaissance tool by Google
+
+source:
+  kind: tarball
+  file: skipfish-2.10b.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - libs/compression/zlib

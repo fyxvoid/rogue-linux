@@ -1,0 +1,14 @@
+name: openssl-tools
+version: "3.2.1"
+category: security/defense
+
+summary: >
+  OpenSSL CLI tools for certificate and encryption management
+
+source:
+  kind: tarball
+  file: openssl-tools-3.2.1.tar.xz
+
+depends:
+  build:
+    - libs/crypto/openssl

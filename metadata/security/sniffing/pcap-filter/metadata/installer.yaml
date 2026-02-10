@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building pcap-filter, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing pcap-filter into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

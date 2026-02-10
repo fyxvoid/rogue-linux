@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting magicrescue source, sir."
+      tar -xf tar/magicrescue-1.1.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring magicrescue, sir."
+      cd build
+      ../source/magicrescue-1.1.10/configure --prefix=/usr \
+        
+

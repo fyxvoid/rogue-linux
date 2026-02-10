@@ -1,0 +1,16 @@
+name: certbot
+version: "2.9.0"
+category: security/defense
+
+summary: >
+  ACME client for automated TLS certificate management
+
+source:
+  kind: tarball
+  file: certbot-2.9.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests
+    - scripting/python/cryptography

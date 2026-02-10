@@ -1,0 +1,16 @@
+name: eaphammer
+version: "1.14.0"
+category: security/wireless
+
+summary: >
+  Targeted evil twin attacks against WPA2-Enterprise networks
+
+source:
+  kind: tarball
+  file: eaphammer-1.14.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - networking/core/hostapd
+    - libs/crypto/openssl

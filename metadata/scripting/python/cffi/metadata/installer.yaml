@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing cffi Python package, sir."
+      cd source/cffi*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

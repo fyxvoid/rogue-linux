@@ -1,0 +1,16 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting curl source, sir."
+      tar -xf tar/curl-8.6.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring curl, sir."
+      cd build
+      ../source/curl-8.6.0/configure --prefix=/usr \
+        --disable-static \
+        --with-openssl \
+        --enable-threaded-resolver
+

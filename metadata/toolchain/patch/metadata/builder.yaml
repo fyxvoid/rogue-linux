@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting patch source, sir."
+      tar -xf tar/patch-2.7.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring patch, sir."
+      cd build
+      ../source/patch-2.7.6/configure --prefix=/usr \
+        
+

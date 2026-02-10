@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building bluez-tools, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing bluez-tools into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

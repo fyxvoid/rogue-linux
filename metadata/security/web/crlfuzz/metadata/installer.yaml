@@ -1,0 +1,4 @@
+steps:
+  - |
+      echo "[COGMAN] Installing crlfuzz, sir."
+      install -Dm755 build/* "$PKGROOT/usr/bin/"

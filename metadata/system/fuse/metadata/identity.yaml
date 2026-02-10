@@ -1,0 +1,14 @@
+name: fuse
+version: "3.16.2"
+category: system
+
+summary: >
+  Filesystem in Userspace framework for custom filesystems
+
+source:
+  kind: tarball
+  file: fuse-3.16.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

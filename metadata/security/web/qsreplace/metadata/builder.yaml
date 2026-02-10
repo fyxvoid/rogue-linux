@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting qsreplace source, sir."
+      tar -xf tar/qsreplace-0.0.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building qsreplace with Go, sir."
+      cd source/qsreplace-0.0.3
+      go build -o ../../build/ ./...
+

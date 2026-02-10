@@ -1,0 +1,14 @@
+name: chaosreader
+version: "0.95"
+category: security/sniffing
+
+summary: >
+  Freeware tool to trace TCP UDP sessions from tcpdump logs
+
+source:
+  kind: tarball
+  file: chaosreader-0.95.tar.xz
+
+depends:
+  build:
+    - toolchain/perl

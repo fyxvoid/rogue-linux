@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting cewl-pass source, sir."
+      tar -xf tar/cewl-pass-2.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building cewl-pass, sir."
+      cd source/cewl-pass-2.3
+      make -j$(nproc)
+

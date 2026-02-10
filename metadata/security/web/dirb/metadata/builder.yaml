@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dirb source, sir."
+      tar -xf tar/dirb-2.22.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring dirb, sir."
+      cd build
+      ../source/dirb-2.22/configure --prefix=/usr \
+        
+

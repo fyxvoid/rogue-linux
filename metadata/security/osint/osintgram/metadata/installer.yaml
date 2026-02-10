@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing osintgram Python package, sir."
+      cd source/osintgram*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

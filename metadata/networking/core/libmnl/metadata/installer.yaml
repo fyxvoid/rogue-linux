@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building libmnl, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing libmnl into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

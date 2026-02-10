@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting unfurl source, sir."
+      tar -xf tar/unfurl-0.4.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building unfurl with Go, sir."
+      cd source/unfurl-0.4.3
+      go build -o ../../build/ ./...
+

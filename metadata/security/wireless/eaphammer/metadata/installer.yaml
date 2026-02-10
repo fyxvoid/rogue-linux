@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing eaphammer Python package, sir."
+      cd source/eaphammer*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

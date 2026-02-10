@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting nss source, sir."
+      tar -xf tar/nss-3.98.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building nss, sir."
+      cd source/nss-3.98
+      make -j$(nproc)
+

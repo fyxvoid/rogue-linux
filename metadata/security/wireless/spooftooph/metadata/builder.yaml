@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting spooftooph source, sir."
+      tar -xf tar/spooftooph-0.5.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building spooftooph, sir."
+      cd source/spooftooph-0.5.2
+      make -j$(nproc)
+

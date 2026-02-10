@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting pigz source, sir."
+      tar -xf tar/pigz-2.8.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building pigz, sir."
+      cd source/pigz-2.8
+      make -j$(nproc)
+

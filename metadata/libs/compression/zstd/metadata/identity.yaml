@@ -1,11 +1,15 @@
 name: zstd
-version: "1.5.6"
-
+version: "1.5.5"
 category: libs/compression
 
-description: >
-  Zstandard is a fast real-time compression algorithm and library.
+summary: >
+  Zstandard fast real-time compression algorithm
 
 source:
-  type: tarball
-  url: https://github.com/facebook/zstd/releases/download/v1.5.6/zstd-1.5.6.tar.gz
+  kind: tarball
+  file: zstd-1.5.5.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

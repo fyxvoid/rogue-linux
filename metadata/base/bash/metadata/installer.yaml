@@ -2,7 +2,7 @@ steps:
   - |
       echo "[COGMAN] Building bash, sir."
       cd build
-      make -j1
+      make -j$(nproc)
 
   - |
       echo "[COGMAN] Installing bash into staging root, sir."

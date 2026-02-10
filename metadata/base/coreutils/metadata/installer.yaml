@@ -2,7 +2,7 @@ steps:
   - |
       echo "[COGMAN] Building coreutils, sir."
       cd build
-      make -j1
+      make -j$(nproc)
 
   - |
       echo "[COGMAN] Installing coreutils into staging root, sir."

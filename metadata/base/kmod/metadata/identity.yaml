@@ -1,0 +1,17 @@
+name: kmod
+version: "32"
+category: base
+
+summary: >
+  Linux kernel module management utilities
+
+source:
+  kind: tarball
+  file: kmod-32.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/compression/xz
+    - libs/compression/zlib
+    - libs/compression/zstd

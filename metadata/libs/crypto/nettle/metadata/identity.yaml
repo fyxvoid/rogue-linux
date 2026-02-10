@@ -2,6 +2,14 @@ name: nettle
 version: "3.9.1"
 category: libs/crypto
 
-description: >
-  Low-level cryptographic library providing hash functions,
-  ciphers, and public-key algorithms.
+summary: >
+  Low-level cryptographic library for public key algorithms
+
+source:
+  kind: tarball
+  file: nettle-3.9.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/gmp

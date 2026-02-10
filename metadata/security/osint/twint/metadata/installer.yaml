@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing twint Python package, sir."
+      cd source/twint*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

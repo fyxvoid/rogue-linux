@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building lime-forensics, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing lime-forensics into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

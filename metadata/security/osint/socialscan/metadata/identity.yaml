@@ -1,0 +1,15 @@
+name: socialscan
+version: "2.0.0"
+category: security/osint
+
+summary: >
+  Check email and username usage on online platforms
+
+source:
+  kind: tarball
+  file: socialscan-2.0.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

@@ -1,0 +1,14 @@
+name: pcre2
+version: "10.43"
+category: libs/general
+
+summary: >
+  Perl Compatible Regular Expressions library version 2 with improved API
+
+source:
+  kind: tarball
+  file: pcre2-10.43.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting droopescan source, sir."
+      tar -xf tar/droopescan-1.13.9.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building droopescan Python package, sir."
+      cd source/droopescan-1.13.9
+      python3 setup.py build
+

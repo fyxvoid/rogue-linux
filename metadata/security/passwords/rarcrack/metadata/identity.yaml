@@ -1,0 +1,15 @@
+name: rarcrack
+version: "0.2"
+category: security/passwords
+
+summary: >
+  RAR WinRAR 7z archive password cracker using brute force
+
+source:
+  kind: tarball
+  file: rarcrack-0.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/general/libxml2

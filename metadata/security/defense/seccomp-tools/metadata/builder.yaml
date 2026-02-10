@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting seccomp-tools source, sir."
+      tar -xf tar/seccomp-tools-1.6.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building seccomp-tools, sir."
+      cd source/seccomp-tools-1.6.0
+      make -j$(nproc)
+

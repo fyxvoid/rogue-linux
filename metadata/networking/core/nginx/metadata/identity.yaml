@@ -1,0 +1,17 @@
+name: nginx
+version: "1.25.4"
+category: networking/core
+
+summary: >
+  High-performance HTTP server and reverse proxy
+
+source:
+  kind: tarball
+  file: nginx-1.25.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - libs/general/pcre2
+    - libs/compression/zlib

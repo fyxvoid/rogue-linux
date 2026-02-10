@@ -1,5 +1,10 @@
 steps:
   - |
-    echo "[COGMAN] Installing nettle into pkgroot, sir."
-    cd build
-    make install DESTDIR="$PKGROOT"
+      echo "[COGMAN] Building nettle, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing nettle into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

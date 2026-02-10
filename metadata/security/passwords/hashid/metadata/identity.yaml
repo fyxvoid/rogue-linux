@@ -1,0 +1,14 @@
+name: hashid
+version: "3.1.4"
+category: security/passwords
+
+summary: >
+  Identify the different types of hashes used to encrypt data
+
+source:
+  kind: tarball
+  file: hashid-3.1.4.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting fragrouter source, sir."
+      tar -xf tar/fragrouter-1.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building fragrouter, sir."
+      cd source/fragrouter-1.6
+      make -j$(nproc)
+

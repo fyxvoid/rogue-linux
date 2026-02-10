@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building openjdk, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing openjdk into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

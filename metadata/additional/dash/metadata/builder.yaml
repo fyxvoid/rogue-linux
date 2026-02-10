@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dash source, sir."
+      tar -xf tar/dash-0.5.12.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring dash, sir."
+      cd build
+      ../source/dash-0.5.12/configure --prefix=/usr \
+        
+

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting paramspider source, sir."
+      tar -xf tar/paramspider-1.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building paramspider Python package, sir."
+      cd source/paramspider-1.1
+      python3 setup.py build
+

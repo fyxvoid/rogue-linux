@@ -4,10 +4,11 @@ steps:
 
   - |
       echo "[COGMAN] Extracting zlib source, sir."
-      tar -xf tar/zlib-1.3.1.tar.gz -C source
+      tar -xf tar/zlib-1.3.1.tar.xz -C source
 
   - |
       echo "[COGMAN] Configuring zlib, sir."
-      cd source/zlib-1.3.1
+      cd build
+      ../source/zlib-1.3.1/configure --prefix=/usr \
+        
 
-      ./configure --prefix=/usr

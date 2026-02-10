@@ -1,0 +1,14 @@
+name: rustscan
+version: "2.2.2"
+category: security/recon
+
+summary: >
+  Modern fast port scanner integrated with Nmap
+
+source:
+  kind: tarball
+  file: rustscan-2.2.2.tar.xz
+
+depends:
+  build:
+    - scripting/rust/rust

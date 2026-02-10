@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting wfuzz source, sir."
+      tar -xf tar/wfuzz-3.1.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building wfuzz Python package, sir."
+      cd source/wfuzz-3.1.0
+      python3 setup.py build
+

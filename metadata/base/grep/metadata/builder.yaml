@@ -9,7 +9,6 @@ steps:
   - |
       echo "[COGMAN] Configuring grep, sir."
       cd build
+      ../source/grep-3.11/configure --prefix=/usr \
+        
 
-      ../source/grep-3.11/configure \
-        --prefix=/usr \
-        --disable-static

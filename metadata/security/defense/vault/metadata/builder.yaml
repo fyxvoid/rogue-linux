@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting vault source, sir."
+      tar -xf tar/vault-1.15.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building vault with Go, sir."
+      cd source/vault-1.15.5
+      go build -o ../../build/ ./...
+

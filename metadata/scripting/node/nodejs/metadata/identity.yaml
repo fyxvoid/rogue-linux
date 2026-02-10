@@ -1,0 +1,19 @@
+name: nodejs
+version: "20.11.1"
+category: scripting/node
+
+summary: >
+  JavaScript runtime built on Chrome V8 engine
+
+source:
+  kind: tarball
+  file: nodejs-20.11.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - libs/general/libuv
+    - libs/general/icu
+    - libs/general/nghttp2
+    - libs/compression/zlib

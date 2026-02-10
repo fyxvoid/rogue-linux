@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building jd-gui, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing jd-gui into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

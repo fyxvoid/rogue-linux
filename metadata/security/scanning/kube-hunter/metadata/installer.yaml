@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing kube-hunter Python package, sir."
+      cd source/kube-hunter*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

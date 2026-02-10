@@ -1,0 +1,23 @@
+[package]
+name = "cogman2-planner"
+version = "0.2.0"
+edition = "2021"
+description = "CogmanII build planner — TOML metadata to binary execution plan"
+
+[features]
+default = []
+# Enable optional AI advisory backend (Ollama).
+# This adds no runtime cost when AI is not invoked.
+# Build with: cargo build --features ai
+ai = []
+
+[dependencies]
+toml = "0.8"
+serde = { version = "1", features = ["derive"] }
+petgraph = "0.6"
+clap = { version = "4", features = ["derive"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true

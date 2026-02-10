@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting pwntools source, sir."
+      tar -xf tar/pwntools-4.12.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building pwntools Python package, sir."
+      cd source/pwntools-4.12.0
+      python3 setup.py build
+

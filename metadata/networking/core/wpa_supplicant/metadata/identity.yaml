@@ -1,0 +1,17 @@
+name: wpa_supplicant
+version: "2.10"
+category: networking/core
+
+summary: >
+  WPA and WPA2 IEEE 802.11i supplicant for wireless authentication
+
+source:
+  kind: tarball
+  file: wpa_supplicant-2.10.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - base/dbus
+    - networking/core/libnl

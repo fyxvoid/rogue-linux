@@ -1,0 +1,14 @@
+name: sops
+version: "3.8.1"
+category: security/defense
+
+summary: >
+  Simple and flexible tool for managing encrypted secrets
+
+source:
+  kind: tarball
+  file: sops-3.8.1.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

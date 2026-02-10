@@ -1,0 +1,14 @@
+name: dnsmasq-sec
+version: "2.90"
+category: security/network
+
+summary: >
+  DNS forwarder with security filtering capabilities
+
+source:
+  kind: tarball
+  file: dnsmasq-sec-2.90.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting altdns source, sir."
+      tar -xf tar/altdns-1.0.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building altdns Python package, sir."
+      cd source/altdns-1.0.2
+      python3 setup.py build
+

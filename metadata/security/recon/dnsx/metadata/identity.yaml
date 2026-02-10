@@ -1,0 +1,14 @@
+name: dnsx
+version: "1.2.1"
+category: security/recon
+
+summary: >
+  Fast multi-purpose DNS toolkit for running queries
+
+source:
+  kind: tarball
+  file: dnsx-1.2.1.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

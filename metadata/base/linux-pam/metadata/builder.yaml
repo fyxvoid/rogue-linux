@@ -1,0 +1,15 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting linux-pam source, sir."
+      tar -xf tar/linux-pam-1.6.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring linux-pam, sir."
+      cd build
+      ../source/linux-pam-1.6.0/configure --prefix=/usr \
+        --sysconfdir=/etc \
+        --disable-db
+

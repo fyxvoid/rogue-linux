@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting pin-tools source, sir."
+      tar -xf tar/pin-tools-3.28.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building pin-tools, sir."
+      cd source/pin-tools-3.28
+      make -j$(nproc)
+

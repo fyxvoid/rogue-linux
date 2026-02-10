@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing shodan-cli Python package, sir."
+      cd source/shodan-cli*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

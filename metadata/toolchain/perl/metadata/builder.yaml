@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting perl source, sir."
+      tar -xf tar/perl-5.38.2.tar.gz -C source
+
+  - |
+      echo "[COGMAN] Configuring perl, sir."
+      cd build
+      ../source/perl-5.38.2/configure --prefix=/usr \
+        -des -Dprefix=/usr -Dvendorprefix=/usr -Dprivlib=/usr/lib/perl5 -Dman1dir=/usr/share/man/man1 -Dman3dir=/usr/share/man/man3 -Dpager=/usr/bin/less
+

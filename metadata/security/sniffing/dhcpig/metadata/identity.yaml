@@ -1,0 +1,15 @@
+name: dhcpig
+version: "1.5"
+category: security/sniffing
+
+summary: >
+  DHCP exhaustion and starvation attack tool
+
+source:
+  kind: tarball
+  file: dhcpig-1.5.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/scapy

@@ -1,0 +1,15 @@
+name: tcpreplay
+version: "4.4.4"
+category: security/sniffing
+
+summary: >
+  Replay pcap files on network at arbitrary speeds
+
+source:
+  kind: tarball
+  file: tcpreplay-4.4.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

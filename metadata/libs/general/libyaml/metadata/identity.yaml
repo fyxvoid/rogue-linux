@@ -1,0 +1,14 @@
+name: libyaml
+version: "0.2.5"
+category: libs/general
+
+summary: >
+  YAML 1.1 parser and emitter library for C
+
+source:
+  kind: tarball
+  file: libyaml-0.2.5.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

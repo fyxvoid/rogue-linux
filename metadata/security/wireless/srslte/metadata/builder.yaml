@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting srslte source, sir."
+      tar -xf tar/srslte-23.11.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring srslte with CMake, sir."
+      cd build
+      cmake ../source/srslte-23.11 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

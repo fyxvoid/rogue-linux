@@ -1,0 +1,15 @@
+name: expect
+version: "5.45.4"
+category: scripting/tcl
+
+summary: >
+  Tool for automating interactive applications via scripts
+
+source:
+  kind: tarball
+  file: expect-5.45.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - scripting/tcl/tcl

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting apktool source, sir."
+      tar -xf tar/apktool-2.9.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building apktool, sir."
+      cd source/apktool-2.9.3
+      make -j$(nproc)
+

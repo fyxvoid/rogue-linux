@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting social-analyzer source, sir."
+      tar -xf tar/social-analyzer-0.35.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building social-analyzer Python package, sir."
+      cd source/social-analyzer-0.35
+      python3 setup.py build
+

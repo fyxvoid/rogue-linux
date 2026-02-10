@@ -1,0 +1,14 @@
+name: popeye
+version: "0.21.2"
+category: security/scanning
+
+summary: >
+  Kubernetes cluster resource sanitizer and best practice checker
+
+source:
+  kind: tarball
+  file: popeye-0.21.2.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

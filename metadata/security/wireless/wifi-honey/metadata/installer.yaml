@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building wifi-honey, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing wifi-honey into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

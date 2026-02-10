@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting minizip source, sir."
+      tar -xf tar/minizip-4.0.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring minizip with CMake, sir."
+      cd build
+      cmake ../source/minizip-4.0.4 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

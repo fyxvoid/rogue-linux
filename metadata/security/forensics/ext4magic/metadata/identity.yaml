@@ -1,0 +1,16 @@
+name: ext4magic
+version: "0.3.1"
+category: security/forensics
+
+summary: >
+  Recover deleted files from ext4 filesystems using journal
+
+source:
+  kind: tarball
+  file: ext4magic-0.3.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/e2fsprogs
+    - libs/compression/bzip2

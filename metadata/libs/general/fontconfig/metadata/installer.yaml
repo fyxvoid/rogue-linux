@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building fontconfig, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing fontconfig into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

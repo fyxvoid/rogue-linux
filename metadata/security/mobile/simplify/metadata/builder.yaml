@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting simplify source, sir."
+      tar -xf tar/simplify-2.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building simplify, sir."
+      cd source/simplify-2.1
+      make -j$(nproc)
+

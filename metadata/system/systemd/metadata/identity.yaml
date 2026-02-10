@@ -1,0 +1,19 @@
+name: systemd
+version: "255"
+category: system
+
+summary: >
+  System and service manager for Linux
+
+source:
+  kind: tarball
+  file: systemd-255.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/dbus
+    - base/linux-pam
+    - base/libcap
+    - base/kmod
+    - base/util-linux

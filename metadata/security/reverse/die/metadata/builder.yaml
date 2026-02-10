@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting die source, sir."
+      tar -xf tar/die-3.09.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring die with CMake, sir."
+      cd build
+      cmake ../source/die-3.09 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ruler source, sir."
+      tar -xf tar/ruler-2.4.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building ruler with Go, sir."
+      cd source/ruler-2.4.0
+      go build -o ../../build/ ./...
+

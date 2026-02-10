@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ranger source, sir."
+      tar -xf tar/ranger-1.9.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building ranger Python package, sir."
+      cd source/ranger-1.9.3
+      python3 setup.py build
+

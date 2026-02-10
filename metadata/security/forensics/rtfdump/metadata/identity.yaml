@@ -1,0 +1,14 @@
+name: rtfdump
+version: "0.0.12"
+category: security/forensics
+
+summary: >
+  Analyze RTF files for malicious content
+
+source:
+  kind: tarball
+  file: rtfdump-0.0.12.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

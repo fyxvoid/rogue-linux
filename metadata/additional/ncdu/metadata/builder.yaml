@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ncdu source, sir."
+      tar -xf tar/ncdu-2.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building ncdu with Cargo, sir."
+      cd source/ncdu-2.3
+      cargo build --release
+

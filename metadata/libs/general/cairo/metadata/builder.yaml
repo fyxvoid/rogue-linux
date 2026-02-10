@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting cairo source, sir."
+      tar -xf tar/cairo-1.18.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring cairo with Meson, sir."
+      cd build
+      meson setup ../source/cairo-1.18.0 . --prefix=/usr --buildtype=release
+

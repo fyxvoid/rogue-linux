@@ -1,0 +1,15 @@
+name: extundelete
+version: "0.2.4"
+category: security/forensics
+
+summary: >
+  Recover deleted files from ext3 and ext4 partitions
+
+source:
+  kind: tarball
+  file: extundelete-0.2.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/e2fsprogs

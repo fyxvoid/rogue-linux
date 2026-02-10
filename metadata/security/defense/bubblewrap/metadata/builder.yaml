@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting bubblewrap source, sir."
+      tar -xf tar/bubblewrap-0.8.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring bubblewrap with Meson, sir."
+      cd build
+      meson setup ../source/bubblewrap-0.8.0 . --prefix=/usr --buildtype=release
+

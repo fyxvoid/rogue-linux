@@ -1,0 +1,14 @@
+name: wolfssl
+version: "5.6.6"
+category: libs/crypto
+
+summary: >
+  Embedded SSL/TLS library optimized for resource-constrained environments
+
+source:
+  kind: tarball
+  file: wolfssl-5.6.6.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

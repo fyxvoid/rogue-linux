@@ -3,8 +3,7 @@ version: "14.1.0"
 category: toolchain
 
 summary: >
-  GNU Compiler Collection rebuilt against the system C library,
-  providing the final C and C++ compiler for the bootstrap system.
+  GNU Compiler Collection providing C and C++ compilers for the bootstrap system
 
 source:
   kind: tarball
@@ -14,3 +13,6 @@ depends:
   build:
     - toolchain/binutils
     - toolchain/glibc
+    - toolchain/gmp
+    - toolchain/mpfr
+    - toolchain/mpc

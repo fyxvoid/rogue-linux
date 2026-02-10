@@ -1,0 +1,17 @@
+name: cryptsetup
+version: "2.7.0"
+category: system
+
+summary: >
+  Disk encryption setup utility using dm-crypt and LUKS
+
+source:
+  kind: tarball
+  file: cryptsetup-2.7.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - system/lvm2
+    - libs/general/json-c

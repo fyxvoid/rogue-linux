@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting kismet source, sir."
+      tar -xf tar/kismet-2023-07-R1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring kismet, sir."
+      cd build
+      ../source/kismet-2023-07-R1/configure --prefix=/usr \
+        
+

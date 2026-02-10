@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting samhain source, sir."
+      tar -xf tar/samhain-4.5.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring samhain, sir."
+      cd build
+      ../source/samhain-4.5.2/configure --prefix=/usr \
+        --sysconfdir=/etc
+

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting icu source, sir."
+      tar -xf tar/icu-74.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring icu, sir."
+      cd build
+      ../source/icu-74.2/configure --prefix=/usr \
+        
+

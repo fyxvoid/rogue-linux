@@ -1,0 +1,14 @@
+name: modlishka
+version: "1.1.0"
+category: security/social
+
+summary: >
+  Flexible HTTP reverse proxy for phishing and 2FA bypass
+
+source:
+  kind: tarball
+  file: modlishka-1.1.0.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

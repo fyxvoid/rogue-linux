@@ -1,0 +1,15 @@
+name: protobuf
+version: "25.3"
+category: libs/general
+
+summary: >
+  Protocol Buffers serialization library by Google
+
+source:
+  kind: tarball
+  file: protobuf-25.3.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

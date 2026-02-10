@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building bc-calc, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing bc-calc into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

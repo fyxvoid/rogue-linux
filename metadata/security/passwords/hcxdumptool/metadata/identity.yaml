@@ -1,0 +1,15 @@
+name: hcxdumptool
+version: "6.3.4"
+category: security/passwords
+
+summary: >
+  Small tool to capture packets from WLAN devices for hashcat
+
+source:
+  kind: tarball
+  file: hcxdumptool-6.3.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

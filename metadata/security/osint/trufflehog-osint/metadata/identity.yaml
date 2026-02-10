@@ -1,0 +1,14 @@
+name: trufflehog-osint
+version: "3.68.0"
+category: security/osint
+
+summary: >
+  Find credentials and secrets in git repositories
+
+source:
+  kind: tarball
+  file: trufflehog-osint-3.68.0.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

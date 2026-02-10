@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing scout-suite Python package, sir."
+      cd source/scout-suite*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

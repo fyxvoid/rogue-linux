@@ -1,0 +1,14 @@
+name: mentalist
+version: "1.0"
+category: security/passwords
+
+summary: >
+  Graphical tool for custom wordlist generation using transforms
+
+source:
+  kind: tarball
+  file: mentalist-1.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

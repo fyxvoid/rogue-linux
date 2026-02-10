@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing frida-ios Python package, sir."
+      cd source/frida-ios*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

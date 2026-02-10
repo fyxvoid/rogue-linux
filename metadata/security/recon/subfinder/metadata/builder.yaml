@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting subfinder source, sir."
+      tar -xf tar/subfinder-2.6.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building subfinder with Go, sir."
+      cd source/subfinder-2.6.4
+      go build -o ../../build/ ./...
+

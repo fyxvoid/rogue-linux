@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building skipfish, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing skipfish into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

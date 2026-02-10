@@ -1,0 +1,14 @@
+name: kubeaudit
+version: "0.22.1"
+category: security/scanning
+
+summary: >
+  Kubernetes cluster security auditing tool
+
+source:
+  kind: tarball
+  file: kubeaudit-0.22.1.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

@@ -1,0 +1,14 @@
+name: libpcap
+version: "1.10.4"
+category: networking/core
+
+summary: >
+  Packet capture library for network traffic analysis
+
+source:
+  kind: tarball
+  file: libpcap-1.10.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

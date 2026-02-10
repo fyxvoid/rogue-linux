@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting mapcidr source, sir."
+      tar -xf tar/mapcidr-1.1.34.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building mapcidr with Go, sir."
+      cd source/mapcidr-1.1.34
+      go build -o ../../build/ ./...
+

@@ -1,0 +1,15 @@
+name: peda
+version: "1.2"
+category: security/reverse
+
+summary: >
+  Python Exploit Development Assistance for GDB
+
+source:
+  kind: tarball
+  file: peda-1.2.tar.xz
+
+depends:
+  build:
+    - security/reverse/gdb
+    - scripting/python/python3

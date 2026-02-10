@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting man-pages source, sir."
+      tar -xf tar/man-pages-6.06.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building man-pages, sir."
+      cd source/man-pages-6.06
+      make -j$(nproc) prefix=/usr
+

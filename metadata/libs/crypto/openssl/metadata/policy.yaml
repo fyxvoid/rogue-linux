@@ -3,7 +3,6 @@ filesystem:
     - /
   write:
     - /usr
-    - /etc
 
 network:
   outbound: false

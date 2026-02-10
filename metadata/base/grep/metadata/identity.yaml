@@ -3,7 +3,7 @@ version: "3.11"
 category: base
 
 summary: >
-  GNU grep searches text using regular expressions.
+  GNU Grep pattern matching utility for searching text
 
 source:
   kind: tarball
@@ -11,7 +11,5 @@ source:
 
 depends:
   build:
-    - base/sed
-    - base/coreutils
     - toolchain/gcc
-    - toolchain/glibc
+    - libs/general/pcre2

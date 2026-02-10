@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting zip source, sir."
+      tar -xf tar/zip-3.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building zip, sir."
+      cd source/zip-3.0
+      make -j$(nproc)
+

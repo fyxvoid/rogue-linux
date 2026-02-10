@@ -1,0 +1,15 @@
+name: ninja
+version: "1.12.0"
+category: toolchain
+
+summary: >
+  Small fast build system focused on speed
+
+source:
+  kind: tarball
+  file: ninja-1.12.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

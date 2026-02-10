@@ -1,0 +1,16 @@
+name: guymager
+version: "0.8.13"
+category: security/forensics
+
+summary: >
+  Forensic disk imager with hash verification
+
+source:
+  kind: tarball
+  file: guymager-0.8.13.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - libs/compression/zlib

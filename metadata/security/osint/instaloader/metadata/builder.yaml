@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting instaloader source, sir."
+      tar -xf tar/instaloader-4.11.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building instaloader Python package, sir."
+      cd source/instaloader-4.11
+      python3 setup.py build
+

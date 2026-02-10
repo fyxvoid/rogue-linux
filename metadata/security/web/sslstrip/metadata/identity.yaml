@@ -1,0 +1,14 @@
+name: sslstrip
+version: "0.9"
+category: security/web
+
+summary: >
+  SSL stripping proxy for downgrading HTTPS to HTTP
+
+source:
+  kind: tarball
+  file: sslstrip-0.9.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

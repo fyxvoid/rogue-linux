@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting iotop source, sir."
+      tar -xf tar/iotop-0.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building iotop Python package, sir."
+      cd source/iotop-0.6
+      python3 setup.py build
+

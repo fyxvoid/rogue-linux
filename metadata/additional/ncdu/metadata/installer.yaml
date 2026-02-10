@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing ncdu, sir."
+      cd source/ncdu*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

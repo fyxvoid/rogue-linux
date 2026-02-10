@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting safety source, sir."
+      tar -xf tar/safety-3.0.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building safety Python package, sir."
+      cd source/safety-3.0.1
+      python3 setup.py build
+

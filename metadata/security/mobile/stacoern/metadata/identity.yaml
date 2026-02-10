@@ -1,0 +1,14 @@
+name: stacoern
+version: "1.0"
+category: security/mobile
+
+summary: >
+  Static Android Code Review tool for vulnerability detection
+
+source:
+  kind: tarball
+  file: stacoern-1.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

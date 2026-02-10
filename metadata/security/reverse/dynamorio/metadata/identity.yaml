@@ -1,0 +1,15 @@
+name: dynamorio
+version: "10.0.0"
+category: security/reverse
+
+summary: >
+  Dynamic binary instrumentation tool platform
+
+source:
+  kind: tarball
+  file: dynamorio-10.0.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

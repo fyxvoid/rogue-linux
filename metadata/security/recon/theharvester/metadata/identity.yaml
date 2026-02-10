@@ -1,0 +1,15 @@
+name: theharvester
+version: "4.6.0"
+category: security/recon
+
+summary: >
+  OSINT tool for gathering emails subdomains and IPs from public sources
+
+source:
+  kind: tarball
+  file: theharvester-4.6.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting libjpeg-turbo source, sir."
+      tar -xf tar/libjpeg-turbo-3.0.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring libjpeg-turbo with CMake, sir."
+      cd build
+      cmake ../source/libjpeg-turbo-3.0.2 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

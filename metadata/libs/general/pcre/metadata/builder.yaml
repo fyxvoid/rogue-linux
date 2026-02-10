@@ -1,0 +1,20 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting pcre source, sir."
+      tar -xf tar/pcre-8.45.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring pcre, sir."
+      cd build
+      ../source/pcre-8.45/configure --prefix=/usr \
+        --enable-unicode-properties \
+        --enable-pcre16 \
+        --enable-pcre32 \
+        --enable-pcregrep-libz \
+        --enable-pcregrep-libbz2 \
+        --enable-pcretest-libreadline \
+        --disable-static
+

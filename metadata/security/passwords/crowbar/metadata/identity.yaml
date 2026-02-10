@@ -1,0 +1,15 @@
+name: crowbar
+version: "4.2"
+category: security/passwords
+
+summary: >
+  Brute force tool supporting VNC RDP SSH and OpenVPN
+
+source:
+  kind: tarball
+  file: crowbar-4.2.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/paramiko

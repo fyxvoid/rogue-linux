@@ -1,18 +1,10 @@
 steps:
-  - echo "[COGMAN] Installing bzip2 (static), sir."
+  - |
+      echo "[COGMAN] Building bzip2, sir."
+      cd build
+      make -j$(nproc)
 
-  # Binary
-  - install -Dm755 source/bzip2 "$PKGROOT/usr/bin/bzip2"
-  - ln -sf bzip2 "$PKGROOT/usr/bin/bunzip2"
-  - ln -sf bzip2 "$PKGROOT/usr/bin/bzcat"
-
-  # Static library
-  - install -Dm644 source/libbz2.a "$PKGROOT/usr/lib/libbz2.a"
-
-  # Header
-  - install -Dm644 source/bzlib.h "$PKGROOT/usr/include/bzlib.h"
-
-  # Man page
-  - install -Dm644 source/bzip2.1 "$PKGROOT/usr/share/man/man1/bzip2.1"
-  - ln -sf bzip2.1 "$PKGROOT/usr/share/man/man1/bunzip2.1"
-  - ln -sf bzip2.1 "$PKGROOT/usr/share/man/man1/bzcat.1"
+  - |
+      echo "[COGMAN] Installing bzip2 into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

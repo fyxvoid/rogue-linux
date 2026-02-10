@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting msgpack source, sir."
+      tar -xf tar/msgpack-6.0.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring msgpack with CMake, sir."
+      cd build
+      cmake ../source/msgpack-6.0.0 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

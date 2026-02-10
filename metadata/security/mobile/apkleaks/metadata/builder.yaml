@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting apkleaks source, sir."
+      tar -xf tar/apkleaks-2.6.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building apkleaks Python package, sir."
+      cd source/apkleaks-2.6.2
+      python3 setup.py build
+

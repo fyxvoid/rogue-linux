@@ -1,0 +1,15 @@
+name: srslte
+version: "23.11"
+category: security/wireless
+
+summary: >
+  Open source 4G/LTE software radio suite
+
+source:
+  kind: tarball
+  file: srslte-23.11.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

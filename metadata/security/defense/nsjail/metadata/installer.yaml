@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building nsjail, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing nsjail into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

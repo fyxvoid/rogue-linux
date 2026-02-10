@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building xxeinjector, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing xxeinjector into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

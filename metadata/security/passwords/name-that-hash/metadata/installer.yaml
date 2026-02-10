@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing name-that-hash Python package, sir."
+      cd source/name-that-hash*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing drozer Python package, sir."
+      cd source/drozer*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

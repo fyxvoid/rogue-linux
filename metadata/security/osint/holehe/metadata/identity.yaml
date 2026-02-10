@@ -1,0 +1,15 @@
+name: holehe
+version: "1.61"
+category: security/osint
+
+summary: >
+  Check if email is attached to accounts on various sites
+
+source:
+  kind: tarball
+  file: holehe-1.61.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

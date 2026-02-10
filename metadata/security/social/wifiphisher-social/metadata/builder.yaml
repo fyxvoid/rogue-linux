@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting wifiphisher-social source, sir."
+      tar -xf tar/wifiphisher-social-1.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building wifiphisher-social Python package, sir."
+      cd source/wifiphisher-social-1.4
+      python3 setup.py build
+

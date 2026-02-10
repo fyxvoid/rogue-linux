@@ -1,0 +1,14 @@
+name: dump-decrypted
+version: "1.0"
+category: security/mobile
+
+summary: >
+  Dump decrypted iOS app binaries from memory
+
+source:
+  kind: tarball
+  file: dump-decrypted-1.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

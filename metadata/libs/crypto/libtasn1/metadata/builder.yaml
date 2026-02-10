@@ -1,20 +1,14 @@
 steps:
-  - |
-    echo "[COGMAN] Extracting libtasn1 source, sir."
-    tar -xf tar/libtasn1-4.19.0.tar.gz -C source --strip-components=1
+  - rm -rf source build
+  - mkdir -p source build
 
   - |
-    echo "[COGMAN] Configuring libtasn1, sir."
-    export PKG_CONFIG_PATH="$PKGROOT/usr/lib/pkgconfig"
-    export CPPFLAGS="-I$PKGROOT/usr/include"
-    export LDFLAGS="-L$PKGROOT/usr/lib"
-
-    cd build
-    ../source/configure \
-      --prefix=/usr \
-      --disable-static
+      echo "[COGMAN] Extracting libtasn1 source, sir."
+      tar -xf tar/libtasn1-4.19.0.tar.xz -C source
 
   - |
-    echo "[COGMAN] Building libtasn1, sir."
-    cd build
-    make
+      echo "[COGMAN] Configuring libtasn1, sir."
+      cd build
+      ../source/libtasn1-4.19.0/configure --prefix=/usr \
+        --disable-static
+

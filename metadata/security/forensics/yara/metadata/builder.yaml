@@ -1,0 +1,17 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting yara source, sir."
+      tar -xf tar/yara-4.5.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring yara, sir."
+      cd build
+      ../source/yara-4.5.0/configure --prefix=/usr \
+        --enable-cuckoo \
+        --enable-magic \
+        --enable-dotnet \
+        --with-crypto
+

@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building nbtscan, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing nbtscan into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting kbd source, sir."
+      tar -xf tar/kbd-2.6.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring kbd, sir."
+      cd build
+      ../source/kbd-2.6.4/configure --prefix=/usr \
+        --disable-vlock
+

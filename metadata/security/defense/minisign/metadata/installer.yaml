@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building minisign, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing minisign into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

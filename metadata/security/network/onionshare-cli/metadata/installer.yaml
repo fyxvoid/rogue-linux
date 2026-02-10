@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing onionshare-cli Python package, sir."
+      cd source/onionshare-cli*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

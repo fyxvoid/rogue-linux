@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting crda source, sir."
+      tar -xf tar/crda-4.14.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building crda, sir."
+      cd source/crda-4.14
+      make -j$(nproc)
+

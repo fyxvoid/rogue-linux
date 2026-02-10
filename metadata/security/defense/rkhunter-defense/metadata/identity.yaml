@@ -1,0 +1,15 @@
+name: rkhunter-defense
+version: "1.4.6"
+category: security/defense
+
+summary: >
+  Rootkit Hunter for detecting rootkits on Linux systems
+
+source:
+  kind: tarball
+  file: rkhunter-defense-1.4.6.tar.xz
+
+depends:
+  build:
+    - base/bash
+    - toolchain/perl

@@ -1,0 +1,15 @@
+name: pwndbg
+version: "2024.02.14"
+category: security/reverse
+
+summary: >
+  GDB plugin for exploit development and reverse engineering
+
+source:
+  kind: tarball
+  file: pwndbg-2024.02.14.tar.xz
+
+depends:
+  build:
+    - security/reverse/gdb
+    - scripting/python/python3

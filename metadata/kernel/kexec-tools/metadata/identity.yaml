@@ -1,0 +1,15 @@
+name: kexec-tools
+version: "2.0.28"
+category: kernel
+
+summary: >
+  Kexec fast reboot utilities for Linux kernel
+
+source:
+  kind: tarball
+  file: kexec-tools-2.0.28.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/compression/xz

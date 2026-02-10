@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building nodejs, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing nodejs into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

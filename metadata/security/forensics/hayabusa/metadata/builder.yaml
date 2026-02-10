@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting hayabusa source, sir."
+      tar -xf tar/hayabusa-2.13.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building hayabusa with Cargo, sir."
+      cd source/hayabusa-2.13.0
+      cargo build --release
+

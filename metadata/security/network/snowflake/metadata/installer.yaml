@@ -1,0 +1,4 @@
+steps:
+  - |
+      echo "[COGMAN] Installing snowflake, sir."
+      install -Dm755 build/* "$PKGROOT/usr/bin/"

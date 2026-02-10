@@ -1,0 +1,14 @@
+name: unhide
+version: "20210124"
+category: security/forensics
+
+summary: >
+  Find hidden processes and TCP/UDP ports using forensic techniques
+
+source:
+  kind: tarball
+  file: unhide-20210124.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

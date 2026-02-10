@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting hexedit source, sir."
+      tar -xf tar/hexedit-1.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building hexedit, sir."
+      cd source/hexedit-1.6
+      make -j$(nproc)
+

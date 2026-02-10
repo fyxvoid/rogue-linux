@@ -1,0 +1,16 @@
+name: osquery
+version: "5.11.0"
+category: security/forensics
+
+summary: >
+  SQL-powered operating system instrumentation and analytics
+
+source:
+  kind: tarball
+  file: osquery-5.11.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - libs/general/glib

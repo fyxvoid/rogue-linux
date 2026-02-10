@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing loki Python package, sir."
+      cd source/loki*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

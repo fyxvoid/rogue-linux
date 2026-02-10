@@ -1,0 +1,14 @@
+name: hyperfine
+version: "1.18.0"
+category: additional
+
+summary: >
+  Command-line benchmarking tool with statistical analysis
+
+source:
+  kind: tarball
+  file: hyperfine-1.18.0.tar.xz
+
+depends:
+  build:
+    - scripting/rust/rust

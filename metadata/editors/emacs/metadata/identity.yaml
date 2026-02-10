@@ -1,0 +1,16 @@
+name: emacs
+version: "29.3"
+category: editors
+
+summary: >
+  GNU Emacs extensible self-documenting text editor
+
+source:
+  kind: tarball
+  file: emacs-29.3.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/ncurses
+    - libs/general/glib

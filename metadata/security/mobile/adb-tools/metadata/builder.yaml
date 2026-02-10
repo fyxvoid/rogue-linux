@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting adb-tools source, sir."
+      tar -xf tar/adb-tools-34.0.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building adb-tools, sir."
+      cd source/adb-tools-34.0.5
+      make -j$(nproc)
+

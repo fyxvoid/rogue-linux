@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building yara, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing yara into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

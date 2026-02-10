@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building seclists, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing seclists into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

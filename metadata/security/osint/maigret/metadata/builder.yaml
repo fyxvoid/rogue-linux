@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting maigret source, sir."
+      tar -xf tar/maigret-0.4.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building maigret Python package, sir."
+      cd source/maigret-0.4.4
+      python3 setup.py build
+

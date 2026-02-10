@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing tokei, sir."
+      cd source/tokei*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

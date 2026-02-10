@@ -3,7 +3,7 @@ version: "4.9"
 category: base
 
 summary: >
-  GNU stream editor used for filtering and transforming text.
+  GNU Stream Editor for filtering and transforming text
 
 source:
   kind: tarball
@@ -11,6 +11,5 @@ source:
 
 depends:
   build:
-    - base/coreutils
     - toolchain/gcc
     - toolchain/glibc

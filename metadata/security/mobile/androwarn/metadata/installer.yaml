@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing androwarn Python package, sir."
+      cd source/androwarn*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

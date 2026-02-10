@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing ssl-pinning-bypass Python package, sir."
+      cd source/ssl-pinning-bypass*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

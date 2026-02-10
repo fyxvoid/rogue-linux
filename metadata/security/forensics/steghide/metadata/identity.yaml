@@ -1,0 +1,17 @@
+name: steghide
+version: "0.5.1"
+category: security/forensics
+
+summary: >
+  Steganography tool for hiding data in images and audio files
+
+source:
+  kind: tarball
+  file: steghide-0.5.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/general/libjpeg-turbo
+    - libs/compression/zlib
+    - libs/crypto/libgcrypt

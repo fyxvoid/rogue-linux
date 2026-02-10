@@ -1,0 +1,15 @@
+name: freeradius-wpe
+version: "3.2.3"
+category: security/wireless
+
+summary: >
+  FreeRADIUS with WPE patches for credential capture
+
+source:
+  kind: tarball
+  file: freeradius-wpe-3.2.3.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl

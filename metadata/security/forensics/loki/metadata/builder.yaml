@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting loki source, sir."
+      tar -xf tar/loki-0.51.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building loki Python package, sir."
+      cd source/loki-0.51.0
+      python3 setup.py build
+

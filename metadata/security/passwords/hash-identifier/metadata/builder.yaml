@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting hash-identifier source, sir."
+      tar -xf tar/hash-identifier-1.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building hash-identifier Python package, sir."
+      cd source/hash-identifier-1.2
+      python3 setup.py build
+

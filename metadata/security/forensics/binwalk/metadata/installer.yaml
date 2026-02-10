@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing binwalk Python package, sir."
+      cd source/binwalk*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,0 +1,14 @@
+name: ssdeep
+version: "2.14.1"
+category: security/forensics
+
+summary: >
+  Fuzzy hashing program for computing context triggered piecewise hashes
+
+source:
+  kind: tarball
+  file: ssdeep-2.14.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

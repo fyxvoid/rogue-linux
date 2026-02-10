@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting classyshark source, sir."
+      tar -xf tar/classyshark-8.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building classyshark, sir."
+      cd source/classyshark-8.2
+      make -j$(nproc)
+

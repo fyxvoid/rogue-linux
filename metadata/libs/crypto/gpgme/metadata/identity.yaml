@@ -1,0 +1,16 @@
+name: gpgme
+version: "1.23.2"
+category: libs/crypto
+
+summary: >
+  GnuPG Made Easy library for simplified GnuPG access
+
+source:
+  kind: tarball
+  file: gpgme-1.23.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/gnupg
+    - libs/crypto/libgpg-error

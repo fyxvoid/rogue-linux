@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting sops source, sir."
+      tar -xf tar/sops-3.8.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building sops with Go, sir."
+      cd source/sops-3.8.1
+      go build -o ../../build/ ./...
+

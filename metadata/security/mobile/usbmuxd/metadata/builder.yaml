@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting usbmuxd source, sir."
+      tar -xf tar/usbmuxd-1.1.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring usbmuxd, sir."
+      cd build
+      ../source/usbmuxd-1.1.1/configure --prefix=/usr \
+        
+

@@ -1,0 +1,15 @@
+name: wafw00f
+version: "2.2.0"
+category: security/scanning
+
+summary: >
+  Web Application Firewall detection tool
+
+source:
+  kind: tarball
+  file: wafw00f-2.2.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

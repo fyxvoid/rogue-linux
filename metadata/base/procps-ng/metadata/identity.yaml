@@ -1,0 +1,15 @@
+name: procps-ng
+version: "4.0.4"
+category: base
+
+summary: >
+  Process monitoring utilities including ps top and free
+
+source:
+  kind: tarball
+  file: procps-ng-4.0.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/ncurses

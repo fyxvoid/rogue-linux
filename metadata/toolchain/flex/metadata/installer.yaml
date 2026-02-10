@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building flex, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing flex into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

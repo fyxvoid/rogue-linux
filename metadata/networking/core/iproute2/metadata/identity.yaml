@@ -1,0 +1,16 @@
+name: iproute2
+version: "6.7.0"
+category: networking/core
+
+summary: >
+  IP routing and network device configuration utilities
+
+source:
+  kind: tarball
+  file: iproute2-6.7.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/libelf
+    - libs/general/libmnl

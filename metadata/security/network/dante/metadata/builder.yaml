@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dante source, sir."
+      tar -xf tar/dante-1.4.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring dante, sir."
+      cd build
+      ../source/dante-1.4.3/configure --prefix=/usr \
+        --sysconfdir=/etc
+

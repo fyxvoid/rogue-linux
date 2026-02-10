@@ -1,0 +1,16 @@
+name: afflib
+version: "3.7.20"
+category: security/forensics
+
+summary: >
+  Advanced Forensic Format library for disk images
+
+source:
+  kind: tarball
+  file: afflib-3.7.20.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/general/curl
+    - libs/crypto/openssl

@@ -1,0 +1,15 @@
+name: m4
+version: "1.4.19"
+category: toolchain
+
+summary: >
+  GNU M4 macro processor
+
+source:
+  kind: tarball
+  file: m4-1.4.19.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/glibc

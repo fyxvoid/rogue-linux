@@ -1,0 +1,15 @@
+name: graudit
+version: "3.5"
+category: security/scanning
+
+summary: >
+  Simple script and signature based source code auditing tool
+
+source:
+  kind: tarball
+  file: graudit-3.5.tar.xz
+
+depends:
+  build:
+    - base/bash
+    - base/grep

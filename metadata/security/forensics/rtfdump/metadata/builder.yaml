@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting rtfdump source, sir."
+      tar -xf tar/rtfdump-0.0.12.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building rtfdump Python package, sir."
+      cd source/rtfdump-0.0.12
+      python3 setup.py build
+

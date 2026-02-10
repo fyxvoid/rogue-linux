@@ -1,0 +1,15 @@
+name: socat
+version: "1.8.0.0"
+category: networking/core
+
+summary: >
+  Multipurpose relay for bidirectional data transfer between channels
+
+source:
+  kind: tarball
+  file: socat-1.8.0.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl

@@ -1,0 +1,20 @@
+name: suricata
+version: "7.0.3"
+category: security/defense
+
+summary: >
+  High performance network IDS IPS and security monitoring engine
+
+source:
+  kind: tarball
+  file: suricata-7.0.3.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap
+    - libs/general/libyaml
+    - libs/general/pcre2
+    - libs/general/jansson
+    - libs/crypto/libgcrypt
+    - libs/compression/zlib

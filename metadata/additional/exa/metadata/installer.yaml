@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing exa, sir."
+      cd source/exa*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

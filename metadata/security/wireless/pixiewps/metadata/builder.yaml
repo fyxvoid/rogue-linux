@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting pixiewps source, sir."
+      tar -xf tar/pixiewps-1.4.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building pixiewps, sir."
+      cd source/pixiewps-1.4.2
+      make -j$(nproc)
+

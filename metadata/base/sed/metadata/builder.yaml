@@ -9,7 +9,6 @@ steps:
   - |
       echo "[COGMAN] Configuring sed, sir."
       cd build
+      ../source/sed-4.9/configure --prefix=/usr \
+        
 
-      ../source/sed-4.9/configure \
-        --prefix=/usr \
-        --disable-static

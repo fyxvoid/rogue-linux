@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting sslstrip source, sir."
+      tar -xf tar/sslstrip-0.9.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building sslstrip Python package, sir."
+      cd source/sslstrip-0.9
+      python3 setup.py build
+

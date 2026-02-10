@@ -1,0 +1,4 @@
+steps:
+  - |
+      echo "[COGMAN] Installing doh-proxy, sir."
+      install -Dm755 build/* "$PKGROOT/usr/bin/"

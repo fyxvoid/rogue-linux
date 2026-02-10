@@ -1,0 +1,14 @@
+name: cupp
+version: "3.0"
+category: security/passwords
+
+summary: >
+  Common User Passwords Profiler for targeted wordlist generation
+
+source:
+  kind: tarball
+  file: cupp-3.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

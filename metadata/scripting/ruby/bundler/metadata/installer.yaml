@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing bundler Python package, sir."
+      cd source/bundler*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

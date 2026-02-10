@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building linux-pam, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing linux-pam into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

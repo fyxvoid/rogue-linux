@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting hcxtools source, sir."
+      tar -xf tar/hcxtools-6.3.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building hcxtools, sir."
+      cd source/hcxtools-6.3.4
+      make -j$(nproc)
+

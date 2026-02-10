@@ -1,0 +1,14 @@
+name: ca-certificates
+version: "20240203"
+category: libs/crypto
+
+summary: >
+  Common CA certificates for SSL/TLS verification
+
+source:
+  kind: tarball
+  file: ca-certificates-20240203.tar.xz
+
+depends:
+  build:
+    - libs/crypto/openssl

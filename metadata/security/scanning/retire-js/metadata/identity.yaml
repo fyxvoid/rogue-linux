@@ -1,0 +1,15 @@
+name: retire-js
+version: "4.3.4"
+category: security/scanning
+
+summary: >
+  Scanner for detecting use of JavaScript libraries with known vulnerabilities
+
+source:
+  kind: tarball
+  file: retire-js-4.3.4.tar.xz
+
+depends:
+  build:
+    - scripting/node/nodejs
+    - scripting/node/npm

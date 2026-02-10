@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting nbtscan source, sir."
+      tar -xf tar/nbtscan-1.7.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building nbtscan, sir."
+      cd source/nbtscan-1.7.2
+      make -j$(nproc)
+

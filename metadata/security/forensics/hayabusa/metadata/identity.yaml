@@ -1,0 +1,14 @@
+name: hayabusa
+version: "2.13.0"
+category: security/forensics
+
+summary: >
+  Windows event log fast forensics timeline generator
+
+source:
+  kind: tarball
+  file: hayabusa-2.13.0.tar.xz
+
+depends:
+  build:
+    - scripting/rust/rust

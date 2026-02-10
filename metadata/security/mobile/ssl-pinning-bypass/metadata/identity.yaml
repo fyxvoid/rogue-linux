@@ -1,0 +1,15 @@
+name: ssl-pinning-bypass
+version: "1.0"
+category: security/mobile
+
+summary: >
+  Scripts for bypassing SSL certificate pinning on mobile apps
+
+source:
+  kind: tarball
+  file: ssl-pinning-bypass-1.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - security/reverse/frida

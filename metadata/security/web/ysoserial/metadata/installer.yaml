@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building ysoserial, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing ysoserial into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

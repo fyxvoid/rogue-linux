@@ -1,0 +1,15 @@
+name: gef
+version: "2024.01"
+category: security/reverse
+
+summary: >
+  GDB Enhanced Features for exploitation and reverse engineering
+
+source:
+  kind: tarball
+  file: gef-2024.01.tar.xz
+
+depends:
+  build:
+    - security/reverse/gdb
+    - scripting/python/python3

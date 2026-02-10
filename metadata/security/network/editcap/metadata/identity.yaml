@@ -1,0 +1,14 @@
+name: editcap
+version: "4.2.3"
+category: security/network
+
+summary: >
+  Edit and translate capture file formats
+
+source:
+  kind: tarball
+  file: editcap-4.2.3.tar.xz
+
+depends:
+  build:
+    - security/sniffing/wireshark-cli

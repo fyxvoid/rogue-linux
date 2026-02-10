@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting mdk4 source, sir."
+      tar -xf tar/mdk4-4.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building mdk4, sir."
+      cd source/mdk4-4.2
+      make -j$(nproc)
+

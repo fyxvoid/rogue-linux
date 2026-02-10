@@ -1,0 +1,14 @@
+name: avatar2
+version: "1.4.4"
+category: security/reverse
+
+summary: >
+  Multi-target orchestration framework for embedded firmware
+
+source:
+  kind: tarball
+  file: avatar2-1.4.4.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

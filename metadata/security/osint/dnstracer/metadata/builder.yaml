@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dnstracer source, sir."
+      tar -xf tar/dnstracer-1.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building dnstracer, sir."
+      cd source/dnstracer-1.10
+      make -j$(nproc)
+

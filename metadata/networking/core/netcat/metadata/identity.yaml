@@ -1,0 +1,14 @@
+name: netcat
+version: "1.226"
+category: networking/core
+
+summary: >
+  TCP/IP Swiss army knife for reading and writing network connections
+
+source:
+  kind: tarball
+  file: netcat-1.226.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

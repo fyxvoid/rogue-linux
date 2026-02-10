@@ -1,0 +1,15 @@
+name: datasploit
+version: "2.0.0"
+category: security/osint
+
+summary: >
+  Automated OSINT framework for domains emails and usernames
+
+source:
+  kind: tarball
+  file: datasploit-2.0.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

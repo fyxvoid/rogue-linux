@@ -1,0 +1,14 @@
+name: openstego
+version: "0.8.6"
+category: security/forensics
+
+summary: >
+  Open source steganography solution for data hiding
+
+source:
+  kind: tarball
+  file: openstego-0.8.6.tar.xz
+
+depends:
+  build:
+    - scripting/java/openjdk

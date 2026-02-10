@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building libpng, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing libpng into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

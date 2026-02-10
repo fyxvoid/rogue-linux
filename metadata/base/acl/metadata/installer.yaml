@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building acl, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing acl into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

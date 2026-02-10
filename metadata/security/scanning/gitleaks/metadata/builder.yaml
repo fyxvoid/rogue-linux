@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gitleaks source, sir."
+      tar -xf tar/gitleaks-8.18.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building gitleaks with Go, sir."
+      cd source/gitleaks-8.18.2
+      go build -o ../../build/ ./...
+

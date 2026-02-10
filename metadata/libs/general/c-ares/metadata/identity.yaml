@@ -1,0 +1,15 @@
+name: c-ares
+version: "1.27.0"
+category: libs/general
+
+summary: >
+  C library for asynchronous DNS requests and resolution
+
+source:
+  kind: tarball
+  file: c-ares-1.27.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

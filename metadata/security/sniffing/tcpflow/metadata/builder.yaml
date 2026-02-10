@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting tcpflow source, sir."
+      tar -xf tar/tcpflow-1.6.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring tcpflow, sir."
+      cd build
+      ../source/tcpflow-1.6.1/configure --prefix=/usr \
+        
+

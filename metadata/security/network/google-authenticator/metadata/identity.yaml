@@ -1,0 +1,15 @@
+name: google-authenticator
+version: "1.09"
+category: security/network
+
+summary: >
+  Google Authenticator PAM module for two-factor auth
+
+source:
+  kind: tarball
+  file: google-authenticator-1.09.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/linux-pam

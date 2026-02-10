@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting minisign source, sir."
+      tar -xf tar/minisign-0.11.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring minisign with CMake, sir."
+      cd build
+      cmake ../source/minisign-0.11 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

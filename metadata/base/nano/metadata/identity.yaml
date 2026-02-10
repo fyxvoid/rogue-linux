@@ -1,0 +1,15 @@
+name: nano
+version: "7.2"
+category: base
+
+summary: >
+  GNU Nano text editor for terminal
+
+source:
+  kind: tarball
+  file: nano-7.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/ncurses

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting tcpwrappers source, sir."
+      tar -xf tar/tcpwrappers-7.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building tcpwrappers, sir."
+      cd source/tcpwrappers-7.6
+      make -j$(nproc)
+

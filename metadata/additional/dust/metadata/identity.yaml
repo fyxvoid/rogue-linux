@@ -1,0 +1,14 @@
+name: dust
+version: "0.9.0"
+category: additional
+
+summary: >
+  More intuitive version of du for disk usage analysis
+
+source:
+  kind: tarball
+  file: dust-0.9.0.tar.xz
+
+depends:
+  build:
+    - scripting/rust/rust

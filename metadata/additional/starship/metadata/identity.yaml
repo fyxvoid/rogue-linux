@@ -1,0 +1,14 @@
+name: starship
+version: "1.17.1"
+category: additional
+
+summary: >
+  Minimal fast cross-shell prompt
+
+source:
+  kind: tarball
+  file: starship-1.17.1.tar.xz
+
+depends:
+  build:
+    - scripting/rust/rust

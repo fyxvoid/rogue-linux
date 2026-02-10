@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting fierce source, sir."
+      tar -xf tar/fierce-1.5.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building fierce Python package, sir."
+      cd source/fierce-1.5.0
+      python3 setup.py build
+

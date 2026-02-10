@@ -1,0 +1,15 @@
+name: msgpack
+version: "6.0.0"
+category: libs/general
+
+summary: >
+  Efficient binary serialization format library
+
+source:
+  kind: tarball
+  file: msgpack-6.0.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

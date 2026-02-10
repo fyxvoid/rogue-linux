@@ -1,0 +1,15 @@
+name: hashcat
+version: "6.2.6"
+category: security/passwords
+
+summary: >
+  Advanced CPU/GPU-based password recovery utility
+
+source:
+  kind: tarball
+  file: hashcat-6.2.6.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl

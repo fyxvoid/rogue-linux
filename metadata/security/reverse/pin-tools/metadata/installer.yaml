@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building pin-tools, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing pin-tools into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

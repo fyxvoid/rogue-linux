@@ -1,0 +1,16 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting bluez source, sir."
+      tar -xf tar/bluez-5.72.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring bluez, sir."
+      cd build
+      ../source/bluez-5.72/configure --prefix=/usr \
+        --sysconfdir=/etc \
+        --enable-library \
+        --enable-tools
+

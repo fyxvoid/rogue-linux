@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting fenrir source, sir."
+      tar -xf tar/fenrir-0.9.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building fenrir, sir."
+      cd source/fenrir-0.9.0
+      make -j$(nproc)
+

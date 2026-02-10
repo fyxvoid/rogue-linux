@@ -1,0 +1,4 @@
+steps:
+  - |
+      echo "[COGMAN] Installing obfs4proxy, sir."
+      install -Dm755 build/* "$PKGROOT/usr/bin/"

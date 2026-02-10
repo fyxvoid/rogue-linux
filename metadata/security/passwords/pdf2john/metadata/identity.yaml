@@ -1,0 +1,14 @@
+name: pdf2john
+version: "1.9.0"
+category: security/passwords
+
+summary: >
+  Convert PDF files to John the Ripper crackable format
+
+source:
+  kind: tarball
+  file: pdf2john-1.9.0.tar.xz
+
+depends:
+  build:
+    - security/passwords/john

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting lime-forensics source, sir."
+      tar -xf tar/lime-forensics-1.9.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building lime-forensics, sir."
+      cd source/lime-forensics-1.9.1
+      make -j$(nproc)
+

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ima-evm-utils source, sir."
+      tar -xf tar/ima-evm-utils-1.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring ima-evm-utils, sir."
+      cd build
+      ../source/ima-evm-utils-1.5/configure --prefix=/usr \
+        
+

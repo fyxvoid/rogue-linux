@@ -1,0 +1,18 @@
+name: clamav-daemon
+version: "1.3.0"
+category: security/defense
+
+summary: >
+  ClamAV antivirus daemon for real-time scanning
+
+source:
+  kind: tarball
+  file: clamav-daemon-1.3.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - libs/general/json-c
+    - libs/general/curl
+    - libs/crypto/openssl

@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing androguard Python package, sir."
+      cd source/androguard*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,0 +1,14 @@
+name: zoxide
+version: "0.9.4"
+category: additional
+
+summary: >
+  Smarter cd command that learns your habits
+
+source:
+  kind: tarball
+  file: zoxide-0.9.4.tar.xz
+
+depends:
+  build:
+    - scripting/rust/rust

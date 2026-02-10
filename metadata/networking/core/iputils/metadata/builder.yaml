@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting iputils source, sir."
+      tar -xf tar/iputils-20240117.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring iputils with Meson, sir."
+      cd build
+      meson setup ../source/iputils-20240117 . --prefix=/usr --buildtype=release
+

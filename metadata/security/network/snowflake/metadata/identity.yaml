@@ -1,0 +1,14 @@
+name: snowflake
+version: "2.9.2"
+category: security/network
+
+summary: >
+  Pluggable transport using WebRTC for Tor censorship circumvention
+
+source:
+  kind: tarball
+  file: snowflake-2.9.2.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

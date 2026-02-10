@@ -1,0 +1,14 @@
+name: fd
+version: "9.0.0"
+category: additional
+
+summary: >
+  Simple fast user-friendly alternative to find
+
+source:
+  kind: tarball
+  file: fd-9.0.0.tar.xz
+
+depends:
+  build:
+    - scripting/rust/rust

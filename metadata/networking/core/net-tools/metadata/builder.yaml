@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting net-tools source, sir."
+      tar -xf tar/net-tools-2.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building net-tools, sir."
+      cd source/net-tools-2.10
+      make -j$(nproc)
+

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting cowpatty source, sir."
+      tar -xf tar/cowpatty-4.8.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building cowpatty, sir."
+      cd source/cowpatty-4.8
+      make -j$(nproc)
+

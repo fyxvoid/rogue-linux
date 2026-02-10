@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting sctp-tools source, sir."
+      tar -xf tar/sctp-tools-1.0.19.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring sctp-tools, sir."
+      cd build
+      ../source/sctp-tools-1.0.19/configure --prefix=/usr \
+        
+

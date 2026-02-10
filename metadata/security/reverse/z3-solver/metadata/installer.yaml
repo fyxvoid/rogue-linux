@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building z3-solver, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing z3-solver into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

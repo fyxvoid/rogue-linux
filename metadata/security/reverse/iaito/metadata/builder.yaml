@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting iaito source, sir."
+      tar -xf tar/iaito-5.8.8.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring iaito with CMake, sir."
+      cd build
+      cmake ../source/iaito-5.8.8 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

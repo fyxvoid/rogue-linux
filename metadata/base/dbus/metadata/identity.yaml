@@ -1,0 +1,15 @@
+name: dbus
+version: "1.14.10"
+category: base
+
+summary: >
+  Message bus system for inter-process communication
+
+source:
+  kind: tarball
+  file: dbus-1.14.10.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/expat

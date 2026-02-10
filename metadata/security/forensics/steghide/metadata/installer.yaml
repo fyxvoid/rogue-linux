@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building steghide, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing steghide into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

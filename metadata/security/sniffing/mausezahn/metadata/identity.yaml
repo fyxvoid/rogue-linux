@@ -1,0 +1,15 @@
+name: mausezahn
+version: "0.40"
+category: security/sniffing
+
+summary: >
+  Fast traffic generator for testing network equipment
+
+source:
+  kind: tarball
+  file: mausezahn-0.40.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

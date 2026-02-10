@@ -1,0 +1,15 @@
+name: checksec
+version: "2.7.0"
+category: security/reverse
+
+summary: >
+  Check security properties of ELF binaries and kernel
+
+source:
+  kind: tarball
+  file: checksec-2.7.0.tar.xz
+
+depends:
+  build:
+    - base/bash
+    - base/file

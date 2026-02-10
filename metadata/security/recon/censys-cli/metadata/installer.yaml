@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing censys-cli Python package, sir."
+      cd source/censys-cli*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

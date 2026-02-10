@@ -1,0 +1,15 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting lzo source, sir."
+      tar -xf tar/lzo-2.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring lzo, sir."
+      cd build
+      ../source/lzo-2.10/configure --prefix=/usr \
+        --enable-shared \
+        --disable-static
+

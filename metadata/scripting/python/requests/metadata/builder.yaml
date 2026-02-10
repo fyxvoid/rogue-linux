@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting requests source, sir."
+      tar -xf tar/requests-2.31.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building requests Python package, sir."
+      cd source/requests-2.31.0
+      python3 setup.py build
+

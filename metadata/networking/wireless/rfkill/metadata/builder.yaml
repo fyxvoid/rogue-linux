@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting rfkill source, sir."
+      tar -xf tar/rfkill-1.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building rfkill, sir."
+      cd source/rfkill-1.0
+      make -j$(nproc)
+

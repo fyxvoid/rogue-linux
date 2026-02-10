@@ -1,0 +1,15 @@
+name: upx
+version: "4.2.2"
+category: security/reverse
+
+summary: >
+  Ultimate Packer for eXecutables compression and decompression
+
+source:
+  kind: tarball
+  file: upx-4.2.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

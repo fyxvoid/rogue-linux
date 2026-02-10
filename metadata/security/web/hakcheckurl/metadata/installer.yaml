@@ -1,0 +1,4 @@
+steps:
+  - |
+      echo "[COGMAN] Installing hakcheckurl, sir."
+      install -Dm755 build/* "$PKGROOT/usr/bin/"

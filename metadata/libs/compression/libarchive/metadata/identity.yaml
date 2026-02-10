@@ -1,0 +1,19 @@
+name: libarchive
+version: "3.7.2"
+category: libs/compression
+
+summary: >
+  Multi-format archive and compression library
+
+source:
+  kind: tarball
+  file: libarchive-3.7.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/compression/zlib
+    - libs/compression/xz
+    - libs/compression/bzip2
+    - libs/compression/zstd
+    - libs/compression/lz4

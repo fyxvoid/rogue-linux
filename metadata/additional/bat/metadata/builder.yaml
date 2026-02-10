@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting bat source, sir."
+      tar -xf tar/bat-0.24.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building bat with Cargo, sir."
+      cd source/bat-0.24.0
+      cargo build --release
+

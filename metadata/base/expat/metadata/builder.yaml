@@ -1,6 +1,6 @@
 steps:
-  - rm -rf build source
-  - mkdir -p build source
+  - rm -rf source build
+  - mkdir -p source build
 
   - |
       echo "[COGMAN] Extracting expat source, sir."
@@ -9,7 +9,6 @@ steps:
   - |
       echo "[COGMAN] Configuring expat, sir."
       cd build
-
-      ../source/expat-2.6.2/configure \
-        --prefix=/usr \
+      ../source/expat-2.6.2/configure --prefix=/usr \
         --disable-static
+

@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building r2ghidra, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing r2ghidra into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

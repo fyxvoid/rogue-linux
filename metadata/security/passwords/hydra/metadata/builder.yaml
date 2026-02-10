@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting hydra source, sir."
+      tar -xf tar/hydra-9.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring hydra, sir."
+      cd build
+      ../source/hydra-9.5/configure --prefix=/usr \
+        
+

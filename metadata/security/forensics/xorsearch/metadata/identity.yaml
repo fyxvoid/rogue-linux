@@ -1,0 +1,14 @@
+name: xorsearch
+version: "1.11"
+category: security/forensics
+
+summary: >
+  Search for XOR encoded strings in binary files
+
+source:
+  kind: tarball
+  file: xorsearch-1.11.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

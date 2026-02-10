@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting seclists source, sir."
+      tar -xf tar/seclists-2024.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building seclists, sir."
+      cd source/seclists-2024.1
+      make -j$(nproc)
+

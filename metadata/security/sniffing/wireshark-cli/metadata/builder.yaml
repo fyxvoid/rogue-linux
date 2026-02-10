@@ -1,0 +1,15 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting wireshark-cli source, sir."
+      tar -xf tar/wireshark-cli-4.2.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring wireshark-cli with CMake, sir."
+      cd build
+      cmake ../source/wireshark-cli-4.2.3 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release \
+        -DBUILD_wireshark=OFF \
+        -DENABLE_QT6=OFF
+

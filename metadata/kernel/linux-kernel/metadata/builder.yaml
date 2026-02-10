@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting linux-kernel source, sir."
+      tar -xf tar/linux-kernel-6.8.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building linux-kernel, sir."
+      cd source/linux-kernel-6.8.2
+      make -j$(nproc)
+

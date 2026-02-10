@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building gmp, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing gmp into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

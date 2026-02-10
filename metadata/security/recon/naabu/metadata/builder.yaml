@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting naabu source, sir."
+      tar -xf tar/naabu-2.3.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building naabu with Go, sir."
+      cd source/naabu-2.3.0
+      go build -o ../../build/ ./...
+

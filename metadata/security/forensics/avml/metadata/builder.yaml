@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting avml source, sir."
+      tar -xf tar/avml-0.14.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building avml with Cargo, sir."
+      cd source/avml-0.14.0
+      cargo build --release
+

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting libevent source, sir."
+      tar -xf tar/libevent-2.1.12.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring libevent, sir."
+      cd build
+      ../source/libevent-2.1.12/configure --prefix=/usr \
+        --disable-static
+

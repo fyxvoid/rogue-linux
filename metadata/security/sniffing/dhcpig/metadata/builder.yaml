@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dhcpig source, sir."
+      tar -xf tar/dhcpig-1.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building dhcpig Python package, sir."
+      cd source/dhcpig-1.5
+      python3 setup.py build
+

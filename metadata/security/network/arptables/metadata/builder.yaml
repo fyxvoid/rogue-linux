@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting arptables source, sir."
+      tar -xf tar/arptables-0.0.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building arptables, sir."
+      cd source/arptables-0.0.5
+      make -j$(nproc)
+

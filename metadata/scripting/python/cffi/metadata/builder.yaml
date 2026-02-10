@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting cffi source, sir."
+      tar -xf tar/cffi-1.16.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building cffi Python package, sir."
+      cd source/cffi-1.16.0
+      python3 setup.py build
+

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting pam-krb5 source, sir."
+      tar -xf tar/pam-krb5-4.11.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring pam-krb5, sir."
+      cd build
+      ../source/pam-krb5-4.11/configure --prefix=/usr \
+        
+

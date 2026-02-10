@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building fluxion, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing fluxion into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

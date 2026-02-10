@@ -1,0 +1,15 @@
+name: tcpslice
+version: "1.5"
+category: security/network
+
+summary: >
+  Extract portions of pcap files based on timestamps
+
+source:
+  kind: tarball
+  file: tcpslice-1.5.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

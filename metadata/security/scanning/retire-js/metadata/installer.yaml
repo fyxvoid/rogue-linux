@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building retire-js, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing retire-js into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting redsocks source, sir."
+      tar -xf tar/redsocks-0.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building redsocks, sir."
+      cd source/redsocks-0.5
+      make -j$(nproc)
+

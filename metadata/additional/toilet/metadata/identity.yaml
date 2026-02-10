@@ -1,0 +1,14 @@
+name: toilet
+version: "0.3"
+category: additional
+
+summary: >
+  Display large colorful text in the terminal
+
+source:
+  kind: tarball
+  file: toilet-0.3.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing dnsrecon Python package, sir."
+      cd source/dnsrecon*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

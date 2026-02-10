@@ -1,11 +1,14 @@
 name: bzip2
 version: "1.0.8"
-
 category: libs/compression
 
-description: >
-  High-quality data compressor using the Burrows-Wheeler algorithm.
+summary: >
+  Block-sorting file compressor library and utilities
 
 source:
-  type: tarball
-  url: https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz
+  kind: tarball
+  file: bzip2-1.0.8.tar.gz
+
+depends:
+  build:
+    - toolchain/gcc

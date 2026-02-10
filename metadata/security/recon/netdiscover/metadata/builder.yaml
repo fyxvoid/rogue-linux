@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting netdiscover source, sir."
+      tar -xf tar/netdiscover-0.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring netdiscover, sir."
+      cd build
+      ../source/netdiscover-0.10/configure --prefix=/usr \
+        
+

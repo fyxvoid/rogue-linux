@@ -1,0 +1,16 @@
+name: medusa
+version: "2.2"
+category: security/passwords
+
+summary: >
+  Speedy parallel modular brute force login tool
+
+source:
+  kind: tarball
+  file: medusa-2.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - libs/crypto/libssh2

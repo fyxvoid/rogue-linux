@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing sslyze Python package, sir."
+      cd source/sslyze*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

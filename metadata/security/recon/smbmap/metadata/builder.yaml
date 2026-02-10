@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting smbmap source, sir."
+      tar -xf tar/smbmap-1.10.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building smbmap Python package, sir."
+      cd source/smbmap-1.10.2
+      python3 setup.py build
+

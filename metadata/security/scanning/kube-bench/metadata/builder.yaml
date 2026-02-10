@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting kube-bench source, sir."
+      tar -xf tar/kube-bench-0.7.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building kube-bench with Go, sir."
+      cd source/kube-bench-0.7.2
+      go build -o ../../build/ ./...
+

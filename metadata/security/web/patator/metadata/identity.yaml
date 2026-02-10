@@ -1,0 +1,15 @@
+name: patator
+version: "1.0"
+category: security/web
+
+summary: >
+  Multi-purpose brute-forcer supporting multiple protocols
+
+source:
+  kind: tarball
+  file: patator-1.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/paramiko

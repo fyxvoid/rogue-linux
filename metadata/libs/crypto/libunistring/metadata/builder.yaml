@@ -1,16 +1,14 @@
 steps:
-  - |
-    echo "[COGMAN] Extracting libunistring source, sir."
-    tar -xf tar/libunistring-1.1.tar.gz -C source --strip-components=1
+  - rm -rf source build
+  - mkdir -p source build
 
   - |
-    echo "[COGMAN] Configuring libunistring, sir."
-    cd build
-    ../source/configure \
-      --prefix=/usr \
-      --disable-static
+      echo "[COGMAN] Extracting libunistring source, sir."
+      tar -xf tar/libunistring-1.2.tar.xz -C source
 
   - |
-    echo "[COGMAN] Building libunistring, sir."
-    cd build
-    make
+      echo "[COGMAN] Configuring libunistring, sir."
+      cd build
+      ../source/libunistring-1.2/configure --prefix=/usr \
+        --disable-static
+

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting lynis source, sir."
+      tar -xf tar/lynis-3.1.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building lynis, sir."
+      cd source/lynis-3.1.1
+      make -j$(nproc)
+

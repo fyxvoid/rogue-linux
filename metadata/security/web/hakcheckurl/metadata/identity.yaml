@@ -1,0 +1,14 @@
+name: hakcheckurl
+version: "2.1"
+category: security/web
+
+summary: >
+  Takes a list of URLs and returns their status codes
+
+source:
+  kind: tarball
+  file: hakcheckurl-2.1.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

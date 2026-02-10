@@ -1,0 +1,16 @@
+name: rust
+version: "1.76.0"
+category: scripting/rust
+
+summary: >
+  Rust programming language compiler and cargo build system
+
+source:
+  kind: tarball
+  file: rust-1.76.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - libs/general/curl

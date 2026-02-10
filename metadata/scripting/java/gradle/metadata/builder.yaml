@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gradle source, sir."
+      tar -xf tar/gradle-8.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building gradle, sir."
+      cd source/gradle-8.6
+      make -j$(nproc)
+

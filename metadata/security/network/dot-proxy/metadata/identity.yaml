@@ -1,0 +1,15 @@
+name: dot-proxy
+version: "1.0"
+category: security/network
+
+summary: >
+  DNS over TLS proxy for encrypted DNS queries
+
+source:
+  kind: tarball
+  file: dot-proxy-1.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl

@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building polkit, sir."
+      cd build
+      ninja
+
+  - |
+      echo "[COGMAN] Installing polkit into staging root, sir."
+      cd build
+      DESTDIR="$PKGROOT" ninja install

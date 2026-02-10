@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gdk-pixbuf source, sir."
+      tar -xf tar/gdk-pixbuf-2.42.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring gdk-pixbuf with Meson, sir."
+      cd build
+      meson setup ../source/gdk-pixbuf-2.42.10 . --prefix=/usr --buildtype=release
+

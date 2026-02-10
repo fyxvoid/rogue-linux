@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ilspy source, sir."
+      tar -xf tar/ilspy-8.2.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building ilspy, sir."
+      cd source/ilspy-8.2.0
+      make -j$(nproc)
+

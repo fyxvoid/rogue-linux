@@ -1,0 +1,14 @@
+name: ed
+version: "1.20.1"
+category: editors
+
+summary: >
+  GNU Ed line-oriented text editor
+
+source:
+  kind: tarball
+  file: ed-1.20.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

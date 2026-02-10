@@ -1,0 +1,14 @@
+name: procyon
+version: "0.6.0"
+category: security/reverse
+
+summary: >
+  Java decompiler and metadata analysis tool suite
+
+source:
+  kind: tarball
+  file: procyon-0.6.0.tar.xz
+
+depends:
+  build:
+    - scripting/java/openjdk

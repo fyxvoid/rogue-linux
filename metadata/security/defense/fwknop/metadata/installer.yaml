@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building fwknop, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing fwknop into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

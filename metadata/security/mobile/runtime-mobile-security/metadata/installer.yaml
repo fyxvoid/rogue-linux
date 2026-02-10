@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing runtime-mobile-security Python package, sir."
+      cd source/runtime-mobile-security*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

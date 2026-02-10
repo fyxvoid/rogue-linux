@@ -1,0 +1,15 @@
+name: hexedit
+version: "1.6"
+category: additional
+
+summary: >
+  View and edit files in hexadecimal or ASCII
+
+source:
+  kind: tarball
+  file: hexedit-1.6.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/ncurses

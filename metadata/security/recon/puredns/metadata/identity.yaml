@@ -1,0 +1,14 @@
+name: puredns
+version: "2.1.1"
+category: security/recon
+
+summary: >
+  Fast domain resolver and subdomain bruteforcing tool
+
+source:
+  kind: tarball
+  file: puredns-2.1.1.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

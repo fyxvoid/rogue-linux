@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting whatweb source, sir."
+      tar -xf tar/whatweb-0.5.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building whatweb, sir."
+      cd source/whatweb-0.5.5
+      make -j$(nproc)
+

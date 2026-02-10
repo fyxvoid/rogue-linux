@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting meek source, sir."
+      tar -xf tar/meek-0.38.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building meek with Go, sir."
+      cd source/meek-0.38
+      go build -o ../../build/ ./...
+

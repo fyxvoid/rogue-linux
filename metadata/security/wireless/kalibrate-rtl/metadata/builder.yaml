@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting kalibrate-rtl source, sir."
+      tar -xf tar/kalibrate-rtl-0.4.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring kalibrate-rtl, sir."
+      cd build
+      ../source/kalibrate-rtl-0.4.1/configure --prefix=/usr \
+        
+

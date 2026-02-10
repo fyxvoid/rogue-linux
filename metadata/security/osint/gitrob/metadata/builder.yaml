@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gitrob source, sir."
+      tar -xf tar/gitrob-2.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building gitrob with Go, sir."
+      cd source/gitrob-2.0
+      go build -o ../../build/ ./...
+

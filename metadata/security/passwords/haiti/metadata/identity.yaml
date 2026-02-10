@@ -1,0 +1,14 @@
+name: haiti
+version: "2.1.0"
+category: security/passwords
+
+summary: >
+  Hash type identifier supporting 500+ hash types
+
+source:
+  kind: tarball
+  file: haiti-2.1.0.tar.xz
+
+depends:
+  build:
+    - scripting/ruby/ruby

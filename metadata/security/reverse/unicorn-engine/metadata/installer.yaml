@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building unicorn-engine, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing unicorn-engine into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

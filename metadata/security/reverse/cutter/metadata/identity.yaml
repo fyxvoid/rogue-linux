@@ -1,0 +1,16 @@
+name: cutter
+version: "2.3.4"
+category: security/reverse
+
+summary: >
+  Free and open-source GUI reverse engineering platform
+
+source:
+  kind: tarball
+  file: cutter-2.3.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - security/reverse/rizin

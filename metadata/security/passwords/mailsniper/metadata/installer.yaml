@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing mailsniper Python package, sir."
+      cd source/mailsniper*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

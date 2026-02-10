@@ -1,0 +1,14 @@
+name: metagoofil
+version: "2.2"
+category: security/osint
+
+summary: >
+  Extract metadata from public documents on target websites
+
+source:
+  kind: tarball
+  file: metagoofil-2.2.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

@@ -1,0 +1,15 @@
+name: social-analyzer
+version: "0.35"
+category: security/osint
+
+summary: >
+  API framework and OSINT tool for analyzing social media profiles
+
+source:
+  kind: tarball
+  file: social-analyzer-0.35.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

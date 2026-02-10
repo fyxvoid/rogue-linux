@@ -1,0 +1,15 @@
+name: smbmap
+version: "1.10.2"
+category: security/recon
+
+summary: >
+  SMB enumeration tool for listing shares and permissions
+
+source:
+  kind: tarball
+  file: smbmap-1.10.2.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/impacket

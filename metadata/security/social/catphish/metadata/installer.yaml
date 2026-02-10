@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building catphish, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing catphish into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

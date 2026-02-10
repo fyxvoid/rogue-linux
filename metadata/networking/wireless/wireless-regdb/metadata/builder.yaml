@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting wireless-regdb source, sir."
+      tar -xf tar/wireless-regdb-2024.01.23.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building wireless-regdb, sir."
+      cd source/wireless-regdb-2024.01.23
+      make -j$(nproc)
+

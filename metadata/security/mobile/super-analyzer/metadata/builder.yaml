@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting super-analyzer source, sir."
+      tar -xf tar/super-analyzer-0.5.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building super-analyzer with Cargo, sir."
+      cd source/super-analyzer-0.5.1
+      cargo build --release
+

@@ -1,0 +1,15 @@
+name: openrc
+version: "0.54"
+category: base
+
+summary: >
+  Dependency-based init system for Unix-like systems
+
+source:
+  kind: tarball
+  file: openrc-0.54.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/linux-pam

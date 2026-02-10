@@ -1,0 +1,15 @@
+name: p11-kit
+version: "0.25.3"
+category: libs/crypto
+
+summary: >
+  PKCS11 module management and loading library
+
+source:
+  kind: tarball
+  file: p11-kit-0.25.3.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/libtasn1

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting extundelete source, sir."
+      tar -xf tar/extundelete-0.2.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring extundelete, sir."
+      cd build
+      ../source/extundelete-0.2.4/configure --prefix=/usr \
+        
+

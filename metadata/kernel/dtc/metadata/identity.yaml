@@ -1,0 +1,14 @@
+name: dtc
+version: "1.7.0"
+category: kernel
+
+summary: >
+  Device Tree Compiler for embedded system hardware description
+
+source:
+  kind: tarball
+  file: dtc-1.7.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

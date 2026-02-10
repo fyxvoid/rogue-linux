@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing pdfid Python package, sir."
+      cd source/pdfid*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ethtool source, sir."
+      tar -xf tar/ethtool-6.7.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring ethtool, sir."
+      cd build
+      ../source/ethtool-6.7/configure --prefix=/usr \
+        
+

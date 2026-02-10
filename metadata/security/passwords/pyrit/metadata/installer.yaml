@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing pyrit Python package, sir."
+      cd source/pyrit*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,0 +1,16 @@
+name: yara
+version: "4.5.0"
+category: security/forensics
+
+summary: >
+  Pattern matching Swiss knife for malware researchers
+
+source:
+  kind: tarball
+  file: yara-4.5.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - libs/general/pcre2

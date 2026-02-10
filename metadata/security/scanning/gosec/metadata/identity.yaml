@@ -1,0 +1,14 @@
+name: gosec
+version: "2.19.0"
+category: security/scanning
+
+summary: >
+  Go source code security analyzer for common vulnerabilities
+
+source:
+  kind: tarball
+  file: gosec-2.19.0.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting recon-ng source, sir."
+      tar -xf tar/recon-ng-5.1.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building recon-ng Python package, sir."
+      cd source/recon-ng-5.1.2
+      python3 setup.py build
+

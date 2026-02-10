@@ -1,0 +1,15 @@
+name: simplify
+version: "2.1"
+category: security/mobile
+
+summary: >
+  Android virtual machine deobfuscator and simplifier
+
+source:
+  kind: tarball
+  file: simplify-2.1.tar.xz
+
+depends:
+  build:
+    - scripting/java/openjdk
+    - scripting/java/gradle

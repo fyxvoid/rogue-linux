@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing xsstrike Python package, sir."
+      cd source/xsstrike*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

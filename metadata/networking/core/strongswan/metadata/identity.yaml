@@ -1,0 +1,15 @@
+name: strongswan
+version: "5.9.14"
+category: networking/core
+
+summary: >
+  IPsec VPN solution with IKEv1 and IKEv2 key exchange
+
+source:
+  kind: tarball
+  file: strongswan-5.9.14.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting libuv source, sir."
+      tar -xf tar/libuv-1.48.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring libuv with CMake, sir."
+      cd build
+      cmake ../source/libuv-1.48.0 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

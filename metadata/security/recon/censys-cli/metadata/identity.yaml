@@ -1,0 +1,14 @@
+name: censys-cli
+version: "2.2.10"
+category: security/recon
+
+summary: >
+  Command-line tool for Censys internet scan data
+
+source:
+  kind: tarball
+  file: censys-cli-2.2.10.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

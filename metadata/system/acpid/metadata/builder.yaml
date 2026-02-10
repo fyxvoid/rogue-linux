@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting acpid source, sir."
+      tar -xf tar/acpid-2.0.34.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring acpid, sir."
+      cd build
+      ../source/acpid-2.0.34/configure --prefix=/usr \
+        
+

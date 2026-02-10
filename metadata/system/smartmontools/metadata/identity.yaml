@@ -1,0 +1,14 @@
+name: smartmontools
+version: "7.4"
+category: system
+
+summary: >
+  SMART disk monitoring and diagnostics tools
+
+source:
+  kind: tarball
+  file: smartmontools-7.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

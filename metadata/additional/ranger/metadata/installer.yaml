@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing ranger Python package, sir."
+      cd source/ranger*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

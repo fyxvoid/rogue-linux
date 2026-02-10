@@ -1,0 +1,16 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting fontconfig source, sir."
+      tar -xf tar/fontconfig-2.15.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring fontconfig, sir."
+      cd build
+      ../source/fontconfig-2.15.0/configure --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-docs
+

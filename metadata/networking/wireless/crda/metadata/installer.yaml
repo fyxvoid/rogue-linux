@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building crda, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing crda into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gr-gsm source, sir."
+      tar -xf tar/gr-gsm-0.42.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring gr-gsm with CMake, sir."
+      cd build
+      cmake ../source/gr-gsm-0.42.2 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

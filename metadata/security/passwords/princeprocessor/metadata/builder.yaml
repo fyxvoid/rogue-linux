@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting princeprocessor source, sir."
+      tar -xf tar/princeprocessor-0.22.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building princeprocessor, sir."
+      cd source/princeprocessor-0.22
+      make -j$(nproc)
+

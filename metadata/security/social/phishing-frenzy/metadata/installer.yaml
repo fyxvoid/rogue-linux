@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building phishing-frenzy, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing phishing-frenzy into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

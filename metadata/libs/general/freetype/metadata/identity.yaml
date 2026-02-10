@@ -1,0 +1,17 @@
+name: freetype
+version: "2.13.2"
+category: libs/general
+
+summary: >
+  Font rendering engine for high-quality glyph images
+
+source:
+  kind: tarball
+  file: freetype-2.13.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/compression/zlib
+    - libs/general/libpng
+    - libs/compression/bzip2

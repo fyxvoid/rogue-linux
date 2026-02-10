@@ -1,0 +1,15 @@
+name: joe
+version: "4.6"
+category: editors
+
+summary: >
+  Joes Own Editor terminal text editor with WordStar keybindings
+
+source:
+  kind: tarball
+  file: joe-4.6.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/ncurses

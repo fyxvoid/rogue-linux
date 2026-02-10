@@ -1,0 +1,19 @@
+name: aria2
+version: "1.37.0"
+category: networking/core
+
+summary: >
+  Lightweight multi-protocol multi-source download utility
+
+source:
+  kind: tarball
+  file: aria2-1.37.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - libs/general/libxml2
+    - libs/compression/zlib
+    - libs/general/sqlite
+    - libs/general/c-ares

@@ -1,0 +1,14 @@
+name: yt-dlp
+version: "2024.03.10"
+category: security/osint
+
+summary: >
+  YouTube and video platform downloader and metadata extractor
+
+source:
+  kind: tarball
+  file: yt-dlp-2024.03.10.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

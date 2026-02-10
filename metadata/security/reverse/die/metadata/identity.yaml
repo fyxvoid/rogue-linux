@@ -1,0 +1,15 @@
+name: die
+version: "3.09"
+category: security/reverse
+
+summary: >
+  Detect It Easy - program for determining file types and packer info
+
+source:
+  kind: tarball
+  file: die-3.09.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

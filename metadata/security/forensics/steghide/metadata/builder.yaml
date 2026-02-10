@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting steghide source, sir."
+      tar -xf tar/steghide-0.5.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring steghide, sir."
+      cd build
+      ../source/steghide-0.5.1/configure --prefix=/usr \
+        
+

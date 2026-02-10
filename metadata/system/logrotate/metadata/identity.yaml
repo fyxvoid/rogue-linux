@@ -1,0 +1,15 @@
+name: logrotate
+version: "3.21.0"
+category: system
+
+summary: >
+  Log file rotation utility to manage growing log files
+
+source:
+  kind: tarball
+  file: logrotate-3.21.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/linux-pam

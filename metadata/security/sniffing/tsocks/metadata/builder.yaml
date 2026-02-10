@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting tsocks source, sir."
+      tar -xf tar/tsocks-1.8.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring tsocks, sir."
+      cd build
+      ../source/tsocks-1.8/configure --prefix=/usr \
+        
+

@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building i2pd, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing i2pd into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

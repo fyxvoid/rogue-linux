@@ -2,6 +2,14 @@ name: libidn2
 version: "2.3.7"
 category: libs/crypto
 
-description: >
-  Internationalized Domain Names (IDNA2008) library.
-  Depends on libunistring and is required by gnutls.
+summary: >
+  GNU Internationalized Domain Names library version 2
+
+source:
+  kind: tarball
+  file: libidn2-2.3.7.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/libunistring

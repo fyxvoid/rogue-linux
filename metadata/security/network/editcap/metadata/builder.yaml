@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting editcap source, sir."
+      tar -xf tar/editcap-4.2.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building editcap, sir."
+      cd source/editcap-4.2.3
+      make -j$(nproc)
+

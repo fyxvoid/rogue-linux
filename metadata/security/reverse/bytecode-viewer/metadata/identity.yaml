@@ -1,0 +1,14 @@
+name: bytecode-viewer
+version: "2.12"
+category: security/reverse
+
+summary: >
+  Advanced lightweight Java bytecode viewer and decompiler
+
+source:
+  kind: tarball
+  file: bytecode-viewer-2.12.tar.xz
+
+depends:
+  build:
+    - scripting/java/openjdk

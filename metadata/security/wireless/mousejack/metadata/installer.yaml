@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing mousejack Python package, sir."
+      cd source/mousejack*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

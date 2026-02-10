@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting arp-scan source, sir."
+      tar -xf tar/arp-scan-1.10.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring arp-scan, sir."
+      cd build
+      ../source/arp-scan-1.10.0/configure --prefix=/usr \
+        
+

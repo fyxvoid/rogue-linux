@@ -1,0 +1,20 @@
+name: kismet
+version: "2023-07-R1"
+category: security/wireless
+
+summary: >
+  Wireless network and device detector sniffer and IDS
+
+source:
+  kind: tarball
+  file: kismet-2023-07-R1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap
+    - libs/crypto/openssl
+    - networking/wireless/bluez
+    - libs/general/sqlite
+    - libs/general/protobuf
+    - libs/general/libwebp

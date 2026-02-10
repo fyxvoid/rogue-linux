@@ -1,0 +1,15 @@
+name: hexinject
+version: "1.6"
+category: security/sniffing
+
+summary: >
+  Hex-based packet injector and sniffer tool
+
+source:
+  kind: tarball
+  file: hexinject-1.6.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

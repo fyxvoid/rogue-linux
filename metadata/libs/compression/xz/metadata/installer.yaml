@@ -1,3 +1,10 @@
 steps:
-  - echo "[COGMAN] Installing xz into pkgroot, sir."
-  - make -C source install DESTDIR="$PKGROOT"
+  - |
+      echo "[COGMAN] Building xz, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing xz into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

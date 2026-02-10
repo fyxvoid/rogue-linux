@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ysoserial source, sir."
+      tar -xf tar/ysoserial-0.0.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building ysoserial, sir."
+      cd source/ysoserial-0.0.6
+      make -j$(nproc)
+

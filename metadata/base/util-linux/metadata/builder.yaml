@@ -1,23 +1,22 @@
 steps:
-  - rm -rf build source
-  - mkdir -p build source
+  - rm -rf source build
+  - mkdir -p source build
 
   - |
       echo "[COGMAN] Extracting util-linux source, sir."
-      tar -xf tar/util-linux-2.39.tar.xz -C source
+      tar -xf tar/util-linux-2.40.tar.xz -C source
 
   - |
-      echo "[COGMAN] Configuring util-linux (pass 2), sir."
+      echo "[COGMAN] Configuring util-linux, sir."
       cd build
-
-      ../source/util-linux-2.39/configure \
-        --prefix=/usr \
+      ../source/util-linux-2.40/configure --prefix=/usr \
+        --disable-chfn-chsh \
+        --disable-login \
+        --disable-nologin \
+        --disable-su \
+        --disable-setpriv \
+        --disable-runuser \
+        --disable-pylibmount \
         --disable-static \
-        --without-python \
-        --disable-asciidoc \
-        --disable-bash-completion \
-        --disable-chown-install \
-        --enable-libcap \
-        --enable-libuuid \
-        --enable-mount \
-        --enable-libmount
+        --without-python
+

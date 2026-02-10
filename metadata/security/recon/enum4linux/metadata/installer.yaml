@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building enum4linux, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing enum4linux into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

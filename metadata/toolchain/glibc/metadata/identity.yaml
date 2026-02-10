@@ -3,16 +3,13 @@ version: "2.39"
 category: toolchain
 
 summary: >
-  GNU C Library — provides the core system C runtime,
-  binding userspace programs to the Linux kernel.
+  GNU C Library providing core system libraries and POSIX API implementation
 
 source:
   kind: tarball
-  url: https://ftp.gnu.org/gnu/glibc/glibc-2.39.tar.xz
   file: glibc-2.39.tar.xz
 
 depends:
   build:
-    - toolchain/binutils
-    - toolchain/gcc
     - toolchain/linux-headers
+    - toolchain/gcc

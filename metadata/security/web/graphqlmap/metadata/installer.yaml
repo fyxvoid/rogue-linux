@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing graphqlmap Python package, sir."
+      cd source/graphqlmap*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

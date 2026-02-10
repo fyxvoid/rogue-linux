@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting race-the-web source, sir."
+      tar -xf tar/race-the-web-2.1.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building race-the-web with Go, sir."
+      cd source/race-the-web-2.1.0
+      go build -o ../../build/ ./...
+

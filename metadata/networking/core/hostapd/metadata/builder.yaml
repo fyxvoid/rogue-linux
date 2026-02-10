@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting hostapd source, sir."
+      tar -xf tar/hostapd-2.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building hostapd, sir."
+      cd source/hostapd-2.10
+      make -j$(nproc)
+

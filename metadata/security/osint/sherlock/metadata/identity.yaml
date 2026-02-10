@@ -1,0 +1,15 @@
+name: sherlock
+version: "0.14.3"
+category: security/osint
+
+summary: >
+  Hunt down social media accounts by username across platforms
+
+source:
+  kind: tarball
+  file: sherlock-0.14.3.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

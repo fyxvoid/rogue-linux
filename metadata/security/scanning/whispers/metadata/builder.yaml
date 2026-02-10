@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting whispers source, sir."
+      tar -xf tar/whispers-2.2.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building whispers Python package, sir."
+      cd source/whispers-2.2.0
+      python3 setup.py build
+

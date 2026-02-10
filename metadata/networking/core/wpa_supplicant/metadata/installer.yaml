@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building wpa_supplicant, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing wpa_supplicant into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

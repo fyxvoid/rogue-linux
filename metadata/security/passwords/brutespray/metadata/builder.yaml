@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting brutespray source, sir."
+      tar -xf tar/brutespray-1.6.9.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building brutespray Python package, sir."
+      cd source/brutespray-1.6.9
+      python3 setup.py build
+

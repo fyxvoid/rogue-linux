@@ -9,8 +9,6 @@ steps:
   - |
       echo "[COGMAN] Configuring gawk, sir."
       cd build
+      ../source/gawk-5.3.0/configure --prefix=/usr \
+        
 
-      CFLAGS="-std=gnu99" \
-      ../source/gawk-5.3.0/configure \
-        --prefix=/usr \
-        --disable-static

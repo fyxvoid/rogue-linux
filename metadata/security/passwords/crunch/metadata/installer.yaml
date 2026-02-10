@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building crunch, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing crunch into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

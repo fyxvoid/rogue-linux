@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing miasm Python package, sir."
+      cd source/miasm*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

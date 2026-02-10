@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building harfbuzz, sir."
+      cd build
+      ninja
+
+  - |
+      echo "[COGMAN] Installing harfbuzz into staging root, sir."
+      cd build
+      DESTDIR="$PKGROOT" ninja install

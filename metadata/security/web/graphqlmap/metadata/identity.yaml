@@ -1,0 +1,15 @@
+name: graphqlmap
+version: "1.0.1"
+category: security/web
+
+summary: >
+  Scripting engine to interact with GraphQL endpoints for pentesting
+
+source:
+  kind: tarball
+  file: graphqlmap-1.0.1.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

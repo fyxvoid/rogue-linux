@@ -1,0 +1,14 @@
+name: lsof
+version: "4.99.3"
+category: system
+
+summary: >
+  List open files utility showing file descriptor information
+
+source:
+  kind: tarball
+  file: lsof-4.99.3.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

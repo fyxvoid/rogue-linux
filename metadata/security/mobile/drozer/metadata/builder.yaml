@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting drozer source, sir."
+      tar -xf tar/drozer-3.0.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building drozer Python package, sir."
+      cd source/drozer-3.0.0
+      python3 setup.py build
+

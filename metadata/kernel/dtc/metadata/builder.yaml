@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dtc source, sir."
+      tar -xf tar/dtc-1.7.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building dtc, sir."
+      cd source/dtc-1.7.0
+      make -j$(nproc)
+

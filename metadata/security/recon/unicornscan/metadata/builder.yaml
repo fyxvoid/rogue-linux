@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting unicornscan source, sir."
+      tar -xf tar/unicornscan-0.4.7.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring unicornscan, sir."
+      cd build
+      ../source/unicornscan-0.4.7/configure --prefix=/usr \
+        
+

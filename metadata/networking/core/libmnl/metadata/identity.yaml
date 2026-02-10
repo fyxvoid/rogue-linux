@@ -1,0 +1,14 @@
+name: libmnl
+version: "1.0.5"
+category: networking/core
+
+summary: >
+  Minimalistic Netlink communication library for kernel interfaces
+
+source:
+  kind: tarball
+  file: libmnl-1.0.5.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

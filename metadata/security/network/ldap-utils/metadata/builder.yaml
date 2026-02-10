@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ldap-utils source, sir."
+      tar -xf tar/ldap-utils-2.6.7.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring ldap-utils, sir."
+      cd build
+      ../source/ldap-utils-2.6.7/configure --prefix=/usr \
+        
+

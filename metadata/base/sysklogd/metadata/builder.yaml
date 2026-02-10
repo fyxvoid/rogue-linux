@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting sysklogd source, sir."
+      tar -xf tar/sysklogd-1.5.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building sysklogd, sir."
+      cd source/sysklogd-1.5.1
+      make -j$(nproc)
+

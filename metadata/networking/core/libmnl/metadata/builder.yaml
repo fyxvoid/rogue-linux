@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting libmnl source, sir."
+      tar -xf tar/libmnl-1.0.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring libmnl, sir."
+      cd build
+      ../source/libmnl-1.0.5/configure --prefix=/usr \
+        --disable-static
+

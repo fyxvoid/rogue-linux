@@ -1,0 +1,15 @@
+name: apparmor-utils
+version: "3.1.7"
+category: security/defense
+
+summary: >
+  AppArmor userspace utilities for mandatory access control
+
+source:
+  kind: tarball
+  file: apparmor-utils-3.1.7.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - scripting/python/python3

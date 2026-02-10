@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting mailsnarf source, sir."
+      tar -xf tar/mailsnarf-2.4b1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building mailsnarf, sir."
+      cd source/mailsnarf-2.4b1
+      make -j$(nproc)
+

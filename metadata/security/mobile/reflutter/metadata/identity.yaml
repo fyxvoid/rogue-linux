@@ -1,0 +1,14 @@
+name: reflutter
+version: "1.0"
+category: security/mobile
+
+summary: >
+  Flutter reverse engineering framework for traffic interception
+
+source:
+  kind: tarball
+  file: reflutter-1.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

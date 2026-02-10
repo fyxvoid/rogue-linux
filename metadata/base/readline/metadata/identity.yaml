@@ -3,15 +3,13 @@ version: "8.2"
 category: base
 
 summary: >
-  GNU Readline provides command-line editing, history,
-  and key-bindings for interactive shells.
+  GNU Readline library for command line editing
 
 source:
   kind: tarball
-  file: readline-8.2.tar.gz
+  file: readline-8.2.tar.xz
 
 depends:
   build:
-    - base/ncurses
     - toolchain/gcc
-    - toolchain/glibc
+    - base/ncurses

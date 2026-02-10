@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing starship, sir."
+      cd source/starship*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

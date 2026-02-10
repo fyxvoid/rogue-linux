@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting multimon-ng source, sir."
+      tar -xf tar/multimon-ng-1.2.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring multimon-ng with CMake, sir."
+      cd build
+      cmake ../source/multimon-ng-1.2.0 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

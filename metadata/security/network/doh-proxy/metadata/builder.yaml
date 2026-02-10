@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting doh-proxy source, sir."
+      tar -xf tar/doh-proxy-0.0.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building doh-proxy with Go, sir."
+      cd source/doh-proxy-0.0.3
+      go build -o ../../build/ ./...
+

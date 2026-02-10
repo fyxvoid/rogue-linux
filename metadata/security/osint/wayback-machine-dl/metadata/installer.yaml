@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing wayback-machine-dl Python package, sir."
+      cd source/wayback-machine-dl*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

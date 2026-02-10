@@ -1,0 +1,15 @@
+name: wifipumpkin3
+version: "1.1.5"
+category: security/wireless
+
+summary: >
+  Rogue access point attack framework
+
+source:
+  kind: tarball
+  file: wifipumpkin3-1.1.5.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - networking/core/hostapd

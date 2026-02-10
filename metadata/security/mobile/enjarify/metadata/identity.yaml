@@ -1,0 +1,14 @@
+name: enjarify
+version: "1.0.3"
+category: security/mobile
+
+summary: >
+  Tool to translate Dalvik bytecode to Java bytecode
+
+source:
+  kind: tarball
+  file: enjarify-1.0.3.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

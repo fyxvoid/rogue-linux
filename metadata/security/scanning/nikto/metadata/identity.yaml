@@ -1,0 +1,15 @@
+name: nikto
+version: "2.5.0"
+category: security/scanning
+
+summary: >
+  Web server scanner for dangerous files and outdated components
+
+source:
+  kind: tarball
+  file: nikto-2.5.0.tar.xz
+
+depends:
+  build:
+    - toolchain/perl
+    - libs/crypto/openssl

@@ -1,0 +1,14 @@
+name: exiftool
+version: "12.77"
+category: security/forensics
+
+summary: >
+  Read write and edit EXIF metadata in image and media files
+
+source:
+  kind: tarball
+  file: exiftool-12.77.tar.xz
+
+depends:
+  build:
+    - toolchain/perl

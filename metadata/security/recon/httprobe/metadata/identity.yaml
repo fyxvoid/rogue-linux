@@ -1,0 +1,14 @@
+name: httprobe
+version: "0.2"
+category: security/recon
+
+summary: >
+  Take a list of domains and probe for working HTTP and HTTPS servers
+
+source:
+  kind: tarball
+  file: httprobe-0.2.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

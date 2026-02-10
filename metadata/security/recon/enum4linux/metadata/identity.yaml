@@ -1,0 +1,14 @@
+name: enum4linux
+version: "0.9.1"
+category: security/recon
+
+summary: >
+  Linux alternative to enum.exe for enumerating Windows systems
+
+source:
+  kind: tarball
+  file: enum4linux-0.9.1.tar.xz
+
+depends:
+  build:
+    - toolchain/perl

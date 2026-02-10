@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting unhide source, sir."
+      tar -xf tar/unhide-20210124.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building unhide, sir."
+      cd source/unhide-20210124
+      make -j$(nproc)
+

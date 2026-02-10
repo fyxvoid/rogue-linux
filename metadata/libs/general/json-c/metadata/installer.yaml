@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building json-c, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing json-c into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

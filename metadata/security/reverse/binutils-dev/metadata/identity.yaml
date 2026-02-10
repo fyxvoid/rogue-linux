@@ -1,0 +1,14 @@
+name: binutils-dev
+version: "2.42"
+category: security/reverse
+
+summary: >
+  Binary utilities development libraries for analysis tools
+
+source:
+  kind: tarball
+  file: binutils-dev-2.42.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

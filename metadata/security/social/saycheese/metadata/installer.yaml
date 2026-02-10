@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing saycheese Python package, sir."
+      cd source/saycheese*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

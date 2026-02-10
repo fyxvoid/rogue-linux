@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting patchelf source, sir."
+      tar -xf tar/patchelf-0.18.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring patchelf, sir."
+      cd build
+      ../source/patchelf-0.18.0/configure --prefix=/usr \
+        
+

@@ -1,0 +1,14 @@
+name: apktool
+version: "2.9.3"
+category: security/reverse
+
+summary: >
+  Tool for reverse engineering Android APK files
+
+source:
+  kind: tarball
+  file: apktool-2.9.3.tar.xz
+
+depends:
+  build:
+    - scripting/java/openjdk

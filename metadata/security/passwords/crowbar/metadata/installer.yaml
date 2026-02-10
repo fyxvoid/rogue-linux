@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing crowbar Python package, sir."
+      cd source/crowbar*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting sshguard source, sir."
+      tar -xf tar/sshguard-2.4.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring sshguard, sir."
+      cd build
+      ../source/sshguard-2.4.3/configure --prefix=/usr \
+        --sysconfdir=/etc
+

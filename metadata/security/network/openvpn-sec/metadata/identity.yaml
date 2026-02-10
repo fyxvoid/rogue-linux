@@ -1,0 +1,16 @@
+name: openvpn-sec
+version: "2.6.9"
+category: security/network
+
+summary: >
+  Secure VPN solution for encrypted network tunneling
+
+source:
+  kind: tarball
+  file: openvpn-sec-2.6.9.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - networking/core/libnl

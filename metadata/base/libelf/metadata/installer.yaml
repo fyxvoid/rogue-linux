@@ -2,7 +2,7 @@ steps:
   - |
       echo "[COGMAN] Building libelf, sir."
       cd build
-      make -j1
+      make -j$(nproc)
 
   - |
       echo "[COGMAN] Installing libelf into staging root, sir."

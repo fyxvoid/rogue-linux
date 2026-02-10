@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing qark Python package, sir."
+      cd source/qark*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

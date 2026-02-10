@@ -1,0 +1,14 @@
+name: ranger
+version: "1.9.3"
+category: additional
+
+summary: >
+  Console file manager with VI key bindings
+
+source:
+  kind: tarball
+  file: ranger-1.9.3.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

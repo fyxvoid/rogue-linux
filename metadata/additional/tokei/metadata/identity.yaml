@@ -1,0 +1,14 @@
+name: tokei
+version: "12.1.2"
+category: additional
+
+summary: >
+  Count code lines statistics quickly across languages
+
+source:
+  kind: tarball
+  file: tokei-12.1.2.tar.xz
+
+depends:
+  build:
+    - scripting/rust/rust

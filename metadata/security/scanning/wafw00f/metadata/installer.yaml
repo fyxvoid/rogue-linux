@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing wafw00f Python package, sir."
+      cd source/wafw00f*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

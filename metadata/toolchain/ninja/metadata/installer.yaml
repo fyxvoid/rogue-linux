@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building ninja, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing ninja into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

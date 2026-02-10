@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ntp source, sir."
+      tar -xf tar/ntp-4.2.8p17.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring ntp, sir."
+      cd build
+      ../source/ntp-4.2.8p17/configure --prefix=/usr \
+        --sysconfdir=/etc
+

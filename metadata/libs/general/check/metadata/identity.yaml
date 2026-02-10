@@ -1,0 +1,14 @@
+name: check
+version: "0.15.2"
+category: libs/general
+
+summary: >
+  Unit testing framework for C programs
+
+source:
+  kind: tarball
+  file: check-0.15.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

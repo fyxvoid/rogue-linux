@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building glib, sir."
+      cd build
+      ninja
+
+  - |
+      echo "[COGMAN] Installing glib into staging root, sir."
+      cd build
+      DESTDIR="$PKGROOT" ninja install

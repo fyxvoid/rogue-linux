@@ -1,0 +1,15 @@
+name: testssl
+version: "3.0.8"
+category: security/scanning
+
+summary: >
+  Testing TLS/SSL encryption and cipher suites on servers
+
+source:
+  kind: tarball
+  file: testssl-3.0.8.tar.xz
+
+depends:
+  build:
+    - base/bash
+    - libs/crypto/openssl

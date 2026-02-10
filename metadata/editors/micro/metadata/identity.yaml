@@ -1,0 +1,14 @@
+name: micro
+version: "2.0.13"
+category: editors
+
+summary: >
+  Modern intuitive terminal text editor
+
+source:
+  kind: tarball
+  file: micro-2.0.13.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

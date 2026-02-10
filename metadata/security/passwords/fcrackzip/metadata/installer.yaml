@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building fcrackzip, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing fcrackzip into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

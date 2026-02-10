@@ -1,0 +1,16 @@
+name: hcxtools
+version: "6.3.4"
+category: security/passwords
+
+summary: >
+  Tools for capturing and converting WiFi handshakes to hashcat format
+
+source:
+  kind: tarball
+  file: hcxtools-6.3.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - networking/core/libpcap

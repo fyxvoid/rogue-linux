@@ -1,0 +1,17 @@
+name: fish
+version: "3.7.0"
+category: additional
+
+summary: >
+  Friendly interactive shell with autosuggestions
+
+source:
+  kind: tarball
+  file: fish-3.7.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - base/ncurses
+    - libs/general/pcre2

@@ -1,0 +1,16 @@
+name: ngrep
+version: "1.47"
+category: security/sniffing
+
+summary: >
+  Network packet grep utility for pattern matching in traffic
+
+source:
+  kind: tarball
+  file: ngrep-1.47.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap
+    - libs/general/pcre2

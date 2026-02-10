@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building pi-hole-ftl, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing pi-hole-ftl into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

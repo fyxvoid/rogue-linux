@@ -1,0 +1,15 @@
+name: msgsnarf
+version: "2.4b1"
+category: security/sniffing
+
+summary: >
+  Sniff chat messages from various IM protocols
+
+source:
+  kind: tarball
+  file: msgsnarf-2.4b1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

@@ -1,0 +1,15 @@
+name: ipset
+version: "7.19"
+category: security/network
+
+summary: >
+  IP sets framework for iptables for efficient match sets
+
+source:
+  kind: tarball
+  file: ipset-7.19.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libmnl

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting phoneinfoga source, sir."
+      tar -xf tar/phoneinfoga-2.11.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building phoneinfoga with Go, sir."
+      cd source/phoneinfoga-2.11.0
+      go build -o ../../build/ ./...
+

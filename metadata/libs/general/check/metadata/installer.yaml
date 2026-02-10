@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building check, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing check into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,16 @@
+name: suricata-update
+version: "1.3.2"
+category: security/network
+
+summary: >
+  Suricata rule update and management tool
+
+source:
+  kind: tarball
+  file: suricata-update-1.3.2.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/pyyaml
+    - security/defense/suricata

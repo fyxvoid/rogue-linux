@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting asciinema source, sir."
+      tar -xf tar/asciinema-2.4.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building asciinema Python package, sir."
+      cd source/asciinema-2.4.0
+      python3 setup.py build
+

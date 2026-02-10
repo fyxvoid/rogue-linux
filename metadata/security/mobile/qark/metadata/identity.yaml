@@ -1,0 +1,14 @@
+name: qark
+version: "4.0.0"
+category: security/mobile
+
+summary: >
+  Quick Android Review Kit for finding security vulnerabilities
+
+source:
+  kind: tarball
+  file: qark-4.0.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

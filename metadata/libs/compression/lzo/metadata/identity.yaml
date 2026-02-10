@@ -1,0 +1,14 @@
+name: lzo
+version: "2.10"
+category: libs/compression
+
+summary: >
+  Portable lossless data compression library
+
+source:
+  kind: tarball
+  file: lzo-2.10.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

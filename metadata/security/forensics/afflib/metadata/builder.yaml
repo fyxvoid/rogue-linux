@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting afflib source, sir."
+      tar -xf tar/afflib-3.7.20.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring afflib, sir."
+      cd build
+      ../source/afflib-3.7.20/configure --prefix=/usr \
+        
+

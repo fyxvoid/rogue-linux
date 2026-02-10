@@ -1,0 +1,17 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting python3 source, sir."
+      tar -xf tar/python3-3.12.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring python3, sir."
+      cd build
+      ../source/python3-3.12.2/configure --prefix=/usr \
+        --enable-shared \
+        --with-system-expat \
+        --with-system-ffi \
+        --enable-optimizations
+

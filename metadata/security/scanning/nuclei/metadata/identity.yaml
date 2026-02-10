@@ -1,0 +1,14 @@
+name: nuclei
+version: "3.1.10"
+category: security/scanning
+
+summary: >
+  Fast customizable vulnerability scanner based on YAML templates
+
+source:
+  kind: tarball
+  file: nuclei-3.1.10.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

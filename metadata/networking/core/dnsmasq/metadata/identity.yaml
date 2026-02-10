@@ -1,0 +1,14 @@
+name: dnsmasq
+version: "2.90"
+category: networking/core
+
+summary: >
+  Lightweight DNS forwarder and DHCP server
+
+source:
+  kind: tarball
+  file: dnsmasq-2.90.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

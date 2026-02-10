@@ -1,0 +1,16 @@
+name: cryptography
+version: "42.0.4"
+category: scripting/python
+
+summary: >
+  Cryptographic recipes and primitives for Python
+
+source:
+  kind: tarball
+  file: cryptography-42.0.4.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - libs/crypto/openssl
+    - scripting/python/cffi

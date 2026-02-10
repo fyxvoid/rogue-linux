@@ -1,0 +1,14 @@
+name: tlsx
+version: "1.1.6"
+category: security/recon
+
+summary: >
+  TLS data grabber for certificate information extraction
+
+source:
+  kind: tarball
+  file: tlsx-1.1.6.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

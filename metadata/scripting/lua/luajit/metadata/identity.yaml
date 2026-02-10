@@ -1,0 +1,14 @@
+name: luajit
+version: "2.1.1707061634"
+category: scripting/lua
+
+summary: >
+  Just-In-Time compiler for Lua language
+
+source:
+  kind: tarball
+  file: luajit-2.1.1707061634.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

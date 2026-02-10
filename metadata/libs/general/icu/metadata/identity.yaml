@@ -1,0 +1,14 @@
+name: icu
+version: "74.2"
+category: libs/general
+
+summary: >
+  International Components for Unicode library for text processing
+
+source:
+  kind: tarball
+  file: icu-74.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

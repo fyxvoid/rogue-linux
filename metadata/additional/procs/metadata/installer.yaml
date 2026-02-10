@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing procs, sir."
+      cd source/procs*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

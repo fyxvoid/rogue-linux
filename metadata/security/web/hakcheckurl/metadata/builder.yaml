@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting hakcheckurl source, sir."
+      tar -xf tar/hakcheckurl-2.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building hakcheckurl with Go, sir."
+      cd source/hakcheckurl-2.1
+      go build -o ../../build/ ./...
+

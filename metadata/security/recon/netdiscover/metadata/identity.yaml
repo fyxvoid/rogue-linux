@@ -1,0 +1,15 @@
+name: netdiscover
+version: "0.10"
+category: security/recon
+
+summary: >
+  Active and passive ARP reconnaissance tool
+
+source:
+  kind: tarball
+  file: netdiscover-0.10.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

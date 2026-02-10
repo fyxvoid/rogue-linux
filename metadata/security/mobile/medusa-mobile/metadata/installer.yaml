@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing medusa-mobile Python package, sir."
+      cd source/medusa-mobile*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

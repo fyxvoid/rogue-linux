@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing basecrack Python package, sir."
+      cd source/basecrack*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

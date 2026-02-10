@@ -1,0 +1,14 @@
+name: classyshark
+version: "8.2"
+category: security/mobile
+
+summary: >
+  Android executables browser for APK class analysis
+
+source:
+  kind: tarball
+  file: classyshark-8.2.tar.xz
+
+depends:
+  build:
+    - scripting/java/openjdk

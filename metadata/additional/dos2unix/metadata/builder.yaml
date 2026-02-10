@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dos2unix source, sir."
+      tar -xf tar/dos2unix-7.5.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building dos2unix, sir."
+      cd source/dos2unix-7.5.2
+      make -j$(nproc)
+

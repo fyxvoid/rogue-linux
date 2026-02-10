@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing smuggler Python package, sir."
+      cd source/smuggler*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

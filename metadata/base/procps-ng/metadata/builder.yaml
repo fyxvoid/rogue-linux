@@ -1,0 +1,15 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting procps-ng source, sir."
+      tar -xf tar/procps-ng-4.0.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring procps-ng, sir."
+      cd build
+      ../source/procps-ng-4.0.4/configure --prefix=/usr \
+        --disable-static \
+        --disable-kill
+

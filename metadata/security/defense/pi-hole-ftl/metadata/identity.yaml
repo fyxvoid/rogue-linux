@@ -1,0 +1,15 @@
+name: pi-hole-ftl
+version: "5.25.1"
+category: security/defense
+
+summary: >
+  Pi-hole FTL DNS engine for network-wide ad blocking
+
+source:
+  kind: tarball
+  file: pi-hole-ftl-5.25.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

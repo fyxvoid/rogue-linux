@@ -1,0 +1,14 @@
+name: maven
+version: "3.9.6"
+category: scripting/java
+
+summary: >
+  Apache Maven build automation and project management tool
+
+source:
+  kind: tarball
+  file: maven-3.9.6.tar.xz
+
+depends:
+  build:
+    - scripting/java/openjdk

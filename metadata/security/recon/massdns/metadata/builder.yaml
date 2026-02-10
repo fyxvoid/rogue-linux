@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting massdns source, sir."
+      tar -xf tar/massdns-1.0.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building massdns, sir."
+      cd source/massdns-1.0.0
+      make -j$(nproc)
+

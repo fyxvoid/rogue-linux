@@ -1,0 +1,14 @@
+name: subfinder
+version: "2.6.4"
+category: security/recon
+
+summary: >
+  Fast passive subdomain enumeration tool
+
+source:
+  kind: tarball
+  file: subfinder-2.6.4.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

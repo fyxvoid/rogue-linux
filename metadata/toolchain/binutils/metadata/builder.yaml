@@ -3,18 +3,16 @@ steps:
   - mkdir -p source build
 
   - |
-      echo "[COGMAN] Extracting Binutils source (pass 2), sir."
-      tar -xf tar/binutils-2.43.tar.xz -C source
+      echo "[COGMAN] Extracting binutils source, sir."
+      tar -xf tar/binutils-2.42.tar.xz -C source
 
   - |
-      echo "[COGMAN] Configuring Binutils (pass 2), sir."
+      echo "[COGMAN] Configuring binutils, sir."
       cd build
-
-      ../source/binutils-2.43/configure \
-        --prefix=/usr \
-        --with-sysroot=/ \
-        --disable-nls \
+      ../source/binutils-2.42/configure --prefix=/usr \
+        --enable-gold \
+        --enable-plugins \
+        --enable-shared \
         --disable-werror \
-        --disable-gprofng \
-        --disable-libctf \
-        --disable-multilib
+        --with-system-zlib
+

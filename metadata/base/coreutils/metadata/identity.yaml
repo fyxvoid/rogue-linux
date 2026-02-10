@@ -1,17 +1,15 @@
 name: coreutils
-version: "9.4"
+version: "9.5"
 category: base
 
 summary: >
-  GNU Core Utilities providing fundamental file, shell,
-  and text manipulation commands.
+  GNU Core Utilities providing essential file shell and text commands
 
 source:
   kind: tarball
-  file: coreutils-9.4.tar.xz
+  file: coreutils-9.5.tar.xz
 
 depends:
   build:
-    - base/bash
     - toolchain/gcc
     - toolchain/glibc

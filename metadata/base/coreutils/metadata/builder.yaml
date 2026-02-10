@@ -4,13 +4,11 @@ steps:
 
   - |
       echo "[COGMAN] Extracting coreutils source, sir."
-      tar -xf tar/coreutils-9.4.tar.xz -C source
+      tar -xf tar/coreutils-9.5.tar.xz -C source
 
   - |
       echo "[COGMAN] Configuring coreutils, sir."
       cd build
+      ../source/coreutils-9.5/configure --prefix=/usr \
+        --enable-no-install-program=kill,uptime
 
-      ../source/coreutils-9.4/configure \
-        --prefix=/usr \
-        --enable-no-install-program=kill,uptime \
-        --disable-static

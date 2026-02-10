@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building bind-utils, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing bind-utils into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

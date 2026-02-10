@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dnsmasq-sec source, sir."
+      tar -xf tar/dnsmasq-sec-2.90.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building dnsmasq-sec, sir."
+      cd source/dnsmasq-sec-2.90
+      make -j$(nproc) PREFIX=/usr
+

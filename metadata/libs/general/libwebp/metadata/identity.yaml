@@ -1,0 +1,19 @@
+name: libwebp
+version: "1.3.2"
+category: libs/general
+
+summary: >
+  WebP image format library for lossy and lossless compression
+
+source:
+  kind: tarball
+  file: libwebp-1.3.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - libs/general/libpng
+    - libs/general/libjpeg-turbo
+    - libs/general/libtiff
+    - libs/general/giflib

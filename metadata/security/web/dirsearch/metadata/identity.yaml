@@ -1,0 +1,15 @@
+name: dirsearch
+version: "0.4.3"
+category: security/web
+
+summary: >
+  Web path brute-forcer with advanced features
+
+source:
+  kind: tarball
+  file: dirsearch-0.4.3.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

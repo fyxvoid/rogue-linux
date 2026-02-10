@@ -1,5 +1,10 @@
 steps:
   - |
-    echo "[COGMAN] Installing OpenSSL into pkgroot, sir."
-    cd source
-    make install DESTDIR="$PKGROOT"
+      echo "[COGMAN] Building openssl, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing openssl into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building net-tools, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing net-tools into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

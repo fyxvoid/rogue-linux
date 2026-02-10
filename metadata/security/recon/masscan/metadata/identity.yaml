@@ -1,0 +1,15 @@
+name: masscan
+version: "1.3.2"
+category: security/recon
+
+summary: >
+  TCP port scanner transmitting 10 million packets per second
+
+source:
+  kind: tarball
+  file: masscan-1.3.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

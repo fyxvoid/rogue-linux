@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting firejail source, sir."
+      tar -xf tar/firejail-0.9.72.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring firejail, sir."
+      cd build
+      ../source/firejail-0.9.72/configure --prefix=/usr \
+        
+

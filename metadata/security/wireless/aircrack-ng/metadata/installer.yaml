@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building aircrack-ng, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing aircrack-ng into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

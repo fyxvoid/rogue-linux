@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting expect source, sir."
+      tar -xf tar/expect-5.45.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring expect, sir."
+      cd build
+      ../source/expect-5.45.4/configure --prefix=/usr \
+        --with-tcl=/usr/lib
+

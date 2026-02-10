@@ -1,0 +1,15 @@
+name: bully
+version: "1.4.0"
+category: security/wireless
+
+summary: >
+  WPS PIN brute force attack tool for WiFi access points
+
+source:
+  kind: tarball
+  file: bully-1.4.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

@@ -1,0 +1,15 @@
+name: radare2
+version: "5.8.8"
+category: security/reverse
+
+summary: >
+  Advanced command-line reverse engineering framework
+
+source:
+  kind: tarball
+  file: radare2-5.8.8.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

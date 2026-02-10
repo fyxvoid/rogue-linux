@@ -1,0 +1,14 @@
+name: sysklogd
+version: "1.5.1"
+category: base
+
+summary: >
+  System logging daemons syslogd and klogd
+
+source:
+  kind: tarball
+  file: sysklogd-1.5.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

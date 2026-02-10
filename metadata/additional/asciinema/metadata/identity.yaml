@@ -1,0 +1,14 @@
+name: asciinema
+version: "2.4.0"
+category: additional
+
+summary: >
+  Terminal session recorder for creating shareable recordings
+
+source:
+  kind: tarball
+  file: asciinema-2.4.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

@@ -1,0 +1,14 @@
+name: clair
+version: "4.7.3"
+category: security/scanning
+
+summary: >
+  Static analysis for known vulnerabilities in container images
+
+source:
+  kind: tarball
+  file: clair-4.7.3.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

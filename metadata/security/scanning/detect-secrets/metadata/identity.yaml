@@ -1,0 +1,14 @@
+name: detect-secrets
+version: "1.4.0"
+category: security/scanning
+
+summary: >
+  Enterprise-friendly tool for detecting secrets in codebase
+
+source:
+  kind: tarball
+  file: detect-secrets-1.4.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

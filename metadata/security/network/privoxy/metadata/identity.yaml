@@ -1,0 +1,15 @@
+name: privoxy
+version: "3.0.34"
+category: security/network
+
+summary: >
+  Non-caching web proxy with advanced filtering for privacy
+
+source:
+  kind: tarball
+  file: privoxy-3.0.34.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/general/pcre2

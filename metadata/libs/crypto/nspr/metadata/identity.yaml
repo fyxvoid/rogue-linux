@@ -1,0 +1,14 @@
+name: nspr
+version: "4.35"
+category: libs/crypto
+
+summary: >
+  Netscape Portable Runtime library for cross-platform system functions
+
+source:
+  kind: tarball
+  file: nspr-4.35.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

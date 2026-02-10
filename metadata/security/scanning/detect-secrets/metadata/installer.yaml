@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing detect-secrets Python package, sir."
+      cd source/detect-secrets*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,0 +1,14 @@
+name: dnstracer
+version: "1.10"
+category: security/osint
+
+summary: >
+  Trace DNS queries to their source authoritative server
+
+source:
+  kind: tarball
+  file: dnstracer-1.10.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting swaks source, sir."
+      tar -xf tar/swaks-20240103.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building swaks, sir."
+      cd source/swaks-20240103
+      make -j$(nproc)
+

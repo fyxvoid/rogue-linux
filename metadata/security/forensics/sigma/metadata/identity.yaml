@@ -1,0 +1,15 @@
+name: sigma
+version: "0.23"
+category: security/forensics
+
+summary: >
+  Generic signature format for SIEM systems and log analysis
+
+source:
+  kind: tarball
+  file: sigma-0.23.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/pyyaml

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dracut source, sir."
+      tar -xf tar/dracut-059.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring dracut, sir."
+      cd build
+      ../source/dracut-059/configure --prefix=/usr \
+        --sysconfdir=/etc
+

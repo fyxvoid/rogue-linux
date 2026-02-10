@@ -1,0 +1,10 @@
+name: seclists
+version: "2024.1"
+category: security/passwords
+
+summary: >
+  Collection of multiple types of lists for security assessments
+
+source:
+  kind: tarball
+  file: seclists-2024.1.tar.xz

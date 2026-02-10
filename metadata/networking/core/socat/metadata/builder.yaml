@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting socat source, sir."
+      tar -xf tar/socat-1.8.0.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring socat, sir."
+      cd build
+      ../source/socat-1.8.0.0/configure --prefix=/usr \
+        
+

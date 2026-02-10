@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building libnetfilter_conntrack, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing libnetfilter_conntrack into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

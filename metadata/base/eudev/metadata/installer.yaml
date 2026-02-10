@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building eudev, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing eudev into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

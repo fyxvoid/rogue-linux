@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting king-phisher source, sir."
+      tar -xf tar/king-phisher-1.14.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building king-phisher Python package, sir."
+      cd source/king-phisher-1.14.0
+      python3 setup.py build
+

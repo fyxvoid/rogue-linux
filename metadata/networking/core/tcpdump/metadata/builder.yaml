@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting tcpdump source, sir."
+      tar -xf tar/tcpdump-4.99.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring tcpdump, sir."
+      cd build
+      ../source/tcpdump-4.99.4/configure --prefix=/usr \
+        
+

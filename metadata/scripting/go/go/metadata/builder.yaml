@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting go source, sir."
+      tar -xf tar/go-1.22.1.tar.gz -C source
+
+  - |
+      echo "[COGMAN] Building go, sir."
+      cd source/go-1.22.1
+      make -j$(nproc)
+

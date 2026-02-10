@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting darkstat source, sir."
+      tar -xf tar/darkstat-3.0.721.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring darkstat, sir."
+      cd build
+      ../source/darkstat-3.0.721/configure --prefix=/usr \
+        
+

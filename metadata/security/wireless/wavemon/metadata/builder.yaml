@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting wavemon source, sir."
+      tar -xf tar/wavemon-0.9.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring wavemon, sir."
+      cd build
+      ../source/wavemon-0.9.5/configure --prefix=/usr \
+        
+

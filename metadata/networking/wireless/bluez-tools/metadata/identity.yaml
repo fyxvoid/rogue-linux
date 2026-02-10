@@ -1,0 +1,17 @@
+name: bluez-tools
+version: "2.0"
+category: networking/wireless
+
+summary: >
+  Set of Bluetooth management tools complementing BlueZ
+
+source:
+  kind: tarball
+  file: bluez-tools-2.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/wireless/bluez
+    - base/dbus
+    - libs/general/glib

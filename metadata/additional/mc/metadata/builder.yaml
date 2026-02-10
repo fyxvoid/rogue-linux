@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting mc source, sir."
+      tar -xf tar/mc-4.8.31.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring mc, sir."
+      cd build
+      ../source/mc-4.8.31/configure --prefix=/usr \
+        --sysconfdir=/etc
+

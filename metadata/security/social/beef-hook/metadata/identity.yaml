@@ -1,0 +1,15 @@
+name: beef-hook
+version: "0.5.4.0"
+category: security/social
+
+summary: >
+  BeEF hooking server for browser exploitation
+
+source:
+  kind: tarball
+  file: beef-hook-0.5.4.0.tar.xz
+
+depends:
+  build:
+    - scripting/ruby/ruby
+    - scripting/ruby/bundler

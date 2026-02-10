@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting holehe source, sir."
+      tar -xf tar/holehe-1.61.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building holehe Python package, sir."
+      cd source/holehe-1.61
+      python3 setup.py build
+

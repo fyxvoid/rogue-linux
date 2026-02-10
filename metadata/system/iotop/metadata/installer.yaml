@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing iotop Python package, sir."
+      cd source/iotop*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

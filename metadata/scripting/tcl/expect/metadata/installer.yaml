@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building expect, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing expect into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

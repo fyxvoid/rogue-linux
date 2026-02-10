@@ -1,0 +1,14 @@
+name: phoneinfoga
+version: "2.11.0"
+category: security/osint
+
+summary: >
+  Advanced phone number OSINT framework
+
+source:
+  kind: tarball
+  file: phoneinfoga-2.11.0.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

@@ -1,6 +1,6 @@
 steps:
-  - rm -rf build source
-  - mkdir -p build source
+  - rm -rf source build
+  - mkdir -p source build
 
   - |
       echo "[COGMAN] Extracting libcap source, sir."
@@ -9,7 +9,5 @@ steps:
   - |
       echo "[COGMAN] Building libcap, sir."
       cd source/libcap-2.69
+      make -j$(nproc) prefix=/usr lib=lib
 
-      make \
-        prefix=/usr \
-        lib=lib

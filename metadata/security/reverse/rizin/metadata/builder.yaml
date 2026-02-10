@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting rizin source, sir."
+      tar -xf tar/rizin-0.7.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring rizin with Meson, sir."
+      cd build
+      meson setup ../source/rizin-0.7.2 . --prefix=/usr --buildtype=release
+

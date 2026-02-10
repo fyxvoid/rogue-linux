@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ipset source, sir."
+      tar -xf tar/ipset-7.19.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring ipset, sir."
+      cd build
+      ../source/ipset-7.19/configure --prefix=/usr \
+        
+

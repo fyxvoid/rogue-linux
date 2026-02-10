@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building nftables, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing nftables into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

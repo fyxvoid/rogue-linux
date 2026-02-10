@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building libgcrypt, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing libgcrypt into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

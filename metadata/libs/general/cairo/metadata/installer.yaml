@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building cairo, sir."
+      cd build
+      ninja
+
+  - |
+      echo "[COGMAN] Installing cairo into staging root, sir."
+      cd build
+      DESTDIR="$PKGROOT" ninja install

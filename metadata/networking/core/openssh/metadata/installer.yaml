@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building openssh, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing openssh into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

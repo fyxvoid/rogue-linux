@@ -1,0 +1,15 @@
+name: trevorspray
+version: "2.2.2"
+category: security/passwords
+
+summary: >
+  Advanced password spraying tool for Active Directory
+
+source:
+  kind: tarball
+  file: trevorspray-2.2.2.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

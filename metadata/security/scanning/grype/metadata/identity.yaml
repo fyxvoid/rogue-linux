@@ -1,0 +1,14 @@
+name: grype
+version: "0.74.4"
+category: security/scanning
+
+summary: >
+  Vulnerability scanner for container images and filesystems
+
+source:
+  kind: tarball
+  file: grype-0.74.4.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing nosqlmap Python package, sir."
+      cd source/nosqlmap*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

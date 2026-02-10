@@ -1,5 +1,10 @@
 steps:
   - |
-    echo "[COGMAN] Installing libidn2 into pkgroot, sir."
-    cd build
-    make install DESTDIR="$PKGROOT"
+      echo "[COGMAN] Building libidn2, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing libidn2 into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

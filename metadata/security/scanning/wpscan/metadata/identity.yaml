@@ -1,0 +1,15 @@
+name: wpscan
+version: "3.8.25"
+category: security/scanning
+
+summary: >
+  WordPress vulnerability scanner for plugins themes and core
+
+source:
+  kind: tarball
+  file: wpscan-3.8.25.tar.xz
+
+depends:
+  build:
+    - scripting/ruby/ruby
+    - scripting/ruby/bundler

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ubertooth source, sir."
+      tar -xf tar/ubertooth-2024.02.R1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring ubertooth with CMake, sir."
+      cd build
+      cmake ../source/ubertooth-2024.02.R1 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

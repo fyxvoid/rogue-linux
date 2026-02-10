@@ -1,0 +1,15 @@
+name: tcpick
+version: "0.2.1"
+category: security/sniffing
+
+summary: >
+  TCP stream sniffer and connection tracker
+
+source:
+  kind: tarball
+  file: tcpick-0.2.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

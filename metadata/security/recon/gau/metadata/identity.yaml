@@ -1,0 +1,14 @@
+name: gau
+version: "2.2.1"
+category: security/recon
+
+summary: >
+  GetAllUrls fetches known URLs from multiple public sources
+
+source:
+  kind: tarball
+  file: gau-2.2.1.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

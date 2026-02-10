@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing bottom, sir."
+      cd source/bottom*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

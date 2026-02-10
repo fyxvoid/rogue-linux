@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building gradle, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing gradle into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

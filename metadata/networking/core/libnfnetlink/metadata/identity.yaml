@@ -1,0 +1,14 @@
+name: libnfnetlink
+version: "1.0.2"
+category: networking/core
+
+summary: >
+  Low-level netfilter Netlink communication library
+
+source:
+  kind: tarball
+  file: libnfnetlink-1.0.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

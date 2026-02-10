@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting nping source, sir."
+      tar -xf tar/nping-0.7.95.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring nping, sir."
+      cd build
+      ../source/nping-0.7.95/configure --prefix=/usr \
+        
+

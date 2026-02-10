@@ -1,0 +1,15 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting openssh source, sir."
+      tar -xf tar/openssh-9.6p1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring openssh, sir."
+      cd build
+      ../source/openssh-9.6p1/configure --prefix=/usr \
+        --sysconfdir=/etc/ssh \
+        --with-ssl-engine
+

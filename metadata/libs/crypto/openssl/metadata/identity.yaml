@@ -2,6 +2,14 @@ name: openssl
 version: "3.2.1"
 category: libs/crypto
 
-description: >
-  Cryptographic library and toolkit implementing SSL, TLS,
-  and general-purpose cryptographic functions.
+summary: >
+  Cryptographic library and toolkit implementing SSL TLS and general-purpose cryptography
+
+source:
+  kind: tarball
+  file: openssl-3.2.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/compression/zlib

@@ -1,0 +1,14 @@
+name: libnl
+version: "3.9.0"
+category: networking/core
+
+summary: >
+  Netlink protocol library suite for kernel communication
+
+source:
+  kind: tarball
+  file: libnl-3.9.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

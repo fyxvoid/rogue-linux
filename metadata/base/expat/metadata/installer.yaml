@@ -2,7 +2,7 @@ steps:
   - |
       echo "[COGMAN] Building expat, sir."
       cd build
-      make -j1
+      make -j$(nproc)
 
   - |
       echo "[COGMAN] Installing expat into staging root, sir."

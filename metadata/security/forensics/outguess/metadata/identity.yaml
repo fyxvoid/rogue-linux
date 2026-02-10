@@ -1,0 +1,15 @@
+name: outguess
+version: "0.4"
+category: security/forensics
+
+summary: >
+  Universal steganographic tool for hiding data in images
+
+source:
+  kind: tarball
+  file: outguess-0.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/general/libjpeg-turbo

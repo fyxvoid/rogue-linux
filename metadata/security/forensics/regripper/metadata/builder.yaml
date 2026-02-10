@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting regripper source, sir."
+      tar -xf tar/regripper-3.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building regripper, sir."
+      cd source/regripper-3.0
+      make -j$(nproc)
+

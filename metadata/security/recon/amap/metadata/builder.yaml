@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting amap source, sir."
+      tar -xf tar/amap-5.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring amap, sir."
+      cd build
+      ../source/amap-5.4/configure --prefix=/usr \
+        
+

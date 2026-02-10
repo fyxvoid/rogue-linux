@@ -1,0 +1,15 @@
+name: dnsrecon
+version: "1.2.0"
+category: security/recon
+
+summary: >
+  DNS enumeration script with multiple record types and zone transfer
+
+source:
+  kind: tarball
+  file: dnsrecon-1.2.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

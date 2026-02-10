@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dynamorio source, sir."
+      tar -xf tar/dynamorio-10.0.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring dynamorio with CMake, sir."
+      cd build
+      cmake ../source/dynamorio-10.0.0 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

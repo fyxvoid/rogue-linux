@@ -1,0 +1,15 @@
+name: tripwire
+version: "2.4.3.7"
+category: security/defense
+
+summary: >
+  File integrity assessment tool for system security
+
+source:
+  kind: tarball
+  file: tripwire-2.4.3.7.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl

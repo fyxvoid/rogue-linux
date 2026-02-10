@@ -1,0 +1,14 @@
+name: net-tools
+version: "2.10"
+category: networking/core
+
+summary: >
+  Classic networking utilities including ifconfig netstat and route
+
+source:
+  kind: tarball
+  file: net-tools-2.10.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

@@ -1,0 +1,15 @@
+name: netcraft-cli
+version: "1.0"
+category: security/osint
+
+summary: >
+  CLI tool for Netcraft reconnaissance and analysis
+
+source:
+  kind: tarball
+  file: netcraft-cli-1.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting semgrep source, sir."
+      tar -xf tar/semgrep-1.60.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building semgrep Python package, sir."
+      cd source/semgrep-1.60.1
+      python3 setup.py build
+

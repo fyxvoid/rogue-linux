@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing whatwaf Python package, sir."
+      cd source/whatwaf*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,0 +1,16 @@
+name: libssh2
+version: "1.11.0"
+category: libs/crypto
+
+summary: >
+  SSH2 client-side library for file transfer and remote execution
+
+source:
+  kind: tarball
+  file: libssh2-1.11.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - libs/compression/zlib

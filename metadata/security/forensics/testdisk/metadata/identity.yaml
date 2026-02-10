@@ -1,0 +1,15 @@
+name: testdisk
+version: "7.2"
+category: security/forensics
+
+summary: >
+  Data recovery tool for lost partitions and boot sectors
+
+source:
+  kind: tarball
+  file: testdisk-7.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/ncurses

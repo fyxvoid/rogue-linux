@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing whispers Python package, sir."
+      cd source/whispers*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

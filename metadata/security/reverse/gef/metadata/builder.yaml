@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gef source, sir."
+      tar -xf tar/gef-2024.01.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building gef Python package, sir."
+      cd source/gef-2024.01
+      python3 setup.py build
+

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting procyon source, sir."
+      tar -xf tar/procyon-0.6.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building procyon, sir."
+      cd source/procyon-0.6.0
+      make -j$(nproc)
+

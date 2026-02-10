@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting c-ares source, sir."
+      tar -xf tar/c-ares-1.27.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring c-ares with CMake, sir."
+      cd build
+      cmake ../source/c-ares-1.27.0 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

@@ -1,0 +1,15 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting libnl source, sir."
+      tar -xf tar/libnl-3.9.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring libnl, sir."
+      cd build
+      ../source/libnl-3.9.0/configure --prefix=/usr \
+        --sysconfdir=/etc \
+        --disable-static
+

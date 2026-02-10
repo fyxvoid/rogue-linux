@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting pam-oath source, sir."
+      tar -xf tar/pam-oath-2.6.11.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring pam-oath, sir."
+      cd build
+      ../source/pam-oath-2.6.11/configure --prefix=/usr \
+        
+

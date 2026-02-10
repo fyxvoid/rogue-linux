@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting trufflehog-osint source, sir."
+      tar -xf tar/trufflehog-osint-3.68.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building trufflehog-osint with Go, sir."
+      cd source/trufflehog-osint-3.68.0
+      go build -o ../../build/ ./...
+

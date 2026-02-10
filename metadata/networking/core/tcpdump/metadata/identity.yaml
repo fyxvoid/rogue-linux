@@ -1,0 +1,16 @@
+name: tcpdump
+version: "4.99.4"
+category: networking/core
+
+summary: >
+  Command-line packet analyzer for network traffic capture
+
+source:
+  kind: tarball
+  file: tcpdump-4.99.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap
+    - libs/crypto/openssl

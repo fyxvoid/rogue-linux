@@ -1,0 +1,14 @@
+name: feroxbuster
+version: "2.10.2"
+category: security/web
+
+summary: >
+  Fast recursive content discovery tool written in Rust
+
+source:
+  kind: tarball
+  file: feroxbuster-2.10.2.tar.xz
+
+depends:
+  build:
+    - scripting/rust/rust

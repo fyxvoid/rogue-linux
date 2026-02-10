@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting frida-tools source, sir."
+      tar -xf tar/frida-tools-12.3.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building frida-tools Python package, sir."
+      cd source/frida-tools-12.3.0
+      python3 setup.py build
+

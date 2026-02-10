@@ -1,0 +1,15 @@
+name: libxslt
+version: "1.1.39"
+category: libs/general
+
+summary: >
+  XSLT transformation library for XML documents
+
+source:
+  kind: tarball
+  file: libxslt-1.1.39.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/general/libxml2

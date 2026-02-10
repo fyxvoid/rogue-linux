@@ -1,0 +1,14 @@
+name: crunch
+version: "3.6"
+category: security/passwords
+
+summary: >
+  Wordlist generator with character set and pattern specification
+
+source:
+  kind: tarball
+  file: crunch-3.6.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

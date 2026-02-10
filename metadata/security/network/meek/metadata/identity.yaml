@@ -1,0 +1,14 @@
+name: meek
+version: "0.38"
+category: security/network
+
+summary: >
+  Tor pluggable transport using HTTP for domain fronting
+
+source:
+  kind: tarball
+  file: meek-0.38.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

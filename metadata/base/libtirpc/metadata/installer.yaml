@@ -2,7 +2,7 @@ steps:
   - |
       echo "[COGMAN] Building libtirpc, sir."
       cd build
-      make -j1
+      make -j$(nproc)
 
   - |
       echo "[COGMAN] Installing libtirpc into staging root, sir."

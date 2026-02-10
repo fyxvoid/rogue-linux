@@ -1,0 +1,15 @@
+name: userrecon
+version: "1.0"
+category: security/osint
+
+summary: >
+  Find usernames across over 75 social networks
+
+source:
+  kind: tarball
+  file: userrecon-1.0.tar.xz
+
+depends:
+  build:
+    - base/bash
+    - libs/general/curl

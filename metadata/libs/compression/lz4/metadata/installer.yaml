@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building lz4, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing lz4 into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

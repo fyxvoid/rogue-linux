@@ -4,12 +4,11 @@ steps:
 
   - |
       echo "[COGMAN] Extracting readline source, sir."
-      tar -xf tar/readline-8.2.tar.gz -C source
+      tar -xf tar/readline-8.2.tar.xz -C source
 
   - |
       echo "[COGMAN] Configuring readline, sir."
       cd build
+      ../source/readline-8.2/configure --prefix=/usr \
+        --with-curses
 
-      ../source/readline-8.2/configure \
-        --prefix=/usr \
-        --disable-static

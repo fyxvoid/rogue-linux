@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building blutter, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing blutter into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting luajit source, sir."
+      tar -xf tar/luajit-2.1.1707061634.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building luajit, sir."
+      cd source/luajit-2.1.1707061634
+      make -j$(nproc)
+

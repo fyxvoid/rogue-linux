@@ -1,0 +1,14 @@
+name: ddrescue
+version: "1.28"
+category: security/forensics
+
+summary: >
+  GNU data recovery tool for copying data from failing drives
+
+source:
+  kind: tarball
+  file: ddrescue-1.28.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

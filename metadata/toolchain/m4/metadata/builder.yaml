@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting m4 source, sir."
+      tar -xf tar/m4-1.4.19.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring m4, sir."
+      cd build
+      ../source/m4-1.4.19/configure --prefix=/usr \
+        
+

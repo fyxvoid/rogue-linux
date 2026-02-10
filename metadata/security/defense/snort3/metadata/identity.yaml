@@ -1,0 +1,18 @@
+name: snort3
+version: "3.1.80.0"
+category: security/defense
+
+summary: >
+  Open source intrusion prevention system for network security
+
+source:
+  kind: tarball
+  file: snort3-3.1.80.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - networking/core/libpcap
+    - libs/general/pcre2
+    - libs/compression/zlib

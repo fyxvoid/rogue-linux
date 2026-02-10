@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting enum4linux source, sir."
+      tar -xf tar/enum4linux-0.9.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building enum4linux, sir."
+      cd source/enum4linux-0.9.1
+      make -j$(nproc)
+

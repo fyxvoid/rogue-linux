@@ -1,0 +1,14 @@
+name: sslyze
+version: "5.2.0"
+category: security/scanning
+
+summary: >
+  Fast and powerful SSL/TLS scanning library and CLI tool
+
+source:
+  kind: tarball
+  file: sslyze-5.2.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

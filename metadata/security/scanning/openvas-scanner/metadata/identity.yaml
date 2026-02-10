@@ -1,0 +1,17 @@
+name: openvas-scanner
+version: "23.0.1"
+category: security/scanning
+
+summary: >
+  Open Vulnerability Assessment Scanner for comprehensive auditing
+
+source:
+  kind: tarball
+  file: openvas-scanner-23.0.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - libs/general/glib
+    - libs/crypto/gnutls

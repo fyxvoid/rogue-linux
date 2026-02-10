@@ -1,0 +1,14 @@
+name: gf
+version: "1.2.0"
+category: security/web
+
+summary: >
+  Wrapper around grep for custom pattern matching
+
+source:
+  kind: tarball
+  file: gf-1.2.0.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

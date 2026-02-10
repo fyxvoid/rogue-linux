@@ -1,0 +1,17 @@
+name: linux-kernel
+version: "6.8.2"
+category: kernel
+
+summary: >
+  Linux kernel providing the core operating system
+
+source:
+  kind: tarball
+  file: linux-kernel-6.8.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/binutils
+    - base/kmod
+    - base/libelf

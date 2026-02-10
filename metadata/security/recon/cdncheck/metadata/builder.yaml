@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting cdncheck source, sir."
+      tar -xf tar/cdncheck-1.0.9.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building cdncheck with Go, sir."
+      cd source/cdncheck-1.0.9
+      go build -o ../../build/ ./...
+

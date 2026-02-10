@@ -1,0 +1,14 @@
+name: slowloris
+version: "0.2.2"
+category: security/web
+
+summary: >
+  Low bandwidth denial of service tool for HTTP servers
+
+source:
+  kind: tarball
+  file: slowloris-0.2.2.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

@@ -1,0 +1,16 @@
+name: hostapd
+version: "2.10"
+category: networking/core
+
+summary: >
+  IEEE 802.11 AP and IEEE 802.1X/WPA/WPA2 authenticator
+
+source:
+  kind: tarball
+  file: hostapd-2.10.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - networking/core/libnl

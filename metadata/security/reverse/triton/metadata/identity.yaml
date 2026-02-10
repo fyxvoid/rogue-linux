@@ -1,0 +1,17 @@
+name: triton
+version: "1.0"
+category: security/reverse
+
+summary: >
+  Dynamic binary analysis framework using symbolic execution
+
+source:
+  kind: tarball
+  file: triton-1.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - security/reverse/capstone
+    - security/reverse/z3-solver

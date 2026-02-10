@@ -1,0 +1,14 @@
+name: nuclei-mobile
+version: "3.1.10"
+category: security/mobile
+
+summary: >
+  Nuclei templates for mobile application security testing
+
+source:
+  kind: tarball
+  file: nuclei-mobile-3.1.10.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

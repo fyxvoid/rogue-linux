@@ -1,0 +1,14 @@
+name: hashdeep
+version: "4.4"
+category: security/forensics
+
+summary: >
+  Programs to compute hashes with matching and audit features
+
+source:
+  kind: tarball
+  file: hashdeep-4.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

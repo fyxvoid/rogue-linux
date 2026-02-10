@@ -1,0 +1,10 @@
+name: wireless-regdb
+version: "2024.01.23"
+category: networking/wireless
+
+summary: >
+  Wireless regulatory database for allowed frequencies by region
+
+source:
+  kind: tarball
+  file: wireless-regdb-2024.01.23.tar.xz

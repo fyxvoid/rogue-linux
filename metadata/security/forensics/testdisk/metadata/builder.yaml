@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting testdisk source, sir."
+      tar -xf tar/testdisk-7.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring testdisk, sir."
+      cd build
+      ../source/testdisk-7.2/configure --prefix=/usr \
+        
+

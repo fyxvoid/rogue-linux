@@ -1,10 +1,10 @@
 steps:
   - |
-      echo "[COGMAN] Building Binutils (pass 2), sir."
+      echo "[COGMAN] Building binutils, sir."
       cd build
       make -j$(nproc)
 
   - |
-      echo "[COGMAN] Installing Binutils (pass 2) into staging root, sir."
+      echo "[COGMAN] Installing binutils into staging root, sir."
       cd build
       make install DESTDIR="$PKGROOT"

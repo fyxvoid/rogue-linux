@@ -1,0 +1,14 @@
+name: pdfid
+version: "0.2.8"
+category: security/forensics
+
+summary: >
+  Tool to analyze PDF files for suspicious elements
+
+source:
+  kind: tarball
+  file: pdfid-0.2.8.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

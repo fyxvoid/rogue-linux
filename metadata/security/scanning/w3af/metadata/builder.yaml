@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting w3af source, sir."
+      tar -xf tar/w3af-2024.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building w3af Python package, sir."
+      cd source/w3af-2024.1
+      python3 setup.py build
+

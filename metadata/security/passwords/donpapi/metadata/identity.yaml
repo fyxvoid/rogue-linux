@@ -1,0 +1,15 @@
+name: donpapi
+version: "1.1.0"
+category: security/passwords
+
+summary: >
+  Remote DPAPI credential harvesting and extraction tool
+
+source:
+  kind: tarball
+  file: donpapi-1.1.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/impacket

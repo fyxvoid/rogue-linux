@@ -1,0 +1,15 @@
+name: libjpeg-turbo
+version: "3.0.2"
+category: libs/general
+
+summary: >
+  JPEG codec library using SIMD instructions for accelerated compression
+
+source:
+  kind: tarball
+  file: libjpeg-turbo-3.0.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

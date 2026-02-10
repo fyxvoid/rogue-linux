@@ -1,0 +1,14 @@
+name: libsodium
+version: "1.0.19"
+category: libs/crypto
+
+summary: >
+  Modern easy-to-use cryptographic library for encryption and signatures
+
+source:
+  kind: tarball
+  file: libsodium-1.0.19.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

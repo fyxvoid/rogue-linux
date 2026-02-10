@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting byobu source, sir."
+      tar -xf tar/byobu-5.133.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building byobu, sir."
+      cd source/byobu-5.133
+      make -j$(nproc)
+

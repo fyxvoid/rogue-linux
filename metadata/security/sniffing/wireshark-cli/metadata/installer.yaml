@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building wireshark-cli, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing wireshark-cli into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

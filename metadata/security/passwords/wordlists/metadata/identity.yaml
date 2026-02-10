@@ -1,0 +1,10 @@
+name: wordlists
+version: "2024.1"
+category: security/passwords
+
+summary: >
+  Collection of wordlists for brute-force and fuzzing attacks
+
+source:
+  kind: tarball
+  file: wordlists-2024.1.tar.xz

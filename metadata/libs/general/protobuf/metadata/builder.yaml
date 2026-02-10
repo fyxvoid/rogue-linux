@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting protobuf source, sir."
+      tar -xf tar/protobuf-25.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring protobuf with CMake, sir."
+      cd build
+      cmake ../source/protobuf-25.3 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

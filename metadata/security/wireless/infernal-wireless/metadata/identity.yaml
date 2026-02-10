@@ -1,0 +1,15 @@
+name: infernal-wireless
+version: "3.5"
+category: security/wireless
+
+summary: >
+  Automated wireless hacking tool with GUI
+
+source:
+  kind: tarball
+  file: infernal-wireless-3.5.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - security/wireless/aircrack-ng

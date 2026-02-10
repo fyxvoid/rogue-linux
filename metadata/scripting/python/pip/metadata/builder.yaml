@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting pip source, sir."
+      tar -xf tar/pip-24.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building pip Python package, sir."
+      cd source/pip-24.0
+      python3 setup.py build
+

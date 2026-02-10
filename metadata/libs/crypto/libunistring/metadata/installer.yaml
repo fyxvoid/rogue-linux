@@ -1,5 +1,10 @@
 steps:
   - |
-    echo "[COGMAN] Installing libunistring into pkgroot, sir."
-    cd build
-    make install DESTDIR="$PKGROOT"
+      echo "[COGMAN] Building libunistring, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing libunistring into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

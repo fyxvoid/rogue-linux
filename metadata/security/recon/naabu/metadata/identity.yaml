@@ -1,0 +1,15 @@
+name: naabu
+version: "2.3.0"
+category: security/recon
+
+summary: >
+  Fast port scanner with SYN/CONNECT scanning support
+
+source:
+  kind: tarball
+  file: naabu-2.3.0.tar.xz
+
+depends:
+  build:
+    - scripting/go/go
+    - networking/core/libpcap

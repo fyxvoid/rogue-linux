@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing jwt-tool Python package, sir."
+      cd source/jwt-tool*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

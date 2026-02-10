@@ -1,0 +1,14 @@
+name: kerbrute-go
+version: "1.0.3"
+category: security/passwords
+
+summary: >
+  Go implementation of Kerberos brute forcing tool
+
+source:
+  kind: tarball
+  file: kerbrute-go-1.0.3.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

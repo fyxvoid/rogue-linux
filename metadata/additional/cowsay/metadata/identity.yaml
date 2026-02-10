@@ -1,0 +1,14 @@
+name: cowsay
+version: "3.04"
+category: additional
+
+summary: >
+  Configurable talking ASCII cow for terminal
+
+source:
+  kind: tarball
+  file: cowsay-3.04.tar.xz
+
+depends:
+  build:
+    - toolchain/perl

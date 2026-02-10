@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dalfox source, sir."
+      tar -xf tar/dalfox-2.9.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building dalfox with Go, sir."
+      cd source/dalfox-2.9.2
+      go build -o ../../build/ ./...
+

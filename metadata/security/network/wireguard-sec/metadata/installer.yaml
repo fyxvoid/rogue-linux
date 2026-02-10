@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building wireguard-sec, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing wireguard-sec into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

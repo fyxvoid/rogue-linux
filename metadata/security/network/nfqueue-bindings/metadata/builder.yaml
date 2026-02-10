@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting nfqueue-bindings source, sir."
+      tar -xf tar/nfqueue-bindings-0.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring nfqueue-bindings, sir."
+      cd build
+      ../source/nfqueue-bindings-0.6/configure --prefix=/usr \
+        
+

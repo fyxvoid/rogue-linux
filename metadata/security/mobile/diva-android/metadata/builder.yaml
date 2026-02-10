@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting diva-android source, sir."
+      tar -xf tar/diva-android-1.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building diva-android, sir."
+      cd source/diva-android-1.0
+      make -j$(nproc)
+

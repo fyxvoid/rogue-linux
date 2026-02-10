@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting o365spray source, sir."
+      tar -xf tar/o365spray-2.0.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building o365spray Python package, sir."
+      cd source/o365spray-2.0.4
+      python3 setup.py build
+

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting bincompare source, sir."
+      tar -xf tar/bincompare-1.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building bincompare Python package, sir."
+      cd source/bincompare-1.0
+      python3 setup.py build
+

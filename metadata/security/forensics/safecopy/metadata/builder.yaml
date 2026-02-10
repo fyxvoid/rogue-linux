@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting safecopy source, sir."
+      tar -xf tar/safecopy-1.7.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring safecopy, sir."
+      cd build
+      ../source/safecopy-1.7/configure --prefix=/usr \
+        
+

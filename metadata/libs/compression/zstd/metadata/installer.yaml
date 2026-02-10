@@ -1,3 +1,10 @@
 steps:
-  - echo "[COGMAN] Installing zstd into pkgroot, sir."
-  - make -C source install PREFIX=/usr DESTDIR="$PKGROOT"
+  - |
+      echo "[COGMAN] Building zstd, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing zstd into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

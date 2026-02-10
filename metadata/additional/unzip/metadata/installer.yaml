@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building unzip, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing unzip into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

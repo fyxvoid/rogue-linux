@@ -1,0 +1,17 @@
+name: rsync
+version: "3.2.7"
+category: networking/core
+
+summary: >
+  Fast incremental file transfer utility for efficient remote sync
+
+source:
+  kind: tarball
+  file: rsync-3.2.7.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - libs/compression/zstd
+    - libs/compression/lz4

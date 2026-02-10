@@ -1,0 +1,16 @@
+name: bettercap-sniff
+version: "2.40.0"
+category: security/sniffing
+
+summary: >
+  Network attack and monitoring framework with sniffer
+
+source:
+  kind: tarball
+  file: bettercap-sniff-2.40.0.tar.xz
+
+depends:
+  build:
+    - scripting/go/go
+    - networking/core/libpcap
+    - libs/general/libusb

@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing plaso Python package, sir."
+      cd source/plaso*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,0 +1,18 @@
+# CogmanII Identity Schema Reference
+# Every package MUST define this section.
+# Rust planner deserializes into typed structs — no JSON Schema needed.
+
+[identity]
+name     = "string — required, package name"
+version  = "string — required, semver or upstream version"
+category = "string — required, slash-separated path (e.g. 'base', 'security/wireless')"
+summary  = "string — required, one-line description"
+
+[identity.source]
+kind = "string — required, enum: tarball | git"
+file = "string — required, filename of source archive"
+# url is optional — resolved by mirror configuration
+
+[identity.depends]
+build   = ["string — list of category/name dependency paths"]
+runtime = ["string — optional, runtime dependencies"]

@@ -1,0 +1,15 @@
+name: ldap-utils
+version: "2.6.7"
+category: security/network
+
+summary: >
+  LDAP client utilities for directory service operations
+
+source:
+  kind: tarball
+  file: ldap-utils-2.6.7.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl

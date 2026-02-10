@@ -1,0 +1,14 @@
+name: gradle
+version: "8.6"
+category: scripting/java
+
+summary: >
+  Modern open-source build automation tool for Java and JVM
+
+source:
+  kind: tarball
+  file: gradle-8.6.tar.xz
+
+depends:
+  build:
+    - scripting/java/openjdk

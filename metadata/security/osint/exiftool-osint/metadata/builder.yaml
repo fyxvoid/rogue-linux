@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting exiftool-osint source, sir."
+      tar -xf tar/exiftool-osint-12.77.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building exiftool-osint, sir."
+      cd source/exiftool-osint-12.77
+      make -j$(nproc)
+

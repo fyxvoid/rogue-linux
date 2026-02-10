@@ -1,0 +1,16 @@
+name: cowpatty
+version: "4.8"
+category: security/passwords
+
+summary: >
+  WPA-PSK handshake brute force attack tool
+
+source:
+  kind: tarball
+  file: cowpatty-4.8.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap
+    - libs/crypto/openssl

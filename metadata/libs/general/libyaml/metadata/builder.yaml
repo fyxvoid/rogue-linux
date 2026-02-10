@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting libyaml source, sir."
+      tar -xf tar/libyaml-0.2.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring libyaml, sir."
+      cd build
+      ../source/libyaml-0.2.5/configure --prefix=/usr \
+        --disable-static
+

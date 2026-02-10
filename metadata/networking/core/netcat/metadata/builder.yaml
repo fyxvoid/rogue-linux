@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting netcat source, sir."
+      tar -xf tar/netcat-1.226.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building netcat, sir."
+      cd source/netcat-1.226
+      make -j$(nproc)
+

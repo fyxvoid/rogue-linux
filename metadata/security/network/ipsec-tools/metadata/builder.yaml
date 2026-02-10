@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ipsec-tools source, sir."
+      tar -xf tar/ipsec-tools-0.8.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring ipsec-tools, sir."
+      cd build
+      ../source/ipsec-tools-0.8.2/configure --prefix=/usr \
+        
+

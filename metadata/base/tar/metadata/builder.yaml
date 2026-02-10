@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting tar source, sir."
+      tar -xf tar/tar-1.35.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring tar, sir."
+      cd build
+      ../source/tar-1.35/configure --prefix=/usr \
+        
+

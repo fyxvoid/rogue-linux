@@ -1,0 +1,14 @@
+name: maskprocessor
+version: "0.73"
+category: security/passwords
+
+summary: >
+  High-performance word generator with per-position mask attack
+
+source:
+  kind: tarball
+  file: maskprocessor-0.73.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

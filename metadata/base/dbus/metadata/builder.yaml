@@ -1,0 +1,17 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dbus source, sir."
+      tar -xf tar/dbus-1.14.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring dbus, sir."
+      cd build
+      ../source/dbus-1.14.10/configure --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --disable-static \
+        --disable-doxygen-docs
+

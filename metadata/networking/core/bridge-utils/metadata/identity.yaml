@@ -1,0 +1,14 @@
+name: bridge-utils
+version: "1.7.1"
+category: networking/core
+
+summary: >
+  Ethernet bridge administration utilities
+
+source:
+  kind: tarball
+  file: bridge-utils-1.7.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

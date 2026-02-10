@@ -1,0 +1,14 @@
+name: man-pages
+version: "6.06"
+category: base
+
+summary: >
+  Linux manual pages documenting kernel and C library APIs
+
+source:
+  kind: tarball
+  file: man-pages-6.06.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

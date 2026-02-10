@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing cloudmapper Python package, sir."
+      cd source/cloudmapper*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

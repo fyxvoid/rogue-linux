@@ -2,7 +2,7 @@ steps:
   - |
       echo "[COGMAN] Building sed, sir."
       cd build
-      make -j1
+      make -j$(nproc)
 
   - |
       echo "[COGMAN] Installing sed into staging root, sir."

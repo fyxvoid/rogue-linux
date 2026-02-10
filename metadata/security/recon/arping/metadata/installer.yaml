@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building arping, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing arping into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

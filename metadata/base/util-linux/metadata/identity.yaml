@@ -1,20 +1,16 @@
 name: util-linux
-version: "2.39"
+version: "2.40"
 category: base
 
 summary: >
-  Essential system utilities for Linux, including mount,
-  login, block device, and process-related tools.
+  Essential Linux system utilities including mount fdisk and more
 
 source:
   kind: tarball
-  file: util-linux-2.39.tar.xz
+  file: util-linux-2.40.tar.xz
 
 depends:
   build:
-    - base/gawk
-    - base/grep
-    - base/sed
-    - base/coreutils
     - toolchain/gcc
-    - toolchain/glibc
+    - base/ncurses
+    - base/readline

@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing avml, sir."
+      cd source/avml*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

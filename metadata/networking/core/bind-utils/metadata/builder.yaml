@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting bind-utils source, sir."
+      tar -xf tar/bind-utils-9.18.24.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring bind-utils, sir."
+      cd build
+      ../source/bind-utils-9.18.24/configure --prefix=/usr \
+        --without-python
+

@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building kerberos-tools, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing kerberos-tools into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

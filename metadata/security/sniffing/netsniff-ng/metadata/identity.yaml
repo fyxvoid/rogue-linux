@@ -1,0 +1,17 @@
+name: netsniff-ng
+version: "0.6.8"
+category: security/sniffing
+
+summary: >
+  High-performance Linux networking toolkit for packet analysis
+
+source:
+  kind: tarball
+  file: netsniff-ng-0.6.8.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap
+    - networking/core/libnl
+    - libs/crypto/libgcrypt

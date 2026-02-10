@@ -1,0 +1,16 @@
+name: horst
+version: "5.1"
+category: security/wireless
+
+summary: >
+  Lightweight IEEE 802.11 WLAN analyzer with text interface
+
+source:
+  kind: tarball
+  file: horst-5.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libnl
+    - base/ncurses

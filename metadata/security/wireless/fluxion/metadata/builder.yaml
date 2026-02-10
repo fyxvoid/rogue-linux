@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting fluxion source, sir."
+      tar -xf tar/fluxion-6.9.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building fluxion, sir."
+      cd source/fluxion-6.9
+      make -j$(nproc)
+

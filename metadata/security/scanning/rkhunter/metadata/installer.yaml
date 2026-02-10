@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building rkhunter, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing rkhunter into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

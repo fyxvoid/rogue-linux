@@ -1,0 +1,14 @@
+name: ruler
+version: "2.4.0"
+category: security/passwords
+
+summary: >
+  Microsoft Exchange brute-force and exploitation tool
+
+source:
+  kind: tarball
+  file: ruler-2.4.0.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

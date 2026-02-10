@@ -1,0 +1,15 @@
+name: qiling
+version: "1.4.6"
+category: security/reverse
+
+summary: >
+  Advanced binary emulation framework using Unicorn engine
+
+source:
+  kind: tarball
+  file: qiling-1.4.6.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - security/reverse/unicorn-engine

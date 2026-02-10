@@ -1,0 +1,16 @@
+name: polkit
+version: "124"
+category: system
+
+summary: >
+  Authorization framework for controlling system-wide privileges
+
+source:
+  kind: tarball
+  file: polkit-124.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/dbus
+    - libs/general/glib

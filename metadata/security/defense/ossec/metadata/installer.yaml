@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building ossec, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing ossec into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

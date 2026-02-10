@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing cors-scanner Python package, sir."
+      cd source/cors-scanner*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

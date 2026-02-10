@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing nushell, sir."
+      cd source/nushell*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

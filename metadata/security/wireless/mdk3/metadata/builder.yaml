@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting mdk3 source, sir."
+      tar -xf tar/mdk3-6.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building mdk3, sir."
+      cd source/mdk3-6.0
+      make -j$(nproc)
+

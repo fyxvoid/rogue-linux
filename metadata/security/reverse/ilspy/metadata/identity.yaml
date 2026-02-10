@@ -1,0 +1,14 @@
+name: ilspy
+version: "8.2.0"
+category: security/reverse
+
+summary: >
+  Open-source .NET assembly browser and decompiler
+
+source:
+  kind: tarball
+  file: ilspy-8.2.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

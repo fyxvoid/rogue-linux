@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gdisk source, sir."
+      tar -xf tar/gdisk-1.0.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building gdisk, sir."
+      cd source/gdisk-1.0.10
+      make -j$(nproc)
+

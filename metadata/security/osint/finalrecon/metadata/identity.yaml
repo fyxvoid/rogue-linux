@@ -1,0 +1,15 @@
+name: finalrecon
+version: "1.1.5"
+category: security/osint
+
+summary: >
+  All in one web reconnaissance tool for OSINT
+
+source:
+  kind: tarball
+  file: finalrecon-1.1.5.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting obfs4proxy source, sir."
+      tar -xf tar/obfs4proxy-0.0.14.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building obfs4proxy with Go, sir."
+      cd source/obfs4proxy-0.0.14
+      go build -o ../../build/ ./...
+

@@ -3,8 +3,7 @@ version: "2.69"
 category: base
 
 summary: >
-  POSIX capabilities library enabling fine-grained privilege
-  management without full root access.
+  POSIX capabilities library for Linux
 
 source:
   kind: tarball
@@ -14,4 +13,3 @@ depends:
   build:
     - toolchain/gcc
     - toolchain/glibc
-    - libs/compression/zlib

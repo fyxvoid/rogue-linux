@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting bc source, sir."
+      tar -xf tar/bc-6.7.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring bc, sir."
+      cd build
+      ../source/bc-6.7.5/configure --prefix=/usr \
+        
+

@@ -1,0 +1,14 @@
+name: exiftool-osint
+version: "12.77"
+category: security/osint
+
+summary: >
+  Metadata extraction tool for OSINT image analysis
+
+source:
+  kind: tarball
+  file: exiftool-osint-12.77.tar.xz
+
+depends:
+  build:
+    - toolchain/perl

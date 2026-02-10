@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ettercap source, sir."
+      tar -xf tar/ettercap-0.8.3.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring ettercap with CMake, sir."
+      cd build
+      cmake ../source/ettercap-0.8.3.1 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

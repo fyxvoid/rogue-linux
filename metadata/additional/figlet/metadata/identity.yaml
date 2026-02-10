@@ -1,0 +1,14 @@
+name: figlet
+version: "2.2.5"
+category: additional
+
+summary: >
+  Program for making large ASCII art text banners
+
+source:
+  kind: tarball
+  file: figlet-2.2.5.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

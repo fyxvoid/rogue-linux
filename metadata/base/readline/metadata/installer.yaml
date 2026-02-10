@@ -2,7 +2,7 @@ steps:
   - |
       echo "[COGMAN] Building readline, sir."
       cd build
-      make -j1
+      make -j$(nproc)
 
   - |
       echo "[COGMAN] Installing readline into staging root, sir."

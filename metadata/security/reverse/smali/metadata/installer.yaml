@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building smali, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing smali into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting htop source, sir."
+      tar -xf tar/htop-3.3.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring htop, sir."
+      cd build
+      ../source/htop-3.3.0/configure --prefix=/usr \
+        
+

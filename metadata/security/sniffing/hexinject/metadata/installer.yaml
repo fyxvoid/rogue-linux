@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building hexinject, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing hexinject into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

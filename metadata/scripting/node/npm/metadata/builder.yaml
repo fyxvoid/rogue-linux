@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting npm source, sir."
+      tar -xf tar/npm-10.4.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building npm, sir."
+      cd source/npm-10.4.0
+      make -j$(nproc)
+

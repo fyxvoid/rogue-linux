@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building nano, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing nano into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

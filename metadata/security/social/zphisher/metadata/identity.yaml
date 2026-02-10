@@ -1,0 +1,14 @@
+name: zphisher
+version: "2.3.5"
+category: security/social
+
+summary: >
+  Automated phishing tool with 30+ templates
+
+source:
+  kind: tarball
+  file: zphisher-2.3.5.tar.xz
+
+depends:
+  build:
+    - base/bash

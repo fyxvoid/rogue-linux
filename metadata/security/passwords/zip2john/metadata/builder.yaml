@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting zip2john source, sir."
+      tar -xf tar/zip2john-1.9.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building zip2john, sir."
+      cd source/zip2john-1.9.0
+      make -j$(nproc)
+

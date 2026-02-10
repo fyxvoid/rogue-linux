@@ -1,0 +1,14 @@
+name: sqlmap
+version: "1.8.2"
+category: security/web
+
+summary: >
+  Automatic SQL injection and database takeover tool
+
+source:
+  kind: tarball
+  file: sqlmap-1.8.2.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

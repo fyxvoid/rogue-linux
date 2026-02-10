@@ -1,0 +1,14 @@
+name: kakoune
+version: "2023.08.05"
+category: editors
+
+summary: >
+  Modal code editor with multiple selections
+
+source:
+  kind: tarball
+  file: kakoune-2023.08.05.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

@@ -1,0 +1,16 @@
+name: haproxy
+version: "2.9.5"
+category: networking/core
+
+summary: >
+  Reliable high-performance TCP/HTTP load balancer
+
+source:
+  kind: tarball
+  file: haproxy-2.9.5.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - libs/general/pcre2

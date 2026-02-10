@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building firejail, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing firejail into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

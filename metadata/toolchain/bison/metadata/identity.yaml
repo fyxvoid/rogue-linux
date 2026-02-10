@@ -1,0 +1,15 @@
+name: bison
+version: "3.8.2"
+category: toolchain
+
+summary: >
+  GNU Bison parser generator for LALR grammars
+
+source:
+  kind: tarball
+  file: bison-3.8.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/m4

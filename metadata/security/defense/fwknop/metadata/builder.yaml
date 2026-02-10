@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting fwknop source, sir."
+      tar -xf tar/fwknop-2.6.11.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring fwknop, sir."
+      cd build
+      ../source/fwknop-2.6.11/configure --prefix=/usr \
+        --sysconfdir=/etc
+

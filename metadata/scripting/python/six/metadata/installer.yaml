@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing six Python package, sir."
+      cd source/six*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

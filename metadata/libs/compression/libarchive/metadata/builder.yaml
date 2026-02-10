@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting libarchive source, sir."
+      tar -xf tar/libarchive-3.7.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring libarchive, sir."
+      cd build
+      ../source/libarchive-3.7.2/configure --prefix=/usr \
+        --disable-static
+

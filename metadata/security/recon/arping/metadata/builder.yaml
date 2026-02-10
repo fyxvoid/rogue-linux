@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting arping source, sir."
+      tar -xf tar/arping-2.24.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building arping, sir."
+      cd source/arping-2.24
+      make -j$(nproc)
+

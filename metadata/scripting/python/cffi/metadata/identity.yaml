@@ -1,0 +1,15 @@
+name: cffi
+version: "1.16.0"
+category: scripting/python
+
+summary: >
+  C Foreign Function Interface for Python calling C code
+
+source:
+  kind: tarball
+  file: cffi-1.16.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - libs/general/libffi

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting kiterunner source, sir."
+      tar -xf tar/kiterunner-2.0.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building kiterunner with Go, sir."
+      cd source/kiterunner-2.0.2
+      go build -o ../../build/ ./...
+

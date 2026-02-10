@@ -1,0 +1,15 @@
+name: parted
+version: "3.6"
+category: system
+
+summary: >
+  GNU Parted disk partitioning tool
+
+source:
+  kind: tarball
+  file: parted-3.6.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/util-linux

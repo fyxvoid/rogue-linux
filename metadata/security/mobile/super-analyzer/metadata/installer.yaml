@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing super-analyzer, sir."
+      cd source/super-analyzer*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

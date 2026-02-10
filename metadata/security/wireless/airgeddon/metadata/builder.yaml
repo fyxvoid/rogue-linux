@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting airgeddon source, sir."
+      tar -xf tar/airgeddon-11.22.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building airgeddon, sir."
+      cd source/airgeddon-11.22
+      make -j$(nproc)
+

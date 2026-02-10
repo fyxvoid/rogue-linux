@@ -1,0 +1,15 @@
+name: exodus-cli
+version: "2.5.0"
+category: security/mobile
+
+summary: >
+  CLI tool for analyzing Android app trackers and permissions
+
+source:
+  kind: tarball
+  file: exodus-cli-2.5.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

@@ -1,0 +1,15 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting emacs source, sir."
+      tar -xf tar/emacs-29.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring emacs, sir."
+      cd build
+      ../source/emacs-29.3/configure --prefix=/usr \
+        --with-modules \
+        --without-x
+

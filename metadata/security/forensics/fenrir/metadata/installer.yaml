@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building fenrir, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing fenrir into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

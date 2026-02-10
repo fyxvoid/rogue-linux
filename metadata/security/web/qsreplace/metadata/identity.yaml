@@ -1,0 +1,14 @@
+name: qsreplace
+version: "0.0.3"
+category: security/web
+
+summary: >
+  Accept URLs on stdin and replace query string values
+
+source:
+  kind: tarball
+  file: qsreplace-0.0.3.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

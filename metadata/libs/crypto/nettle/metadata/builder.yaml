@@ -1,20 +1,14 @@
 steps:
-  - |
-    echo "[COGMAN] Extracting nettle source, sir."
-    tar -xf tar/nettle-3.9.1.tar.gz -C source --strip-components=1
+  - rm -rf source build
+  - mkdir -p source build
 
   - |
-    echo "[COGMAN] Configuring nettle, sir."
-    export PKG_CONFIG_PATH="$PKGROOT/usr/lib/pkgconfig"
-    export CPPFLAGS="-I$PKGROOT/usr/include"
-    export LDFLAGS="-L$PKGROOT/usr/lib"
-
-    cd build
-    ../source/configure \
-      --prefix=/usr \
-      --disable-static
+      echo "[COGMAN] Extracting nettle source, sir."
+      tar -xf tar/nettle-3.9.1.tar.xz -C source
 
   - |
-    echo "[COGMAN] Building nettle, sir."
-    cd build
-    make
+      echo "[COGMAN] Configuring nettle, sir."
+      cd build
+      ../source/nettle-3.9.1/configure --prefix=/usr \
+        --disable-static
+

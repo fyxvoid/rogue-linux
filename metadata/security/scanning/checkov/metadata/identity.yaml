@@ -1,0 +1,14 @@
+name: checkov
+version: "3.2.25"
+category: security/scanning
+
+summary: >
+  Infrastructure as Code static analysis security scanner
+
+source:
+  kind: tarball
+  file: checkov-3.2.25.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

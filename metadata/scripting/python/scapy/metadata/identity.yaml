@@ -1,0 +1,14 @@
+name: scapy
+version: "2.5.0"
+category: scripting/python
+
+summary: >
+  Interactive packet manipulation library and tool for Python
+
+source:
+  kind: tarball
+  file: scapy-2.5.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

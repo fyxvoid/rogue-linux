@@ -1,0 +1,11 @@
+filesystem:
+  read:
+    - /
+  write:
+    - /usr
+
+network:
+  outbound: true
+
+capabilities:
+  - cap_net_raw

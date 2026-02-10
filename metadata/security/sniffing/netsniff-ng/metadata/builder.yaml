@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting netsniff-ng source, sir."
+      tar -xf tar/netsniff-ng-0.6.8.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building netsniff-ng, sir."
+      cd source/netsniff-ng-0.6.8
+      make -j$(nproc)
+

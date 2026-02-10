@@ -1,0 +1,14 @@
+name: bundler
+version: "2.5.6"
+category: scripting/ruby
+
+summary: >
+  Ruby dependency manager for gem management
+
+source:
+  kind: tarball
+  file: bundler-2.5.6.tar.xz
+
+depends:
+  build:
+    - scripting/ruby/ruby

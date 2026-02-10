@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building joomscan, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing joomscan into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

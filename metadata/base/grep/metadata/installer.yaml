@@ -2,7 +2,7 @@ steps:
   - |
       echo "[COGMAN] Building grep, sir."
       cd build
-      make -j1
+      make -j$(nproc)
 
   - |
       echo "[COGMAN] Installing grep into staging root, sir."

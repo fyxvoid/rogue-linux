@@ -1,0 +1,14 @@
+name: whatweb
+version: "0.5.5"
+category: security/scanning
+
+summary: >
+  Next generation web scanner identifying technologies and plugins
+
+source:
+  kind: tarball
+  file: whatweb-0.5.5.tar.xz
+
+depends:
+  build:
+    - scripting/ruby/ruby

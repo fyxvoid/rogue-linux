@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building tpm2-tools, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing tpm2-tools into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

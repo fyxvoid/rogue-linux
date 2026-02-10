@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting p11-kit source, sir."
+      tar -xf tar/p11-kit-0.25.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring p11-kit with Meson, sir."
+      cd build
+      meson setup ../source/p11-kit-0.25.3 . --prefix=/usr --buildtype=release
+

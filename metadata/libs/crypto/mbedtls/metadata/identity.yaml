@@ -1,0 +1,15 @@
+name: mbedtls
+version: "3.5.2"
+category: libs/crypto
+
+summary: >
+  Lightweight cryptographic and SSL/TLS library for embedded systems
+
+source:
+  kind: tarball
+  file: mbedtls-3.5.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

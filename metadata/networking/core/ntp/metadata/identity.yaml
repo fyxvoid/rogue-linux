@@ -1,0 +1,15 @@
+name: ntp
+version: "4.2.8p17"
+category: networking/core
+
+summary: >
+  Network Time Protocol daemon for clock synchronization
+
+source:
+  kind: tarball
+  file: ntp-4.2.8p17.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl

@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building bubblewrap, sir."
+      cd build
+      ninja
+
+  - |
+      echo "[COGMAN] Installing bubblewrap into staging root, sir."
+      cd build
+      DESTDIR="$PKGROOT" ninja install

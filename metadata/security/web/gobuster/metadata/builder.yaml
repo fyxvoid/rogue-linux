@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gobuster source, sir."
+      tar -xf tar/gobuster-3.6.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building gobuster with Go, sir."
+      cd source/gobuster-3.6.0
+      go build -o ../../build/ ./...
+

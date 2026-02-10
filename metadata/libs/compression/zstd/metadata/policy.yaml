@@ -1,11 +1,10 @@
 filesystem:
+  read:
+    - /
   write:
-    - /usr/bin
-    - /usr/lib
-    - /usr/include
-    - /usr/share
-
-capabilities: []
+    - /usr
 
 network:
   outbound: false
+
+capabilities: []

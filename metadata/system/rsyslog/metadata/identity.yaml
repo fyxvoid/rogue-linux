@@ -1,0 +1,16 @@
+name: rsyslog
+version: "8.2312.0"
+category: system
+
+summary: >
+  Enhanced system logging daemon with modular architecture
+
+source:
+  kind: tarball
+  file: rsyslog-8.2312.0.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/general/json-c
+    - libs/general/libevent

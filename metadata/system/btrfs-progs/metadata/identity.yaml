@@ -1,0 +1,18 @@
+name: btrfs-progs
+version: "6.7.1"
+category: system
+
+summary: >
+  Btrfs filesystem utilities for administration and repair
+
+source:
+  kind: tarball
+  file: btrfs-progs-6.7.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/e2fsprogs
+    - libs/compression/zlib
+    - libs/compression/lz4
+    - libs/compression/zstd

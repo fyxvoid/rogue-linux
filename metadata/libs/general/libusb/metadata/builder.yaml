@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting libusb source, sir."
+      tar -xf tar/libusb-1.0.27.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring libusb, sir."
+      cd build
+      ../source/libusb-1.0.27/configure --prefix=/usr \
+        --disable-static
+

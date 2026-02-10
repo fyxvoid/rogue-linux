@@ -1,0 +1,15 @@
+name: graphite2
+version: "1.3.14"
+category: libs/general
+
+summary: >
+  Font rendering engine for complex non-Roman writing systems
+
+source:
+  kind: tarball
+  file: graphite2-1.3.14.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

@@ -1,0 +1,16 @@
+name: bind-utils
+version: "9.18.24"
+category: networking/core
+
+summary: >
+  DNS lookup utilities including dig nslookup and host
+
+source:
+  kind: tarball
+  file: bind-utils-9.18.24.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl
+    - networking/core/libuv

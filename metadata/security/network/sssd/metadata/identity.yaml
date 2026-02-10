@@ -1,0 +1,17 @@
+name: sssd
+version: "2.9.4"
+category: security/network
+
+summary: >
+  System Security Services Daemon for identity and auth management
+
+source:
+  kind: tarball
+  file: sssd-2.9.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - base/dbus
+    - libs/crypto/openssl

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting basecrack source, sir."
+      tar -xf tar/basecrack-4.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building basecrack Python package, sir."
+      cd source/basecrack-4.0
+      python3 setup.py build
+

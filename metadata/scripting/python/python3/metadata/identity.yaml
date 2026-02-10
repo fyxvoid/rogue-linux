@@ -1,0 +1,21 @@
+name: python3
+version: "3.12.2"
+category: scripting/python
+
+summary: >
+  Python 3 programming language interpreter and standard library
+
+source:
+  kind: tarball
+  file: python3-3.12.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/general/libffi
+    - libs/crypto/openssl
+    - libs/compression/zlib
+    - base/expat
+    - base/ncurses
+    - base/readline
+    - libs/general/sqlite

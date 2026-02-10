@@ -1,0 +1,15 @@
+name: cython
+version: "3.0.8"
+category: scripting/python
+
+summary: >
+  C extensions for Python language for compiled performance
+
+source:
+  kind: tarball
+  file: cython-3.0.8.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - toolchain/gcc

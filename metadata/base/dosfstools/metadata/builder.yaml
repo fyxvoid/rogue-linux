@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dosfstools source, sir."
+      tar -xf tar/dosfstools-4.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring dosfstools, sir."
+      cd build
+      ../source/dosfstools-4.2/configure --prefix=/usr \
+        
+

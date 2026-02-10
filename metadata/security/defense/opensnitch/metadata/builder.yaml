@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting opensnitch source, sir."
+      tar -xf tar/opensnitch-1.6.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building opensnitch with Go, sir."
+      cd source/opensnitch-1.6.5
+      go build -o ../../build/ ./...
+

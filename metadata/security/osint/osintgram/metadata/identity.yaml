@@ -1,0 +1,15 @@
+name: osintgram
+version: "1.3"
+category: security/osint
+
+summary: >
+  Interactive OSINT tool for Instagram analysis
+
+source:
+  kind: tarball
+  file: osintgram-1.3.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

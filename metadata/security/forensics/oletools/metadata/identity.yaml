@@ -1,0 +1,14 @@
+name: oletools
+version: "0.60.1"
+category: security/forensics
+
+summary: >
+  Tools for analyzing OLE and MS Office documents
+
+source:
+  kind: tarball
+  file: oletools-0.60.1.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

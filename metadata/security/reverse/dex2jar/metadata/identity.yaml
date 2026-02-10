@@ -1,0 +1,14 @@
+name: dex2jar
+version: "2.4"
+category: security/reverse
+
+summary: >
+  Convert DEX to JAR for Android reverse engineering
+
+source:
+  kind: tarball
+  file: dex2jar-2.4.tar.xz
+
+depends:
+  build:
+    - scripting/java/openjdk

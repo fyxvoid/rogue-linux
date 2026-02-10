@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting procs source, sir."
+      tar -xf tar/procs-0.14.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building procs with Cargo, sir."
+      cd source/procs-0.14.4
+      cargo build --release
+

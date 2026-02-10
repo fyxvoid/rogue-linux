@@ -1,0 +1,15 @@
+name: texinfo
+version: "7.1"
+category: toolchain
+
+summary: >
+  GNU documentation system for online and printed output
+
+source:
+  kind: tarball
+  file: texinfo-7.1.tar.xz
+
+depends:
+  build:
+    - toolchain/perl
+    - toolchain/gcc

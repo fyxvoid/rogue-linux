@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting tor source, sir."
+      tar -xf tar/tor-0.4.8.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring tor, sir."
+      cd build
+      ../source/tor-0.4.8.10/configure --prefix=/usr \
+        --sysconfdir=/etc
+

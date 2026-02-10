@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting checksec source, sir."
+      tar -xf tar/checksec-2.7.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building checksec, sir."
+      cd source/checksec-2.7.0
+      make -j$(nproc)
+

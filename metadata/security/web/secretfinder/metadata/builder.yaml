@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting secretfinder source, sir."
+      tar -xf tar/secretfinder-1.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building secretfinder Python package, sir."
+      cd source/secretfinder-1.1
+      python3 setup.py build
+

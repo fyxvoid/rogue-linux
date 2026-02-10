@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting peda source, sir."
+      tar -xf tar/peda-1.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building peda Python package, sir."
+      cd source/peda-1.2
+      python3 setup.py build
+

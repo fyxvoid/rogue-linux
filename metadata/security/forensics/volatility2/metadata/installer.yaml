@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing volatility2 Python package, sir."
+      cd source/volatility2*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

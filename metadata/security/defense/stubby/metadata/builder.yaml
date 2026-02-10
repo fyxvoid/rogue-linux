@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting stubby source, sir."
+      tar -xf tar/stubby-0.4.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring stubby with CMake, sir."
+      cd build
+      cmake ../source/stubby-0.4.3 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

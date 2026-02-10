@@ -1,0 +1,14 @@
+name: seccomp-tools
+version: "1.6.0"
+category: security/defense
+
+summary: >
+  Tools for analyzing and generating seccomp BPF filters
+
+source:
+  kind: tarball
+  file: seccomp-tools-1.6.0.tar.xz
+
+depends:
+  build:
+    - scripting/ruby/ruby

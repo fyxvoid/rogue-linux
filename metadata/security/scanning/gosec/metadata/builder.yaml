@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gosec source, sir."
+      tar -xf tar/gosec-2.19.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building gosec with Go, sir."
+      cd source/gosec-2.19.0
+      go build -o ../../build/ ./...
+

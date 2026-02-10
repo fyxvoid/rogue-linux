@@ -1,0 +1,14 @@
+name: cewl
+version: "2.3"
+category: security/web
+
+summary: >
+  Custom wordlist generator from website content spidering
+
+source:
+  kind: tarball
+  file: cewl-2.3.tar.xz
+
+depends:
+  build:
+    - scripting/ruby/ruby

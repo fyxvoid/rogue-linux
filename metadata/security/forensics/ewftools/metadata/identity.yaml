@@ -1,0 +1,17 @@
+name: ewftools
+version: "20231119"
+category: security/forensics
+
+summary: >
+  Tools for reading and writing Expert Witness Format images
+
+source:
+  kind: tarball
+  file: ewftools-20231119.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/compression/zlib
+    - libs/compression/bzip2
+    - libs/crypto/openssl

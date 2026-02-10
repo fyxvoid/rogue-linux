@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting quark-engine source, sir."
+      tar -xf tar/quark-engine-24.2.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building quark-engine Python package, sir."
+      cd source/quark-engine-24.2.1
+      python3 setup.py build
+

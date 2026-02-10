@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting vulscan source, sir."
+      tar -xf tar/vulscan-2.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building vulscan, sir."
+      cd source/vulscan-2.1
+      make -j$(nproc)
+

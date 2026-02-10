@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dnscrypt-proxy source, sir."
+      tar -xf tar/dnscrypt-proxy-2.1.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building dnscrypt-proxy with Go, sir."
+      cd source/dnscrypt-proxy-2.1.5
+      go build -o ../../build/ ./...
+

@@ -1,0 +1,15 @@
+name: shadow
+version: "4.15.1"
+category: base
+
+summary: >
+  Password and user account management utilities
+
+source:
+  kind: tarball
+  file: shadow-4.15.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/linux-pam

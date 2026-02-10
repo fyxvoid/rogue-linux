@@ -1,0 +1,15 @@
+name: sslscan
+version: "2.1.1"
+category: security/scanning
+
+summary: >
+  Tests SSL/TLS enabled services for supported cipher suites
+
+source:
+  kind: tarball
+  file: sslscan-2.1.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl

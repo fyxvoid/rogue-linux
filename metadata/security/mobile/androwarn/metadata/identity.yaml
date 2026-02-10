@@ -1,0 +1,14 @@
+name: androwarn
+version: "1.6"
+category: security/mobile
+
+summary: >
+  Static code analyzer for Android malicious application detection
+
+source:
+  kind: tarball
+  file: androwarn-1.6.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

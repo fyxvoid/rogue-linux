@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting blackeye source, sir."
+      tar -xf tar/blackeye-2.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building blackeye, sir."
+      cd source/blackeye-2.0
+      make -j$(nproc)
+

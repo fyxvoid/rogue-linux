@@ -1,0 +1,15 @@
+name: less
+version: "643"
+category: base
+
+summary: >
+  Terminal pager for viewing file contents
+
+source:
+  kind: tarball
+  file: less-643.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/ncurses

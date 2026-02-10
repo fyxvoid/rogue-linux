@@ -1,0 +1,14 @@
+name: nbtscan
+version: "1.7.2"
+category: security/recon
+
+summary: >
+  NetBIOS name network scanner for Windows host discovery
+
+source:
+  kind: tarball
+  file: nbtscan-1.7.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

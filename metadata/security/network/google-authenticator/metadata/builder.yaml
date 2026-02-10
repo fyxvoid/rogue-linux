@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting google-authenticator source, sir."
+      tar -xf tar/google-authenticator-1.09.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring google-authenticator, sir."
+      cd build
+      ../source/google-authenticator-1.09/configure --prefix=/usr \
+        
+

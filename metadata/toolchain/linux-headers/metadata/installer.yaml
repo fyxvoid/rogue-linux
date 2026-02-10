@@ -1,5 +1,10 @@
 steps:
   - |
-      echo "[COGMAN] Installing Linux API headers into staging root, sir."
-      cd source/linux-6.7
-      make headers_install INSTALL_HDR_PATH="$PKGROOT/usr"
+      echo "[COGMAN] Building linux-headers, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing linux-headers into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

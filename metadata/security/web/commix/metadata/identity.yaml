@@ -1,0 +1,15 @@
+name: commix
+version: "3.9"
+category: security/web
+
+summary: >
+  Automated OS command injection and exploitation tool
+
+source:
+  kind: tarball
+  file: commix-3.9.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3
+    - scripting/python/requests

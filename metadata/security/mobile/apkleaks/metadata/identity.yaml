@@ -1,0 +1,14 @@
+name: apkleaks
+version: "2.6.2"
+category: security/mobile
+
+summary: >
+  Scanning APK files for URIs endpoints and secrets
+
+source:
+  kind: tarball
+  file: apkleaks-2.6.2.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

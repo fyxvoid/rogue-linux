@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing patator Python package, sir."
+      cd source/patator*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

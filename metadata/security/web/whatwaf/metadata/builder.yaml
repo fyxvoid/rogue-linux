@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting whatwaf source, sir."
+      tar -xf tar/whatwaf-2.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building whatwaf Python package, sir."
+      cd source/whatwaf-2.2
+      python3 setup.py build
+

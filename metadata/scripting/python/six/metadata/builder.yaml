@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting six source, sir."
+      tar -xf tar/six-1.16.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building six Python package, sir."
+      cd source/six-1.16.0
+      python3 setup.py build
+

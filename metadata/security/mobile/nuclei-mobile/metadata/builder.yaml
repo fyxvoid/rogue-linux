@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting nuclei-mobile source, sir."
+      tar -xf tar/nuclei-mobile-3.1.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building nuclei-mobile with Go, sir."
+      cd source/nuclei-mobile-3.1.10
+      go build -o ../../build/ ./...
+

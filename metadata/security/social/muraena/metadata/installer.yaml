@@ -1,0 +1,4 @@
+steps:
+  - |
+      echo "[COGMAN] Installing muraena, sir."
+      install -Dm755 build/* "$PKGROOT/usr/bin/"

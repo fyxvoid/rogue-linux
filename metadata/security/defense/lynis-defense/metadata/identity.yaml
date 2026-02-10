@@ -1,0 +1,14 @@
+name: lynis-defense
+version: "3.1.1"
+category: security/defense
+
+summary: >
+  Security auditing and hardening tool for Linux systems
+
+source:
+  kind: tarball
+  file: lynis-defense-3.1.1.tar.xz
+
+depends:
+  build:
+    - base/bash

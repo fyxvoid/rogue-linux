@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting kakoune source, sir."
+      tar -xf tar/kakoune-2023.08.05.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building kakoune, sir."
+      cd source/kakoune-2023.08.05
+      make -j$(nproc)
+

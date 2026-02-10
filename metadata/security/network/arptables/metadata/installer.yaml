@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building arptables, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing arptables into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

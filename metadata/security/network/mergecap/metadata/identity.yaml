@@ -1,0 +1,14 @@
+name: mergecap
+version: "4.2.3"
+category: security/network
+
+summary: >
+  Merge multiple capture files into one
+
+source:
+  kind: tarball
+  file: mergecap-4.2.3.tar.xz
+
+depends:
+  build:
+    - security/sniffing/wireshark-cli

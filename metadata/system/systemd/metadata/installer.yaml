@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building systemd, sir."
+      cd build
+      ninja
+
+  - |
+      echo "[COGMAN] Installing systemd into staging root, sir."
+      cd build
+      DESTDIR="$PKGROOT" ninja install

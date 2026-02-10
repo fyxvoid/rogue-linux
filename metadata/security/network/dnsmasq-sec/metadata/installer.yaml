@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building dnsmasq-sec, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing dnsmasq-sec into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,14 @@
+name: libffi
+version: "3.4.6"
+category: libs/general
+
+summary: >
+  Foreign Function Interface library for calling code written in one language from another
+
+source:
+  kind: tarball
+  file: libffi-3.4.6.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

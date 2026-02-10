@@ -1,0 +1,15 @@
+name: libpng
+version: "1.6.43"
+category: libs/general
+
+summary: >
+  PNG reference library for reading and writing PNG image files
+
+source:
+  kind: tarball
+  file: libpng-1.6.43.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/compression/zlib

@@ -1,0 +1,14 @@
+name: httpx
+version: "1.6.0"
+category: security/recon
+
+summary: >
+  Fast multi-purpose HTTP toolkit for probing and fingerprinting
+
+source:
+  kind: tarball
+  file: httpx-1.6.0.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

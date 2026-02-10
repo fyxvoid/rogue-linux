@@ -1,8 +1,13 @@
 steps:
-  - echo "[COGMAN] Extracting zstd source, sir."
-  - |
-      rm -rf source/*
-      tar -xf tar/zstd-1.5.6.tar.gz -C source --strip-components=1
+  - rm -rf source build
+  - mkdir -p source build
 
-  - echo "[COGMAN] Building zstd, sir."
-  - make -C source -j1
+  - |
+      echo "[COGMAN] Extracting zstd source, sir."
+      tar -xf tar/zstd-1.5.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring zstd with CMake, sir."
+      cd build
+      cmake ../source/zstd-1.5.5 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

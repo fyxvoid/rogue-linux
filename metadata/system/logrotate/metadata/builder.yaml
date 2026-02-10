@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting logrotate source, sir."
+      tar -xf tar/logrotate-3.21.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring logrotate, sir."
+      cd build
+      ../source/logrotate-3.21.0/configure --prefix=/usr \
+        
+

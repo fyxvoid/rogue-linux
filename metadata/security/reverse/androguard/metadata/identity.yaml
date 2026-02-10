@@ -1,0 +1,14 @@
+name: androguard
+version: "3.4.0"
+category: security/reverse
+
+summary: >
+  Python tool for Android application analysis
+
+source:
+  kind: tarball
+  file: androguard-3.4.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

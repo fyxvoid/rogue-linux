@@ -1,0 +1,16 @@
+name: gr-gsm
+version: "0.42.2"
+category: security/wireless
+
+summary: >
+  GNU Radio blocks and tools for receiving GSM transmissions
+
+source:
+  kind: tarball
+  file: gr-gsm-0.42.2.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - security/wireless/gnuradio

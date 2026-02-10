@@ -1,0 +1,14 @@
+name: tcl
+version: "8.6.14"
+category: scripting/tcl
+
+summary: >
+  Tool Command Language interpreter and scripting environment
+
+source:
+  kind: tarball
+  file: tcl-8.6.14.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

@@ -1,16 +1,10 @@
 name: linux-headers
-version: "6.7"
+version: "6.8.2"
 category: toolchain
 
 summary: >
-  Linux kernel API headers required for building the C library
-  and userland software.
+  Linux kernel headers for userspace API definitions
 
 source:
   kind: tarball
-  url: https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.7.tar.xz
-  file: linux-6.7.tar.xz
-
-depends:
-  build:
-    - toolchain/gcc
+  file: linux-headers-6.8.2.tar.xz

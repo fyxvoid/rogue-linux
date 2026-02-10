@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting hackrf-tools source, sir."
+      tar -xf tar/hackrf-tools-2024.02.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring hackrf-tools with CMake, sir."
+      cd build
+      cmake ../source/hackrf-tools-2024.02.1 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

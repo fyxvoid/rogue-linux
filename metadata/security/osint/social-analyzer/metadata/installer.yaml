@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing social-analyzer Python package, sir."
+      cd source/social-analyzer*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

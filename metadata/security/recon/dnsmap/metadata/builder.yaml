@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting dnsmap source, sir."
+      tar -xf tar/dnsmap-0.36.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building dnsmap, sir."
+      cd source/dnsmap-0.36
+      make -j$(nproc)
+

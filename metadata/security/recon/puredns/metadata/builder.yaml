@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting puredns source, sir."
+      tar -xf tar/puredns-2.1.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building puredns with Go, sir."
+      cd source/puredns-2.1.1
+      go build -o ../../build/ ./...
+

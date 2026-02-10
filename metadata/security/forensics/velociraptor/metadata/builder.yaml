@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting velociraptor source, sir."
+      tar -xf tar/velociraptor-0.72.3.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building velociraptor with Go, sir."
+      cd source/velociraptor-0.72.3
+      go build -o ../../build/ ./...
+

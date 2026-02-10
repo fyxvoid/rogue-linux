@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting certbot source, sir."
+      tar -xf tar/certbot-2.9.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building certbot Python package, sir."
+      cd source/certbot-2.9.0
+      python3 setup.py build
+

@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing ciphey Python package, sir."
+      cd source/ciphey*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

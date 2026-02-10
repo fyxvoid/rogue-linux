@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting bettercap-sniff source, sir."
+      tar -xf tar/bettercap-sniff-2.40.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building bettercap-sniff with Go, sir."
+      cd source/bettercap-sniff-2.40.0
+      go build -o ../../build/ ./...
+

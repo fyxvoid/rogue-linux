@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting mitmproxy source, sir."
+      tar -xf tar/mitmproxy-10.2.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building mitmproxy Python package, sir."
+      cd source/mitmproxy-10.2.2
+      python3 setup.py build
+

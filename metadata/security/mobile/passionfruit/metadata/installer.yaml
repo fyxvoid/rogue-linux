@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building passionfruit, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing passionfruit into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,15 @@
+name: lz4
+version: "1.9.4"
+category: libs/compression
+
+summary: >
+  Extremely fast compression algorithm library
+
+source:
+  kind: tarball
+  file: lz4-1.9.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake

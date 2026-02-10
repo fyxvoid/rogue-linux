@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting maltego-cli source, sir."
+      tar -xf tar/maltego-cli-4.6.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building maltego-cli, sir."
+      cd source/maltego-cli-4.6.0
+      make -j$(nproc)
+

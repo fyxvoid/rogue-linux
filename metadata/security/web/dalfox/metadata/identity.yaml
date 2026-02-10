@@ -1,0 +1,14 @@
+name: dalfox
+version: "2.9.2"
+category: security/web
+
+summary: >
+  Parameter analysis and XSS scanning tool
+
+source:
+  kind: tarball
+  file: dalfox-2.9.2.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

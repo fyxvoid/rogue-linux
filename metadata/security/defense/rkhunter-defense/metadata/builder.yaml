@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting rkhunter-defense source, sir."
+      tar -xf tar/rkhunter-defense-1.4.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building rkhunter-defense, sir."
+      cd source/rkhunter-defense-1.4.6
+      make -j$(nproc)
+

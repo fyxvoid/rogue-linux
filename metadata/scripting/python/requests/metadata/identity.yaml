@@ -1,0 +1,14 @@
+name: requests
+version: "2.31.0"
+category: scripting/python
+
+summary: >
+  HTTP library for Python with elegant simple API
+
+source:
+  kind: tarball
+  file: requests-2.31.0.tar.xz
+
+depends:
+  build:
+    - scripting/python/python3

@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building blackeye, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing blackeye into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

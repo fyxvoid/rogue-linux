@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting hashcat source, sir."
+      tar -xf tar/hashcat-6.2.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building hashcat, sir."
+      cd source/hashcat-6.2.6
+      make -j$(nproc)
+

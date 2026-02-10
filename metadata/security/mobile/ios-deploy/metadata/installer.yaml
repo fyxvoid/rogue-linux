@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building ios-deploy, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing ios-deploy into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

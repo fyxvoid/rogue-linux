@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing hash-identifier Python package, sir."
+      cd source/hash-identifier*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

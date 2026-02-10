@@ -1,11 +1,14 @@
 name: xz
-version: "5.6.2"
-
+version: "5.4.6"
 category: libs/compression
 
-description: >
-  XZ Utils provides high-ratio data compression and the liblzma library.
+summary: >
+  XZ Utils providing LZMA compression library and tools
 
 source:
-  type: tarball
-  url: https://tukaani.org/xz/xz-5.6.2.tar.xz
+  kind: tarball
+  file: xz-5.4.6.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

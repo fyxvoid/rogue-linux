@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building dump-decrypted, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing dump-decrypted into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

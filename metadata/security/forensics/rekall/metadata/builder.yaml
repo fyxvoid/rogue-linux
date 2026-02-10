@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting rekall source, sir."
+      tar -xf tar/rekall-1.7.2.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building rekall Python package, sir."
+      cd source/rekall-1.7.2
+      python3 setup.py build
+

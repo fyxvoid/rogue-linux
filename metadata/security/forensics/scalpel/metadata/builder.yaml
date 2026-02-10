@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting scalpel source, sir."
+      tar -xf tar/scalpel-2.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring scalpel, sir."
+      cd build
+      ../source/scalpel-2.0/configure --prefix=/usr \
+        
+

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting yt-dlp source, sir."
+      tar -xf tar/yt-dlp-2024.03.10.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building yt-dlp Python package, sir."
+      cd source/yt-dlp-2024.03.10
+      python3 setup.py build
+

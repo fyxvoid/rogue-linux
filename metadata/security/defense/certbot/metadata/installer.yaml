@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing certbot Python package, sir."
+      cd source/certbot*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

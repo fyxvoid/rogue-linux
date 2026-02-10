@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing ripgrep, sir."
+      cd source/ripgrep*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

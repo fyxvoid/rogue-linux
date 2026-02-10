@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting skipfish source, sir."
+      tar -xf tar/skipfish-2.10b.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building skipfish, sir."
+      cd source/skipfish-2.10b
+      make -j$(nproc)
+

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting findomain source, sir."
+      tar -xf tar/findomain-9.0.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building findomain with Cargo, sir."
+      cd source/findomain-9.0.4
+      cargo build --release
+

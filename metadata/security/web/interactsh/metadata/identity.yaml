@@ -1,0 +1,14 @@
+name: interactsh
+version: "1.1.9"
+category: security/web
+
+summary: >
+  Out-of-band interaction gathering tool for security testing
+
+source:
+  kind: tarball
+  file: interactsh-1.1.9.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

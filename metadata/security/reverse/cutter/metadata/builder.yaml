@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting cutter source, sir."
+      tar -xf tar/cutter-2.3.4.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring cutter with CMake, sir."
+      cd build
+      cmake ../source/cutter-2.3.4 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

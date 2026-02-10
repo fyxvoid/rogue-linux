@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building hdparm, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing hdparm into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting mksh source, sir."
+      tar -xf tar/mksh-59c.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building mksh, sir."
+      cd source/mksh-59c
+      make -j$(nproc)
+

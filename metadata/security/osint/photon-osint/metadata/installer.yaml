@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing photon-osint Python package, sir."
+      cd source/photon-osint*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

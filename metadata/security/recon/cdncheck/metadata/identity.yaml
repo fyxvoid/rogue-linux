@@ -1,0 +1,14 @@
+name: cdncheck
+version: "1.0.9"
+category: security/recon
+
+summary: >
+  Tool to detect if an IP belongs to a CDN provider
+
+source:
+  kind: tarball
+  file: cdncheck-1.0.9.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

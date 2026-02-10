@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building default-credentials, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing default-credentials into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

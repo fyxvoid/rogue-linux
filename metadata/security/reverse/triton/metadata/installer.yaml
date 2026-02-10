@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building triton, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing triton into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

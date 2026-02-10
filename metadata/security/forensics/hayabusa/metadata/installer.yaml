@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing hayabusa, sir."
+      cd source/hayabusa*
+      install -Dm755 target/release/{name} "$PKGROOT/usr/bin/"

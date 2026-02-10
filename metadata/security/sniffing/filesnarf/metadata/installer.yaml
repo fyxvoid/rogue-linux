@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building filesnarf, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing filesnarf into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

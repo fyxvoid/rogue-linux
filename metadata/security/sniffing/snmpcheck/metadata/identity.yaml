@@ -1,0 +1,14 @@
+name: snmpcheck
+version: "1.9"
+category: security/sniffing
+
+summary: >
+  SNMP device enumerating tool for security assessment
+
+source:
+  kind: tarball
+  file: snmpcheck-1.9.tar.xz
+
+depends:
+  build:
+    - toolchain/perl

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting rust source, sir."
+      tar -xf tar/rust-1.76.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building rust, sir."
+      cd source/rust-1.76.0
+      make -j$(nproc)
+

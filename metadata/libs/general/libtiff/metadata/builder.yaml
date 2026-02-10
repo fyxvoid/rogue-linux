@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting libtiff source, sir."
+      tar -xf tar/libtiff-4.6.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring libtiff, sir."
+      cd build
+      ../source/libtiff-4.6.0/configure --prefix=/usr \
+        --disable-static
+

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting neovim source, sir."
+      tar -xf tar/neovim-0.9.5.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring neovim with CMake, sir."
+      cd build
+      cmake ../source/neovim-0.9.5 -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+

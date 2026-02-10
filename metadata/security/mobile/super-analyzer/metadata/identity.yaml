@@ -1,0 +1,14 @@
+name: super-analyzer
+version: "0.5.1"
+category: security/mobile
+
+summary: >
+  Android application static analyzer for security
+
+source:
+  kind: tarball
+  file: super-analyzer-0.5.1.tar.xz
+
+depends:
+  build:
+    - scripting/rust/rust

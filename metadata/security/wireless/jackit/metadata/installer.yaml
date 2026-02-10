@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing jackit Python package, sir."
+      cd source/jackit*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

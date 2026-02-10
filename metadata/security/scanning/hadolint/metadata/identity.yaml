@@ -1,0 +1,10 @@
+name: hadolint
+version: "2.12.0"
+category: security/scanning
+
+summary: >
+  Dockerfile linter for best practice validation
+
+source:
+  kind: tarball
+  file: hadolint-2.12.0.tar.xz

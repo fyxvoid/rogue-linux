@@ -1,0 +1,15 @@
+name: knockd
+version: "0.8"
+category: security/defense
+
+summary: >
+  Port-knocking daemon and client for hidden service access
+
+source:
+  kind: tarball
+  file: knockd-0.8.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - networking/core/libpcap

@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing mat2 Python package, sir."
+      cd source/mat2*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting manticore source, sir."
+      tar -xf tar/manticore-0.3.7.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building manticore Python package, sir."
+      cd source/manticore-0.3.7
+      python3 setup.py build
+

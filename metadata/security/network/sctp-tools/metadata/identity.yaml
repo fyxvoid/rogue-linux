@@ -1,0 +1,14 @@
+name: sctp-tools
+version: "1.0.19"
+category: security/network
+
+summary: >
+  SCTP protocol userspace tools for stream control
+
+source:
+  kind: tarball
+  file: sctp-tools-1.0.19.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc

@@ -1,0 +1,15 @@
+name: thc-pptp-bruter
+version: "0.1.4"
+category: security/passwords
+
+summary: >
+  PPTP VPN brute force tool
+
+source:
+  kind: tarball
+  file: thc-pptp-bruter-0.1.4.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - libs/crypto/openssl

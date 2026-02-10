@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting tpm2-tools source, sir."
+      tar -xf tar/tpm2-tools-5.6.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring tpm2-tools, sir."
+      cd build
+      ../source/tpm2-tools-5.6/configure --prefix=/usr \
+        
+

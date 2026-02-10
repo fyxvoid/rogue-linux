@@ -1,0 +1,19 @@
+name: ettercap
+version: "0.8.3.1"
+category: security/sniffing
+
+summary: >
+  Comprehensive suite for man-in-the-middle attacks on LAN
+
+source:
+  kind: tarball
+  file: ettercap-0.8.3.1.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - toolchain/cmake
+    - networking/core/libpcap
+    - libs/crypto/openssl
+    - base/ncurses
+    - libs/general/curl

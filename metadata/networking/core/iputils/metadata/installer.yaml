@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building iputils, sir."
+      cd build
+      ninja
+
+  - |
+      echo "[COGMAN] Installing iputils into staging root, sir."
+      cd build
+      DESTDIR="$PKGROOT" ninja install

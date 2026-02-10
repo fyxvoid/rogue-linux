@@ -1,0 +1,16 @@
+name: dracut
+version: "059"
+category: kernel
+
+summary: >
+  Event-driven initramfs generator for Linux
+
+source:
+  kind: tarball
+  file: dracut-059.tar.xz
+
+depends:
+  build:
+    - toolchain/gcc
+    - base/bash
+    - base/coreutils

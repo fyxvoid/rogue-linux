@@ -1,0 +1,5 @@
+steps:
+  - |
+      echo "[COGMAN] Installing stacoern Python package, sir."
+      cd source/stacoern*
+      python3 setup.py install --root="$PKGROOT" --prefix=/usr

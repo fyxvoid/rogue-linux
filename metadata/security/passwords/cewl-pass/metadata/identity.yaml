@@ -1,0 +1,14 @@
+name: cewl-pass
+version: "2.3"
+category: security/passwords
+
+summary: >
+  Custom Word List generator from target website content
+
+source:
+  kind: tarball
+  file: cewl-pass-2.3.tar.xz
+
+depends:
+  build:
+    - scripting/ruby/ruby

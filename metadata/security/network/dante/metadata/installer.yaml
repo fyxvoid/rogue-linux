@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building dante, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing dante into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

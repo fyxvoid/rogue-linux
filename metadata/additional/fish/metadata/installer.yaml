@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building fish, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing fish into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

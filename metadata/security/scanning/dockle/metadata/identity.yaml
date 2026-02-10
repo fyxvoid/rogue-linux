@@ -1,0 +1,14 @@
+name: dockle
+version: "0.4.14"
+category: security/scanning
+
+summary: >
+  Container image security linter for CIS benchmarks
+
+source:
+  kind: tarball
+  file: dockle-0.4.14.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting meg source, sir."
+      tar -xf tar/meg-0.3.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building meg with Go, sir."
+      cd source/meg-0.3.0
+      go build -o ../../build/ ./...
+

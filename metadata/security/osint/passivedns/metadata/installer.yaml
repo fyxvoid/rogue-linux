@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building passivedns, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing passivedns into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

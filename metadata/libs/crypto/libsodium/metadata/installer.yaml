@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building libsodium, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing libsodium into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

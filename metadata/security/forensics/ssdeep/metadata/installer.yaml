@@ -1,0 +1,10 @@
+steps:
+  - |
+      echo "[COGMAN] Building ssdeep, sir."
+      cd build
+      make -j$(nproc)
+
+  - |
+      echo "[COGMAN] Installing ssdeep into staging root, sir."
+      cd build
+      make install DESTDIR="$PKGROOT"

@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting ruby source, sir."
+      tar -xf tar/ruby-3.3.0.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring ruby, sir."
+      cd build
+      ../source/ruby-3.3.0/configure --prefix=/usr \
+        --enable-shared
+

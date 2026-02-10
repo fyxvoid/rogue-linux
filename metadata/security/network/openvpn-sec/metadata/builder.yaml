@@ -1,0 +1,14 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting openvpn-sec source, sir."
+      tar -xf tar/openvpn-sec-2.6.9.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Configuring openvpn-sec, sir."
+      cd build
+      ../source/openvpn-sec-2.6.9/configure --prefix=/usr \
+        --enable-iproute2
+

@@ -1,0 +1,13 @@
+steps:
+  - rm -rf source build
+  - mkdir -p source build
+
+  - |
+      echo "[COGMAN] Extracting gau source, sir."
+      tar -xf tar/gau-2.2.1.tar.xz -C source
+
+  - |
+      echo "[COGMAN] Building gau with Go, sir."
+      cd source/gau-2.2.1
+      go build -o ../../build/ ./...
+

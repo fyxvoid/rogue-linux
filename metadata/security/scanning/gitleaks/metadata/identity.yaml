@@ -1,0 +1,14 @@
+name: gitleaks
+version: "8.18.2"
+category: security/scanning
+
+summary: >
+  Scan git repos for secrets and sensitive information
+
+source:
+  kind: tarball
+  file: gitleaks-8.18.2.tar.xz
+
+depends:
+  build:
+    - scripting/go/go

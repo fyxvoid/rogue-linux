@@ -1,0 +1,14 @@
+name: chaos-client
+version: "0.5.1"
+category: security/recon
+
+summary: >
+  Client for ProjectDiscovery Chaos DNS dataset
+
+source:
+  kind: tarball
+  file: chaos-client-0.5.1.tar.xz
+
+depends:
+  build:
+    - scripting/go/go
