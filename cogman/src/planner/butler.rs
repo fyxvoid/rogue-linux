@@ -1,39 +1,46 @@
 // cogman planner — butler.rs
-// Handles all user-facing communication with a distinct "British Butler" personality.
-// "Cogman" treats the user as "Sir" (or "Madam", though default to "Sir" for now as per prompt)
-// and the machine/packages as "resources" or "subjects" to be managed with care.
+// Crisp HUD-inspired logging for the build planner.
 
 use std::fmt::Display;
+use std::time::{SystemTime, UNIX_EPOCH};
 
-const BLUE: &str = "\x1b[94m";
+const CLR_HUD: &str = "\x1b[96m";
+const CLR_SYS: &str = "\x1b[97m";
+const CLR_DIM: &str = "\x1b[90m";
+const CLR_OK: &str = "\x1b[92m";
+const CLR_WARN: &str = "\x1b[93m";
+const CLR_FAIL: &str = "\x1b[91m";
 const BOLD: &str = "\x1b[1m";
 const RESET: &str = "\x1b[0m";
-const WHITE: &str = "\x1b[97m";
-const GREEN: &str = "\x1b[92m";
-const RED: &str = "\x1b[91m";
-const YELLOW: &str = "\x1b[93m";
 
-fn prefix() -> String {
-    format!("{}{}\u{2590} COGMAN \u{258c}{}", BLUE, BOLD, RESET)
+fn get_timestamp() -> String {
+    let now = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap_or_default();
+    let secs = now.as_secs() % 86400;
+    format!("{}[{:02}:{:02}:{:02}]{}", CLR_DIM, secs / 3600, (secs % 3600) / 60, secs % 60, RESET)
+}
+
+fn pfx(label: &str, color: &str) -> String {
+    format!("{} {}{}{}▐ {} ▌{}", get_timestamp(), BOLD, color, RESET, label, RESET)
 }
 
 pub fn info<T: Display>(msg: T) {
-    eprintln!("{} {}{}, sir.{}", prefix(), WHITE, msg, RESET);
+    eprintln!("{} {}{}{}", pfx("PLAN", CLR_HUD), CLR_SYS, msg, RESET);
 }
 
 pub fn success<T: Display>(msg: T) {
-    eprintln!("{} {}{}, sir. Most satisfactory.{}", prefix(), GREEN, msg, RESET);
+    eprintln!("{} {}{}{}", pfx(" OK ", CLR_OK), CLR_SYS, msg, RESET);
 }
 
 pub fn error<T: Display>(msg: T) {
-    eprintln!("{} {}{}, sir. I am afraid this is rather unfortunate.{}", prefix(), RED, msg, RESET);
+    eprintln!("{} {}FAIL: {}{}", pfx("FAIL", CLR_FAIL), CLR_FAIL, msg, RESET);
 }
 
 pub fn check<T: Display>(msg: T) {
-    eprintln!("{} {}Checking {}, sir...{}", prefix(), BLUE, msg, RESET);
+    eprintln!("{} {}CHECK: {}{}", pfx("HUD ", CLR_HUD), CLR_SYS, msg, RESET);
 }
 
 pub fn advise<T: Display>(advice: T) {
-    eprintln!("{} {}I have taken the liberty of analyzing the situation:{}", prefix(), YELLOW, RESET);
-    eprintln!("{}{}{}", YELLOW, advice, RESET);
+    eprintln!("{} {}ADVICE: {}{}", pfx("WARN", CLR_WARN), CLR_WARN, advice, RESET);
 }

@@ -64,7 +64,7 @@ fn run_plan(
     explain: bool,
 ) {
     // Step 1: Load TOML metadata
-    butler::info(format!("Parsing metadata from {}, if you would be so kind as to wait a moment", metadata_path.display()));
+    butler::info(format!("Loading metadata: {}", metadata_path.display()));
     let meta = match metadata::load_metadata(&metadata_path) {
         Ok(m) => m,
         Err(e) => {
@@ -79,7 +79,7 @@ fn run_plan(
     };
 
     // Step 2: Semantic validation
-    butler::check("Conducting a most thorough inspection of the metadata");
+    butler::check("Validating package schema");
     if let Err(e) = metadata::validate(&meta) {
         #[cfg(feature = "ai")]
         if explain {
@@ -92,10 +92,10 @@ fn run_plan(
         butler::error(format!("Validation failed:\n{}", e));
         die("Validation error(s) found");
     }
-    butler::success("Metadata validation passed. Quite satisfactory");
+    butler::success("Validation passed");
 
     // Step 3: Resolve dependency graph
-    butler::info("Attempting to resolve the dependency graph, recursively of course");
+    butler::info("Resolving dependency graph");
     
     let metadata_dir = metadata_path
         .parent()
@@ -136,14 +136,9 @@ fn run_plan(
         }
     };
     
-    butler::success(format!(
-        "I have successfully resolved the build order. It appears we have {} packages to attend to",
-        build_list.len()
-    ));
+    butler::success(format!("Build order resolved ({} packages)", build_list.len()));
 
-    butler::info(format!(
-        "Commencing installation planning for said {} packages", build_list.len()
-    ));
+    butler::info(format!("Planning installation for {} packages", build_list.len()));
 
     let mut all_steps = Vec::new();
 
@@ -162,7 +157,7 @@ fn run_plan(
         butler::info("Temporary directories will be preserved (--keep-tmp), as you requested");
     }
 
-    butler::info(format!("Emitting the final plan, which consists of {} distinct steps", all_steps.len()));
+    butler::info(format!("Emitting plan ({} steps)", all_steps.len()));
     match output {
         Some(ref path) => {
             let mut file = match std::fs::File::create(path) {
@@ -174,14 +169,14 @@ fn run_plan(
             if let Err(e) = plan::emit_plan(&all_steps, variant, &mut file) {
                 die(&format!("Failed to write plan: {}", e));
             }
-            butler::success(format!("The plan has been duly written to {}", path.display()));
+            butler::success(format!("Plan written to {}", path.display()));
         }
         None => {
             let mut stdout = std::io::stdout().lock();
             if let Err(e) = plan::emit_plan(&all_steps, variant, &mut stdout) {
                 die(&format!("Failed to write plan: {}", e));
             }
-            butler::success("The plan has been presented to the standard output, as requested");
+            butler::success("Plan emitted to stdout");
         }
     }
 }

@@ -1,0 +1,567 @@
+    1  ls
+    2  nvim .zshrc
+    3  startx
+    4  fastfetch
+    5  cd workspace
+    6  ls
+    7  cd workspace
+    8  ls
+    9  cd blockchain-voting
+   10  ls
+   11  cd blockchain-voting/frontend
+   12  ls
+   13  python -m http.server
+   14  python -m http.server 5000
+   15  cd backend
+   16  ls
+   17  node index.js
+   18  ganache
+   19  which ganache
+   20  cd workspace/blockchain-voting
+   21  ls
+   22  python -m http.server
+   23  acpi 
+   24  brightnessctl set 30%
+   25  ollama run mistral
+   26  cd workspace
+   27  ls
+   28  cd cogman
+   29  ls
+   30  cd ..
+   31  lsd
+   32  ls
+   33  rm -rf cogman
+   34  ls
+   35  mv cogmanII rogue-linux
+   36  ls
+   37  cd docs
+   38  ls
+   39  cd ..
+   40  ls
+   41  mv docs ~/.
+   42  ls
+   43  ls web-pentesting
+   44  cd penguide
+   45  ls
+   46  cd ..
+   47  ls
+   48  cd rogue-
+   49  cd rogue-agent
+   50  ls
+   51  cd agent_core
+   52  ls
+   53  tree -L 1 -d
+   54  tree -L 2 -d
+   55  cd ../..
+   56  ls
+   57  rm -rf rogue-agent
+   58  ls
+   59  cd rogue-linux
+   60  ls
+   61  ls cogman
+   62  ls builder
+   63  ls core
+   64  ls deployer
+   65  ls metadata
+   66  ls
+   67  mkdir mdata
+   68  ls
+   69  ls metadata
+   70  ls packages
+   71  ls packages/base/expat/metadata/
+   72  cp -r packages/*/*/metadata/* mdata
+   73  ls
+   74  ls mdata
+   75  s
+   76  ls
+   77  rm -rf metadata/.
+   78  rm -rf metadata
+   79  ls
+   80  rm -rf mdata
+   81  ls
+   82  mkdir installer
+   83  ls
+   84  cp -r deployer/* installer/*
+   85  cp -r deployer/*.* installer/*.*
+   86  ls
+   87  ls packages
+   88  ls
+   89  cp -r packages pkg
+   90  ls
+   91  cd pkg
+   92  ls
+   93  cd base
+   94  ls
+   95  cd
+   96  cd workspace
+   97  ls
+   98  cd rogue-linux
+   99  ls
+  100  cd pkg
+  101  ls
+  102  la
+  103  ls
+  104  cd base
+  105  ls
+  106  cd bash
+  107  ls
+  108  pwd
+  109  rm -rf build logs pkgroot source tar 
+  110  ls
+  111  cd ..
+  112  ls
+  113  cd
+  114  ls
+  115  cd workspace
+  116  ls
+  117  cd rogue-linux
+  118  ls
+  119  iwclt station wlan0 scan
+  120  iwctl station wlan0 scan
+  121  lks
+  122  ls
+  123  rm -rf pkg
+  124  ls
+  125  mkdir cogman
+  126  ls cogman
+  127  ls
+  128  mv cogman cogOld
+  129  ls
+  130  mkdir cogman
+  131  ls
+  132  mv builder core deployer installer log cogman
+  133  mv builder core deployer installer logs cogman
+  134  lls
+  135  ls
+  136  ls cogman/
+  137  ls
+  138  ls cog
+  139  ls cogman
+  140  cd cog
+  141  cd cogman
+  142  ls
+  143  ls deployer
+  144  ls installer
+  145  ls builder
+  146  ls logs
+  147  ls core
+  148  cd ..
+  149  ls
+  150  mv cogmen.py cogman
+  151  ls
+  152  ls scripts
+  153  ls
+  154  find packages -type f \( -name "*.yml" -o -name "*.yaml" \)\n
+  155  tree -P '*.yml|*.yaml' --prune packages
+  156  tree -P '*/metadata/*.yaml|*/metadata/*.yml' --prune\n
+  157  cd ..
+  158  ls
+  159  cd rogue-linux
+  160  ls
+  161  tree -L 2 packages
+  162  ls
+  163  mkdir -p metadata\n\nrsync -a \\n  --include='*/' \\n  --include='metadata/***' \\n  --exclude='*' \\n  packages/ metadata/\n
+  164  ls
+  165  tree metadata
+  166  ls
+  167  rm -rf metadata
+  168  mkdir -p metadata\n\nrsync -a \\n  --include='*/' \\n  --include='metadata/***' \\n  --exclude='*' \\n  packages/ metadata/\n
+  169  ls
+  170  tree metadata
+  171  ls
+  172  rm -rf metadata
+  173  ls
+  174  rsync -av --dry-run \\n  --include='*/' \\n  --include='metadata/***' \\n  --exclude='*' \\n  packages/ metadata/\n
+  175  ls
+  176  rsync -av --dry-run \\n  --include='*/' \\n  --include='metadata/***' \\n  --exclude='*' \\n  packages/ metadata/ | grep metadata\n
+  177  ls
+  178  rm -rf metadata\nmkdir -p metadata\n\nrsync -a \\n  --include='*/' \\n  --include='metadata/***' \\n  --exclude='*' \\n  packages/ metadata/\n
+  179  tree metadata
+  180  ls
+  181  rm -rf metadata\nmkdir -p metadata\n\nrsync -a -m \\n  --include='*/' \\n  --include='metadata/***' \\n  --exclude='*' \\n  packages/ metadata/\n
+  182  tree metadata
+  183  ls
+  184  rm -rf metadata\nmkdir -p metadata\n\nrsync -a -m \\n  --exclude='*/source/***/metadata/***' \\n  --include='*/' \\n  --include='*/metadata/***' \\n  --exclude='*' \\n  packages/ metadata/\n
+  185  tree metadata
+  186  ls
+  187  tree -L 2 packages
+  188  tree -L 3 -d packages
+  189  ls
+  190  ls cogOld
+  191  cd cogOld
+  192  ls
+  193  tree -L 3 -d packages
+  194  ls
+  195  cd ..
+  196  ls
+  197  mv cogOld/*.pptx docs
+  198  ls cogOld
+  199  ls
+  200  cd workspace
+  201  ls
+  202  cd rogue-linux
+  203  ls
+  204  ls cogOld
+  205  rm -rf  cogOld
+  206  cd workspace/rogue-linux
+  207  ls
+  208  ls cogman
+  209  ls
+  210  ls docs
+  211  cat docs/R
+  212  cat docs/README.md
+  213  ls
+  214  git status
+  215  ls
+  216  ls cogman/core
+  217  ls cogman/deployer
+  218  ls cogman/logs
+  219  ls cogman
+  220  ls
+  221  ls cogman
+  222  ls
+  223  mkdir clone
+  224  cd clone
+  225  git clone https://github.com/SridharanThangaraji/rogue-linux.git
+  226  ls
+  227  git clone git@github.com:SridharanThangaraji/rogue-linux.git
+  228  ls
+  229  mv rogue-linux ~/workspace/rogue-linux
+  230  cd ~/workspace/rogue-linux
+  231  ls
+  232  cd rogue-linux
+  233  ls
+  234  ls metadata
+  235  cp -r metadata ../cogman
+  236  ls
+  237  cd ..
+  238  ls
+  239  ls cogman
+  240  ls cogman/metadata
+  241  tree -L 4 -d rogue-linux
+  242  tree -L 4 -d cogman
+  243  tree -L 4  cogman
+  244  tree -L 4  rogue-linux
+  245  ls
+  246  pwd
+  247  rm -rf rogue-linux
+  248  ls
+  249  ls cogman
+  250  ls cogman/metadata
+  251  ls
+  252  ls cogman/metadata/schemas
+  253  ls clone
+  254  rm -rf clone
+  255  ls
+  256  ls scripts
+  257  head scripts/fetch.sh
+  258  cat scripts/fetch.sh
+  259  ls
+  260  rm scripts/fetch.sh
+  261  ls
+  262  cd docs
+  263  ls
+  264  mkdir coference journal ppt 
+  265  ls
+  266  mv final.pptx rogueLinux.pptx coference
+  267  ls
+  268  mv README.md ../.
+  269  ls
+  270  cat unbuild.md
+  271  ls
+  272  ls unbuild.md
+  273  rm unbuild.md
+  274  ls
+  275  cd ..
+  276  ls
+  277  acpi
+  278  exit
+  279  git status
+  280  git add .
+  281  ls
+  282  ls -la
+  283  touch .gitignore
+  284  nvim .gitignore
+  285  git add .
+  286  git commit -m "fix: fixed directory structure"
+  287  ls
+  288  git push -u origin main
+  289  ls
+  290  ls docs
+  291  cd docs
+  292  ls
+  293  mv coference conference
+  294  cd ..
+  295  ls
+  296  feh --bg-scale Downloads/beautiful-scenery-summit-mount-everest-covered-with-snow-white-clouds.jpg
+  297  ls
+  298  mv Downloads/WhatsApp\ Image\ 2026-02-08\ at\ 4.14.05\ PM.jpeg rogue.png
+  299  ls
+  300  feh --bg-scale rogue.png
+  301  ls
+  302  htop
+  303  ls
+  304  cd /home/rogue/workspace/rogue-linux/scripts
+  305  python3 pkg_data.py
+  306  ls
+  307  cd workspace/rogue-linux
+  308  ls
+  309  ls cogman
+  310  ls cogman/builder
+  311  ls cogman/deployer
+  312  ls cogman/metadata/schemas
+  313  python3 pkg_data.py
+  314  python3 generate_metadata.py
+  315  cd /home/rogue/workspace/rogue-linux
+  316  find /home/rogue/workspace/rogue-linux/metadata -name '*.yaml' -path '*/metadata/*' | wc -l
+  317  find /home/rogue/workspace/rogue-linux/metadata -mindepth 1 -maxdepth 1 -type d | sort
+  318  for cat in $(find /home/rogue/workspace/rogue-linux/metadata -mindepth 1 -maxdepth 1 -type d | sort); do count=$(find "$cat" -name 'identity.yaml' | wc -l); echo "$(basename $cat): $count packages"; done
+  319  grep -rl -- '--prefix=/usr' /home/rogue/workspace/rogue-linux/metadata/ --include='builder.yaml' | head -5 | while read f; do grep -c 'prefix=/usr' "$f" | paste - <(echo "$f"); done
+  320  cd /home/rogue/workspace/rogue-linux/scripts
+  321  python3 generate_metadata.py
+  322  cd /home/rogue/workspace/rogue-linux
+  323  grep -rl 'prefix=/usr' /home/rogue/workspace/rogue-linux/metadata/ --include='builder.yaml' | head -5 | while read f; do count=$(grep -c 'prefix=/usr' "$f"); if [ "$count" -gt 1 ]; then echo "DUPLICATE: $f ($count)"; fi; done; echo "DONE"
+  324  grep -c 'prefix=/usr' /home/rogue/workspace/rogue-linux/metadata/security/wireless/aircrack-ng/metadata/builder.yaml
+  325  cd /home/rogue/workspace/rogue-linux/cogmanII/planner
+  326  cd /home/rogue/workspace/rogue-linux/cogmanII/planner && cargo build 2>&1
+  327  cd /home/rogue/workspace/rogue-linux/cogmanII/planner && cargo build 2>&1 | tail -30
+  328  cd /home/rogue/workspace/rogue-linux/cogmanII/planner && cargo build 2>&1 | tail -5
+  329  cd /home/rogue/workspace/rogue-linux/cogmanII/executor
+  330  cd /home/rogue/workspace/rogue-linux/cogmanII/executor && make 2>&1
+  331  cd /home/rogue/workspace/rogue-linux/cogmanII/executor && make clean && make 2>&1
+  332  cd /home/rogue/workspace/rogue-linux/cogmanII
+  333  cd /home/rogue/workspace/rogue-linux/cogmanII && planner/target/debug/cogman2-planner build --binary metadata/profiles/bash.toml -o /tmp/test-plan.bin 2>&1
+  334  hexdump -C /tmp/test-plan.bin | head -8
+  335  cd /home/rogue/workspace/rogue-linux/cogmanII && executor/cogmanII-exec /tmp/test-plan.bin 2>&1
+  336  cd /home/rogue/workspace/rogue-linux/cogmanII && planner/target/debug/cogman2-planner build --native metadata/profiles/bash.toml -o /dev/null 2>&1; echo "EXIT: $?"
+  337  cd /home/rogue/workspace/rogue-linux/cogmanII && planner/target/debug/cogman2-planner build --build --native metadata/profiles/bash.toml -o /tmp/native-plan.bin 2>&1; echo "EXIT: $?"
+  338  cd /home/rogue/workspace/rogue-linux/cogmanII && planner/target/debug/cogman2-planner build --binary --build metadata/profiles/bash.toml 2>&1; echo "EXIT: $?"
+  339  cd /home/rogue/workspace/rogue-linux/cogmanII && planner/target/debug/cogman2-planner install metadata/profiles/bash.toml -o /tmp/install-plan.bin 2>&1; echo "EXIT: $?"
+  340  ls
+  341  cd ro
+  342  cd workspace/rogue-linux
+  343  tree cogmanII
+  344  tree -L 2 -dcogmanII
+  345  tree -L 2 -d cogmanII
+  346  find /home/rogue/workspace/rogue-linux/cogmanII/planner/src -name '*.rs' | while read f; do echo "$(wc -l < "$f") $f"; done | sort -rn
+  347  find /home/rogue/workspace/rogue-linux/cogmanII/executor/src -name '*.c' -o -name '*.h' | while read f; do echo "$(wc -l < "$f") $f"; done | sort -rn
+  348  cd /home/rogue/workspace/rogue-linux/cogmanII/planner
+  349  rm /home/rogue/workspace/rogue-linux/cogmanII/planner/src/parse.rs /home/rogue/workspace/rogue-linux/cogmanII/planner/src/validate.rs /home/rogue/workspace/rogue-linux/cogmanII/planner/src/graph.rs /home/rogue/workspace/rogue-linux/cogmanII/planner/src/variants.rs /home/rogue/workspace/rogue-linux/cogmanII/planner/src/plan.rs
+  350  cd /home/rogue/workspace/rogue-linux/cogmanII/planner && cargo build 2>&1 | tail -40
+  351  cd /home/rogue/workspace/rogue-linux/cogmanII/planner && cargo build 2>&1 | grep -E '(warning|error|Finished)' | tail -5
+  352  cd /home/rogue/workspace/rogue-linux/cogmanII/planner && cargo build 2>&1 | grep -c warning && cargo test 2>&1 | tail -10
+  353  xdg-settings set default-web-browser firefox.desktop\n
+  354  ls
+  355  cd workspace
+  356  ls
+  357  cd rogue-linux
+  358  ls
+  359  git add .
+  360  git commit -m "feature: added cogman rust + toml varient"
+  361  git push -u origin main 
+  362  cd /home/rogue/workspace/rogue-linux/cogmanII/executor
+  363  rm /home/rogue/workspace/rogue-linux/cogmanII/executor/src/fs.c /home/rogue/workspace/rogue-linux/cogmanII/executor/src/proc.c /home/rogue/workspace/rogue-linux/cogmanII/executor/src/log.c /home/rogue/workspace/rogue-linux/cogmanII/executor/include/plan.h && rmdir /home/rogue/workspace/rogue-linux/cogmanII/executor/include
+  364  cd /home/rogue/workspace/rogue-linux/cogmanII/executor && make clean && make 2>&1
+  365  cd /home/rogue/workspace/rogue-linux/cogmanII
+  366  cd /home/rogue/workspace/rogue-linux/cogmanII && planner/target/debug/cogman2-planner build --binary --build metadata/profiles/bash.toml 2>&1; echo "EXIT: $?"
+  367  cd /home/rogue/workspace/rogue-linux/cogmanII && planner/target/debug/cogman2-planner build --build --native metadata/profiles/bash.toml -o /tmp/refactor-plan.bin 2>&1; echo "EXIT: $?"
+  368  cd /home/rogue/workspace/rogue-linux/cogmanII && executor/cogmanII-exec /tmp/refactor-plan.bin 2>&1; echo "EXEC_EXIT: $?"
+  369  cd /home/rogue/workspace/rogue-linux
+  370  mkdir -p /home/rogue/workspace/rogue-linux/cogman/packages/bash/metadata
+  371  mkdir -p /home/rogue/workspace/rogue-linux/cogman/packages/toybox/metadata
+  372  mkdir -p /home/rogue/workspace/rogue-linux/cogman/packages/zlib/metadata
+  373  mkdir -p /home/rogue/workspace/rogue-linux/cogmanII/metadata/packages/bash
+  374  mkdir -p /home/rogue/workspace/rogue-linux/cogmanII/metadata/packages/toybox
+  375  mkdir -p /home/rogue/workspace/rogue-linux/cogmanII/metadata/packages/zlib
+  376  iwctl station wlan0 scan
+  377  iwctl station waln0 connect nx
+  378  iwctl station wlan0 connect nx
+  379  cd /home/rogue/workspace/rogue-linux/cogmanII
+  380  which apk; which python3; cat /etc/os-release
+  381  cd /home/rogue/workspace/rogue-linux
+  382  python3 cogman/cogmen.py --help
+  383  python3 benchmark.py
+  384  which time
+  385  python3 benchmark.py
+  386  sed -i '/verify:/,$d' cogman/packages/bash/metadata/installer.yaml
+  387  sed -i '/verify:/,$d' cogman/packages/toybox/metadata/installer.yaml
+  388  sed -i '/verify:/,$d' cogman/packages/zlib/metadata/installer.yaml
+  389  cd cogmanII/executor && make clean && make
+  390  cd /home/rogue/workspace/rogue-linux
+  391  python3 benchmark.py
+  392  mkdir -p tar
+  393  wget -O tar/bash-5.2.21.tar.xz https://ftp.gnu.org/gnu/bash/bash-5.2.21.tar.gz
+  394  wget -O tar/toybox-0.8.11.tar.gz http://landley.net/toybox/downloads/toybox-0.8.11.tar.gz
+  395  wget -O tar/zlib-1.3.1.tar.gz https://zlib.net/zlib-1.3.1.tar.gz
+  396  git add .
+  397  python3 benchmark.py
+  398  cat benchmark_results.csv
+  399  /tmp/cogman-test/cogmanII/pkgroot/toybox/bin/toybox --version
+  400  tar tf tar/zlib-1.3.1.tar.gz | head -n 5
+  401  python3 -c "import toml; print('OK')"
+  402  python3 -c "import yaml; print('OK')"
+  403  python3 scripts/yaml2toml.py
+  404  grep -r '"{' metadata_toml | head -n 5
+  405  grep -rnE "network|http|curl|wget|sudo|interactive" cogmanII/executor/src
+  406  python3 -c "import pytest; print('OK')"
+  407  find cogman -name "*test*"
+  408  mkdir -p tests/metadata tests/graph tests/plan tests/executor tests/tmp tests/cli tests/parity tests/security tests/perf tests/ai tests/utils
+  409  cargo build --manifest-path cogmanII/planner/Cargo.toml && make -C cogmanII/executor
+  410  ./target/debug/cogman2-planner --help
+  411  find . -name cogman2-planner -type f
+  412  ./cogmanII/planner/target/debug/cogman2-planner --help
+  413  ./cogmanII/planner/target/debug/cogman2-planner build --help
+  414  python3 tests/run_all.py
+  415  touch tests/__init__.py tests/metadata/__init__.py tests/graph/__init__.py tests/plan/__init__.py tests/executor/__init__.py tests/utils/__init__.py
+  416  python3 tests/run_all.py
+  417  ./cogmanII/planner/target/debug/cogman2-planner build test_manual.toml
+  418  cd /home/rogue/workspace/rogue-linux/cogmanII/planner
+  419  cargo build --bin cogman2-planner
+  420  cd /home/rogue/workspace/rogue-linux
+  421  ./cogmanII/planner/target/debug/cogman2-planner build test_manual.toml
+  422  python3 tests/run_all.py
+  423  ./cogmanII/planner/target/debug/cogman2-planner build test_manual.toml
+  424  cd /home/rogue/workspace/rogue-linux/cogmanII/planner
+  425  cargo clean
+  426  cd /home/rogue/workspace/rogue-linux
+  427  grep -rn "meta.builder" cogmanII/planner/src
+  428  cd /home/rogue/workspace/rogue-linux/cogmanII/planner
+  429  cargo build --bin cogman2-planner
+  430  cd /home/rogue/workspace/rogue-linux
+  431  ./cogmanII/planner/target/debug/cogman2-planner build test_manual.toml
+  432  python3 tests/run_all.py
+  433  cd /home/rogue/workspace/rogue-linux/cogmanII/planner
+  434  cargo build --bin cogman2-planner
+  435  cd /home/rogue/workspace/rogue-linux
+  436  python3 tests/run_all.py
+  437  cd /home/rogue/workspace/rogue-linux/cogmanII/planner
+  438  cargo build --bin cogman2-planner
+  439  cd /home/rogue/workspace/rogue-linux
+  440  python3 tests/run_all.py
+  441  cd /home/rogue/workspace/rogue-linux/cogmanII/planner
+  442  cargo build --bin cogman2-planner
+  443  cd /home/rogue/workspace/rogue-linux
+  444  python3 tests/run_all.py
+  445  ls
+  446  git add .
+  447  git commit -m "Benchmarking and Running 600 test case"
+  448  ls
+  449  git push -u origin main
+  450  python3 tests/run_all.py
+  451  touch docs/README.md docs/ARCHITECTURE.md docs/COGMAN-IDENTITY.md docs/DATA-FLOW.md docs/METADATA.md docs/INSTALL-VARIANTS.md docs/EXECUTION.md docs/DETERMINISM.md docs/FAILURE-MODEL.md docs/LOGGING.md docs/TMP-LIFECYCLE.md docs/TESTING.md docs/BENCHMARKING.md docs/AI-BOUNDARIES.md docs/ROOTFS-INTERFACE.md
+  452  mkdir -p archived && mv cogman archived/cogman-python
+  453  mv cogmanII cogman
+  454  make
+  455  make test
+  456  mkdir -p benchmarks/results/raw-data benchmarks/scripts && mv benchmark.py benchmarks/scripts/benchmark.py && mv benchmark_results.csv benchmarks/results/raw-data/benchmark_results.csv
+  457  python3 scripts/validate_skeleton.py
+  458  python3 scripts/demo_rootfs.py
+  459  ls -ld /tmp/rogue-rootfs-demo /tmp/rogue-rootfs-skeleton
+  460  rm -f scripts/hello-static
+  461  make test
+  462  cd /home/rogue/workspace/rogue-linux/cogman/planner/src/cli/args.rs
+  463  cat -A /home/rogue/workspace/rogue-linux/cogman/planner/src/cli/args.rs | head -n 55 | tail -n 10
+  464  nvim workspace/rogue-linux
+  465  cd /home/rogue/workspace/rogue-linux/cogman/planner/
+  466  cargo check --features ai
+  467  cd /home/rogue/workspace/rogue-linux/cogman/planner/
+  468  cargo check --features ai
+  469  cd /home/rogue/workspace/rogue-linux/cogman/planner/
+  470  cargo check
+  471  cd /home/rogue/workspace/rogue-linux/cogman/planner/
+  472  cargo check
+  473  cd /home/rogue/workspace/rogue-linux/cogman/planner/
+  474  cargo check --features ai
+  475  cd /home/rogue/workspace/rogue-linux
+  476  python3 -c "import toml; print('ok')" || python3 -c "import tomli_w; print('ok')" || echo "none"
+  477  ls
+  478  git add .
+  479  git commit -m "feature: Integration of ollama + mistral ai"
+  480  git push -u origin main
+  481  python3 scripts/yaml2toml.py
+  482  rm -rf metadata metadata_toml test_manual.toml
+  483  cp -r cogman/metadata/packages/toybox packages/base/ && cp -r cogman/metadata/packages/zlib packages/system/ && rm -rf cogman/metadata && rm -rf cogman/README.md cogman/ARCHITECTURE.md
+  484  make test
+  485  python3 scripts/standardize_packages.py
+  486  git add .
+  487  git commit -m 
+  488  git commit -m "fix: packages population"
+  489  git push -u origin main
+  490  # Prepare glibc pkgroot
+  491  mkdir -p packages/toolchain/glibc/pkgroot/usr/lib
+  492  cp /usr/lib/libc.so.6 packages/toolchain/glibc/pkgroot/usr/lib/
+  493  cp /usr/lib/ld-linux-x86-64.so.2 packages/toolchain/glibc/pkgroot/usr/lib/
+  494  # Prepare zlib pkgroot
+  495  mkdir -p packages/system/zlib/pkgroot/usr/lib
+  496  cp /usr/lib/libz.so.1 packages/system/zlib/pkgroot/usr/lib/
+  497  # Prepare bash pkgroot
+  498  mkdir -p packages/base/bash/pkgroot/usr/bin
+  499  cp /usr/bin/bash packages/base/bash/pkgroot/usr/bin/
+  500  REHEARSAL_DIR="/tmp/rogue-rootfs-rehearsal"
+  501  mkdir -p "$REHEARSAL_DIR"
+  502  # Step 2: Assemble Union
+  503  echo "Assembling glibc..."
+  504  cp -a packages/toolchain/glibc/pkgroot/* "$REHEARSAL_DIR/"
+  505  echo "Assembling zlib..."
+  506  cp -a packages/system/zlib/pkgroot/* "$REHEARSAL_DIR/"
+  507  echo "Assembling bash..."
+  508  cp -a packages/base/bash/pkgroot/* "$REHEARSAL_DIR/"
+  509  # Step 3: Structural Validation
+  510  echo "Scanning for collisions (simple file count vs sum)..."
+  511  find "$REHEARSAL_DIR" -type f | wc -l
+  512  echo "Checking for leaked host paths (searching for /home/rogue)..."
+  513  grep -r "/home/rogue" "$REHEARSAL_DIR" || echo "No host paths found."
+  514  echo "Checking for absolute build paths (searching for /build/)..."
+  515  grep -r "/build/" "$REHEARSAL_DIR" || echo "No build paths leaked."
+  516  REHEARSAL_DIR="/tmp/rogue-rootfs-rehearsal"
+  517  echo "Step 4: ELF Inspection..."
+  518  # Inspect bash
+  519  BASH_BIN="$REHEARSAL_DIR/usr/bin/bash"
+  520  ldd "$BASH_BIN"
+  521  echo "Checking dynamic linker path in bash..."
+  522  readelf -l "$BASH_BIN" | grep "interpreter"
+  523  echo "Checking shebangs in integrated env..."
+  524  grep -r "^# "$REHEARSAL_DIR" | head -n 20
+  525  REHEARSAL_DIR="/tmp/rogue-rootfs-rehearsal"
+  526  echo "Checking library presence in Rehearsal Dir..."
+  527  find "$REHEARSAL_DIR" -name "*.so*"
+  528  echo "Checking binary presence in Rehearsal Dir..."
+  529  find "$REHEARSAL_DIR" -executable -type f
+  530  echo "Checking for shebangs pointing to /home/rogue..."
+  531  grep -r "# "$REHEARSAL_DIR" || echo "No rogue shebangs."
+  532  rm -rf /tmp/rogue-rootfs-rehearsal/
+  533  find packages -name "*.toml" | wc -l
+  534  python3 scripts/extract_manifest.py
+  535  python3 scripts/fetch_sources.py
+  536  kill $(pgrep -f fetch_sources.py)
+  537  startx
+  538  iwctl station scan
+  539  iwctl station wlan0 scan
+  540  iwctl station wlan0 connect nx
+  541  exit
+  542  ls
+  543  cd workspace
+  544  cd rogue-linux
+  545  ls
+  546* cd workspace
+  547* ls
+  548* cd wm
+  549* ls
+  550* cd ..
+  551* ls
+  552* cp -r wm rogue-linux/packages/ui
+  553* cd ..
+  554* ls
+  555* cp rogue.png workspace/rogue-linux/website/assets/images/.
+  556  ls
+  557  git add .
+  558  git commit -m "feat: website redesigned-ai ai-model train-data
+  559  git commit -m "feat: website redesigned-ai ai-model train-data docs and file structure"
+  560  git push -u origin main
+  561* ls
+  562* cd workspace
+  563* ls
+  564* mkdir rogue-linux/test-dwm
+  565* ls rogue-linux
+  566* cp -r wm/dwm-clean/dwm-6.2 wm/dwm-clean/patches rogue-linux/test-dwm
+  567  history

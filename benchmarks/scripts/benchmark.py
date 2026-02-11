@@ -15,11 +15,10 @@ RESULTS_FILE = "benchmark_results.csv"
 
 # Paths
 # Paths
-WORKSPACE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+WORKSPACE = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 COGMAN_LEGACY = os.path.join(WORKSPACE, "archived/cogman-python")
-COGMAN_ROOT = os.path.join(WORKSPACE, "cogman")
-COGMAN_PLANNER = os.path.join(COGMAN_ROOT, "src/planner/target/debug/cogman-planner")
-COGMAN_EXECUTOR = os.path.join(COGMAN_ROOT, "src/executor/cogman-exec")
+COGMAN_PLANNER = os.path.join(WORKSPACE, "bin/cogman-planner")
+COGMAN_EXECUTOR = os.path.join(WORKSPACE, "bin/cogman-executor")
 
 def run_cmd(cmd, cwd=None, env=None, shell=False):
     """Run command and return (returncode, stdout, stderr, time_taken, peak_mem)"""
