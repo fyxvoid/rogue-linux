@@ -1,4 +1,12 @@
-use super::context::AiContext;
+/*
+ * cogman/src/advisor/src/prompt.rs - Tactical Prompt Builder
+ *
+ * This file implements the prompt engineering logic for Cogman, 
+ * injecting build context and "The Butler" persona into AI queries.
+ *
+ * Why: To ensure that the AI responds as a tactical advisor rather 
+ * than a generic chatbot.
+ */
 
 // Constructs the prompt for the LLM.
 // Enforces the "Advisory Only" role.

@@ -1,10 +1,11 @@
 /*
- * cogman executor — verify/verify.c
+ * cogman/src/executor/verify/verify.c - Artifact Verification Engine
  *
- * Artifact verification logic (safety gate).
- * build and install. A failed verification MUST abort installation —
- * no partial installs allowed. This is separated from fs.c because
- * verification is a policy decision, not just a filesystem operation.
+ * This file implements the post-build verification logic, ensuring
+ * that produced artifacts meet the defined safety and checksum criteria.
+ *
+ * Why: To prevent the installation of corrupted or incomplete 
+ * packages into the Rogue Linux rootfs.
  */
 
 #define _POSIX_C_SOURCE 200809L

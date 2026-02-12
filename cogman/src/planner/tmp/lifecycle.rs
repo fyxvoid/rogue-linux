@@ -1,11 +1,13 @@
 #![allow(dead_code)]
-// cogman planner — tmp/lifecycle.rs
-// Lifecycle management for /tmp/cogman-build-*.
-// strict lifecycle that must be encoded correctly into the plan:
-//   create → build → verify → install → cleanup
-//
-// If any phase is missing or mis-ordered, the executor will produce
-// incorrect results. This module makes the lifecycle explicit.
+/*
+ * cogman/src/planner/tmp/lifecycle.rs - Build Workspace Lifecycle
+ *
+ * This file implements the explicit state transitions for temporary 
+ * build directories (create -> build -> verify -> install -> cleanup).
+ *
+ * Why: To guarantee that filesystem state remains consistent even 
+ * across complex, multi-stage native builds.
+ */
 
 /// Describes the lifecycle of a temporary build directory.
 /// Used by variants/native.rs to encode the correct step sequence.

@@ -1,14 +1,15 @@
 /*
- * cogman executor — log/log.h
+ * cogman/src/executor/log/log.h - Logging System Interface
  *
- * This header exists because every C file needs logging,
- * and the COGMAN_DEBUG compile flag controls whether trace-level
- * output is included. When COGMAN_DEBUG is not defined, log_debug
- * compiles to nothing — zero runtime cost.
+ * This header defines the Cogman logging macros and levels, including
+ * the zero-cost debug logging compiled out in production.
+ *
+ * Why: To ensure consistent, tactical, and personality-driven output
+ * throughout the entire C codebase.
  */
 
-#ifndef COGMAN2_LOG_H
-#define COGMAN2_LOG_H
+#ifndef COGMAN_LOG_H
+#define COGMAN_LOG_H
 
 void log_info(const char *fmt, ...);
 void log_ok(const char *fmt, ...);
@@ -25,4 +26,15 @@ void log_err(const char *fmt, ...);
 #define log_debug(fmt, ...) ((void)0)
 #endif
 
-#endif /* COGMAN2_LOG_H */
+#ifdef COGMAN_DEBUG
+#define COGMAN_LOG_DEBUG(fmt, ...) log_debug(fmt, ##__VA_ARGS__)
+#else
+#define COGMAN_LOG_DEBUG(fmt, ...) ((void)0)
+#endif
+
+#define COGMAN_LOG_INFO(fmt, ...) log_info(fmt, ##__VA_ARGS__)
+#define COGMAN_LOG_OK(fmt, ...)   log_ok(fmt, ##__VA_ARGS__)
+#define COGMAN_LOG_WARN(fmt, ...) log_warn(fmt, ##__VA_ARGS__)
+#define COGMAN_LOG_ERR(fmt, ...)  log_err(fmt, ##__VA_ARGS__)
+
+#endif /* COGMAN_LOG_H */

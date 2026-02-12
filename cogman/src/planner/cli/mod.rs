@@ -1,7 +1,12 @@
-// cogman planner — cli/mod.rs
-// CLI module entry point.
-// should not pollute the planner's decision logic. main.rs dispatches
-// to this module, which returns a validated configuration struct.
+/*
+ * cogman/src/planner/cli/mod.rs - Command Line Interface
+ *
+ * This module is the entry point for Cogman's command-line processing, 
+ * abstracting argument parsing from the core planning logic.
+ *
+ * Why: To provide a clean, detached interface for interacting with 
+ * the build system.
+ */
 
 pub mod args;
 

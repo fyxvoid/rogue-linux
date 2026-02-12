@@ -1,10 +1,11 @@
 /*
- * cogman executor — plan/plan.c
+ * cogman/src/executor/plan/plan.c - Binary Plan Management
  *
- * Plan loading and validation (mmap).
- * a distinct concern from step dispatch. main.c calls plan_open()
- * and plan_validate() without knowing the details of how files are
- * mapped or how headers are checked.
+ * This file handles memory-mapping (mmap) and validation of the
+ * Cogman binary execution plans.
+ *
+ * Why: To eliminate runtime parsing overhead and achieve true
+ * zero-latency handover from the Planner.
  */
 
 #define _POSIX_C_SOURCE 200809L

@@ -1,19 +1,28 @@
-// cogman planner — metadata/schema.rs
-// Metadata type definitions (Serde).
-// single source of truth for what a package definition looks like.
-// serde derives handle structural validation automatically — if it
-// deserializes, the shapes are correct.
+/*
+ * cogman/src/planner/metadata/schema.rs - Metadata Schema Definitions
+ *
+ * This file defines the Rust structures that reflect the package.toml
+ * schema v1.0, including identity, dependencies, and build instructions.
+ *
+ * Why: To maintain a strict type contract that governs all package
+ * definitions in the Rogue Linux ecosystem.
+ */
 
 use serde::{Deserialize, Serialize};
 
 /// Top-level package metadata (single .toml file).
+/// This structure mirrors the `package.toml` schema version 1.0.
 #[allow(dead_code)]
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct PackageMetadata {
+    /// Basic identification (name, version, etc)
     pub identity: Identity,
+    /// Build instructions and system type
     #[allow(missing_docs)]
     pub build: Builder,
+    /// Post-build installation steps
     pub installer: Installer,
+    /// Security and system policies
     #[serde(default)]
     pub policy: Policy,
 }

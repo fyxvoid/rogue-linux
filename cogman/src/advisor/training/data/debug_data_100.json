@@ -1,0 +1,602 @@
+[
+  {
+    "instruction": "Explain the purpose of the `ls` command.",
+    "input": "",
+    "output": "The `ls` command is used to list directory contents. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `ls` with the `-l` option?",
+    "input": "",
+    "output": "You can run: `ls -l <args>`. This modifies the behavior to include specific functionality related to list directory contents."
+  },
+  {
+    "instruction": "How do I run `ls` with the `-a` option?",
+    "input": "",
+    "output": "You can run: `ls -a <args>`. This modifies the behavior to include specific functionality related to list directory contents."
+  },
+  {
+    "instruction": "How do I run `ls` with the `-h` option?",
+    "input": "",
+    "output": "You can run: `ls -h <args>`. This modifies the behavior to include specific functionality related to list directory contents."
+  },
+  {
+    "instruction": "How do I run `ls` with the `-R` option?",
+    "input": "",
+    "output": "You can run: `ls -R <args>`. This modifies the behavior to include specific functionality related to list directory contents."
+  },
+  {
+    "instruction": "Explain the purpose of the `grep` command.",
+    "input": "",
+    "output": "The `grep` command is used to print lines that match patterns. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `grep` with the `-i` option?",
+    "input": "",
+    "output": "You can run: `grep -i <args>`. This modifies the behavior to include specific functionality related to print lines that match patterns."
+  },
+  {
+    "instruction": "How do I run `grep` with the `-v` option?",
+    "input": "",
+    "output": "You can run: `grep -v <args>`. This modifies the behavior to include specific functionality related to print lines that match patterns."
+  },
+  {
+    "instruction": "How do I run `grep` with the `-r` option?",
+    "input": "",
+    "output": "You can run: `grep -r <args>`. This modifies the behavior to include specific functionality related to print lines that match patterns."
+  },
+  {
+    "instruction": "How do I run `grep` with the `-n` option?",
+    "input": "",
+    "output": "You can run: `grep -n <args>`. This modifies the behavior to include specific functionality related to print lines that match patterns."
+  },
+  {
+    "instruction": "Explain the purpose of the `chmod` command.",
+    "input": "",
+    "output": "The `chmod` command is used to change file mode bits. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `chmod` with the `+x` option?",
+    "input": "",
+    "output": "You can run: `chmod +x <args>`. This modifies the behavior to include specific functionality related to change file mode bits."
+  },
+  {
+    "instruction": "How do I run `chmod` with the `777` option?",
+    "input": "",
+    "output": "You can run: `chmod 777 <args>`. This modifies the behavior to include specific functionality related to change file mode bits."
+  },
+  {
+    "instruction": "How do I run `chmod` with the `644` option?",
+    "input": "",
+    "output": "You can run: `chmod 644 <args>`. This modifies the behavior to include specific functionality related to change file mode bits."
+  },
+  {
+    "instruction": "How do I run `chmod` with the `-R` option?",
+    "input": "",
+    "output": "You can run: `chmod -R <args>`. This modifies the behavior to include specific functionality related to change file mode bits."
+  },
+  {
+    "instruction": "Explain the purpose of the `chown` command.",
+    "input": "",
+    "output": "The `chown` command is used to change file owner and group. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `chown` with the `user:group` option?",
+    "input": "",
+    "output": "You can run: `chown user:group <args>`. This modifies the behavior to include specific functionality related to change file owner and group."
+  },
+  {
+    "instruction": "How do I run `chown` with the `-R` option?",
+    "input": "",
+    "output": "You can run: `chown -R <args>`. This modifies the behavior to include specific functionality related to change file owner and group."
+  },
+  {
+    "instruction": "Explain the purpose of the `ps` command.",
+    "input": "",
+    "output": "The `ps` command is used to report a snapshot of the current processes. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `ps` with the `aux` option?",
+    "input": "",
+    "output": "You can run: `ps aux <args>`. This modifies the behavior to include specific functionality related to report a snapshot of the current processes."
+  },
+  {
+    "instruction": "How do I run `ps` with the `-ef` option?",
+    "input": "",
+    "output": "You can run: `ps -ef <args>`. This modifies the behavior to include specific functionality related to report a snapshot of the current processes."
+  },
+  {
+    "instruction": "Explain the purpose of the `top` command.",
+    "input": "",
+    "output": "The `top` command is used to display Linux processes. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `top` with the `-b` option?",
+    "input": "",
+    "output": "You can run: `top -b <args>`. This modifies the behavior to include specific functionality related to display Linux processes."
+  },
+  {
+    "instruction": "How do I run `top` with the `-n 1` option?",
+    "input": "",
+    "output": "You can run: `top -n 1 <args>`. This modifies the behavior to include specific functionality related to display Linux processes."
+  },
+  {
+    "instruction": "Explain the purpose of the `kill` command.",
+    "input": "",
+    "output": "The `kill` command is used to send a signal to a process. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `kill` with the `-9` option?",
+    "input": "",
+    "output": "You can run: `kill -9 <args>`. This modifies the behavior to include specific functionality related to send a signal to a process."
+  },
+  {
+    "instruction": "How do I run `kill` with the `-15` option?",
+    "input": "",
+    "output": "You can run: `kill -15 <args>`. This modifies the behavior to include specific functionality related to send a signal to a process."
+  },
+  {
+    "instruction": "Explain the purpose of the `tar` command.",
+    "input": "",
+    "output": "The `tar` command is used to an archiving utility. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `tar` with the `-czvf` option?",
+    "input": "",
+    "output": "You can run: `tar -czvf <args>`. This modifies the behavior to include specific functionality related to an archiving utility."
+  },
+  {
+    "instruction": "How do I run `tar` with the `-xzvf` option?",
+    "input": "",
+    "output": "You can run: `tar -xzvf <args>`. This modifies the behavior to include specific functionality related to an archiving utility."
+  },
+  {
+    "instruction": "How do I run `tar` with the `-tjvf` option?",
+    "input": "",
+    "output": "You can run: `tar -tjvf <args>`. This modifies the behavior to include specific functionality related to an archiving utility."
+  },
+  {
+    "instruction": "Explain the purpose of the `find` command.",
+    "input": "",
+    "output": "The `find` command is used to search for files in a directory hierarchy. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `find` with the `-name` option?",
+    "input": "",
+    "output": "You can run: `find -name <args>`. This modifies the behavior to include specific functionality related to search for files in a directory hierarchy."
+  },
+  {
+    "instruction": "How do I run `find` with the `-type f` option?",
+    "input": "",
+    "output": "You can run: `find -type f <args>`. This modifies the behavior to include specific functionality related to search for files in a directory hierarchy."
+  },
+  {
+    "instruction": "How do I run `find` with the `--mtime` option?",
+    "input": "",
+    "output": "You can run: `find --mtime <args>`. This modifies the behavior to include specific functionality related to search for files in a directory hierarchy."
+  },
+  {
+    "instruction": "Explain the purpose of the `netstat` command.",
+    "input": "",
+    "output": "The `netstat` command is used to print network connections. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `netstat` with the `-tuln` option?",
+    "input": "",
+    "output": "You can run: `netstat -tuln <args>`. This modifies the behavior to include specific functionality related to print network connections."
+  },
+  {
+    "instruction": "How do I run `netstat` with the `-pan` option?",
+    "input": "",
+    "output": "You can run: `netstat -pan <args>`. This modifies the behavior to include specific functionality related to print network connections."
+  },
+  {
+    "instruction": "Explain the purpose of the `ss` command.",
+    "input": "",
+    "output": "The `ss` command is used to another utility to investigate sockets. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `ss` with the `-tuln` option?",
+    "input": "",
+    "output": "You can run: `ss -tuln <args>`. This modifies the behavior to include specific functionality related to another utility to investigate sockets."
+  },
+  {
+    "instruction": "How do I run `ss` with the `-pl` option?",
+    "input": "",
+    "output": "You can run: `ss -pl <args>`. This modifies the behavior to include specific functionality related to another utility to investigate sockets."
+  },
+  {
+    "instruction": "Explain the purpose of the `iptables` command.",
+    "input": "",
+    "output": "The `iptables` command is used to administration tool for IPv4 packet filtering and NAT. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `iptables` with the `-L` option?",
+    "input": "",
+    "output": "You can run: `iptables -L <args>`. This modifies the behavior to include specific functionality related to administration tool for IPv4 packet filtering and NAT."
+  },
+  {
+    "instruction": "How do I run `iptables` with the `-A INPUT` option?",
+    "input": "",
+    "output": "You can run: `iptables -A INPUT <args>`. This modifies the behavior to include specific functionality related to administration tool for IPv4 packet filtering and NAT."
+  },
+  {
+    "instruction": "How do I run `iptables` with the `-F` option?",
+    "input": "",
+    "output": "You can run: `iptables -F <args>`. This modifies the behavior to include specific functionality related to administration tool for IPv4 packet filtering and NAT."
+  },
+  {
+    "instruction": "Explain the purpose of the `systemctl` command.",
+    "input": "",
+    "output": "The `systemctl` command is used to Control the systemd system and service manager. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `systemctl` with the `start` option?",
+    "input": "",
+    "output": "You can run: `systemctl start <args>`. This modifies the behavior to include specific functionality related to Control the systemd system and service manager."
+  },
+  {
+    "instruction": "How do I run `systemctl` with the `stop` option?",
+    "input": "",
+    "output": "You can run: `systemctl stop <args>`. This modifies the behavior to include specific functionality related to Control the systemd system and service manager."
+  },
+  {
+    "instruction": "How do I run `systemctl` with the `status` option?",
+    "input": "",
+    "output": "You can run: `systemctl status <args>`. This modifies the behavior to include specific functionality related to Control the systemd system and service manager."
+  },
+  {
+    "instruction": "How do I run `systemctl` with the `enable` option?",
+    "input": "",
+    "output": "You can run: `systemctl enable <args>`. This modifies the behavior to include specific functionality related to Control the systemd system and service manager."
+  },
+  {
+    "instruction": "Explain the purpose of the `journalctl` command.",
+    "input": "",
+    "output": "The `journalctl` command is used to Query the systemd journal. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `journalctl` with the `-xe` option?",
+    "input": "",
+    "output": "You can run: `journalctl -xe <args>`. This modifies the behavior to include specific functionality related to Query the systemd journal."
+  },
+  {
+    "instruction": "How do I run `journalctl` with the `-u ssh` option?",
+    "input": "",
+    "output": "You can run: `journalctl -u ssh <args>`. This modifies the behavior to include specific functionality related to Query the systemd journal."
+  },
+  {
+    "instruction": "How do I run `journalctl` with the `-f` option?",
+    "input": "",
+    "output": "You can run: `journalctl -f <args>`. This modifies the behavior to include specific functionality related to Query the systemd journal."
+  },
+  {
+    "instruction": "Explain the purpose of the `ip` command.",
+    "input": "",
+    "output": "The `ip` command is used to show / manipulate routing, network devices, interfaces. It is a fundamental tool for Linux system administration."
+  },
+  {
+    "instruction": "How do I run `ip` with the `address show` option?",
+    "input": "",
+    "output": "You can run: `ip address show <args>`. This modifies the behavior to include specific functionality related to show / manipulate routing, network devices, interfaces."
+  },
+  {
+    "instruction": "How do I run `ip` with the `link set up` option?",
+    "input": "",
+    "output": "You can run: `ip link set up <args>`. This modifies the behavior to include specific functionality related to show / manipulate routing, network devices, interfaces."
+  },
+  {
+    "instruction": "How do I run `ip` with the `route` option?",
+    "input": "",
+    "output": "You can run: `ip route <args>`. This modifies the behavior to include specific functionality related to show / manipulate routing, network devices, interfaces."
+  },
+  {
+    "instruction": "I need to another utility to investigate sockets. Which tool should I use?",
+    "input": "",
+    "output": "To another utility to investigate sockets, you can use `ss`.\nCommon flags include `-pl -tuln`.\nExample: `ss -pl -tuln [arguments]`"
+  },
+  {
+    "instruction": "What is the command to send a signal to a process using `kill`?",
+    "input": "",
+    "output": "To send a signal to a process, you can use `kill`.\nCommon flags include `-15 -9`.\nExample: `kill -15 -9 [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `netstat` command.",
+    "input": "",
+    "output": "To print network connections, you can use `netstat`.\nCommon flags include `-pan -tuln`.\nExample: `netstat -pan -tuln [arguments]`"
+  },
+  {
+    "instruction": "What is the command to change file mode bits using `chmod`?",
+    "input": "",
+    "output": "To change file mode bits, you can use `chmod`.\nCommon flags include `+x -R`.\nExample: `chmod +x -R [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `grep` command.",
+    "input": "",
+    "output": "To print lines that match patterns, you can use `grep`.\nCommon flags include `-n -r`.\nExample: `grep -n -r [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `chmod` command.",
+    "input": "",
+    "output": "To change file mode bits, you can use `chmod`.\nCommon flags include `-R 644`.\nExample: `chmod -R 644 [arguments]`"
+  },
+  {
+    "instruction": "I need to print lines that match patterns. Which tool should I use?",
+    "input": "",
+    "output": "To print lines that match patterns, you can use `grep`.\nCommon flags include `-r -n`.\nExample: `grep -r -n [arguments]`"
+  },
+  {
+    "instruction": "Show me examples of `kill`.",
+    "input": "",
+    "output": "To send a signal to a process, you can use `kill`.\nCommon flags include `-9 -15`.\nExample: `kill -9 -15 [arguments]`"
+  },
+  {
+    "instruction": "What is the command to change file mode bits using `chmod`?",
+    "input": "",
+    "output": "To change file mode bits, you can use `chmod`.\nCommon flags include `777 -R`.\nExample: `chmod 777 -R [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `netstat` command.",
+    "input": "",
+    "output": "To print network connections, you can use `netstat`.\nCommon flags include `-pan -tuln`.\nExample: `netstat -pan -tuln [arguments]`"
+  },
+  {
+    "instruction": "What is the command to show / manipulate routing, network devices, interfaces using `ip`?",
+    "input": "",
+    "output": "To show / manipulate routing, network devices, interfaces, you can use `ip`.\nCommon flags include `link set up route`.\nExample: `ip link set up route [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `ip` command.",
+    "input": "",
+    "output": "To show / manipulate routing, network devices, interfaces, you can use `ip`.\nCommon flags include `link set up route`.\nExample: `ip link set up route [arguments]`"
+  },
+  {
+    "instruction": "What is the command to report a snapshot of the current processes using `ps`?",
+    "input": "",
+    "output": "To report a snapshot of the current processes, you can use `ps`.\nCommon flags include `aux -ef`.\nExample: `ps aux -ef [arguments]`"
+  },
+  {
+    "instruction": "I need to change file owner and group. Which tool should I use?",
+    "input": "",
+    "output": "To change file owner and group, you can use `chown`.\nCommon flags include `user:group -R`.\nExample: `chown user:group -R [arguments]`"
+  },
+  {
+    "instruction": "I need to Query the systemd journal. Which tool should I use?",
+    "input": "",
+    "output": "To Query the systemd journal, you can use `journalctl`.\nCommon flags include `-f -u ssh`.\nExample: `journalctl -f -u ssh [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `journalctl` command.",
+    "input": "",
+    "output": "To Query the systemd journal, you can use `journalctl`.\nCommon flags include `-xe -f`.\nExample: `journalctl -xe -f [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `tar` command.",
+    "input": "",
+    "output": "To an archiving utility, you can use `tar`.\nCommon flags include `-czvf -tjvf`.\nExample: `tar -czvf -tjvf [arguments]`"
+  },
+  {
+    "instruction": "What is the command to print lines that match patterns using `grep`?",
+    "input": "",
+    "output": "To print lines that match patterns, you can use `grep`.\nCommon flags include `-r -v`.\nExample: `grep -r -v [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `ls` command.",
+    "input": "",
+    "output": "To list directory contents, you can use `ls`.\nCommon flags include `-h -R`.\nExample: `ls -h -R [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `kill` command.",
+    "input": "",
+    "output": "To send a signal to a process, you can use `kill`.\nCommon flags include `-15 -9`.\nExample: `kill -15 -9 [arguments]`"
+  },
+  {
+    "instruction": "How do I use `ip` to show / manipulate routing, network devices, interfaces?",
+    "input": "",
+    "output": "To show / manipulate routing, network devices, interfaces, you can use `ip`.\nCommon flags include `address show route`.\nExample: `ip address show route [arguments]`"
+  },
+  {
+    "instruction": "Show me examples of `systemctl`.",
+    "input": "",
+    "output": "To Control the systemd system and service manager, you can use `systemctl`.\nCommon flags include `status stop`.\nExample: `systemctl status stop [arguments]`"
+  },
+  {
+    "instruction": "Show me examples of `chmod`.",
+    "input": "",
+    "output": "To change file mode bits, you can use `chmod`.\nCommon flags include `644 -R`.\nExample: `chmod 644 -R [arguments]`"
+  },
+  {
+    "instruction": "Show me examples of `chmod`.",
+    "input": "",
+    "output": "To change file mode bits, you can use `chmod`.\nCommon flags include `777 -R`.\nExample: `chmod 777 -R [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `ps` command.",
+    "input": "",
+    "output": "To report a snapshot of the current processes, you can use `ps`.\nCommon flags include `aux -ef`.\nExample: `ps aux -ef [arguments]`"
+  },
+  {
+    "instruction": "I need to display Linux processes. Which tool should I use?",
+    "input": "",
+    "output": "To display Linux processes, you can use `top`.\nCommon flags include `-b -n 1`.\nExample: `top -b -n 1 [arguments]`"
+  },
+  {
+    "instruction": "Show me examples of `ip`.",
+    "input": "",
+    "output": "To show / manipulate routing, network devices, interfaces, you can use `ip`.\nCommon flags include `address show link set up`.\nExample: `ip address show link set up [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `ip` command.",
+    "input": "",
+    "output": "To show / manipulate routing, network devices, interfaces, you can use `ip`.\nCommon flags include `link set up address show`.\nExample: `ip link set up address show [arguments]`"
+  },
+  {
+    "instruction": "What is the command to show / manipulate routing, network devices, interfaces using `ip`?",
+    "input": "",
+    "output": "To show / manipulate routing, network devices, interfaces, you can use `ip`.\nCommon flags include `route address show`.\nExample: `ip route address show [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `kill` command.",
+    "input": "",
+    "output": "To send a signal to a process, you can use `kill`.\nCommon flags include `-9 -15`.\nExample: `kill -9 -15 [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `chmod` command.",
+    "input": "",
+    "output": "To change file mode bits, you can use `chmod`.\nCommon flags include `+x 777`.\nExample: `chmod +x 777 [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `iptables` command.",
+    "input": "",
+    "output": "To administration tool for IPv4 packet filtering and NAT, you can use `iptables`.\nCommon flags include `-A INPUT -F`.\nExample: `iptables -A INPUT -F [arguments]`"
+  },
+  {
+    "instruction": "I need to Control the systemd system and service manager. Which tool should I use?",
+    "input": "",
+    "output": "To Control the systemd system and service manager, you can use `systemctl`.\nCommon flags include `stop enable`.\nExample: `systemctl stop enable [arguments]`"
+  },
+  {
+    "instruction": "I need to report a snapshot of the current processes. Which tool should I use?",
+    "input": "",
+    "output": "To report a snapshot of the current processes, you can use `ps`.\nCommon flags include `-ef aux`.\nExample: `ps -ef aux [arguments]`"
+  },
+  {
+    "instruction": "How do I use `chown` to change file owner and group?",
+    "input": "",
+    "output": "To change file owner and group, you can use `chown`.\nCommon flags include `-R user:group`.\nExample: `chown -R user:group [arguments]`"
+  },
+  {
+    "instruction": "I need to another utility to investigate sockets. Which tool should I use?",
+    "input": "",
+    "output": "To another utility to investigate sockets, you can use `ss`.\nCommon flags include `-pl -tuln`.\nExample: `ss -pl -tuln [arguments]`"
+  },
+  {
+    "instruction": "How do I use `chown` to change file owner and group?",
+    "input": "",
+    "output": "To change file owner and group, you can use `chown`.\nCommon flags include `user:group -R`.\nExample: `chown user:group -R [arguments]`"
+  },
+  {
+    "instruction": "How do I use `ss` to another utility to investigate sockets?",
+    "input": "",
+    "output": "To another utility to investigate sockets, you can use `ss`.\nCommon flags include `-pl -tuln`.\nExample: `ss -pl -tuln [arguments]`"
+  },
+  {
+    "instruction": "Show me examples of `systemctl`.",
+    "input": "",
+    "output": "To Control the systemd system and service manager, you can use `systemctl`.\nCommon flags include `start status`.\nExample: `systemctl start status [arguments]`"
+  },
+  {
+    "instruction": "I need to Query the systemd journal. Which tool should I use?",
+    "input": "",
+    "output": "To Query the systemd journal, you can use `journalctl`.\nCommon flags include `-f -xe`.\nExample: `journalctl -f -xe [arguments]`"
+  },
+  {
+    "instruction": "How do I use `top` to display Linux processes?",
+    "input": "",
+    "output": "To display Linux processes, you can use `top`.\nCommon flags include `-b -n 1`.\nExample: `top -b -n 1 [arguments]`"
+  },
+  {
+    "instruction": "How do I use `kill` to send a signal to a process?",
+    "input": "",
+    "output": "To send a signal to a process, you can use `kill`.\nCommon flags include `-9 -15`.\nExample: `kill -9 -15 [arguments]`"
+  },
+  {
+    "instruction": "What is the command to list directory contents using `ls`?",
+    "input": "",
+    "output": "To list directory contents, you can use `ls`.\nCommon flags include `-a -h`.\nExample: `ls -a -h [arguments]`"
+  },
+  {
+    "instruction": "What is the command to show / manipulate routing, network devices, interfaces using `ip`?",
+    "input": "",
+    "output": "To show / manipulate routing, network devices, interfaces, you can use `ip`.\nCommon flags include `address show route`.\nExample: `ip address show route [arguments]`"
+  },
+  {
+    "instruction": "How do I use `ls` to list directory contents?",
+    "input": "",
+    "output": "To list directory contents, you can use `ls`.\nCommon flags include `-R -l`.\nExample: `ls -R -l [arguments]`"
+  },
+  {
+    "instruction": "I need to list directory contents. Which tool should I use?",
+    "input": "",
+    "output": "To list directory contents, you can use `ls`.\nCommon flags include `-h -a`.\nExample: `ls -h -a [arguments]`"
+  },
+  {
+    "instruction": "How do I use `ip` to show / manipulate routing, network devices, interfaces?",
+    "input": "",
+    "output": "To show / manipulate routing, network devices, interfaces, you can use `ip`.\nCommon flags include `link set up address show`.\nExample: `ip link set up address show [arguments]`"
+  },
+  {
+    "instruction": "I need to Control the systemd system and service manager. Which tool should I use?",
+    "input": "",
+    "output": "To Control the systemd system and service manager, you can use `systemctl`.\nCommon flags include `enable stop`.\nExample: `systemctl enable stop [arguments]`"
+  },
+  {
+    "instruction": "What is the command to an archiving utility using `tar`?",
+    "input": "",
+    "output": "To an archiving utility, you can use `tar`.\nCommon flags include `-xzvf -tjvf`.\nExample: `tar -xzvf -tjvf [arguments]`"
+  },
+  {
+    "instruction": "I need to send a signal to a process. Which tool should I use?",
+    "input": "",
+    "output": "To send a signal to a process, you can use `kill`.\nCommon flags include `-9 -15`.\nExample: `kill -9 -15 [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `ss` command.",
+    "input": "",
+    "output": "To another utility to investigate sockets, you can use `ss`.\nCommon flags include `-tuln -pl`.\nExample: `ss -tuln -pl [arguments]`"
+  },
+  {
+    "instruction": "What is the command to search for files in a directory hierarchy using `find`?",
+    "input": "",
+    "output": "To search for files in a directory hierarchy, you can use `find`.\nCommon flags include `--mtime -type f`.\nExample: `find --mtime -type f [arguments]`"
+  },
+  {
+    "instruction": "I need to another utility to investigate sockets. Which tool should I use?",
+    "input": "",
+    "output": "To another utility to investigate sockets, you can use `ss`.\nCommon flags include `-tuln -pl`.\nExample: `ss -tuln -pl [arguments]`"
+  },
+  {
+    "instruction": "How do I use `find` to search for files in a directory hierarchy?",
+    "input": "",
+    "output": "To search for files in a directory hierarchy, you can use `find`.\nCommon flags include `--mtime -type f`.\nExample: `find --mtime -type f [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `find` command.",
+    "input": "",
+    "output": "To search for files in a directory hierarchy, you can use `find`.\nCommon flags include `-name -type f`.\nExample: `find -name -type f [arguments]`"
+  },
+  {
+    "instruction": "Show me examples of `find`.",
+    "input": "",
+    "output": "To search for files in a directory hierarchy, you can use `find`.\nCommon flags include `-name --mtime`.\nExample: `find -name --mtime [arguments]`"
+  },
+  {
+    "instruction": "Explain the usage of `ps` command.",
+    "input": "",
+    "output": "To report a snapshot of the current processes, you can use `ps`.\nCommon flags include `aux -ef`.\nExample: `ps aux -ef [arguments]`"
+  },
+  {
+    "instruction": "I need to report a snapshot of the current processes. Which tool should I use?",
+    "input": "",
+    "output": "To report a snapshot of the current processes, you can use `ps`.\nCommon flags include `-ef aux`.\nExample: `ps -ef aux [arguments]`"
+  },
+  {
+    "instruction": "How do I use `top` to display Linux processes?",
+    "input": "",
+    "output": "To display Linux processes, you can use `top`.\nCommon flags include `-n 1 -b`.\nExample: `top -n 1 -b [arguments]`"
+  },
+  {
+    "instruction": "I need to list directory contents. Which tool should I use?",
+    "input": "",
+    "output": "To list directory contents, you can use `ls`.\nCommon flags include `-l -h`.\nExample: `ls -l -h [arguments]`"
+  },
+  {
+    "instruction": "What is the command to send a signal to a process using `kill`?",
+    "input": "",
+    "output": "To send a signal to a process, you can use `kill`.\nCommon flags include `-9 -15`.\nExample: `kill -9 -15 [arguments]`"
+  },
+  {
+    "instruction": "Show me examples of `kill`.",
+    "input": "",
+    "output": "To send a signal to a process, you can use `kill`.\nCommon flags include `-9 -15`.\nExample: `kill -9 -15 [arguments]`"
+  }
+]

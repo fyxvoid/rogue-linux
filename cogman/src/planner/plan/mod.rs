@@ -1,7 +1,12 @@
-// cogman planner — plan/mod.rs
-// Plan emission (JSON/Binary).
-// 1. layout.rs: the binary format definition (constants, repr(C) structs)
-// 2. emit.rs: serializing steps into that format
+/*
+ * cogman/src/planner/plan/mod.rs - Execution Plan Engine
+ *
+ * This module coordinates the translation of metadata into binary 
+ * execution plans and manages the shared layout definitions.
+ *
+ * Why: To bridge the gap between high-level package definitions and 
+ * low-level execution instructions.
+ */
 //
 // The C executor's plan.h must match layout.rs exactly.
 

@@ -1,11 +1,12 @@
-// cogman planner — metadata/mod.rs
-// Metadata processing pipeline: schema -> load -> validate.
-// 1. Load: read bytes from disk and deserialize TOML
-// 2. Schema: define the typed shape of valid metadata
-// 3. Validate: check semantic constraints beyond structural typing
-//
-// Keeping these phases in separate files makes it obvious where
-// a metadata-related bug lives.
+/*
+ * cogman/src/advisor/src/metadata/mod.rs - Package Metadata Management
+ *
+ * This module provides the core abstractions for loading, validating, 
+ * and accessing package metadata (package.toml).
+ *
+ * Why: To ensure that the system operates on high-fidelity, schema-valid 
+ * package definitions.
+ */
 
 pub mod schema;
 pub mod load;

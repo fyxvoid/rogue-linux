@@ -1,8 +1,12 @@
-// cogman planner — graph/mod.rs
-// Graph data structure and algorithms.
-// It is split into two concerns:
-// - resolve.rs: building the graph (adding nodes and edges)
-// - topo.rs: extracting a valid build order (topological sort)
+/*
+ * cogman/src/planner/graph/mod.rs - Dependency Graph Engine
+ *
+ * This module manages the high-level dependency structures and 
+ * graph theory abstractions for the build planner.
+ *
+ * Why: To provide a centralized interface for complex relational 
+ * data processing during the planning phase.
+ */
 
 pub mod resolve;
 pub mod topo;

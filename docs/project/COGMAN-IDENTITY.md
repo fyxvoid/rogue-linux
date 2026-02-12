@@ -29,4 +29,4 @@ It is analogous to `makepkg` (Arch) or `rpmbuild` (RedHat), but with integrated 
 
 ## Evolution
 -   **cogman (Legacy)**: Python prototype. Deprecated.
--   **cogman (Current)**: The Rust+C implementation (formerly `cogmanII`).
+-   **cogman (Current)**: The modular Rust+C implementation.

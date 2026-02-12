@@ -7,7 +7,7 @@ import textwrap
 
 # Paths
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PLANNER_BIN = os.path.join(ROOT, "cogman", "planner", "target", "debug", "cogman-planner")
+PLANNER_BIN = os.path.join(ROOT, "cogman", "src", "planner", "target", "debug", "cogman-planner")
 CASE_DIR = os.path.join(ROOT, "tests", "metadata", "cases")
 
 class TestSchema(unittest.TestCase):

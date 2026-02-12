@@ -1,4 +1,12 @@
-use serde::Serialize;
+/*
+ * cogman/src/advisor/src/context.rs - AI Reasoning Context
+ *
+ * This file defines the data structures that provide the AI with 
+ * a sanitized, high-fidelity view of the build failure state.
+ *
+ * Why: To ensure the Advisor has all necessary indicators (logs, 
+ * metadata, environment) to produce accurate tactical advice.
+ */
 use crate::metadata::PackageMetadata;
 
 // Safe, serializable view of the world for the AI.

@@ -1,8 +1,12 @@
-// cogman planner — plan/layout.rs
-// Binary plan file layout definition.
-// between the Rust planner and the C executor. These constants and
-// repr(C, packed) structs MUST match executor/plan/plan.h exactly.
-// Any change here requires a matching change in the C header.
+/*
+ * cogman/src/planner/plan/layout.rs - Binary Plan Format Definition
+ *
+ * This file defines the shared memory layout for Cogman plans, 
+ * including repr(C) structs and opcodes used for C/Rust interoperability.
+ *
+ * Why: To serve as the single source of truth for the binary contract 
+ * between the Planner and the Executor.
+ */
 
 /// Plan file magic: "CGM2PLAN"
 pub const PLAN_MAGIC: [u8; 8] = *b"CGM2PLAN";
@@ -65,11 +69,13 @@ pub(crate) struct PlanHeader {
 pub(crate) struct StepRecord {
     pub op: u32,
     pub fail_policy: u32,
+    pub flags: u32,
+    pub _reserved_flags: u32,
     pub cmd_offset: u32,
     pub cmd_len: u32,
     pub wdir_offset: u32,
     pub wdir_len: u32,
     pub env_offset: u32,
     pub env_len: u32,
-    pub _reserved: [u8; 96],
+    pub _reserved: [u8; 88],
 }

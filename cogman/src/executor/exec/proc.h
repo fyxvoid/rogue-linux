@@ -1,12 +1,15 @@
 /*
- * cogman executor — exec/proc.h
+ * cogman/src/executor/exec/proc.h - Process Lifecycle Definitions
  *
- * This header exists because process execution (fork/exec/wait)
- * is a distinct syscall domain from filesystem operations.
+ * This header defines the interface for process dispatch, isolation,
+ * and environment management within the Cogman Executor.
+ *
+ * Why: To provide a clean boundary between the master execution loop
+ * and the low-level fork/exec mechanics.
  */
 
-#ifndef COGMAN2_PROC_H
-#define COGMAN2_PROC_H
+#ifndef COGMAN_PROC_H
+#define COGMAN_PROC_H
 
 #include <stdint.h>
 
@@ -15,6 +18,6 @@
  * Returns child exit status (0 = success) or -1 on fork/exec failure.
  */
 int exec_command(const char *cmd, const char *workdir,
-                 const char *env_block, uint32_t env_len);
+                 const char *env_block, uint32_t env_len, uint32_t flags);
 
-#endif /* COGMAN2_PROC_H */
+#endif /* COGMAN_PROC_H */

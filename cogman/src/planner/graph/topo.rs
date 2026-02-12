@@ -1,7 +1,12 @@
-// cogman planner — graph/topo.rs
-// Topological sort implementation.
-// from graph construction. If we ever change the sort strategy (e.g.
-// parallel build groups), only this file changes.
+/*
+ * cogman/src/planner/graph/topo.rs - Topological Sorter (Kahn's)
+ *
+ * This file implements the linear sorting logic for the dependency 
+ * graph, ensuring a safe and deterministic build order.
+ *
+ * Why: To guarantee that every package is built only after its 
+ * required dependencies are successfully prepared.
+ */
 
 use petgraph::algo::toposort;
 use crate::graph::resolve::DepGraph;

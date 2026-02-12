@@ -1,5 +1,12 @@
-// Output sanitization and safety checks.
-// The AI output is untrusted text.
+/*
+ * cogman/src/advisor/src/guards.rs - Information Sanitization & Guards
+ *
+ * This file implements safety filters and output validation for AI 
+ * responses, preventing hallucinations from affecting the system.
+ *
+ * Why: To maintain the integrity of the "Tactical Butler" persona 
+ * and protect the operator from malformed shell advice.
+ */
 
 pub fn sanitize_response(input: &str) -> String {
     // 1. Trim whitespace

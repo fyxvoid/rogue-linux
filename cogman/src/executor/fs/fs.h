@@ -1,12 +1,15 @@
 /*
- * cogman executor — fs/fs.h
+ * cogman/src/executor/fs/fs.h - Filesystem Operation Definitions
  *
- * This header exists because filesystem operations (mkdir, copy, rm)
- * are a distinct syscall domain from process execution and plan parsing.
+ * This header defines the POSIX-based filesystem interface used by
+ * the Cogman Executor for deterministic deployment.
+ *
+ * Why: To provide a safe, high-speed abstraction for directory
+ * management and artifact copying.
  */
 
-#ifndef COGMAN2_FS_H
-#define COGMAN2_FS_H
+#ifndef COGMAN_FS_H
+#define COGMAN_FS_H
 
 /* Create directory tree recursively (like mkdir -p). */
 int mkdir_p(const char *path);
@@ -17,4 +20,4 @@ int copy_recursive(const char *src, const char *dst);
 /* Recursively remove a directory tree (like rm -rf). */
 int rm_rf(const char *path);
 
-#endif /* COGMAN2_FS_H */
+#endif /* COGMAN_FS_H */

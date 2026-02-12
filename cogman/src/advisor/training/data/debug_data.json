@@ -1,0 +1,7 @@
+[
+    {
+        "instruction": "Explain how to check active network connections on Linux and identify the process listening on port 80.",
+        "input": "",
+        "output": "To check active network connections, you can use the `ss` (socket statistics) or `netstat` command. \n\n1. **List listening ports**:\n   ```bash\n   sudo ss -tuln\n   ```\n   - `-t`: TCP\n   - `-u`: UDP\n   - `-l`: Listening sockets\n   - `-n`: Numeric ports (don't resolve service names)\n\n2. **Identify the process on port 80**:\n   Use the `-p` flag (requires sudo) to show process info:\n   ```bash\n   sudo ss -tulnp | grep :80\n   ```\n   \n   Alternatively, using `lsof`:\n   ```bash\n   sudo lsof -i :80\n   ```\n   This will display the COMMAND and PID of the process (e.g., `nginx` or `apache2`) holding the port."
+    }
+]

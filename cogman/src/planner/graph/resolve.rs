@@ -1,7 +1,12 @@
-// cogman planner — graph/resolve.rs
-// Graph-based dependency resolution logic.
-// from sorting it. This file handles adding packages and edges.
-// It knows nothing about ordering — that's topo.rs's job.
+/*
+ * cogman/src/planner/graph/resolve.rs - Recursive Dependency Resolver
+ *
+ * This file implements the recursive discovery and node injection 
+ * logic for building the package dependency graph.
+ *
+ * Why: To ensure that all build-time and runtime requirements are 
+ * fully discovered before scheduling begins.
+ */
 
 use petgraph::graph::{DiGraph, NodeIndex};
 use std::collections::HashMap;
@@ -97,7 +102,7 @@ impl RecursiveLoader {
             )));
         }
         let (group, name) = (parts[0], parts[1]);
-        let path = self.dir.join(group).join(name).join(format!("{}.toml", name));
+        let path = self.dir.join("packages").join(group).join(name).join(format!("{}.toml", name));
 
         let meta = metadata::load_metadata(&path)?;
         

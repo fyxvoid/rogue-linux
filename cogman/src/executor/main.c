@@ -1,14 +1,12 @@
 /*
- * cogman executor — main.c
+ * cogman/src/executor/main.c - The Heart of the Execution Engine
  *
- * This is the executor entry point. It does exactly four things:
- *   1. mmap() the plan file (plan/plan.c)
- *   2. Validate the plan header (plan/plan.c)
- *   3. Iterate through step records (plan/plan.h)
- *   4. Dispatch steps to handlers (exec/, fs/, verify/)
+ * This file serves as the core entry point for the Cogman Executor.
+ * It handles logic for mapping binary plans into memory and
+ * initiating the procedural execution loop.
  *
- * It contains NO business logic for how steps are implemented.
- * It is a pure timeline of execution.
+ * Why: To provide a minimalist, zero-parsing C runtime for
+ * high-speed system deployment.
  */
 
 #define _POSIX_C_SOURCE 200809L
@@ -17,12 +15,47 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/mman.h>
+#include <signal.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <errno.h>
 
 #include "plan/plan.h"
 #include "log/log.h"
 #include "exec/proc.h"
 #include "fs/fs.h"
 #include "verify/verify.h"
+#include "messenger.h"
+
+static volatile sig_atomic_t keep_running = 1;
+
+/*
+ * SIGCHLD handler: The Supervisor's "Ear to the Ground"
+ */
+static void
+sigchld_handler(int sig)
+{
+    (void)sig;
+    int status;
+    pid_t pid;
+
+    /* Reap all zombies */
+    while ((pid = waitpid(-1, &status, WNOHANG)) > 0) {
+        if (WIFEXITED(status)) {
+            log_info("Process %d exited with status %d", pid, WEXITSTATUS(status));
+        } else if (WIFSIGNALED(status)) {
+            log_warn("Process %d killed by signal %d", pid, WTERMSIG(status));
+        }
+    }
+}
+
+static void
+sigint_handler(int sig)
+{
+    (void)sig;
+    log_warn("Termination signal received. Shutting down Supervisor.");
+    keep_running = 0;
+}
 
 /*
  * Execute a single step record.
@@ -35,6 +68,7 @@ execute_step(const void *base, const struct plan_header *hdr,
     const char *cmd  = plan_str(base, hdr->strtab_offset, step->cmd_offset);
     const char *wdir = plan_str(base, hdr->strtab_offset, step->wdir_offset);
     const char *env  = NULL;
+    uint32_t flags = step->flags;
     int rc = 0;
 
     if (step->env_len > 0)
@@ -51,7 +85,7 @@ execute_step(const void *base, const struct plan_header *hdr,
 
     switch (step->op) {
     case OP_EXEC:
-        rc = exec_command(cmd, wdir, env, step->env_len);
+        rc = exec_command(cmd, wdir, env, step->env_len, flags);
         break;
 
     case OP_MKDIR:
@@ -128,6 +162,25 @@ main(int argc, char **argv)
     const struct plan_header *hdr = (const struct plan_header *)base;
     const char *variant = (hdr->variant == VARIANT_BINARY) ? "binary" : "native";
 
+    /* 
+     * In Binary mode (Rogue Core), we act as the Init/Supervisor.
+     * Initialize the IPC broker and enter the persistent lifecycle loop.
+     */
+    if (hdr->variant == VARIANT_BINARY) {
+        struct sigaction sa;
+        memset(&sa, 0, sizeof(sa));
+        sa.sa_handler = sigchld_handler;
+        sigaction(SIGCHLD, &sa, NULL);
+
+        sa.sa_handler = sigint_handler;
+        sigaction(SIGINT, &sa, NULL);
+
+        int ipc_fd = messenger_broker_init();
+        (void)ipc_fd;
+
+        log_ok("Supervisor mode active. Monitoring heartbeat.");
+    }
+
     log_info("Executing %s plan with %u step(s)", variant, hdr->step_count);
 
     int failed = 0;
@@ -139,6 +192,15 @@ main(int argc, char **argv)
         }
     }
 
+    if (hdr->variant == VARIANT_BINARY && !failed) {
+        log_info("Startup phase complete. Entering Supervisor Idle.");
+        while (keep_running) {
+            pause(); /* Wait for signals (SIGCHLD, etc) */
+        }
+    }
+
+    uint32_t step_count = hdr->step_count; // Store before unmap
+
     munmap(base, file_size);
 
     if (failed) {
@@ -146,6 +208,6 @@ main(int argc, char **argv)
         return 1;
     }
 
-    log_ok("All %u steps executed successfully", hdr->step_count);
+    log_ok("All %u steps executed successfully", step_count);
     return 0;
 }

@@ -1,11 +1,12 @@
-// cogman planner — main.rs
-// This is the CLI entry point. It does exactly three things:
-//   1. Parse command-line arguments (cli/)
-//   2. Dispatch to the planner pipeline (run_plan)
-//   3. Exit with the right code
-//
-// It does NOT contain business logic, validation, or plan emission.
-// Those responsibilities live in their own modules.
+/*
+ * cogman/src/planner/main.rs - Build Planning Entry Point
+ *
+ * This file serves as the main command-line interface for the
+ * Cogman Planner, orchestrating metadata loading and plan emission.
+ *
+ * Why: To provide a safe, user-facing gateway to the high-level
+ * dependency resolution and scheduling logic.
+ */
 //
 // Execution order:
 //   parse args → load metadata → validate → resolve deps →
@@ -23,23 +24,6 @@ mod butler;
 #[cfg(feature = "ai")]
 use cogman_advisor as ai;
 
-#[cfg(not(feature = "ai"))]
-mod ai {
-    use std::path::PathBuf;
-    pub struct AiContext { pub package: crate::metadata::PackageMetadata }
-    impl AiContext { 
-        pub fn new(pkg: crate::metadata::PackageMetadata) -> Self { Self { package: pkg } }
-        pub fn with_error(self, _err: String) -> Self { self }
-    }
-    pub trait AiAdvisor {
-        fn explain_failure(&self, _ctx: &AiContext) -> Option<String> { None }
-        fn is_available(&self) -> bool { false }
-    }
-    pub struct NoopAdvisor;
-    impl AiAdvisor for NoopAdvisor {}
-    pub fn create_advisor() -> Box<dyn AiAdvisor> { Box::new(NoopAdvisor) }
-}
-
 use clap::Parser;
 use std::path::PathBuf;
 use std::process;
@@ -54,8 +38,12 @@ fn die(msg: &str) -> ! {
 
 // ── Planner pipeline ───────────────────────────────────────────────
 
+/// Main entry point for the planner pipeline.
+/// 
+/// This function coordinates the loading, validation, and resolution of metadata,
+/// and finally emits a binary execution plan.
 fn run_plan(
-    metadata_path: PathBuf,
+    metadata_path_raw: PathBuf,
     variant: Variant,
     native_opt: bool,
     keep_tmp: bool,
@@ -63,6 +51,11 @@ fn run_plan(
     rootfs: &str,
     explain: bool,
 ) {
+    let metadata_path = match std::fs::canonicalize(&metadata_path_raw) {
+        Ok(p) => p,
+        Err(e) => die(&format!("Cannot access metadata path {}: {}", metadata_path_raw.display(), e)),
+    };
+
     // Step 1: Load TOML metadata
     butler::info(format!("Loading metadata: {}", metadata_path.display()));
     let meta = match metadata::load_metadata(&metadata_path) {
@@ -97,17 +90,18 @@ fn run_plan(
     // Step 3: Resolve dependency graph
     butler::info("Resolving dependency graph");
     
-    let metadata_dir = metadata_path
-        .parent()
-        .and_then(|p| p.parent())
-        .and_then(|p| p.parent())
+    let metadata_root = metadata_path
+        .parent() // name dir
+        .and_then(|p| p.parent()) // group dir
+        .and_then(|p| p.parent()) // packages dir
+        .and_then(|p| p.parent()) // workspace root
         .map(|p| p.to_path_buf())
         .unwrap_or_else(|| {
             butler::error("Could not infer metadata root from input path");
-            PathBuf::from(".")
+            std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."))
         });
         
-    let mut loader = graph::resolve::RecursiveLoader::new(metadata_dir);
+    let mut loader = graph::resolve::RecursiveLoader::new(metadata_root.clone());
     if let Err(e) = loader.inject_root(&meta) {
         #[cfg(feature = "ai")]
         if explain {
@@ -148,7 +142,7 @@ fn run_plan(
             None => die(&format!("Metadata missing for resolved package: {}", pkg_name)),
         };
 
-        let mut pkg_steps = variants::plan_variant(pkg_meta, rootfs, variant, native_opt);
+        let mut pkg_steps = variants::plan_variant(pkg_meta, rootfs, variant, native_opt, &metadata_root);
         all_steps.append(&mut pkg_steps);
     }
     

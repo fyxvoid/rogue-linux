@@ -1,7 +1,12 @@
-// cogman planner — error.rs
-// Unified error type for the planner.
-// report failures. A single error type prevents stringly-typed error
-// propagation and makes the planner's failure surface explicit.
+/*
+ * cogman/src/planner/error.rs - Planner Error Definitions
+ *
+ * This file defines the custom error types used throughout the 
+ * Cogman Planner, enabling precise failure diagnostics.
+ *
+ * Why: To provide detailed, actionable feedback to the operator 
+ * when the planning pipeline encounters an invalid state.
+ */
 
 use std::fmt;
 

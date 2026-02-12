@@ -1,13 +1,15 @@
 /*
- * cogman executor — util/util.h
+ * cogman/src/executor/util/util.h - Shared Inline Utilities
  *
- * This header exists for small inline helpers that don't belong
- * in any specific syscall domain. Keep this minimal — if a helper
- * grows beyond a few lines, it deserves its own module.
+ * This header contains minimalist, side-effect-free inline helpers
+ * used across the Cogman Executor.
+ *
+ * Why: To centralize common logic (e.g., safe string length) while
+ * maintaining a zero-dependency footprint.
  */
 
-#ifndef COGMAN2_UTIL_H
-#define COGMAN2_UTIL_H
+#ifndef COGMAN_UTIL_H
+#define COGMAN_UTIL_H
 
 #include <string.h>
 
@@ -21,4 +23,4 @@ safe_strlen(const char *s, size_t max)
     return i;
 }
 
-#endif /* COGMAN2_UTIL_H */
+#endif /* COGMAN_UTIL_H */

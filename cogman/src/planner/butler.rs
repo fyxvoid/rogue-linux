@@ -1,5 +1,12 @@
-// cogman planner — butler.rs
-// Crisp HUD-inspired logging for the build planner.
+/*
+ * cogman/src/planner/butler.rs - Tactical Planner HUD
+ *
+ * This file implements the "Butler" logging personality for the
+ * build planner, using high-contrast ANSI tactical markers.
+ *
+ * Why: To provide the operator with real-time, aesthetically
+ * precise feedback during the build planning phase.
+ */
 
 use std::fmt::Display;
 use std::time::{SystemTime, UNIX_EPOCH};

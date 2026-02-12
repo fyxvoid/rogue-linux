@@ -1,17 +1,27 @@
-// cogman planner — variants/binary.rs
-// Binary install logic (extract & copy).
-// path: extract prebuilt artifacts and copy them into the rootfs.
-// No compilation, no temporary directories, no environment injection.
+/*
+ * cogman/src/planner/variants/binary.rs - Binary Deployment Strategy
+ *
+ * This file implements the "Binary" installation variant, which 
+ * focuses on direct artifact deployment from pre-built archives.
+ *
+ * Why: To provide a fast, compilation-free path for system updates 
+ * and tool injection.
+ */
 
 use crate::metadata::PackageMetadata;
 use crate::plan::layout::{PlanStep, StepOp, FailPolicy};
 
 /// Generate execution steps for the binary install variant.
 /// Sequence: mkdir → extract → verify → copy.
-pub fn plan(meta: &PackageMetadata, rootfs: &str) -> Vec<PlanStep> {
+pub fn plan(meta: &PackageMetadata, rootfs: &str, metadata_root: &std::path::Path) -> Vec<PlanStep> {
     let name = &meta.identity.name;
+    let cat = &meta.identity.category;
     let src = &meta.identity.source.file;
     let pkgroot = format!("{}/pkgroot/{}", rootfs, name);
+    
+    // Absolute path to the source tarball
+    let tar_path = metadata_root.join("packages").join(cat).join(name).join("tar").join(src);
+    let tar_str = tar_path.to_string_lossy();
 
     let mut steps = Vec::new();
 
@@ -27,7 +37,7 @@ pub fn plan(meta: &PackageMetadata, rootfs: &str) -> Vec<PlanStep> {
     // Extract prebuilt archive into pkgroot
     steps.push(PlanStep {
         op: StepOp::Exec,
-        command: format!("tar -xf tar/{} -C {}", src, pkgroot),
+        command: format!("tar -xf {} -C {}", tar_str, pkgroot),
         workdir: rootfs.to_string(),
         env: Vec::new(),
         fail_policy: FailPolicy::Abort,

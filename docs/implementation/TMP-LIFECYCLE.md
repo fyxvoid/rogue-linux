@@ -20,7 +20,7 @@ Cogman manages ephemeral directories for the build process.
 
 ## Safety
 -   The executor uses strictly scoped `rm -rf` on the specific path it created.
--   It will never traverse up (`..`) or delete outside `/tmp/cogmanII-*`.
+-   It will never traverse up (`..`) or delete outside `/tmp/cogman-*`.
 
 ## Example
 ```bash

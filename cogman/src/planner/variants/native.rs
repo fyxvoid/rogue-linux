@@ -1,8 +1,12 @@
-// cogman planner — variants/native.rs
-// Native build (compile from source) logic.
-// different lifecycle from binary installs: they need temporary
-// directories, environment injection, and a verification gate
-// between build and install.
+/*
+ * cogman/src/planner/variants/native.rs - Native Build Strategy
+ *
+ * This file implements the "Native" build variant, managing 
+ * source compilation, out-of-tree builds, and staged installation.
+ *
+ * Why: To enable high-performance, local compilation of security 
+ * tools within the Rogue Linux environment.
+ */
 
 use crate::metadata::PackageMetadata;
 use crate::plan::layout::{PlanStep, StepOp, FailPolicy};
@@ -17,10 +21,16 @@ pub fn plan(
     meta: &PackageMetadata,
     rootfs: &str,
     native_opt: bool,
+    metadata_root: &std::path::Path,
 ) -> Vec<PlanStep> {
     let name = &meta.identity.name;
+    let cat = &meta.identity.category;
     let pkgroot = format!("{}/pkgroot/{}", rootfs, name);
     let tmpdir = format!("/tmp/cogman-build-{}-native", name);
+    
+    // Absolute path to the source tar directory
+    let tar_dir = metadata_root.join("packages").join(cat).join(name).join("tar");
+    let tar_dir_str = tar_dir.to_string_lossy();
 
     // Build environment — always set PKGROOT/DESTDIR
     let mut base_env: Vec<(String, String)> = vec![
@@ -49,6 +59,15 @@ pub fn plan(
         op: StepOp::Mkdir,
         command: pkgroot.clone(),
         workdir: "/".to_string(),
+        env: Vec::new(),
+        fail_policy: FailPolicy::Abort,
+    });
+
+    // Phase 1.5: Symlink tar directory into tmpdir for relative paths in TOML
+    steps.push(PlanStep {
+        op: StepOp::Exec,
+        command: format!("ln -sf {} tar", tar_dir_str),
+        workdir: tmpdir.clone(),
         env: Vec::new(),
         fail_policy: FailPolicy::Abort,
     });

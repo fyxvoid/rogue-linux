@@ -1,13 +1,15 @@
 /*
- * cogman executor — verify/verify.h
+ * cogman/src/executor/verify/verify.h - Artifact Verification Definitions
  *
- * This header exists because verification (artifact checks before
- * installation) is the safety gate between build and install.
- * It must be a separate concern from general filesystem operations.
+ * This header defines the safety-gate interface for verifying produced
+ * artifacts against checksums and metadata before deployment.
+ *
+ * Why: To enforce system integrity and prevent corrupted packages
+ * from reaching the target filesystem.
  */
 
-#ifndef COGMAN2_VERIFY_H
-#define COGMAN2_VERIFY_H
+#ifndef COGMAN_VERIFY_H
+#define COGMAN_VERIFY_H
 
 /* Check that a path exists. Returns 0 if it does, -1 if not. */
 int verify_path(const char *path);
@@ -15,4 +17,4 @@ int verify_path(const char *path);
 /* Verify a step command (path check or sha256 hash check). */
 int verify_step(const char *cmd);
 
-#endif /* COGMAN2_VERIFY_H */
+#endif /* COGMAN_VERIFY_H */

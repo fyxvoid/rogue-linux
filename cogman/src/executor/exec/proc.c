@@ -1,13 +1,11 @@
 /*
- * cogman executor — exec/proc.c
+ * cogman/src/executor/exec/proc.c - Process Execution Logic
  *
- * Process execution logic (fork/exec/wait).
- * domain: fork(), execve(), waitpid(). It should not be mixed with
- * filesystem operations or plan parsing.
+ * This file implements the fork/exec/wait lifecycle for Cogman steps.
+ * It handles environment injection and sanitized process dispatch.
  *
- * Environment injection: the plan encodes KEY=VAL\0KEY=VAL\0 blocks
- * in the string table. This module parses them into execve-compatible
- * arrays, inheriting the current environment and overlaying plan vars.
+ * Why: To ensure that build steps are executed in a reproducible,
+ * isolated, and efficient manner.
  */
 
 #define _POSIX_C_SOURCE 200809L
@@ -21,6 +19,7 @@
 #include <stdint.h>
 
 #include "../log/log.h"
+#include "../plan/plan.h"
 
 /*
  * Parse a null-terminated env block into a NULL-terminated array.
@@ -68,9 +67,9 @@ parse_env_block(const char *block, uint32_t len)
 
 int
 exec_command(const char *cmd, const char *workdir,
-             const char *env_block, uint32_t env_len)
+             const char *env_block, uint32_t env_len, uint32_t flags)
 {
-    log_debug("exec_command: cmd='%s' wdir='%s'", cmd, workdir);
+    log_debug("exec_command: cmd='%s' wdir='%s' flags=0x%x", cmd, workdir, flags);
 
     pid_t pid = fork();
 
@@ -105,7 +104,12 @@ exec_command(const char *cmd, const char *workdir,
         _exit(127);
     }
 
-    /* Parent: wait for child */
+    /* Parent: wait for child UNLESS it's a service */
+    if (flags & STEP_FLAG_SERVICE) {
+        log_info("Process %d launched as a persistent service.", pid);
+        return 0;
+    }
+
     int status;
     if (waitpid(pid, &status, 0) < 0) {
         log_err("waitpid() failed: %s", strerror(errno));

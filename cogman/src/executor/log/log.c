@@ -1,12 +1,11 @@
 /*
- * cogman executor — log/log.c
+ * cogman/src/executor/log/log.c - Tactical Butler Logging
  *
- * Logging implementation (ANSI support).
- * that must be decoupled from business logic. Every module includes
- * log.h but never calls fprintf(stderr, ...) directly.
+ * This file implements the ANSI-compliant logging system for Cogman.
+ * It enforces the distinctive "Butler Personality" markers.
  *
- * Cogman butler personality preserved: all messages end with ", sir."
- * All output goes to stderr so stdout remains available for data.
+ * Why: To distinguish system-level signals from build output,
+ * providing the operator with clear tactical awareness.
  */
 
 #include <stdio.h>

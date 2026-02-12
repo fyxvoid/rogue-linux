@@ -1,8 +1,12 @@
-// cogman planner — variants/mod.rs
-// Install variants (Binary vs Native).
-// produce fundamentally different execution step sequences.
-// Each variant is in its own file so the step generation logic
-// is obvious and self-contained.
+/*
+ * cogman/src/planner/variants/mod.rs - Build Strategy Variants
+ *
+ * This module provides the abstractions for different build and 
+ * installation strategies (e.g., Native compilation vs. Binary deployment).
+ *
+ * Why: To allow Cogman to support diverse build lifecycles within 
+ * a unified planning interface.
+ */
 
 pub mod binary;
 pub mod native;
@@ -16,9 +20,10 @@ pub fn plan_variant(
     rootfs: &str,
     variant: Variant,
     native_opt: bool,
+    metadata_root: &std::path::Path,
 ) -> Vec<PlanStep> {
     match variant {
-        Variant::Binary => binary::plan(meta, rootfs),
-        Variant::Native => native::plan(meta, rootfs, native_opt),
+        Variant::Binary => binary::plan(meta, rootfs, metadata_root),
+        Variant::Native => native::plan(meta, rootfs, native_opt, metadata_root),
     }
 }

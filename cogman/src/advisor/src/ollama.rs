@@ -1,3 +1,12 @@
+/*
+ * cogman/src/advisor/src/ollama.rs - Ollama Remote Backend
+ *
+ * This file implements an optional backend for the AI Advisor using 
+ * the Ollama API for high-speed, remote inference.
+ *
+ * Why: To allow for faster diagnostics when a remote inference 
+ * server is available and air-gap security is not a primary concern.
+ */
 use crate::interface::AiAdvisor;
 use crate::context::AiContext;
 use crate::prompt::build_prompt;
@@ -54,6 +63,32 @@ impl AiAdvisor for OllamaAdvisor {
         None
     }
     
+    fn ask(&self, query: &str) -> Option<String> {
+        let client = reqwest::blocking::Client::new();
+        let res = client.post(&self.endpoint)
+            .json(&json!({
+                "model": self.model,
+                "prompt": query,
+                "stream": false
+            }))
+            .send();
+
+        match res {
+            Ok(resp) => {
+                if let Ok(json) = resp.json::<serde_json::Value>() {
+                    if let Some(text) = json["response"].as_str() {
+                        let sane = sanitize_response(text);
+                        if validate_safety(&sane) {
+                            return Some(sane);
+                        }
+                    }
+                }
+            }
+            Err(_) => {}
+        }
+        None
+    }
+
     fn is_available(&self) -> bool {
         let client = reqwest::blocking::Client::new();
         // Check API health

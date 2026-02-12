@@ -1,8 +1,12 @@
-// cogman planner — cli/args.rs
-// CLI argument definition (Clap).
-// It defines the CLI contract and validates flag combinations
-// before any planner logic runs. Clap handles structural validation;
-// this module handles semantic validation (e.g. --native requires --build).
+/*
+ * cogman/src/planner/cli/args.rs - CLI Argument Definitions
+ *
+ * This file defines the Clap-based argument schema and semantic 
+ * validation rules for Cogman's user-facing flags.
+ *
+ * Why: To enforce a rigorous and user-friendly interface for 
+ * configuring build and deployment runs.
+ */
 
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;

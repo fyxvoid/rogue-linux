@@ -1,9 +1,11 @@
 /*
- * cogman executor — fs/fs.c
+ * cogman/src/executor/fs/fs.c - Filesystem Operation Handlers
  *
- * Filesystem operations (mkdir, copy, rm).
- * are a distinct syscall domain. No shell invocations — uses POSIX
- * APIs directly for determinism and speed.
+ * This file implements the low-level filesystem logic for Cogman, 
+ * including directory creation and artifact copying via POSIX APIs.
+ *
+ * Why: To ensure deterministic and fast filesystem mutations 
+ * without the overhead of external shell calls.
  */
 
 #define _POSIX_C_SOURCE 200809L
@@ -67,22 +69,32 @@ copy_file(const char *src, const char *dst)
     ssize_t n;
 
     fd_src = open(src, O_RDONLY);
-    if (fd_src < 0)
+    if (fd_src < 0) {
+        log_err("Cannot open source file %s: %s", src, strerror(errno));
         return -1;
+    }
 
     if (fstat(fd_src, &st) < 0) {
+        log_err("Cannot fstat source file %s: %s", src, strerror(errno));
         close(fd_src);
         return -1;
     }
 
+    /* Unlink destination if it exists to handle read-only files we own */
+    if (unlink(dst) != 0 && errno != ENOENT) {
+        log_debug("Could not unlink %s (might be a directory or permission issue): %s", dst, strerror(errno));
+    }
+
     fd_dst = open(dst, O_WRONLY | O_CREAT | O_TRUNC, st.st_mode);
     if (fd_dst < 0) {
+        log_err("Cannot open destination file %s: %s", dst, strerror(errno));
         close(fd_src);
         return -1;
     }
 
     while ((n = read(fd_src, buf, sizeof(buf))) > 0) {
         if (write(fd_dst, buf, n) != n) {
+            log_err("Short write to %s: %s", dst, strerror(errno));
             close(fd_src);
             close(fd_dst);
             return -1;
@@ -104,7 +116,7 @@ copy_recursive(const char *src, const char *dst)
 
     dir = opendir(src);
     if (!dir) {
-        log_err("Cannot open directory: %s", src);
+        log_err("Cannot open source directory %s: %s", src, strerror(errno));
         return -1;
     }
 
@@ -123,7 +135,7 @@ copy_recursive(const char *src, const char *dst)
         snprintf(dst_path, PATH_MAX, "%s/%s", dst, ent->d_name);
 
         if (stat(src_path, &st) < 0) {
-            log_err("Cannot stat: %s", src_path);
+            log_err("Cannot stat %s: %s", src_path, strerror(errno));
             closedir(dir);
             return -1;
         }
@@ -135,7 +147,7 @@ copy_recursive(const char *src, const char *dst)
             }
         } else {
             if (copy_file(src_path, dst_path) != 0) {
-                log_err("Cannot copy: %s", src_path);
+                log_err("Failed to copy file %s to %s", src_path, dst_path);
                 closedir(dir);
                 return -1;
             }

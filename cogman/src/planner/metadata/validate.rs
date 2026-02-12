@@ -1,8 +1,12 @@
-// cogman planner — metadata/validate.rs
-// Semantic validation for loaded metadata.
-// catch everything. Values can be the right type but semantically wrong:
-// empty names, path traversal in verify paths, relative write paths.
-// This is the last gate before metadata enters the planner pipeline.
+/*
+ * cogman/src/planner/metadata/validate.rs - Semantic Metadata Validator
+ *
+ * This file performs deep semantic validation on package metadata, 
+ * checking for logical errors that go beyond basic structural typing.
+ *
+ * Why: To catch configuration errors during the planning phase, 
+ * preventing build failures in the subsequent execution loop.
+ */
 
 use crate::metadata::schema::PackageMetadata;
 use crate::error::PlannerError;

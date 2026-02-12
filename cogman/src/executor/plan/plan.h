@@ -1,18 +1,16 @@
 /*
- * cogman executor — plan/plan.h
+ * cogman/src/executor/plan/plan.h - Binary Plan Data Structures
  *
- * This header exists because the binary plan format is a contract
- * between the Rust planner and the C executor. Every constant and
- * struct here MUST match planner/src/plan/layout.rs exactly.
+ * This header defines the shared binary contract between the Rust
+ * Planner and the C Executor. It includes the plan header and
+ * step record layouts.
  *
- * Plan file layout:
- *   [PlanHeader]                 — 64 bytes
- *   [StepRecord × step_count]    — 128 bytes each
- *   [String table]               — variable, null-terminated strings
+ * Why: To ensure that both components speak the same binary language
+ * for zero-latency instruction handover.
  */
 
-#ifndef COGMAN2_PLAN_H
-#define COGMAN2_PLAN_H
+#ifndef COGMAN_PLAN_H
+#define COGMAN_PLAN_H
 
 #include <stdint.h>
 #include <stddef.h>
@@ -39,6 +37,9 @@
 #define FAIL_ABORT  0   /* halt the entire plan */
 #define FAIL_WARN   1   /* log and continue */
 
+/* Step Record Flags */
+#define STEP_FLAG_SERVICE (1 << 0) /* Process should be monitored and restarted */
+
 /* Plan header — 64 bytes, packed */
 struct __attribute__((packed)) plan_header {
     char     magic[8];
@@ -53,13 +54,15 @@ struct __attribute__((packed)) plan_header {
 struct __attribute__((packed)) step_record {
     uint32_t op;
     uint32_t fail_policy;
+    uint32_t flags;
+    uint32_t _reserved_flags;
     uint32_t cmd_offset;
     uint32_t cmd_len;
     uint32_t wdir_offset;
     uint32_t wdir_len;
     uint32_t env_offset;
     uint32_t env_len;
-    char     _reserved[96];
+    char     _reserved[88];
 };
 
 /* Accessor: get string from string table */
@@ -90,4 +93,4 @@ int plan_validate(const void *base, size_t file_size);
 /* Get the human-readable name for a step op. */
 const char *plan_op_name(uint32_t op);
 
-#endif /* COGMAN2_PLAN_H */
+#endif /* COGMAN_PLAN_H */

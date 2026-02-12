@@ -1,7 +1,12 @@
-// cogman planner — plan/emit.rs
-// Plan file generation logic.
-// format is a distinct concern from defining the format (layout.rs).
-// The string table builder and write logic live here.
+/*
+ * cogman/src/planner/plan/emit.rs - Binary Plan Serializer
+ *
+ * This file implements the binary serialization logic for Cogman 
+ * plans, including string table construction and record packing.
+ *
+ * Why: To produce high-performance, mmap-ready instruction sets 
+ * for the Cogman Executor.
+ */
 
 use std::io::{self, Write};
 use crate::plan::layout::*;
@@ -65,13 +70,15 @@ pub fn emit_plan<W: Write>(
         records.push(StepRecord {
             op: step.op as u32,
             fail_policy: step.fail_policy as u32,
+            flags: 0,
+            _reserved_flags: 0,
             cmd_offset: cmd_off,
             cmd_len,
             wdir_offset: wdir_off,
             wdir_len,
             env_offset: env_off,
             env_len,
-            _reserved: [0u8; 96],
+            _reserved: [0u8; 88],
         });
     }
 
