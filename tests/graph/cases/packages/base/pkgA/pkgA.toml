@@ -1,0 +1,19 @@
+[identity]
+        name = "pkgA"
+        version = "1.0"
+        category = "base"
+        summary = "test"
+
+        [identity.source]
+        kind = "tarball"
+        file = "pkgA.tar"
+
+        [identity.depends]
+build = ["base/libB"]
+
+        [build]
+        system = "make"
+        steps = ["echo build pkgA"]
+
+        [installer]
+        steps = ["echo install pkgA"]

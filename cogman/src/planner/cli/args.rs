@@ -56,6 +56,10 @@ pub enum Command {
         /// Explain failures using local AI
         #[arg(long)]
         explain: bool,
+
+        /// Skip plan cache — force full re-planning even if metadata is unchanged
+        #[arg(long)]
+        no_cache: bool,
     },
 
     /// Plan a package install (alias for build --binary)
@@ -104,5 +108,9 @@ pub enum Command {
         /// Explain failures using local AI
         #[arg(long)]
         explain: bool,
+
+        /// Skip plan cache — force full re-planning even if metadata is unchanged
+        #[arg(long)]
+        no_cache: bool,
     },
 }

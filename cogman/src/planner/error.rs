@@ -25,6 +25,8 @@ pub enum PlannerError {
     PlanEmit(String),
     /// CLI flag conflict or missing argument.
     Cli(String),
+    /// A package policy constraint was violated.
+    PolicyViolation(String),
 }
 
 impl fmt::Display for PlannerError {
@@ -40,6 +42,7 @@ impl fmt::Display for PlannerError {
             Self::DependencyGraph(e) => write!(f, "dependency: {}", e),
             Self::PlanEmit(e) => write!(f, "plan: {}", e),
             Self::Cli(e) => write!(f, "cli: {}", e),
+            Self::PolicyViolation(e) => write!(f, "policy: {}", e),
         }
     }
 }

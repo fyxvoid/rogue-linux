@@ -12,6 +12,7 @@
 
 pub mod layout;
 pub mod emit;
+pub mod cache;
 
 pub use layout::{Variant, StepOp, FailPolicy, PlanStep};
 pub use emit::emit_plan;

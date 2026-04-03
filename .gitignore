@@ -1,1 +1,8 @@
 /packages
+cogman/src/target/
+**/__pycache__/
+*.pyc
+*.o
+cogman/src/executor/cogman-exec
+cogman/src/executor/verify/verify.o
+logs/

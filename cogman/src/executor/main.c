@@ -61,6 +61,24 @@ sigint_handler(int sig)
  * Execute a single step record.
  * Returns 0 on success, -1 on failure.
  */
+/*
+ * Returns 1 if any path component is ".." (traversal attempt).
+ * Walks each segment between slashes to detect bare ".." entries.
+ */
+static int
+path_has_traversal(const char *path)
+{
+    const char *p = path;
+    while (*p) {
+        while (*p == '/') p++;          /* skip leading/repeated slashes */
+        if (p[0] == '.' && p[1] == '.' &&
+            (p[2] == '/' || p[2] == '\0'))
+            return 1;
+        while (*p && *p != '/') p++;    /* skip this component */
+    }
+    return 0;
+}
+
 static int
 execute_step(const void *base, const struct plan_header *hdr,
              const struct step_record *step, uint32_t index)
@@ -107,7 +125,16 @@ execute_step(const void *base, const struct plan_header *hdr,
             break;
         }
         *sep = '\0';
-        rc = copy_recursive(buf, sep + 1);
+        const char *src_path = buf;
+        const char *dst_path = sep + 1;
+        if (path_has_traversal(src_path) || path_has_traversal(dst_path)) {
+            log_err("COPY step rejected: path traversal detected (src='%s' dst='%s')",
+                    src_path, dst_path);
+            free(buf);
+            rc = -1;
+            break;
+        }
+        rc = copy_recursive(src_path, dst_path);
         free(buf);
         break;
     }
