@@ -1,0 +1,10 @@
+[service]
+name=dbus
+command=/usr/bin/dbus-daemon --system --nofork
+type=process
+restart=always
+restart_delay=2
+
+[env]
+PATH=/usr/bin:/bin
+DBUS_SYSTEM_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket

@@ -1,0 +1,9 @@
+[service]
+name=syslogd
+command=/sbin/syslogd -n
+type=process
+restart=always
+restart_delay=2
+
+[env]
+PATH=/sbin:/usr/sbin:/bin:/usr/bin

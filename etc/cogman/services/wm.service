@@ -1,0 +1,14 @@
+[service]
+name=wm
+command=/usr/bin/openbox --startup /etc/cogman/autostart
+type=process
+restart=always
+restart_delay=1
+depends=dbus,xorg
+
+[env]
+DISPLAY=:0
+HOME=/root
+XDG_RUNTIME_DIR=/run/user/0
+PATH=/usr/bin:/bin
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/dbus/system_bus_socket

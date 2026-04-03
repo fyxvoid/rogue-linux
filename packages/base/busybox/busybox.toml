@@ -1,0 +1,40 @@
+[identity]
+name    = "busybox"
+version = "1.36.1"
+category = "base"
+summary = "All-in-one embedded Unix utilities (static build)"
+
+[identity.source]
+kind = "tarball"
+file = "busybox-1.36.1.tar.bz2"
+
+[identity.depends]
+build   = ["toolchain/linux-headers"]
+runtime = []
+
+[build]
+system = "make"
+steps  = [
+    "tar -xf tar/busybox-1.36.1.tar.bz2",
+    "make -C busybox-1.36.1 defconfig",
+    # Strip any existing CONFIG_STATIC line then force enable it
+    "grep -v 'CONFIG_STATIC' busybox-1.36.1/.config > busybox-1.36.1/.config.new && echo 'CONFIG_STATIC=y' >> busybox-1.36.1/.config.new && mv busybox-1.36.1/.config.new busybox-1.36.1/.config",
+    "make -C busybox-1.36.1 -j$(nproc) V=0",
+]
+
+[installer]
+steps = [
+    "make -C busybox-1.36.1 CONFIG_PREFIX=$PKGROOT install",
+    "mkdir -p $PKGROOT/sbin",
+    "test -f $PKGROOT/sbin/init || ln -sf ../bin/busybox $PKGROOT/sbin/init",
+]
+
+[installer.verify]
+expected_files = [
+    "bin/busybox",
+    "sbin/init",
+]
+
+[policy.filesystem]
+read  = ["/"]
+write = ["/"]

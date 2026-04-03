@@ -241,9 +241,9 @@ for cat in "${ORDERED_CATEGORIES[@]}"; do
         rc=0
         install_package "$toml" || rc=$?
         case $rc in
-            0) ((INSTALLED++)) ;;
-            3) FAILED_PKGS+=("$toml (plan)");   ((SKIPPED++)) ;;
-            4) FAILED_PKGS+=("$toml (execute)"); ((SKIPPED++)) ;;
+            0) INSTALLED=$((INSTALLED + 1)) ;;
+            3) FAILED_PKGS+=("$toml (plan)");    SKIPPED=$((SKIPPED + 1)) ;;
+            4) FAILED_PKGS+=("$toml (execute)"); SKIPPED=$((SKIPPED + 1)) ;;
         esac
     done < <(find "$cat_dir" -name "*.toml" -print0 | sort -z)
 done
@@ -260,8 +260,8 @@ while IFS= read -r -d '' toml; do
     rc=0
     install_package "$toml" || rc=$?
     case $rc in
-        0) ((INSTALLED++)) ;;
-        3|4) FAILED_PKGS+=("$toml"); ((SKIPPED++)) ;;
+        0) INSTALLED=$((INSTALLED + 1)) ;;
+        3|4) FAILED_PKGS+=("$toml"); SKIPPED=$((SKIPPED + 1)) ;;
     esac
 done < <(find "$PACKAGES_DIR" -name "*.toml" -print0 | sort -z)
 

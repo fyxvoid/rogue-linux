@@ -6,3 +6,4 @@ cogman/src/target/
 cogman/src/executor/cogman-exec
 cogman/src/executor/verify/verify.o
 logs/
+packages/toolchain/*/tar/*.xz

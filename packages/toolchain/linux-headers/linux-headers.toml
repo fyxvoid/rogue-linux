@@ -1,0 +1,35 @@
+[identity]
+name    = "linux-headers"
+version = "6.6.75"
+category = "toolchain"
+summary = "Linux kernel userspace API headers"
+
+[identity.source]
+kind = "tarball"
+file = "linux-6.6.75.tar.xz"
+
+[identity.depends]
+build   = []
+runtime = []
+
+[build]
+system = "make"
+steps  = [
+    "tar -xf tar/linux-6.6.75.tar.xz",
+]
+
+[installer]
+steps = [
+    "make -C linux-6.6.75 headers_install INSTALL_HDR_PATH=$PKGROOT/usr ARCH=x86_64",
+    "find $PKGROOT/usr/include -name '*.install*' -delete",
+]
+
+[installer.verify]
+expected_files = [
+    "usr/include/linux/types.h",
+    "usr/include/asm/types.h",
+]
+
+[policy.filesystem]
+read  = ["/"]
+write = ["/"]

@@ -1,0 +1,43 @@
+[identity]
+name    = "base-files"
+version = "1.0"
+category = "base"
+summary  = "Rogue Linux base filesystem configuration (inittab, passwd, fstab, etc.)"
+
+[identity.source]
+kind = "tarball"
+file = "base-files-1.0.tar.gz"
+
+[identity.depends]
+build   = ["base/busybox"]
+runtime = ["base/busybox"]
+
+[build]
+system = "make"
+steps  = [
+    # No compilation needed — just extract the pre-built config tree
+    "tar -xzf tar/base-files-1.0.tar.gz -C $PKGROOT",
+    # Ensure required directories exist in pkgroot
+    "mkdir -p $PKGROOT/proc $PKGROOT/sys $PKGROOT/dev $PKGROOT/tmp $PKGROOT/run",
+    "mkdir -p $PKGROOT/root $PKGROOT/home $PKGROOT/mnt $PKGROOT/opt",
+]
+
+[installer]
+steps = [
+    # Fix permissions on sensitive files
+    "chmod 640 $PKGROOT/etc/shadow",
+    "chmod 755 $PKGROOT/etc/init.d/rcS",
+]
+
+[installer.verify]
+expected_files = [
+    "etc/inittab",
+    "etc/passwd",
+    "etc/fstab",
+    "etc/init.d/rcS",
+    "etc/hostname",
+]
+
+[policy.filesystem]
+read  = ["/"]
+write = ["/"]

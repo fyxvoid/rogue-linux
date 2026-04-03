@@ -1,0 +1,12 @@
+[service]
+name=xorg
+command=/usr/bin/Xorg :0 -nolisten tcp vt1
+type=process
+restart=always
+restart_delay=3
+depends=syslogd
+
+[env]
+PATH=/usr/bin:/bin
+DISPLAY=:0
+XDG_RUNTIME_DIR=/run/user/0
