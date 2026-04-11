@@ -1,0 +1,21 @@
+[package]
+name    = "cogman"
+version = "2.0.0"
+edition = "2021"
+description = "Cogman — unified init, package manager, supervisor, and health monitor for Rogue Linux"
+
+[[bin]]
+name = "cogman"
+path = "src/main.rs"
+
+[dependencies]
+clap      = { version = "4", features = ["derive", "env"] }
+serde     = { version = "1", features = ["derive"] }
+toml      = "0.8"
+libc      = "0.2"
+
+[profile.release]
+opt-level  = 3
+lto        = true
+strip      = true
+panic      = "abort"   # smaller binary, better for init use

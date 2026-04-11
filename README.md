@@ -1,62 +1,156 @@
-# Rogue Linux ▐ COGMAN ▌
+# Rogue Linux — Cogman
 
-A minimal, deterministic, and AI-assisted Linux distribution build system.
-
-## 🛡️ Executive Summary
-Rogue Linux is a metadata-driven infrastructure for constructing sovereign operating systems. It utilizes a strict, two-stage **modular architecture** that separates planning (Rust) from execution (C), ensuring absolute predictability and near-zero build overhead.
-
-## ✨ Key Features
-- **Deterministic Pipeline**: Identical inputs yield bit-identical build plans.
-- **Modular Cogman**:
-    - **Planner (Rust)**: High-safety dependency resolution and validation.
-    - **Executor (C)**: High-performance, isolated instruction runner.
-    - **Advisor (AI)**: Local LLM (`Qwen2.5-3B`) for context-aware failure analysis, gated by build flags.
-- **Rogue Labs**: Integrated hybrid cloud/local testing environment with OpenVPN support.
-- **Cyberpunk SSG**: High-performance website engine (76KB payload) for package indexing and community.
-- **Production-Ready Metadata**: 166 packages verified with strict `package.toml` schema (v1.0).
-
-## 📊 Performance Benchmarks
-The modular refactor (Rust/C) achieved massive reductions in overhead compared to the legacy Python implementation.
-
-```mermaid
-gantt
-    title Build System Overhead (ms)
-    dateFormat  X
-    axisFormat %s
-    section Legacy (Python)
-    Load & Resolve : 0, 450
-    section Current (Rust)
-    Load & Resolve : 0, 8
-```
-
-| Metric | Legacy (Python) | Current (Modular) | Improvement |
-|--------|-----------------|-------------------|-------------|
-| **Planner Latency** | ~450ms | **~8ms** | **56x Faster** |
-| **Peak Memory (RSS)** | ~85MB | **~4MB** | **21x Reduction** |
-| **Exec Overhead** | ~45ms/proc | **~0.9ms/proc** | **50x Faster** |
-
-## 🏗️ Architecture
-```mermaid
-graph LR
-    TOML[package.toml] --> Planner[Rust Planner]
-    Planner -->|Binary Plan| Exec[C Executor]
-    Exec -->|Isolated Build| RootFS[/mnt/rogue]
-    
-    subgraph "AI Gating"
-    Planner -.->|Failure Context| Advisor[AI Advisor]
-    Advisor -.->|Butler Advice| User[Operator]
-    end
-```
-
-## 🗺️ Documentation Map
-- **[ARCHITECTURE](./docs/architecture/ARCHITECTURE.md)**: Deep dive into the two-stage logic.
-- **[AI STRATEGY](./docs/architecture/ai_architecture.md)**: Model selection and safety boundaries.
-- **[METADATA](./docs/implementation/METADATA.md)**: Defining packages for Rogue Linux.
-- **[HISTORY](./docs/project/HISTORY.md)**: The journey from LFS to Cyberpunk.
-- **[VERIFICATION](./docs/VERIFICATION_AUDIT.md)**: Final audit results.
-
-## 🚀 Status
-The **Infrastructure Hardening** phase is complete. The build system, website, and AI advisor are fully verified. The project is currently positioned for the final **Rootfs Construction** phase.
+A deterministic, metadata-driven build system and init supervisor for constructing minimal Linux-based OS images.
 
 ---
-*"Boring systems are good systems. Precision is our primary aesthetic."*
+
+## What is Rogue Linux?
+
+Rogue Linux is not a distribution. It is an infrastructure for building one. Given a set of package definitions, it produces a reproducible root filesystem that can boot as a minimal Linux system — with cogman as the init process.
+
+The system has two distinct halves:
+
+**Build half** — turns package definitions into a rootfs:
+- `cogman-planner` (Rust) — reads TOML package metadata, resolves dependencies, emits a binary build plan
+- `cogman-executor` (C) — executes the plan in an isolated environment, installs files into a staging root
+
+**Runtime half** — manages processes once the OS is running:
+- `cogman` (Rust, unified) — init daemon that spawns, monitors, heals, and controls services; also installs packages
+
+---
+
+## Repository Layout
+
+```
+rogue-linux/
+├── packages/               Package definitions
+│   ├── base/
+│   │   ├── busybox/        busybox-1.36.1 (static build, init scripts)
+│   │   └── base-files/     /etc skeleton, inittab, rcS
+│   └── toolchain/
+│       └── linux-headers/  linux-6.6.75 kernel headers
+├── cogman/
+│   ├── bin/                Compiled binaries (cogman, cogman-planner, etc.)
+│   ├── src/
+│   │   ├── Cargo.toml      Rust workspace (planner, advisor, cogman)
+│   │   ├── planner/        cogman-planner binary (Rust)
+│   │   ├── advisor/        AI advisor crate (Ollama / llama.cpp backend)
+│   │   ├── cogman/         Unified cogman daemon (Rust, v2)
+│   │   ├── executor/       cogman-executor binary (C11)
+│   │   └── supervisor/     Legacy C supervisor (deprecated)
+├── etc/
+│   └── cogman/services/    Service definition files (*.service)
+├── scripts/
+│   ├── build/              rootfs.sh, fetch.sh, security checks
+│   └── utils/              finalize_rootfs.py, helpers
+├── docs/                   Architecture and reference documentation
+└── Makefile                Top-level build
+```
+
+---
+
+## Quick Start
+
+### Build the tools
+
+```sh
+make all       # builds planner + executor + cogman, copies to bin/
+make install   # copies bin/ to /usr/local/bin (requires sudo)
+```
+
+### Fetch package sources
+
+```sh
+scripts/build/fetch.sh packages/base/busybox/busybox.toml
+scripts/build/fetch.sh packages/toolchain/linux-headers/linux-headers.toml
+```
+
+### Build a minimal rootfs
+
+```sh
+sudo scripts/build/rootfs.sh --native
+# Output: /mnt/rogue/pkgroot/ with busybox, base-files, linux headers
+```
+
+### Run cogman as init (on target)
+
+```sh
+# As PID 1 (kernel command line: init=/usr/bin/cogman daemon)
+cogman daemon --services /etc/cogman/services
+
+# Service control
+cogman svc list
+cogman svc status syslogd
+cogman svc stop xorg
+cogman svc restart wm
+
+# Package management
+cogman pkg install /packages/base/busybox/busybox.toml
+cogman pkg remove busybox
+cogman pkg list
+```
+
+---
+
+## Architecture
+
+### Build Pipeline
+
+```
+package.toml
+    │
+    ▼
+cogman-planner
+    Reads TOML metadata
+    Resolves dependency graph (topological sort)
+    Validates build + installer steps
+    Applies filesystem policy (read/write path restrictions)
+    ──→  <name>.plan   (binary, CGM2PLAN format)
+    │
+    ▼
+cogman-executor
+    mmaps the plan file
+    Executes each step in a controlled staging environment
+    Verifies expected output files (SHA-256 checksums)
+    Installs files into $PKGROOT/<package>/
+    Writes file manifest to <name>.manifest
+    │
+    ▼
+$PKGROOT/<package>/   (staged package root)
+    │
+    ▼
+finalize_rootfs.py    (merges package roots into the final rootfs)
+    │
+    ▼
+/mnt/rogue/           (bootable root filesystem)
+```
+
+### Cogman v2 Daemon
+
+The unified `cogman` binary has three modes:
+
+| Mode | Command | Description |
+|------|---------|-------------|
+| Init daemon | `cogman daemon` | Supervisor loop; reads `*.service` files |
+| Service control | `cogman svc <verb>` | Talks to live daemon over Unix socket |
+| Package management | `cogman pkg <verb>` | Install / remove / upgrade packages |
+
+---
+
+## Performance
+
+| Metric | Legacy (Python) | Current | Improvement |
+|--------|-----------------|---------|-------------|
+| Plan resolution | ~450 ms | ~8 ms | 56x |
+| Peak memory | ~85 MB | ~4 MB | 21x |
+| Exec overhead per step | ~45 ms | ~0.9 ms | 50x |
+
+---
+
+## Documentation
+
+- [Package Format](docs/package-format.md) — TOML schema for package definitions
+- [Cogman Daemon](docs/cogman-daemon.md) — daemon CLI, socket protocol, health checks
+- [Service Files](docs/service-files.md) — `*.service` format for the runtime supervisor
+- [Build Architecture](docs/architecture.md) — planner/executor design and binary plan format
+- [Rootfs Build Guide](docs/rootfs-build.md) — step-by-step guide to a bootable rootfs

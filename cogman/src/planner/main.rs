@@ -33,7 +33,7 @@ use cli::{Cli, Command};
 use plan::Variant;
 
 fn die(msg: &str) -> ! {
-    butler::error(msg);
+    butler::fatal(msg);
     process::exit(1);
 }
 
@@ -58,10 +58,17 @@ fn run_plan(
         Err(e) => die(&format!("Cannot access metadata path {}: {}", metadata_path_raw.display(), e)),
     };
 
+    butler::greet();
+
+    // Notify if rootfs target is non-standard
+    if rootfs != "/" {
+        butler::nonstandard_rootfs(rootfs);
+    }
+
     // Step 0: Cache key — computed after loading meta; checked before emitting.
     // We load metadata first so the key reflects actual content.
     // Step 1: Load TOML metadata
-    butler::info(format!("Loading metadata: {}", metadata_path.display()));
+    butler::info(format!("Loading package definition: {}", metadata_path.display()));
     let meta = match metadata::load_metadata(&metadata_path) {
         Ok(m) => m,
         Err(e) => {
@@ -69,17 +76,20 @@ fn run_plan(
             if explain {
                 let advisor = ai::create_advisor();
                 if advisor.is_available() {
-                    butler::info("Consulting AI advisor about this metadata failure...");
+                    butler::info("Consulting the AI advisor on this metadata mishap, sir. One moment...");
+                } else {
+                    butler::advisor_unavailable();
                 }
             }
             #[cfg(not(feature = "ai"))]
             let _ = explain;
-            die(&format!("Metadata parse failure: {}", e))
+            butler::bad_metadata(&metadata_path.display().to_string(), &e.to_string());
+            process::exit(1);
         }
     };
 
     // Step 2: Semantic validation
-    butler::check("Validating package schema");
+    butler::check(format!("Validating package schema for '{}'", meta.identity.name));
     if let Err(e) = metadata::validate(&meta) {
         #[cfg(feature = "ai")]
         if explain {
@@ -89,14 +99,14 @@ fn run_plan(
                 butler::advise(advice);
             }
         }
-        butler::error(format!("Validation failed:\n{}", e));
-        die("Validation error(s) found");
+        butler::validation_failed(&e.to_string());
+        die("Validation error(s) found — the build cannot proceed in good conscience");
     }
-    butler::success("Validation passed");
+    butler::smooth(format!("'{}' passed schema validation without a single complaint.", meta.identity.name));
 
     // Step 3: Resolve dependency graph
-    butler::info("Resolving dependency graph");
-    
+    butler::info("Resolving the dependency graph — tracing the full lineage of requirements...");
+
     let metadata_root = metadata_path
         .parent() // name dir
         .and_then(|p| p.parent()) // group dir
@@ -104,10 +114,10 @@ fn run_plan(
         .and_then(|p| p.parent()) // workspace root
         .map(|p| p.to_path_buf())
         .unwrap_or_else(|| {
-            butler::error("Could not infer metadata root from input path");
+            butler::warn("Could not infer metadata root from input path — falling back to current directory");
             std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."))
         });
-        
+
     let mut loader = graph::resolve::RecursiveLoader::new(metadata_root.clone());
     if let Err(e) = loader.inject_root(&meta) {
         #[cfg(feature = "ai")]
@@ -121,7 +131,6 @@ fn run_plan(
         die(&format!("Dependency loading failed: {}", e));
     }
 
-    // ... rest of the pipeline ...
     let build_list = match graph::topo::resolve_order(&loader.graph) {
         Ok(order) => order.order,
         Err(e) => {
@@ -133,33 +142,45 @@ fn run_plan(
                     butler::advise(advice);
                 }
             }
-            die(&format!("Dependency resolution failed: {}", e))
+            // Check if it sounds like a cycle
+            let msg = e.to_string();
+            if msg.to_lowercase().contains("cycle") || msg.to_lowercase().contains("circular") {
+                butler::circular_dep(&msg);
+            }
+            die(&format!("Dependency resolution failed: {}", msg))
         }
     };
-    
-    butler::success(format!("Build order resolved ({} packages)", build_list.len()));
+
+    butler::deps_resolved(build_list.len());
 
     // Step 4: Policy enforcement — check each resolved package
-    butler::check("Enforcing package policies");
+    butler::check("Enforcing package policies — security boundaries are not optional");
     for pkg_name in &build_list {
         let pkg_meta = match loader.metadata.get(pkg_name) {
             Some(m) => m,
-            None => die(&format!("Metadata missing for policy check: {}", pkg_name)),
+            None => die(&format!("Internal inconsistency, my lord — metadata missing for resolved package '{}'", pkg_name)),
         };
         if let Err(e) = policy::enforce_write_target(&pkg_meta.policy, rootfs) {
-            die(&format!("[{}] Policy violation: {}", pkg_name, e));
+            butler::policy_deny(&format!("[{}] {}", pkg_name, e));
+            process::exit(1);
         }
         let all_steps: Vec<String> = pkg_meta.build.steps.iter()
             .chain(pkg_meta.installer.steps.iter())
             .cloned()
             .collect();
         if let Err(e) = policy::enforce_network(&pkg_meta.policy, policy::steps_require_network(&all_steps)) {
-            die(&format!("[{}] Policy violation: {}", pkg_name, e));
+            butler::network_denied(pkg_name);
+            let _ = e; // message already delivered
+            process::exit(1);
         }
     }
-    butler::success("All package policies satisfied");
+    butler::success(format!(
+        "All {} package{} cleared policy inspection, your excellency. The estate is secure.",
+        build_list.len(),
+        if build_list.len() == 1 { "" } else { "s" }
+    ));
 
-    butler::info(format!("Planning installation for {} packages", build_list.len()));
+    butler::info(format!("Assembling the execution plan for {} package(s)...", build_list.len()));
 
     let mut all_steps = Vec::new();
 
@@ -168,19 +189,17 @@ fn run_plan(
             Some(m) => m,
             None => die(&format!("Metadata missing for resolved package: {}", pkg_name)),
         };
-
+        butler::step(format!("Planning steps for '{}'", pkg_name));
         let mut pkg_steps = variants::plan_variant(pkg_meta, rootfs, variant, native_opt, &metadata_root);
         all_steps.append(&mut pkg_steps);
     }
-    
+
     if keep_tmp {
         all_steps.retain(|s| s.op != plan::StepOp::Cleanup);
-        butler::info("Temporary directories will be preserved (--keep-tmp), as you requested");
+        butler::keep_tmp_taunt();
     }
 
-    // Step 5: Cache check — skip emit if an identical plan is already cached.
-    // Key encodes metadata content + variant + rootfs so that the same package
-    // planned for different targets or build modes gets distinct cache entries.
+    // Step 5: Cache check
     let cache_key = format!(
         "{}_v{}_r{:x}_kt{}",
         plan::cache::compute_cache_key(&meta),
@@ -189,53 +208,65 @@ fn run_plan(
         keep_tmp as u8,
     );
 
-    butler::info(format!("Emitting plan ({} steps)", all_steps.len()));
+    butler::info(format!("Plan assembled — {} step(s) ready for emission.", all_steps.len()));
+
     match output {
         Some(ref path) => {
-            // Cache hit: copy cached bytes directly to the output path.
             if !no_cache {
                 if let Some(cached_bytes) = plan::cache::load(&cache_key) {
                     match std::fs::write(path, &cached_bytes) {
                         Ok(_) => {
-                            butler::success(format!(
-                                "Plan served from cache [{}.plan] → {}",
-                                cache_key, path.display()
+                            butler::cache_hit(format!(
+                                "An identical plan was on file. Served from cache → {}",
+                                path.display()
                             ));
+                            butler::farewell();
                             return;
                         }
                         Err(e) => {
                             butler::advise(format!(
-                                "Cache write failed ({}), re-planning", e
+                                "I attempted to serve from cache, but the write to '{}' failed ({}). \
+                                 I shall plan fresh — do forgive the delay.",
+                                path.display(), e
                             ));
                         }
                     }
                 }
             } else {
                 plan::cache::invalidate(&cache_key);
-                butler::info("Cache bypassed (--no-cache)");
+                butler::no_cache_taunt();
             }
 
             // Cache miss or bypass: emit fresh plan.
             let mut buf: Vec<u8> = Vec::new();
             if let Err(e) = plan::emit_plan(&all_steps, variant, &mut buf) {
-                die(&format!("Failed to serialize plan: {}", e));
+                die(&format!("Failed to serialise the execution plan: {}", e));
             }
             if let Err(e) = std::fs::write(path, &buf) {
+                // Check for permission issues
+                if e.kind() == std::io::ErrorKind::PermissionDenied {
+                    butler::permission_denied(&path.display().to_string());
+                }
                 die(&format!("Cannot write plan file {}: {}", path.display(), e));
             }
-            // Persist to cache for next run.
             if let Err(e) = plan::cache::save(&cache_key, &buf) {
-                butler::advise(format!("Could not save plan to cache: {}", e));
+                butler::advise(format!(
+                    "The plan was written successfully, but I could not file a copy in the cache: {}. \
+                     Future runs will need to re-plan. A minor inconvenience, sir.",
+                    e
+                ));
             }
-            butler::success(format!("Plan written to {}", path.display()));
+            butler::plan_written(&path.display().to_string(), all_steps.len());
+            butler::farewell();
         }
         None => {
             // stdout output — no caching (non-deterministic consumer).
             let mut stdout = std::io::stdout().lock();
             if let Err(e) = plan::emit_plan(&all_steps, variant, &mut stdout) {
-                die(&format!("Failed to write plan: {}", e));
+                die(&format!("Failed to write plan to standard output: {}", e));
             }
-            butler::success("Plan emitted to stdout");
+            butler::success("The plan has been emitted to standard output, sir. Receiving process may proceed.");
+            butler::farewell();
         }
     }
 }

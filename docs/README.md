@@ -1,50 +1,68 @@
-# Rogue Linux Documentation
+# Rogue Linux — Documentation Index
 
-Welcome to the official documentation for **Rogue Linux** and the **Cogman** build system.
+---
 
-## 📚 Documentation Structure
+## Getting Started
 
-- [📐 Architecture](./architecture/)
-Technical deep dives into the core systems.
-- **[System Design](./architecture/ARCHITECTURE.md)**: Kernel, Init System, and Userland structure.
-- **[AI Advisor](./architecture/ai_architecture.md)**: Model selection and Training pipeline.
-- **[Data Flow](./architecture/DATA-FLOW.md)**: Immutable data transformation.
-- **[Failure Model](./architecture/FAILURE-MODEL.md)**: How Cogman handles errors.
-- **[Determinism](./architecture/DETERMINISM.md)**: Reproducible build strategies.
-- **[AI Boundaries](./architecture/AI-BOUNDARIES.md)**: System safety and interaction limits.
-- **[RootFS Contract](./architecture/ROOTFS-CONTRACT.md)**: Interface between package manager and filesystem.
+New here? Read these first:
 
-### [🛠️ Implementation](./implementation/)
-Details on the specific implementation of Cogman and its components.
-- **[Execution Engine](./implementation/EXECUTION.md)**: How build plans are executed.
-- **[Package Lifecycle](./implementation/PACKAGE-LIFECYCLE.md)**: From source to binary.
-- **[Metadata](./implementation/METADATA.md)**: `package.toml` schema and parsing.
-- **[Logging](./implementation/LOGGING.md)**: The "Butler" persona logging system.
+1. [../README.md](../README.md) — project overview, quick start, architecture summary
+2. [rootfs-build.md](rootfs-build.md) — build a bootable rootfs from scratch
+3. [package-format.md](package-format.md) — write your first package definition
 
-### [🚀 Project & Meta](./project/)
-High-level project information, history, and status.
-- **[Final Wrap-up Report](./project/FINAL_REPORT.md)**: Executive summary of achievements.
-- **[History & Evolution](./project/HISTORY.md)**: The journey from LFS to Cyberpunk.
-- **[Cogman Identity](./project/COGMAN-IDENTITY.md)**: Defining the AI persona.
+---
 
-### [🎨 Design](./design/)
-Visual identity and user experience guidelines.
-- **[Brand Identity](./design/brand_identity.md)**: Color palettes (Holographic Blue/Red), Typography, and Persona Voice.
-- **[Website SSG](./design/website_ssg.md)**: How the custom Static Site Generator and Fragments work.
+## Reference
 
-### [📖 Guides](./guides/)
-Hands-on instructions for operators and developers.
-- **[Installation Variants](./guides/INSTALL-VARIANTS.md)**: Different ways to deploy Rogue Linux.
-- **[Testing](./guides/TESTING.md)**: Verification strategies.
-- **[Benchmarking](./guides/BENCHMARKING.md)**: Performance metrics.
+| Document | Description |
+|----------|-------------|
+| [package-format.md](package-format.md) | TOML schema for `*.toml` package definitions |
+| [cogman-daemon.md](cogman-daemon.md) | Unified cogman CLI, daemon modes, socket protocol, health checks |
+| [service-files.md](service-files.md) | `*.service` INI format for the runtime supervisor |
+| [architecture.md](architecture.md) | Planner, executor, binary plan format, AI advisor |
+| [rootfs-build.md](rootfs-build.md) | Step-by-step rootfs build guide |
 
-### [⚖️ Decisions (ADR)](./adr/)
-Architectural Decision Records. The "Why" behind our technical choices.
-- **[001: Python-based Static Site Generation](./adr/001_python_ssg.md)**
-- **[002: Fragment-based Web Architecture](./adr/002_web_fragments.md)**
-- **[003: Cyberpunk Brand Identity](./adr/003_brand_identity.md)**
+---
 
-## 🚀 Getting Started
-1. Read the **[Final Wrap-up Report](./project/FINAL_REPORT.md)** for a project overview.
-2. Check **[Architecture](./architecture/ARCHITECTURE.md)** for system internals.
-3. Consult **[Guides](./guides/)** to start building packages.
+## Architecture (existing)
+
+| Document | Description |
+|----------|-------------|
+| [architecture/ARCHITECTURE.md](architecture/ARCHITECTURE.md) | Two-stage pipeline deep dive |
+| [architecture/DATA-FLOW.md](architecture/DATA-FLOW.md) | Immutable data transformation |
+| [architecture/DETERMINISM.md](architecture/DETERMINISM.md) | Reproducible build strategy |
+| [architecture/FAILURE-MODEL.md](architecture/FAILURE-MODEL.md) | Error handling across planner/executor |
+| [architecture/ROOTFS-CONTRACT.md](architecture/ROOTFS-CONTRACT.md) | Package manager / filesystem interface |
+| [architecture/AI-BOUNDARIES.md](architecture/AI-BOUNDARIES.md) | AI advisor safety boundaries |
+| [architecture/ai_architecture.md](architecture/ai_architecture.md) | Model selection and training pipeline |
+
+## Implementation (existing)
+
+| Document | Description |
+|----------|-------------|
+| [implementation/EXECUTION.md](implementation/EXECUTION.md) | How build plans are executed |
+| [implementation/PACKAGE-LIFECYCLE.md](implementation/PACKAGE-LIFECYCLE.md) | From source tarball to installed package |
+| [implementation/METADATA.md](implementation/METADATA.md) | Package TOML schema (legacy reference) |
+| [implementation/LOGGING.md](implementation/LOGGING.md) | Logging conventions |
+
+## Project
+
+| Document | Description |
+|----------|-------------|
+| [project/HISTORY.md](project/HISTORY.md) | Project evolution |
+| [project/FINAL_REPORT.md](project/FINAL_REPORT.md) | Build system achievement summary |
+| [../VERIFICATION_AUDIT.md](../VERIFICATION_AUDIT.md) | Final audit results |
+
+---
+
+## Key Source Locations
+
+| Path | Description |
+|------|-------------|
+| `cogman/src/planner/` | cogman-planner (Rust) — TOML → binary plan |
+| `cogman/src/executor/` | cogman-executor (C) — plan → installed files |
+| `cogman/src/cogman/` | unified cogman daemon (Rust v2) |
+| `cogman/src/advisor/` | AI advisor crate |
+| `packages/` | Package definitions (TOML + tarballs) |
+| `etc/cogman/services/` | Runtime service definitions |
+| `scripts/build/` | rootfs.sh, fetch.sh |
