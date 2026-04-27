@@ -12,6 +12,6 @@ pub mod schema;
 pub mod load;
 pub mod validate;
 
-pub use schema::PackageMetadata;
+pub use schema::{PackageMetadata, BuildVariant};
 pub use load::load_metadata;
 pub use validate::validate;

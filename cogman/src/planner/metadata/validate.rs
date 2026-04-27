@@ -8,7 +8,7 @@
  * preventing build failures in the subsequent execution loop.
  */
 
-use crate::metadata::schema::PackageMetadata;
+use crate::metadata::schema::{PackageMetadata, SourceKind, BuildSystem, BuildVariant};
 use crate::error::PlannerError;
 
 /// Semantic validation beyond what serde can enforce.
@@ -40,18 +40,29 @@ pub fn validate(meta: &PackageMetadata) -> Result<(), PlannerError> {
         }
     }
 
-    // Source file must not be empty
-    if meta.identity.source.file.is_empty() {
-        errors.push("identity.source.file must not be empty".into());
+    // Source file required only when kind is tarball or git
+    match meta.identity.source.kind {
+        SourceKind::Tarball | SourceKind::Git => {
+            if meta.identity.source.file.as_deref().map(|f| f.is_empty()).unwrap_or(true) {
+                errors.push("identity.source.file must not be empty for tarball/git sources".into());
+            }
+        }
+        SourceKind::None | SourceKind::Local => {}
     }
 
-    // Builder: at least one command
-    if meta.build.steps.is_empty() {
+    // Builder steps required unless source is none/local, system is custom, or variant is binary
+    let skip_build_steps = matches!(meta.identity.source.kind, SourceKind::None | SourceKind::Local)
+        || matches!(meta.build.system, BuildSystem::Custom)
+        || matches!(meta.build.variant, BuildVariant::Binary);
+    if !skip_build_steps && meta.build.steps.is_empty() {
         errors.push("builder.steps.commands must not be empty".into());
     }
 
-    // Installer: at least one step
-    if meta.installer.steps.is_empty() {
+    // Installer steps: optional for binary variant (binary.rs generates the steps)
+    let skip_installer_steps = matches!(meta.build.variant, BuildVariant::Binary)
+        || matches!(meta.identity.source.kind, SourceKind::None | SourceKind::Local)
+        || matches!(meta.build.system, BuildSystem::Custom);
+    if !skip_installer_steps && meta.installer.steps.is_empty() {
         errors.push("installer.steps must not be empty".into());
     }
 

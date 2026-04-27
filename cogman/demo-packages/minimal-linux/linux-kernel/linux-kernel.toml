@@ -1,0 +1,96 @@
+[identity]
+name     = "linux-kernel"
+version  = "6.6.30"
+category = "base"
+summary  = """
+Linux 6.6 LTS kernel — tinyconfig base, extended with the minimum
+options required to boot cogman in QEMU: devtmpfs (/dev/null for
+svc_spawn stdin redirect), Unix-domain sockets (cogman-supervisor
+control socket at /run/cogman-supervisor.sock), ext4 rootfs, and a
+serial console for log visibility.
+"""
+
+[identity.source]
+kind = "tarball"
+file = "linux-6.6.30.tar.xz"
+
+[identity.depends]
+build   = ["toolchain/gcc", "toolchain/make", "toolchain/bc", "toolchain/flex", "toolchain/bison"]
+runtime = []
+
+[build]
+system = "kbuild"
+steps = [
+    "rm -rf source build",
+    "mkdir -p source build",
+    """
+echo "[COGMAN] Extracting Linux source, sir."
+tar -xf tar/linux-6.6.30.tar.xz -C source
+""",
+    """
+echo "[COGMAN] Generating tinyconfig, sir."
+make -C source/linux-6.6.30 O="$(pwd)/build" ARCH=x86_64 tinyconfig
+""",
+    """
+echo "[COGMAN] Enabling minimum cogman-boot options, sir."
+cd build
+
+# devtmpfs — /dev/null in svc_spawn stdin redirect
+scripts/config --enable CONFIG_DEVTMPFS
+scripts/config --enable CONFIG_DEVTMPFS_MOUNT
+
+# TTY + 8250 UART serial console (QEMU -serial stdio)
+scripts/config --enable CONFIG_TTY
+scripts/config --enable CONFIG_SERIAL_8250
+scripts/config --enable CONFIG_SERIAL_8250_CONSOLE
+scripts/config --enable CONFIG_PRINTK
+scripts/config --enable CONFIG_EARLY_PRINTK
+
+# /proc and /sys — needed by ps, mount, and cogman diagnostics
+scripts/config --enable CONFIG_PROC_FS
+scripts/config --enable CONFIG_SYSFS
+scripts/config --enable CONFIG_TMPFS
+
+# Unix-domain sockets — cogman-supervisor control socket
+scripts/config --enable CONFIG_UNIX
+
+# Block layer + ext4 rootfs
+scripts/config --enable CONFIG_BLOCK
+scripts/config --enable CONFIG_EXT4_FS
+scripts/config --enable CONFIG_EXT4_USE_FOR_EXT2
+
+# Initramfs so we can pass rootfs without a disk image
+scripts/config --enable CONFIG_BLK_DEV_INITRD
+scripts/config --set-str CONFIG_INITRAMFS_SOURCE ""
+
+# x86_64 boot
+scripts/config --enable CONFIG_X86_64
+scripts/config --enable CONFIG_64BIT
+
+make ARCH=x86_64 olddefconfig
+""",
+]
+
+[installer]
+steps = [
+    """
+echo "[COGMAN] Building kernel bzImage, sir."
+make -C build ARCH=x86_64 -j$(nproc) bzImage
+""",
+    """
+echo "[COGMAN] Installing kernel image and symbol map, sir."
+mkdir -p "$PKGROOT/boot"
+cp build/arch/x86_64/boot/bzImage  "$PKGROOT/boot/vmlinuz"
+cp build/System.map                 "$PKGROOT/boot/System.map"
+""",
+]
+
+[policy]
+
+[policy.filesystem]
+read  = ["/"]
+write = ["/boot"]
+
+[policy.network]
+outbound     = false
+capabilities = []

@@ -176,8 +176,7 @@ sup_handle_dead(pid_t pid, int status)
 /*
  * sup_tick — respawn services whose restart_at deadline has passed.
  */
-void
-sup_tick(void)
+void sup_tick(void)
 {
     time_t now = time(NULL);
     for (int i = 0; i < g_sup.count; i++) {

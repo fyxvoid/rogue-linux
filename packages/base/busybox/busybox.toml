@@ -13,12 +13,15 @@ build   = ["toolchain/linux-headers"]
 runtime = []
 
 [build]
-system = "make"
-steps  = [
+system  = "make"
+variant = "native"
+steps   = [
     "tar -xf tar/busybox-1.36.1.tar.bz2",
     "make -C busybox-1.36.1 defconfig",
-    # Strip any existing CONFIG_STATIC line then force enable it
-    "grep -v 'CONFIG_STATIC' busybox-1.36.1/.config > busybox-1.36.1/.config.new && echo 'CONFIG_STATIC=y' >> busybox-1.36.1/.config.new && mv busybox-1.36.1/.config.new busybox-1.36.1/.config",
+    # Force CONFIG_STATIC=y; disable CONFIG_TC (CBQ structs removed in Linux 6.x headers)
+    "sed -i '/CONFIG_STATIC/d; /CONFIG_TC/d' busybox-1.36.1/.config && printf 'CONFIG_STATIC=y\n# CONFIG_TC is not set\n' >> busybox-1.36.1/.config",
+    # Reconcile config: pipe empty lines so all NEW option prompts accept their defaults
+    "yes '' | make -C busybox-1.36.1 oldconfig",
     "make -C busybox-1.36.1 -j$(nproc) V=0",
 ]
 

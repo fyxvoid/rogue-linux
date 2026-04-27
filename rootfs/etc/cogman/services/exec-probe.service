@@ -1,0 +1,10 @@
+[service]
+name          = exec-probe
+command       = sh -c '/usr/bin/cogman_planner install /etc/cogman/plans/smoke.toml --output /tmp/smoke.plan --rootfs / && /usr/bin/cogman-exec /tmp/smoke.plan && echo "[SERVICE:exec-probe] plan execution OK, sir."'
+type          = oneshot
+restart       = on-failure
+restart_delay = 3
+depends       = ctl-probe
+
+[env]
+PATH = /usr/bin:/bin:/sbin:/usr/sbin

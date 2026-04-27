@@ -32,17 +32,16 @@
 
 /* ── Helpers ─────────────────────────────────────────────────────────── */
 
-static int
-set_nonblocking(int fd)
+static int set_nonblocking(int fd)
 {
     int flags = fcntl(fd, F_GETFL, 0);
     if (flags < 0) return -1;
     return fcntl(fd, F_SETFL, flags | O_NONBLOCK);
 }
 
+
 /* Write an entire buffer; retry on EINTR */
-static void
-write_all(int fd, const char *buf, size_t len)
+static void write_all(int fd, const char *buf, size_t len)
 {
     size_t written = 0;
     while (written < len) {
@@ -55,11 +54,15 @@ write_all(int fd, const char *buf, size_t len)
     }
 }
 
+
+
 static void
 send_str(int fd, const char *s)
 {
     write_all(fd, s, strlen(s));
 }
+
+
 
 /* ── Command handlers ────────────────────────────────────────────────── */
 

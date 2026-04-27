@@ -43,7 +43,8 @@ pub struct Identity {
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Source {
     pub kind: SourceKind,
-    pub file: String,
+    #[serde(default)]
+    pub file: Option<String>,
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone, Copy, PartialEq)]
@@ -51,6 +52,8 @@ pub struct Source {
 pub enum SourceKind {
     Tarball,
     Git,
+    None,
+    Local,
 }
 
 #[allow(dead_code)]
@@ -72,6 +75,15 @@ pub enum BuildSystem {
     Go,
     Rust,
     Python,
+    Custom,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone, Copy, PartialEq, Default)]
+#[serde(rename_all = "lowercase")]
+pub enum BuildVariant {
+    #[default]
+    Binary,
+    Native,
 }
 
 #[allow(dead_code)]
@@ -81,6 +93,10 @@ pub struct Builder {
     #[serde(default)]
     pub configure: Configure,
     pub steps: Vec<String>,
+    /// Override the CLI-level variant for this package.
+    /// "native" forces source compilation; "binary" (default) expects a prebuilt archive.
+    #[serde(default)]
+    pub variant: BuildVariant,
 }
 
 #[allow(dead_code)]

@@ -1,0 +1,5 @@
+[service]
+name    = rcs
+command = /etc/init.d/rcS
+type    = oneshot
+restart = never

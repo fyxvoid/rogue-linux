@@ -11,10 +11,11 @@
 pub mod binary;
 pub mod native;
 
-use crate::metadata::PackageMetadata;
+use crate::metadata::{PackageMetadata, BuildVariant};
 use crate::plan::layout::{PlanStep, Variant};
 
-/// Select the appropriate variant planner based on CLI flags.
+/// Select the appropriate variant planner.
+/// The package toml can override the CLI-level variant via `[build].variant`.
 pub fn plan_variant(
     meta: &PackageMetadata,
     rootfs: &str,
@@ -22,7 +23,11 @@ pub fn plan_variant(
     native_opt: bool,
     metadata_root: &std::path::Path,
 ) -> Vec<PlanStep> {
-    match variant {
+    let effective = match meta.build.variant {
+        BuildVariant::Native => Variant::Native,
+        BuildVariant::Binary => variant, // fall through to CLI default
+    };
+    match effective {
         Variant::Binary => binary::plan(meta, rootfs, metadata_root),
         Variant::Native => native::plan(meta, rootfs, native_opt, metadata_root),
     }

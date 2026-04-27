@@ -1,0 +1,9 @@
+[service]
+name    = x11-verify
+command = /usr/bin/rogue-x11-verify
+type    = oneshot
+restart = never
+depends = rcs
+
+[env]
+PATH = /usr/bin:/bin

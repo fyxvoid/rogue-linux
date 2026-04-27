@@ -1,0 +1,7 @@
+NAME="Rogue Linux"
+VERSION="1.0"
+ID=rogue
+ID_LIKE=
+PRETTY_NAME="Rogue Linux 1.0"
+VERSION_ID="1.0"
+HOME_URL="https://rogue-linux.dev"

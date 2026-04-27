@@ -1,0 +1,5 @@
+#!/bin/sh
+# Rogue Linux xinitrc — starts i3
+xsetroot -solid "#1e1e2e" 2>/dev/null || true
+export I3SOCK=/tmp/i3-socket
+exec /usr/bin/i3 -c /etc/i3/config

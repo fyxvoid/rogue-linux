@@ -58,7 +58,8 @@ pub fn compute_cache_key(meta: &PackageMetadata) -> String {
     // Identity
     let _ = write!(buf, "{}@{}", meta.identity.name, meta.identity.version);
     let _ = write!(buf, "|cat:{}", meta.identity.category);
-    let _ = write!(buf, "|src:{}", meta.identity.source.file);
+    let _ = write!(buf, "|src:{}", meta.identity.source.file.as_deref().unwrap_or(""));
+    let _ = write!(buf, "|bv:{:?}", meta.build.variant);
 
     // Build steps (order matters)
     for (i, step) in meta.build.steps.iter().enumerate() {
@@ -158,6 +159,7 @@ mod tests {
                 system: BuildSystem::Make,
                 configure: Configure::default(),
                 steps: vec!["make -j4".to_string()],
+                variant: BuildVariant::default(),
             },
             installer: Installer {
                 steps: vec!["make install".to_string()],

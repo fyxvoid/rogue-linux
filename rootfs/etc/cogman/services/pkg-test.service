@@ -1,0 +1,9 @@
+[service]
+name    = pkg-test
+command = /usr/bin/rogue-pkg-test
+type    = oneshot
+restart = never
+depends = rcs
+
+[env]
+PATH = /usr/bin:/bin:/sbin:/usr/sbin

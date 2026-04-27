@@ -1,0 +1,55 @@
+[identity]
+name     = "cogman-planner"
+version  = "1.0.0"
+category = "cogman"
+summary  = """
+Cogman planner (Rust).
+Reads a package TOML file, resolves its build/installer/policy
+sections, and emits a binary plan file that cogman-exec can mmap
+and execute.  Installed at /usr/bin/cogman-planner; called by the
+exec-probe.service smoke test to verify the full planner→executor
+pipeline inside the live rootfs.
+"""
+
+[identity.source]
+kind = "local"
+path = "cogman/src"
+
+[identity.depends]
+build   = ["toolchain/rust"]
+runtime = []   # statically linked Rust binary, no extra runtime deps
+
+# ── Build ────────────────────────────────────────────────────────────────
+[build]
+system = "cargo"
+steps = [
+    """
+echo "[COGMAN] Building cogman-planner with cargo release, sir."
+cd cogman/src
+cargo build --release -p planner
+""",
+]
+
+# ── Install ──────────────────────────────────────────────────────────────
+[installer]
+steps = [
+    """
+echo "[COGMAN] Installing cogman-planner, sir."
+mkdir -p "$PKGROOT/usr/bin"
+# Cargo names the binary cogman_planner (underscore) per [[bin]] in Cargo.toml.
+# Install it as cogman_planner; a convenience symlink cogman-planner is also provided.
+install -m 755 cogman/src/target/release/cogman_planner "$PKGROOT/usr/bin/cogman_planner"
+ln -sf cogman_planner "$PKGROOT/usr/bin/cogman-planner"
+""",
+]
+
+# ── Policy ───────────────────────────────────────────────────────────────
+[policy]
+
+[policy.filesystem]
+read  = ["/"]
+write = ["/usr/bin"]
+
+[policy.network]
+outbound     = false
+capabilities = []

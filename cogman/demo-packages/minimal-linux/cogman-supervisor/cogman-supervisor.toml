@@ -1,0 +1,189 @@
+[identity]
+name     = "cogman-supervisor"
+version  = "1.0.0"
+category = "cogman"
+summary  = """
+PID-1 init and process supervisor for Rogue Linux.
+Installs as /sbin/init and /sbin/cogman-supervisor.
+Also installs cogman-ctl (the Unix-socket control client)
+and provisions /etc/cogman/services/ with the four verification
+service files that exercise every major supervisor code path:
+  hello       — oneshot, verifies fork/exec/SIGCHLD reaping
+  heartbeat   — always-restart long-running process
+  ctl-probe   — confirms the control socket responds correctly
+  exec-probe  — feeds a smoke plan to cogman-exec end-to-end
+"""
+
+[identity.source]
+kind = "local"
+path = "cogman/src/supervisor"
+
+[identity.depends]
+build   = ["toolchain/gcc"]
+runtime = ["base/musl", "base/busybox", "cogman/cogman-exec", "cogman/cogman-planner"]
+
+# ── Build ────────────────────────────────────────────────────────────────
+[build]
+system = "make"
+steps = [
+    """
+echo "[COGMAN] Building cogman-supervisor and cogman-ctl, sir."
+make -C cogman/src/supervisor clean
+make -C cogman/src/supervisor -j$(nproc) \
+    CC=gcc \
+    CFLAGS="-Wall -Wextra -O2 -std=c11 -D_POSIX_C_SOURCE=200809L -D_DEFAULT_SOURCE"
+""",
+]
+
+# ── Install ──────────────────────────────────────────────────────────────
+[installer]
+steps = [
+    # ── Binaries ────────────────────────────────────────────────────────
+    """
+echo "[COGMAN] Installing supervisor binaries, sir."
+mkdir -p "$PKGROOT/sbin" "$PKGROOT/usr/bin"
+
+install -m 755 cogman/src/supervisor/cogman-supervisor "$PKGROOT/sbin/cogman-supervisor"
+install -m 755 cogman/src/supervisor/cogman-supervisor "$PKGROOT/sbin/init"
+install -m 755 cogman/src/supervisor/cogman-ctl        "$PKGROOT/usr/bin/cogman-ctl"
+""",
+
+    # ── Filesystem skeleton ─────────────────────────────────────────────
+    """
+echo "[COGMAN] Creating rootfs skeleton, sir."
+mkdir -p "$PKGROOT/etc/cogman/services"
+mkdir -p "$PKGROOT/etc/cogman/plans"
+mkdir -p "$PKGROOT/run"
+mkdir -p "$PKGROOT/tmp"
+mkdir -p "$PKGROOT/proc"
+mkdir -p "$PKGROOT/sys"
+mkdir -p "$PKGROOT/dev"
+chmod 1777 "$PKGROOT/tmp"
+""",
+
+    # ── hello.service ───────────────────────────────────────────────────
+    # Oneshot — verifies fork/exec/waitpid/SIGCHLD path (SVC_TYPE_ONESHOT)
+    """
+echo "[COGMAN] Installing hello.service, sir."
+cat > "$PKGROOT/etc/cogman/services/hello.service" << 'EOF'
+[service]
+name    = hello
+command = echo "[SERVICE:hello] cogman-supervisor is alive, sir."
+type    = oneshot
+restart = never
+EOF
+""",
+
+    # ── heartbeat.service ───────────────────────────────────────────────
+    # Long-running process with SVC_RESTART_ALWAYS — exercises restart logic
+    # PATH is set explicitly: the kernel passes an empty environment to PID 1,
+    # so bare command names are unreachable without it.
+    """
+echo "[COGMAN] Installing heartbeat.service, sir."
+cat > "$PKGROOT/etc/cogman/services/heartbeat.service" << 'EOF'
+[service]
+name          = heartbeat
+command       = sh -c 'i=0; while true; do echo "[SERVICE:heartbeat] tick $i"; i=$((i+1)); sleep 5; done'
+type          = process
+restart       = always
+restart_delay = 2
+
+[env]
+HEARTBEAT_TAG = rogue-linux
+PATH = /usr/bin:/bin:/sbin:/usr/sbin
+EOF
+""",
+
+    # ── ctl-probe.service ───────────────────────────────────────────────
+    # Oneshot that depends on heartbeat — exercises dep-gate + ctl socket.
+    # Uses absolute path for cogman-ctl: svc_spawn inherits the supervisor's
+    # env which has no PATH when booting as PID 1.
+    """
+echo "[COGMAN] Installing ctl-probe.service, sir."
+cat > "$PKGROOT/etc/cogman/services/ctl-probe.service" << 'EOF'
+[service]
+name          = ctl-probe
+command       = sh -c 'sleep 1 && /usr/bin/cogman-ctl list && echo "[SERVICE:ctl-probe] control socket OK, sir."'
+type          = oneshot
+restart       = on-failure
+restart_delay = 3
+depends       = heartbeat
+
+[env]
+PATH = /usr/bin:/bin:/sbin:/usr/sbin
+EOF
+""",
+
+    # ── exec-probe.service ──────────────────────────────────────────────
+    # Oneshot that depends on ctl-probe — exercises planner → exec pipeline.
+    # Binary is cogman_planner (underscore) per [[bin]] in planner/Cargo.toml;
+    # cogman-planner.toml installs a symlink so both names resolve.
+    # Planner CLI requires a subcommand + --output flag (not positional output).
+    """
+echo "[COGMAN] Installing exec-probe.service, sir."
+cat > "$PKGROOT/etc/cogman/services/exec-probe.service" << 'EOF'
+[service]
+name          = exec-probe
+command       = sh -c '/usr/bin/cogman_planner install /etc/cogman/plans/smoke.toml --output /tmp/smoke.plan --rootfs / && /usr/bin/cogman-exec /tmp/smoke.plan && echo "[SERVICE:exec-probe] plan execution OK, sir."'
+type          = oneshot
+restart       = on-failure
+restart_delay = 3
+depends       = ctl-probe
+
+[env]
+PATH = /usr/bin:/bin:/sbin:/usr/sbin
+EOF
+""",
+
+    # ── smoke.toml ──────────────────────────────────────────────────────
+    # Minimal plan exercising OP_EXEC, OP_MKDIR, OP_CLEANUP inside cogman-exec.
+    # Quotes around echo strings prevent the shell from glob-expanding brackets.
+    """
+echo "[COGMAN] Installing smoke test plan, sir."
+cat > "$PKGROOT/etc/cogman/plans/smoke.toml" << 'EOF'
+[identity]
+name     = "smoke"
+version  = "0.0.1"
+category = "test"
+summary  = "Minimal smoke-test plan: exercises OP_EXEC, OP_MKDIR, and OP_CLEANUP."
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "echo '[SMOKE] step-1: OP_EXEC works'",
+    "mkdir -p /tmp/cogman-smoke",
+    "echo '[SMOKE] step-3: directory created, writing marker'",
+    "sh -c 'echo smoke-ok > /tmp/cogman-smoke/result'",
+    "sh -c 'grep smoke-ok /tmp/cogman-smoke/result && echo \"[SMOKE] OP_VERIFY analogue passed\"'",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = ["/tmp"]
+[policy.network]
+outbound     = false
+capabilities = []
+EOF
+""",
+]
+
+# ── Policy ───────────────────────────────────────────────────────────────
+[policy]
+
+[policy.filesystem]
+read  = ["/"]
+write = ["/sbin", "/usr/bin", "/etc/cogman", "/run", "/tmp", "/proc", "/sys", "/dev"]
+
+[policy.network]
+outbound     = false
+capabilities = []

@@ -1,0 +1,3 @@
+#!/bin/sh
+# Rogue Linux screen locker
+exec /usr/bin/slock

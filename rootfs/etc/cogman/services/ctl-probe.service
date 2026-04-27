@@ -1,0 +1,10 @@
+[service]
+name          = ctl-probe
+command       = sh -c 'sleep 2 && /usr/bin/cogman-ctl list && echo "[SERVICE:ctl-probe] control socket OK, sir."'
+type          = oneshot
+restart       = on-failure
+restart_delay = 3
+depends       = rcs
+
+[env]
+PATH = /usr/bin:/bin:/sbin:/usr/sbin

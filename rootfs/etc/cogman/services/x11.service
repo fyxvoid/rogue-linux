@@ -1,0 +1,13 @@
+[service]
+name    = x11
+command = /usr/bin/startx
+type    = process
+restart = on-failure
+restart_delay = 3
+depends = rcs
+
+[env]
+PATH    = /usr/bin:/bin:/usr/sbin:/sbin
+HOME    = /root
+TERM    = xterm-256color
+DISPLAY = :0

@@ -219,12 +219,8 @@ main(int argc, char **argv)
         }
     }
 
-    if (hdr->variant == VARIANT_BINARY && !failed) {
-        log_info("Startup phase complete. Entering Supervisor Idle.");
-        while (keep_running) {
-            pause(); /* Wait for signals (SIGCHLD, etc) */
-        }
-    }
+    /* Supervisor idle loop intentionally removed: cogman-supervisor owns that
+     * role. The executor exits after all plan steps complete. */
 
     uint32_t step_count = hdr->step_count; // Store before unmap
 

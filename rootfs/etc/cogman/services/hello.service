@@ -1,0 +1,6 @@
+[service]
+name    = hello
+command = echo "[SERVICE:hello] cogman-supervisor is alive, sir."
+type    = oneshot
+restart = never
+depends = rcs

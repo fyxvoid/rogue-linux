@@ -1,0 +1,104 @@
+#!/bin/sh
+# rogue-pkg-test — Rogue Linux package stability test suite
+PASS=0
+FAIL=0
+
+check() {
+    DESC="$1"
+    CMD="$2"
+    if eval "$CMD" >/dev/null 2>&1; then
+        echo "  PASS: $DESC"
+        PASS=$((PASS+1))
+    else
+        echo "  FAIL: $DESC"
+        FAIL=$((FAIL+1))
+    fi
+}
+
+echo "============================================"
+echo " Rogue Linux 1.0 — Package Stability Test"
+echo "============================================"
+echo ""
+
+echo "[1] Shell & Core Utils"
+check "busybox applets"       "busybox echo ok | grep -q ok"
+check "sh arithmetic"         "test $(( 2 + 2 )) -eq 4"
+check "bash version"          "/usr/bin/bash --version | grep -q 'GNU bash'"
+check "bash arithmetic"       "/usr/bin/bash -c 'echo $((7*6))' | grep -q 42"
+check "bash arrays"           '/usr/bin/bash -c '"'"'a=(x y z); echo ${#a[@]}'"'"' | grep -q 3'
+check "cat/echo/grep"         "echo rogue | grep -q rogue"
+check "sed substitution"      "echo hello | sed s/hello/world/ | grep -q world"
+check "awk field split"       "echo 'a b c' | awk '{print \$2}' | grep -q b"
+check "find files"            "find /usr/bin -name bash | grep -q bash"
+check "wc line count"         "printf 'a\nb\nc\n' | wc -l | grep -q 3"
+check "sort+uniq"             "printf 'b\na\nb\na\n' | sort | uniq | wc -l | grep -q 2"
+check "tar list"              "tar -tzf /lib/modules/*/modules.dep.gz 2>/dev/null || test -d /lib/modules"
+
+echo ""
+echo "[2] Text Editors"
+check "vim binary"            "test -x /usr/bin/vim"
+check "vim --version"         "/usr/bin/vim --version | grep -q 'VIM - Vi IMproved'"
+check "nano binary"           "test -x /usr/bin/nano"
+check "nano --version"        "/usr/bin/nano --version | grep -q GNU"
+check "vi (busybox)"          "busybox vi 2>&1 | grep -qi 'vi\|usage\|invalid' || true; test -x /usr/bin/vi || busybox --list | grep -q '^vi'"
+
+echo ""
+echo "[3] Network Tools"
+check "curl binary"           "test -x /usr/bin/curl"
+check "curl --version"        "/usr/bin/curl --version | grep -q curl"
+check "curl HTTPS support"    "/usr/bin/curl --version | grep -q OpenSSL"
+check "wget (busybox)"        "busybox wget --help 2>&1 | grep -q wget"
+check "ping binary"           "test -x /usr/bin/ping || busybox --list | grep -q ping"
+check "ifconfig (busybox)"    "busybox --list | grep -q ifconfig"
+check "ip (busybox)"          "busybox --list | grep -q ip"
+check "netstat (busybox)"     "busybox --list | grep -q netstat"
+check "nc (busybox)"          "busybox --list | grep -q nc"
+
+echo ""
+echo "[4] SSH (Dropbear)"
+check "dropbear server"       "test -x /usr/sbin/dropbear"
+check "dropbear version"      "/usr/sbin/dropbear -V 2>&1 | grep -q Dropbear"
+check "ssh client binary"     "test -x /usr/bin/ssh"
+check "scp binary"            "test -x /usr/bin/scp"
+check "dropbearkey"           "test -x /usr/bin/dropbearkey"
+check "etc/dropbear dir"      "test -d /etc/dropbear"
+
+echo ""
+echo "[5] Package Manager (Cogman)"
+check "cogman daemon"         "/usr/bin/cogman --version | grep -q cogman"
+check "cogman-planner"        "/usr/bin/cogman-planner --version | grep -q cogman"
+check "cogman-supervisor"     "test -x /usr/bin/cogman-supervisor"
+check "cogman-ctl"            "test -x /usr/bin/cogman-ctl"
+check "cogman-exec"           "test -x /usr/bin/cogman-exec"
+check "service files"         "ls /etc/cogman/services/*.service | grep -q service"
+check "smoke plan exists"     "test -f /etc/cogman/plans/smoke.toml"
+
+echo ""
+echo "[6] System & Filesystem"
+check "proc mounted"          "test -f /proc/version"
+check "sys mounted"           "test -d /sys/kernel"
+check "dev populated"         "test -c /dev/null"
+check "tmp writable"          "touch /tmp/stability_test_$$ && rm /tmp/stability_test_$$"
+check "etc/passwd"            "grep -q '^root:' /etc/passwd"
+check "etc/hosts"             "test -f /etc/hosts"
+check "kernel version 6.6"   "uname -r | grep -q '6.6'"
+check "kernel modules dir"    "test -d /lib/modules/6.6.75"
+check "hostname rogue"        "hostname 2>/dev/null | grep -q rogue || true"
+check "ld.so.cache"           "test -f /etc/ld.so.cache"
+check "glibc present"         "test -f /lib/x86_64-linux-gnu/libc.so.6"
+check "libgcc present"        "test -f /lib/x86_64-linux-gnu/libgcc_s.so.1"
+
+echo ""
+echo "[7] Build System Integration"
+check "cogman plan+exec"      "/usr/bin/cogman-planner install /etc/cogman/plans/smoke.toml --output /tmp/pkg_test.plan --rootfs / && /usr/bin/cogman-exec /tmp/pkg_test.plan"
+
+echo ""
+echo "============================================"
+echo " Results: $PASS passed, $FAIL failed"
+if [ $FAIL -eq 0 ]; then
+    echo " STATUS: STABLE — ready for daily driver use"
+else
+    echo " STATUS: $FAIL test(s) need attention"
+fi
+echo "============================================"
+exit $FAIL

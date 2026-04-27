@@ -1,0 +1,51 @@
+[identity]
+name     = "cogman-exec"
+version  = "1.0.0"
+category = "cogman"
+summary  = """
+Cogman execution engine.
+Memory-maps a binary plan file, validates its header, and runs each
+step record in order (OP_EXEC, OP_MKDIR, OP_COPY, OP_VERIFY,
+OP_CLEANUP).  In VARIANT_BINARY mode it also initialises the IPC
+messenger broker and enters supervisor-idle after the startup phase.
+"""
+
+[identity.source]
+kind = "local"
+path = "cogman/src/executor"
+
+[identity.depends]
+build   = ["toolchain/gcc"]
+runtime = ["base/musl"]
+
+# ── Build ────────────────────────────────────────────────────────────────
+[build]
+system = "make"
+steps = [
+    """
+echo "[COGMAN] Building cogman-exec, sir."
+make -C cogman/src/executor clean
+make -C cogman/src/executor -j$(nproc)
+""",
+]
+
+# ── Install ──────────────────────────────────────────────────────────────
+[installer]
+steps = [
+    """
+echo "[COGMAN] Installing cogman-exec, sir."
+mkdir -p "$PKGROOT/usr/bin"
+install -m 755 cogman/src/executor/cogman-exec "$PKGROOT/usr/bin/cogman-exec"
+""",
+]
+
+# ── Policy ───────────────────────────────────────────────────────────────
+[policy]
+
+[policy.filesystem]
+read  = ["/"]
+write = ["/usr/bin"]
+
+[policy.network]
+outbound     = false
+capabilities = []

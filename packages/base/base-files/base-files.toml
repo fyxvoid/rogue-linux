@@ -13,8 +13,9 @@ build   = ["base/busybox"]
 runtime = ["base/busybox"]
 
 [build]
-system = "make"
-steps  = [
+system  = "make"
+variant = "native"
+steps   = [
     # No compilation needed — just extract the pre-built config tree
     "tar -xzf tar/base-files-1.0.tar.gz -C $PKGROOT",
     # Ensure required directories exist in pkgroot

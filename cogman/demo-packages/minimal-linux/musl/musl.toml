@@ -1,0 +1,65 @@
+[identity]
+name    = "musl"
+version = "1.2.5"
+category = "base"
+summary = "Lightweight, correct C standard library — replaces glibc for a clean, minimal rootfs."
+
+[identity.source]
+kind = "tarball"
+file = "musl-1.2.5.tar.gz"
+
+[identity.depends]
+build   = ["toolchain/gcc"]
+runtime = []
+
+[build]
+system = "autotools"
+steps = [
+    "rm -rf source build",
+    "mkdir -p source build",
+    """
+echo "[COGMAN] Extracting musl source, sir."
+tar -xf tar/musl-1.2.5.tar.gz -C source
+""",
+    """
+echo "[COGMAN] Configuring musl, sir."
+cd build
+../source/musl-1.2.5/configure \
+  --prefix=/usr            \
+  --syslibdir=/lib         \
+  --enable-optimize=yes    \
+  CFLAGS="-O2"
+""",
+]
+
+[installer]
+steps = [
+    """
+echo "[COGMAN] Building musl, sir."
+cd build && make -j$(nproc)
+""",
+    """
+echo "[COGMAN] Installing musl into staging root, sir."
+cd build && make install DESTDIR="$PKGROOT"
+""",
+    """
+echo "[COGMAN] Creating dynamic-linker symlink, sir."
+mkdir -p "$PKGROOT/lib"
+ln -sf /usr/lib/libc.so "$PKGROOT/lib/ld-musl-x86_64.so.1"
+""",
+    """
+echo "[COGMAN] Installing musl-gcc wrapper, sir."
+mkdir -p "$PKGROOT/usr/bin"
+ln -sf /usr/lib/musl/bin/musl-gcc "$PKGROOT/usr/bin/musl-gcc" || true
+""",
+]
+
+[policy]
+
+[policy.filesystem]
+read  = ["/"]
+write = ["/usr", "/lib"]
+
+[policy.network]
+outbound     = false
+capabilities = []

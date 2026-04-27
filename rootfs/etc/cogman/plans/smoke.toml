@@ -1,0 +1,32 @@
+[identity]
+name     = "smoke"
+version  = "0.0.1"
+category = "test"
+summary  = "Minimal smoke-test plan: exercises OP_EXEC, OP_MKDIR, and OP_CLEANUP."
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "echo '[SMOKE] step-1: OP_EXEC works'",
+    "mkdir -p /tmp/cogman-smoke",
+    "echo '[SMOKE] step-3: directory created, writing marker'",
+    "sh -c 'echo smoke-ok > /tmp/cogman-smoke/result'",
+    "sh -c 'grep smoke-ok /tmp/cogman-smoke/result && echo \"[SMOKE] OP_VERIFY analogue passed\"'",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = ["/", "/tmp"]
+[policy.network]
+outbound     = false
+capabilities = []

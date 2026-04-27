@@ -1,0 +1,24 @@
+#!/bin/sh
+# Rogue Linux system initialization
+
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev 2>/dev/null || mdev -s
+mkdir -p /dev/pts /dev/shm
+mount -t devpts devpts /dev/pts
+mount -t tmpfs shm /dev/shm
+chmod 1777 /dev/shm
+mount -t tmpfs tmpfs /tmp
+chmod 1777 /tmp
+
+# /run is NOT re-mounted: cogman-supervisor creates its socket there at startup
+# and a tmpfs remount would hide the socket. initramfs /run is already in RAM.
+mkdir -p /run/cogman /run/lock
+touch /run/utmp
+chmod 664 /run/utmp
+
+# Loopback network interface
+ip link set lo up 2>/dev/null || true
+
+hostname rogue
+echo "Rogue Linux 1.0 — booted OK"

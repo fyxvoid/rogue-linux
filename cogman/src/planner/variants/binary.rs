@@ -9,61 +9,86 @@
  */
 
 use crate::metadata::PackageMetadata;
+use crate::metadata::schema::SourceKind;
 use crate::plan::layout::{PlanStep, StepOp, FailPolicy};
 
 /// Generate execution steps for the binary install variant.
-/// Sequence: mkdir → extract → verify → copy.
+/// For packages with a real source (tarball/git): mkdir → extract → verify → copy.
+/// For packages with kind=none/local: run installer steps directly as OP_EXEC.
 pub fn plan(meta: &PackageMetadata, rootfs: &str, metadata_root: &std::path::Path) -> Vec<PlanStep> {
     let name = &meta.identity.name;
     let cat = &meta.identity.category;
-    let src = &meta.identity.source.file;
+    let kind = meta.identity.source.kind;
     let pkgroot = format!("{}/pkgroot/{}", rootfs, name);
-    
-    // Absolute path to the source tarball
-    let tar_path = metadata_root.join("packages").join(cat).join(name).join("tar").join(src);
-    let tar_str = tar_path.to_string_lossy();
 
     let mut steps = Vec::new();
 
-    // Create pkgroot directory
-    steps.push(PlanStep {
-        op: StepOp::Mkdir,
-        command: pkgroot.clone(),
-        workdir: rootfs.to_string(),
-        env: Vec::new(),
-        fail_policy: FailPolicy::Abort,
-    });
+    match kind {
+        SourceKind::None | SourceKind::Local => {
+            // No source archive — run installer steps directly.
+            for cmd in &meta.installer.steps {
+                steps.push(PlanStep {
+                    op: StepOp::Exec,
+                    command: cmd.clone(),
+                    workdir: rootfs.to_string(),
+                    env: Vec::new(),
+                    fail_policy: FailPolicy::Abort,
+                });
+            }
+        }
+        SourceKind::Tarball | SourceKind::Git => {
+            let src = meta.identity.source.file.as_deref().unwrap_or("");
+            let tar_path = metadata_root.join("packages").join(cat).join(name).join("tar").join(src);
+            let tar_str = tar_path.to_string_lossy();
 
-    // Extract prebuilt archive into pkgroot
-    steps.push(PlanStep {
-        op: StepOp::Exec,
-        command: format!("tar -xf {} -C {}", tar_str, pkgroot),
-        workdir: rootfs.to_string(),
-        env: Vec::new(),
-        fail_policy: FailPolicy::Abort,
-    });
-
-    // Verify extraction (if verify section present)
-    if let Some(ref verify) = meta.installer.verify {
-        for f in &verify.expected_files {
             steps.push(PlanStep {
-                op: StepOp::Verify,
-                command: format!("{}/{}", pkgroot, f),
+                op: StepOp::Mkdir,
+                command: pkgroot.clone(),
                 workdir: rootfs.to_string(),
                 env: Vec::new(),
                 fail_policy: FailPolicy::Abort,
             });
+
+            steps.push(PlanStep {
+                op: StepOp::Exec,
+                command: format!("tar -xf {} -C {}", tar_str, pkgroot),
+                workdir: rootfs.to_string(),
+                env: Vec::new(),
+                fail_policy: FailPolicy::Abort,
+            });
+
+            if let Some(ref verify) = meta.installer.verify {
+                for f in &verify.expected_files {
+                    steps.push(PlanStep {
+                        op: StepOp::Verify,
+                        command: format!("{}/{}", pkgroot, f),
+                        workdir: rootfs.to_string(),
+                        env: Vec::new(),
+                        fail_policy: FailPolicy::Abort,
+                    });
+                }
+            }
+
+            steps.push(PlanStep {
+                op: StepOp::Copy,
+                command: format!("{}|{}", pkgroot, rootfs),
+                workdir: rootfs.to_string(),
+                env: Vec::new(),
+                fail_policy: FailPolicy::Abort,
+            });
+
+            // Append installer steps after copy.
+            for cmd in &meta.installer.steps {
+                steps.push(PlanStep {
+                    op: StepOp::Exec,
+                    command: cmd.clone(),
+                    workdir: rootfs.to_string(),
+                    env: Vec::new(),
+                    fail_policy: FailPolicy::Abort,
+                });
+            }
         }
     }
-
-    // Copy into final rootfs
-    steps.push(PlanStep {
-        op: StepOp::Copy,
-        command: format!("{}|{}", pkgroot, rootfs),
-        workdir: rootfs.to_string(),
-        env: Vec::new(),
-        fail_policy: FailPolicy::Abort,
-    });
 
     steps
 }

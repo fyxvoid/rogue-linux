@@ -1,0 +1,11 @@
+[service]
+name          = heartbeat
+command       = sh -c 'i=0; while true; do echo "[SERVICE:heartbeat] tick $i"; i=$((i+1)); sleep 5; done'
+type          = process
+restart       = always
+restart_delay = 2
+depends       = rcs
+
+[env]
+HEARTBEAT_TAG = rogue-linux
+PATH = /usr/bin:/bin:/sbin:/usr/sbin

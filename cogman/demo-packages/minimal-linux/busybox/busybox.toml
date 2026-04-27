@@ -1,0 +1,81 @@
+[identity]
+name     = "busybox"
+version  = "1.36.1"
+category = "base"
+summary  = """
+Swiss Army knife of embedded Linux. Provides /bin/sh (required by
+cogman-supervisor's svc_spawn), plus ps, cat, echo, sleep, date, and
+the rest of the basic userland in a single statically-linked binary.
+"""
+
+[identity.source]
+kind = "tarball"
+file = "busybox-1.36.1.tar.bz2"
+
+[identity.depends]
+build   = ["base/musl", "toolchain/gcc"]
+runtime = []   # statically linked — no shared-lib deps at runtime
+
+[build]
+system = "kbuild"
+steps = [
+    "rm -rf source",
+    "mkdir -p source",
+    """
+echo "[COGMAN] Extracting busybox source, sir."
+tar -xf tar/busybox-1.36.1.tar.bz2 -C source
+""",
+    """
+echo "[COGMAN] Generating defconfig, sir."
+cd source/busybox-1.36.1
+make defconfig
+""",
+    """
+echo "[COGMAN] Patching config: static build, disable suid, sir."
+cd source/busybox-1.36.1
+
+# Static link against musl so no ld.so resolution needed in the rootfs
+sed -i 's/# CONFIG_STATIC is not set/CONFIG_STATIC=y/'           .config
+sed -i 's/CONFIG_FEATURE_SUID=y/# CONFIG_FEATURE_SUID is not set/' .config
+
+# Suppress optional features that pull in glibc headers
+sed -i 's/CONFIG_PAM=y/# CONFIG_PAM is not set/'                  .config || true
+
+make olddefconfig
+""",
+]
+
+[installer]
+steps = [
+    """
+echo "[COGMAN] Building busybox with musl-gcc, sir."
+cd source/busybox-1.36.1
+make -j$(nproc) CC=musl-gcc
+""",
+    """
+echo "[COGMAN] Installing busybox applet symlinks, sir."
+cd source/busybox-1.36.1
+make install CONFIG_PREFIX="$PKGROOT"
+""",
+    """
+echo "[COGMAN] Ensuring /bin/sh exists (required by svc_spawn), sir."
+mkdir -p "$PKGROOT/bin"
+test -f "$PKGROOT/bin/sh" || ln -sf busybox "$PKGROOT/bin/sh"
+""",
+    """
+echo "[COGMAN] Installing /etc/passwd and /etc/group stubs, sir."
+mkdir -p "$PKGROOT/etc"
+printf 'root:x:0:0:root:/root:/bin/sh\n' > "$PKGROOT/etc/passwd"
+printf 'root:x:0:\n'                      > "$PKGROOT/etc/group"
+""",
+]
+
+[policy]
+
+[policy.filesystem]
+read  = ["/"]
+write = ["/bin", "/sbin", "/usr/bin", "/usr/sbin", "/etc"]
+
+[policy.network]
+outbound     = false
+capabilities = []

@@ -1,0 +1,122 @@
+# minimal-linux.toml — Rogue Linux Minimal Distribution Manifest
+#
+# Purpose
+# -------
+# Describes every package that must be built and installed into the
+# rootfs to produce a bootable image that exercises cogman end-to-end.
+#
+# Build order (resolved by cogman-planner from [depends] edges):
+#
+#   toolchain/*                    (assumed pre-installed in build env)
+#       └─ base/musl               C library
+#           └─ base/busybox        /bin/sh + coreutils (required by svc_spawn)
+#               └─ base/linux-kernel  bzImage for QEMU boot
+#   cogman/cogman-exec             executor (no libc deps beyond musl)
+#   cogman/cogman-planner          planner  (static Rust binary)
+#   cogman/cogman-supervisor       supervisor + ctl + service files
+#                                  depends on exec + planner at runtime
+#
+# Verification flow (automatic on boot)
+# --------------------------------------
+# 1. kernel hands control to /sbin/init (= cogman-supervisor)
+# 2. supervisor scans /etc/cogman/services/ and starts all services
+#    whose dependencies are already satisfied:
+#
+#   hello (oneshot, no deps)
+#     → fork+exec+SIGCHLD reap path confirmed
+#
+#   heartbeat (process, restart=always, no deps)
+#     → long-running process tracking confirmed
+#
+#   ctl-probe (oneshot, depends=heartbeat)
+#     → dep-gate logic confirmed
+#     → cogman-ctl list hits /run/cogman-supervisor.sock → IPC confirmed
+#
+#   exec-probe (oneshot, depends=ctl-probe)
+#     → cogman-planner /etc/cogman/plans/smoke.toml → /tmp/smoke.plan
+#     → cogman-exec /tmp/smoke.plan
+#     → OP_EXEC, OP_MKDIR, OP_CLEANUP all exercised
+#
+# All output goes to the serial console (stderr from cogman-supervisor).
+# A clean boot ends with:
+#   [SERVICE:exec-probe] plan execution OK, sir.
+
+# ── Distribution identity ────────────────────────────────────────────────
+
+[distro]
+name    = "rogue-linux-minimal"
+version = "0.1.0"
+arch    = "x86_64"
+summary = "Minimal Rogue Linux image — cogman verification target"
+
+# ── Package set ──────────────────────────────────────────────────────────
+
+[[packages]]
+name    = "musl"
+version = "1.2.5"
+category = "base"
+toml    = "musl/musl.toml"
+
+[[packages]]
+name    = "busybox"
+version = "1.36.1"
+category = "base"
+toml    = "busybox/busybox.toml"
+
+[[packages]]
+name     = "linux-kernel"
+version  = "6.6.30"
+category = "base"
+toml     = "linux-kernel/linux-kernel.toml"
+
+[[packages]]
+name     = "cogman-exec"
+version  = "1.0.0"
+category = "cogman"
+toml     = "cogman-exec/cogman-exec.toml"
+
+[[packages]]
+name     = "cogman-planner"
+version  = "1.0.0"
+category = "cogman"
+toml     = "cogman-planner/cogman-planner.toml"
+
+[[packages]]
+# Must be last — its installer writes all service + plan files and
+# sets up /sbin/init.  Its runtime deps (exec, planner) must already
+# be installed in the staging root when it runs.
+name     = "cogman-supervisor"
+version  = "1.0.0"
+category = "cogman"
+toml     = "cogman-supervisor/cogman-supervisor.toml"
+
+# ── Rootfs layout ────────────────────────────────────────────────────────
+
+[rootfs]
+# Directories created unconditionally (before any package installer runs)
+mkdirs = [
+    "/bin", "/sbin", "/usr/bin", "/usr/lib",
+    "/lib",
+    "/etc/cogman/services",
+    "/etc/cogman/plans",
+    "/run", "/tmp", "/proc", "/sys", "/dev",
+    "/root",
+]
+
+# /sbin/init must exist for the kernel to hand off to cogman-supervisor
+init = "/sbin/init"
+
+# ── Image parameters ─────────────────────────────────────────────────────
+
+[image]
+# Boot kernel from the kernel package; no separate initrd — rootfs is
+# embedded as an initramfs or passed as a raw ext4 image to QEMU.
+kernel   = "/boot/vmlinuz"
+cmdline  = "console=ttyS0 root=/dev/sda rw init=/sbin/init quiet"
+
+# QEMU invocation reference (not executed by cogman; for developer use):
+#   qemu-system-x86_64 \
+#     -kernel /boot/vmlinuz \
+#     -drive  file=rootfs.img,format=raw \
+#     -append "console=ttyS0 root=/dev/sda rw init=/sbin/init quiet" \
+#     -nographic -m 128M

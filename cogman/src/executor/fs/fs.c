@@ -134,13 +134,31 @@ copy_recursive(const char *src, const char *dst)
         snprintf(src_path, PATH_MAX, "%s/%s", src, ent->d_name);
         snprintf(dst_path, PATH_MAX, "%s/%s", dst, ent->d_name);
 
-        if (stat(src_path, &st) < 0) {
+        /* lstat so we see the symlink itself, not its target */
+        if (lstat(src_path, &st) < 0) {
             log_err("Cannot stat %s: %s", src_path, strerror(errno));
             closedir(dir);
             return -1;
         }
 
-        if (S_ISDIR(st.st_mode)) {
+        if (S_ISLNK(st.st_mode)) {
+            char link_target[PATH_MAX];
+            ssize_t len = readlink(src_path, link_target, sizeof(link_target) - 1);
+            if (len < 0) {
+                log_err("readlink(%s) failed: %s", src_path, strerror(errno));
+                closedir(dir);
+                return -1;
+            }
+            link_target[len] = '\0';
+            /* Remove stale destination if present */
+            unlink(dst_path);
+            if (symlink(link_target, dst_path) != 0) {
+                log_err("symlink(%s -> %s) failed: %s",
+                        dst_path, link_target, strerror(errno));
+                closedir(dir);
+                return -1;
+            }
+        } else if (S_ISDIR(st.st_mode)) {
             if (copy_recursive(src_path, dst_path) != 0) {
                 closedir(dir);
                 return -1;

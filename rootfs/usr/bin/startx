@@ -1,0 +1,16 @@
+#!/bin/sh
+mkdir -p /tmp/.X11-unix /tmp/.ICE-unix /var/log
+chmod 1777 /tmp/.X11-unix /tmp/.ICE-unix
+
+xinit /etc/X11/xinit/xinitrc -- /usr/lib/xorg/Xorg :0 vt1 \
+  -nolisten tcp -novtswitch \
+  -logfile /tmp/Xorg.log \
+  -logverbose 3
+
+RC=$?
+if [ $RC -ne 0 ]; then
+    echo "=== Xorg failed (exit $RC) ==="
+    grep -E "EE|WW|Fatal|error|Screen|DRM|drm|Cannot|failed|modesetting|No screens" \
+        /tmp/Xorg.log 2>/dev/null | head -30
+fi
+exit $RC

@@ -1,0 +1,37 @@
+#!/bin/sh
+# Verify X11 startup after a delay
+sleep 12
+
+echo "=== X11 Startup Verification ==="
+
+# Check running processes
+echo "[processes]"
+for pid in $(ls /proc | grep '^[0-9]'); do
+    exe=$(readlink /proc/$pid/exe 2>/dev/null)
+    case "$exe" in
+        *Xorg*|*xinit*|*i3*|*alacritty*)
+            echo "  PID $pid: $exe"
+            ;;
+    esac
+done
+
+# Check X socket
+echo "[X socket]"
+ls /tmp/.X11-unix/ 2>/dev/null && echo "  X sockets OK" || echo "  no X socket yet"
+
+# Check Xorg log locations
+echo "[Xorg log]"
+for log in /tmp/Xorg.log /var/log/Xorg.0.log /root/.local/share/xorg/Xorg.0.log; do
+    if [ -f "$log" ] && [ -s "$log" ]; then
+        echo "  found: $log"
+        grep -E "Screen|modesetting|EE |Fatal|Using " "$log" 2>/dev/null | head -5
+        break
+    fi
+done
+
+# Check i3
+echo "[i3]"
+ls /tmp/i3-socket 2>/dev/null && echo "  i3 IPC socket: ACTIVE" || echo "  i3 socket not found"
+
+echo "=== Done ==="
+exit 0
