@@ -1,0 +1,62 @@
+#!/bin/sh
+# Parse /proc/bus/input/devices and write xorg input config
+CONF=/tmp/xorg-input-devices.conf
+: > "$CONF"
+
+kbd_event=""
+ptr_event=""
+
+# Parse input devices
+while IFS= read -r line; do
+    case "$line" in
+        N:*keyboard*|N:*Keyboard*)
+            in_kbd=1; in_ptr=0 ;;
+        N:*Mouse*|N:*mouse*|N:*Tablet*|N:*tablet*|N:*Pointer*)
+            in_kbd=0; in_ptr=1 ;;
+        N:*)
+            in_kbd=0; in_ptr=0 ;;
+        H:*Handlers*)
+            ev=$(echo "$line" | grep -oE 'event[0-9]+' | head -1)
+            [ -n "$ev" ] && [ "$in_kbd" = "1" ] && [ -z "$kbd_event" ] && kbd_event="$ev"
+            [ -n "$ev" ] && [ "$in_ptr" = "1" ] && [ -z "$ptr_event" ] && ptr_event="$ev"
+            ;;
+    esac
+done < /proc/bus/input/devices
+
+# Fallback: pick first keyboard-capable event
+if [ -z "$kbd_event" ]; then
+    for d in /dev/input/event*; do
+        name=$(cat /sys/class/input/$(basename $d)/device/name 2>/dev/null)
+        case "$name" in
+            *keyboard*|*Keyboard*|*KEY*) kbd_event=$(basename $d); break ;;
+        esac
+    done
+fi
+
+[ -z "$kbd_event" ] && kbd_event="event0"
+[ -z "$ptr_event" ] && ptr_event="event1"
+
+cat > "$CONF" << EOF
+Section "InputDevice"
+  Identifier "Keyboard0"
+  Driver "libinput"
+  Option "Device" "/dev/input/$kbd_event"
+  Option "XkbLayout" "us"
+  Option "XkbModel" "pc105"
+EndSection
+
+Section "InputDevice"
+  Identifier "Pointer0"
+  Driver "libinput"
+  Option "Device" "/dev/input/$ptr_event"
+EndSection
+
+Section "ServerLayout"
+  Identifier "Layout0"
+  Screen "Screen0"
+  InputDevice "Keyboard0" "CoreKeyboard"
+  InputDevice "Pointer0" "CorePointer"
+EndSection
+EOF
+
+echo "xorg-find-inputs: kbd=/dev/input/$kbd_event ptr=/dev/input/$ptr_event"
