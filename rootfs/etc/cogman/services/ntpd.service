@@ -1,0 +1,7 @@
+[service]
+name          = ntpd
+command       = /usr/sbin/ntpd -n -p pool.ntp.org
+type          = process
+restart       = on-failure
+restart_delay = 30
+depends       = rcs

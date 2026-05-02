@@ -24,7 +24,7 @@ exec qemu-system-x86_64 \
     -smp 2 \
     -kernel "$KERNEL" \
     -initrd "$INITRD" \
-    -append "console=ttyS0 rdinit=/sbin/init quiet" \
+    -append "console=ttyS0 rdinit=/init quiet" \
     -nographic \
     -serial mon:stdio \
     -no-reboot

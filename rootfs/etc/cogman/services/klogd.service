@@ -1,0 +1,7 @@
+[service]
+name          = klogd
+command       = /sbin/klogd -n
+type          = process
+restart       = always
+restart_delay = 2
+depends       = syslogd

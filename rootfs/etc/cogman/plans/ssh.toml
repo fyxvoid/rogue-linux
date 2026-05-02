@@ -1,0 +1,35 @@
+[identity]
+name     = "ssh"
+version  = "dropbear-2024.85"
+category = "network"
+summary  = "Dropbear SSH client — lightweight SSH client (dbclient) with key management."
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "ssh -V 2>&1 || true",
+    "mkdir -p /root/.ssh /etc/dropbear",
+    "chmod 700 /root/.ssh",
+    "sh -c 'cat > /root/.ssh/config << SSHCONF\nHost *\n    ServerAliveInterval 60\n    ServerAliveCountMax 3\n    StrictHostKeyChecking ask\n    IdentityFile ~/.ssh/id_dropbear\nSSSHCONF'",
+    "chmod 600 /root/.ssh/config",
+    "sh -c 'dropbearkey -t ed25519 -f /root/.ssh/id_dropbear 2>&1 | grep -E \"Public key|Generating\"'",
+    "sh -c 'dropbearkey -y -f /root/.ssh/id_dropbear 2>&1 | grep -E \"^Public|^ssh-\"'",
+    "sh -c 'echo SSH_SETUP_OK'",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = ["/", "/root/.ssh", "/etc/dropbear", "/tmp"]
+[policy.network]
+outbound     = false
+capabilities = []

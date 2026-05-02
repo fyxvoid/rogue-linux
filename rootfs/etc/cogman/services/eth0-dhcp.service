@@ -1,0 +1,7 @@
+[service]
+name          = eth0-dhcp
+command       = /sbin/udhcpc -i eth0 -s /etc/udhcpc/default.script -f -q
+type          = process
+restart       = on-failure
+restart_delay = 10
+depends       = mdev

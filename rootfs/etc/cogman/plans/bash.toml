@@ -1,0 +1,37 @@
+[identity]
+name     = "bash"
+version  = "5.2"
+category = "shell"
+summary  = "GNU Bourne-Again Shell — interactive shell with history, completion, and PS1."
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "bash --version",
+    "mkdir -p /root",
+    "sh -c 'printf \"export PS1=rogue:\\\\w# \\n\" > /root/.bashrc'",
+    "sh -c 'printf \"export HISTSIZE=1000\\n\" >> /root/.bashrc'",
+    "sh -c 'printf \"export HISTFILE=/root/.bash_history\\n\" >> /root/.bashrc'",
+    "sh -c 'printf \"alias ll=ls -la\\n\" >> /root/.bashrc'",
+    "sh -c 'printf \"alias grep=grep --color=auto\\n\" >> /root/.bashrc'",
+    "sh -c 'grep -q /bin/bash /etc/shells || echo /bin/bash >> /etc/shells'",
+    "sh -c 'sed -i \"s|/bin/sh|/bin/bash|\" /etc/passwd'",
+    "sh -c 'cat /root/.bashrc && echo BASH_SETUP_OK'",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = ["/", "/root", "/etc"]
+[policy.network]
+outbound     = false
+capabilities = []

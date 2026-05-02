@@ -1,0 +1,37 @@
+[identity]
+name     = "curl"
+version  = "8.x"
+category = "network"
+summary  = "Command-line HTTP/FTP client with TLS support."
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "sh -c 'CURLBIN=/usr/bin/curl; $CURLBIN --version | head -1'",
+    "mkdir -p /root /etc/curl",
+    "sh -c 'printf \"--connect-timeout 10\\n\" > /root/.curlrc'",
+    "sh -c 'printf \"--max-time 30\\n\" >> /root/.curlrc'",
+    "sh -c 'printf \"--retry 3\\n\" >> /root/.curlrc'",
+    "sh -c 'printf \"--location\\n\" >> /root/.curlrc'",
+    "sh -c 'printf \"--fail\\n\" >> /root/.curlrc'",
+    "sh -c 'CURLBIN=/usr/bin/curl; $CURLBIN --version | grep -E \"^curl|Protocols\" | head -2'",
+    "sh -c 'echo curl_configured > /tmp/curl-install-marker'",
+    "sh -c 'cat /tmp/curl-install-marker && echo CURL_SETUP_OK'",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = ["/", "/etc/curl", "/root", "/tmp"]
+[policy.network]
+outbound     = false
+capabilities = []

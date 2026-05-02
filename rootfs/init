@@ -1,0 +1,117 @@
+#!/bin/sh
+# Rogue Linux /init — works in both initramfs and direct-disk contexts.
+#
+# Two boot paths converge here:
+#
+#   A) initramfs path (boot-qemu.sh, or GRUB + initrd):
+#      Kernel unpacks cpio into ramfs, execs /init here.
+#      We mount basics, find the root= device, mount it,
+#      mount /run as tmpfs on the new root, then switch_root.
+#      After switch_root the new root's /init (this same script) is called;
+#      it sees a real disk filesystem and takes branch B.
+#
+#   B) direct-disk path (boot-disk-direct.sh, GRUB without initrd):
+#      Kernel mounts ext4 directly and execs /init here.
+#      Root is already a real filesystem — mount /run as tmpfs and
+#      hand off to cogman-supervisor.
+
+set -e
+
+# Always mount the virtual filesystems we need for detection / blkid.
+mount -t proc     proc     /proc    2>/dev/null || true
+mount -t sysfs    sysfs    /sys     2>/dev/null || true
+mount -t devtmpfs devtmpfs /dev     2>/dev/null || true
+mkdir -p /dev/pts /dev/shm
+mount -t devpts   devpts   /dev/pts 2>/dev/null || true
+mount -t tmpfs    shm      /dev/shm 2>/dev/null || true
+chmod 1777 /dev/shm 2>/dev/null || true
+
+# ── Detect boot context ──────────────────────────────────────────────────
+# In initramfs the kernel root is type "rootfs" (or "ramfs"); on a real disk
+# it is "ext4", "btrfs", etc.  Check the filesystem type of /.
+ROOT_FS_TYPE=$(awk '$2 == "/" { print $3; exit }' /proc/mounts 2>/dev/null)
+
+case "$ROOT_FS_TYPE" in
+    ext2|ext3|ext4|btrfs|xfs|f2fs|jfs|reiserfs)
+        # ── Branch B: already on a real disk ────────────────────────────
+        # Mount /run as a fresh tmpfs so cogman-supervisor gets a clean
+        # runtime directory (avoids stale socket/lock files from last boot).
+        if ! mountpoint -q /run 2>/dev/null; then
+            mount -t tmpfs tmpfs /run -o nosuid,mode=0755 2>/dev/null || true
+        fi
+        mkdir -p /run/cogman /run/lock
+        exec /usr/bin/cogman-supervisor "$@"
+        ;;
+esac
+
+# ── Branch A: initramfs — pivot to real root ─────────────────────────────
+
+# Parse kernel cmdline for root= and init args (everything after --)
+ROOT_UUID=""
+ROOT_DEV=""
+INIT_ARGS=""
+PAST_SEP=0
+
+for arg in $(cat /proc/cmdline); do
+    if [ "$PAST_SEP" = "1" ]; then
+        INIT_ARGS="$INIT_ARGS $arg"
+        continue
+    fi
+    case "$arg" in
+        root=UUID=*) ROOT_UUID="${arg#root=UUID=}" ;;
+        root=/dev/*) ROOT_DEV="${arg#root=}"        ;;
+        --)          PAST_SEP=1                      ;;
+    esac
+done
+
+# Resolve UUID → device node (wait up to 10 s for the device to appear)
+if [ -n "$ROOT_UUID" ] && [ -z "$ROOT_DEV" ]; then
+    i=0
+    while [ $i -lt 10 ]; do
+        for dev in $(blkid 2>/dev/null | cut -d: -f1); do
+            uuid=$(blkid -s UUID -o value "$dev" 2>/dev/null)
+            if [ "$uuid" = "$ROOT_UUID" ]; then
+                ROOT_DEV="$dev"
+                break 2
+            fi
+        done
+        sleep 1
+        i=$((i + 1))
+    done
+fi
+
+# If still no device: stay in RAM mode (e.g. pure-RAM development boot)
+if [ -z "$ROOT_DEV" ] || ! [ -b "$ROOT_DEV" ]; then
+    echo "rogue-init: no root device found — staying in RAM mode"
+    mount -t tmpfs tmpfs /run -o nosuid,mode=0755 2>/dev/null || true
+    mkdir -p /run/cogman /run/lock
+    exec /usr/bin/cogman-supervisor $INIT_ARGS
+fi
+
+# Mount the real root
+mkdir -p /mnt/newroot
+if ! mount "$ROOT_DEV" /mnt/newroot; then
+    echo "rogue-init: ERROR — cannot mount $ROOT_DEV"
+    exec /bin/sh
+fi
+
+# Pre-mount /run as tmpfs on the new root BEFORE switch_root so
+# cogman-supervisor finds a clean /run the moment it starts.
+mkdir -p /mnt/newroot/run
+mount -t tmpfs tmpfs /mnt/newroot/run -o nosuid,mode=0755 2>/dev/null || true
+
+# Move virtual filesystems into the new root so they survive the pivot.
+mount --move /proc /mnt/newroot/proc 2>/dev/null \
+    || { umount /proc 2>/dev/null || true; }
+mount --move /sys  /mnt/newroot/sys  2>/dev/null \
+    || { umount /sys  2>/dev/null || true; }
+mount --move /dev  /mnt/newroot/dev  2>/dev/null \
+    || { umount /dev  2>/dev/null || true; }
+
+# Pivot — after this the new root's /init (this script again) runs in
+# branch B and immediately exec's cogman-supervisor.
+exec switch_root /mnt/newroot /init $INIT_ARGS
+
+# Unreachable — defensive fallback
+echo "rogue-init: switch_root failed"
+exec /bin/sh

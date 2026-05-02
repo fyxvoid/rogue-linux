@@ -447,9 +447,15 @@ svc_deps_satisfied(struct service *svc, struct service *table, int n)
         for (int j = 0; j < n; j++) {
             if (strcmp(table[j].name, dep) == 0) {
                 found = 1;
-                if (table[j].state != SVC_RUNNING &&
-                    table[j].state != SVC_DONE)
-                    return 0;
+                /* Oneshot deps must complete before dependents start */
+                if (table[j].type == SVC_TYPE_ONESHOT) {
+                    if (table[j].state != SVC_DONE)
+                        return 0;
+                } else {
+                    if (table[j].state != SVC_RUNNING &&
+                        table[j].state != SVC_DONE)
+                        return 0;
+                }
                 break;
             }
         }

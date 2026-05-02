@@ -54,11 +54,42 @@ pub fn enforce_network(policy: &Policy, has_download_steps: bool) -> Result<(), 
     Ok(())
 }
 
+/// Returns true only if `cmd` (followed by a space) appears in `step` as a
+/// command invocation — i.e. the character immediately before the match (if
+/// any) is a recognised word separator, not a path component character.
+fn is_cmd_invoked(step: &str, cmd: &str) -> bool {
+    let pattern = format!("{} ", cmd);
+    let mut search = step;
+    while let Some(pos) = search.find(pattern.as_str()) {
+        let preceding = if pos == 0 {
+            // At the start of the string — definitely a command
+            true
+        } else {
+            matches!(
+                search.as_bytes()[pos - 1],
+                b' ' | b'\t' | b'|' | b';' | b'&' | b'(' | b'`' | b'\n'
+            )
+        };
+        if preceding {
+            return true;
+        }
+        // Advance past this (non-matching) occurrence and keep scanning
+        search = &search[pos + 1..];
+    }
+    false
+}
+
 /// Heuristic: detect download commands in build/installer step strings.
 pub fn steps_require_network(steps: &[String]) -> bool {
-    let network_cmds = ["curl ", "wget ", "git clone", "git fetch", "pip install", "npm install", "cargo fetch"];
+    // Multi-word patterns cannot collide with path components the same way,
+    // so keep them as plain substring matches.
+    let multiword_cmds = ["git clone", "git fetch", "pip install", "npm install", "cargo fetch"];
+    // Single-word commands are checked via is_cmd_invoked to avoid false
+    // positives from path components like /etc/curl or /var/wget.
+    let singleword_cmds = ["curl", "wget"];
     steps.iter().any(|step| {
-        network_cmds.iter().any(|cmd| step.contains(cmd))
+        multiword_cmds.iter().any(|cmd| step.contains(cmd))
+            || singleword_cmds.iter().any(|cmd| is_cmd_invoked(step, cmd))
     })
 }
 
@@ -126,5 +157,24 @@ mod tests {
     fn test_steps_require_network_clean() {
         let steps = vec!["make -j4".to_string(), "make install".to_string()];
         assert!(!steps_require_network(&steps));
+    }
+
+    #[test]
+    fn test_steps_require_network_no_false_positive_path() {
+        // /etc/curl /root should NOT trigger — "curl" here is a path component
+        let steps = vec!["mkdir /etc/curl /root".to_string()];
+        assert!(!steps_require_network(&steps));
+    }
+
+    #[test]
+    fn test_steps_require_network_curl_at_start() {
+        let steps = vec!["curl -O https://example.com/file.tar.gz".to_string()];
+        assert!(steps_require_network(&steps));
+    }
+
+    #[test]
+    fn test_steps_require_network_curl_after_separator() {
+        let steps = vec!["mkdir /tmp && curl -O https://example.com/file".to_string()];
+        assert!(steps_require_network(&steps));
     }
 }

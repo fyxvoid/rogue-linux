@@ -1,0 +1,6 @@
+[service]
+name    = mdev
+command = /sbin/mdev -s && echo /sbin/mdev > /proc/sys/kernel/hotplug
+type    = oneshot
+restart = never
+depends = rcs

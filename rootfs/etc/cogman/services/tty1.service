@@ -1,0 +1,12 @@
+[service]
+name          = tty1
+command       = /sbin/getty -L tty1 0 linux
+type          = process
+restart       = always
+restart_delay = 2
+depends       = rcs
+
+[env]
+TERM = linux
+HOME = /root
+PATH = /usr/bin:/bin:/usr/sbin:/sbin

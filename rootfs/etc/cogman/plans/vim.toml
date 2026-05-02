@@ -1,0 +1,34 @@
+[identity]
+name     = "vim"
+version  = "9.1"
+category = "editors"
+summary  = "Vi IMproved — full-featured text editor with syntax highlighting."
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "vim --version | head -1",
+    "mkdir -p /etc/vim /root",
+    "sh -c 'cat > /etc/vim/vimrc << VIMRC\nsyntax on\nset number\nset tabstop=4\nset shiftwidth=4\nset expandtab\nset hlsearch\nset incsearch\nset ruler\nset showcmd\nset wildmenu\nset background=dark\nVIMRC'",
+    "sh -c 'cp /etc/vim/vimrc /root/.vimrc'",
+    "sh -c 'update-alternatives --install /usr/bin/editor editor /usr/bin/vim 50 2>/dev/null || ln -sf /usr/bin/vim /usr/bin/editor'",
+    "sh -c 'vim --version | grep -E \"Vi IMproved|Included patches\" | head -2'",
+    "sh -c 'echo VIM_SETUP_OK'",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = ["/", "/etc/vim", "/root", "/usr/bin"]
+[policy.network]
+outbound     = false
+capabilities = []

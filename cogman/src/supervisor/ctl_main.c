@@ -38,7 +38,8 @@ usage(const char *prog)
             "  status <name>      show status of a service\n"
             "  start  <name>      start a stopped service\n"
             "  stop   <name>      stop a running service\n"
-            "  restart <name>     restart a service\n",
+            "  restart <name>     restart a service\n"
+            "  stop-all           stop all running services\n",
             prog);
 }
 

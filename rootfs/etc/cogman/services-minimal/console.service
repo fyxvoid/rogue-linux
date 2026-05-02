@@ -1,0 +1,12 @@
+[service]
+name          = console
+command       = /sbin/getty -L -n -l /bin/sh ttyS0 115200 linux
+type          = process
+restart       = always
+restart_delay = 2
+depends       = rcs
+
+[env]
+TERM = linux
+HOME = /root
+PATH = /usr/bin:/bin:/usr/sbin:/sbin

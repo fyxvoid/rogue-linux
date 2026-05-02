@@ -1,0 +1,32 @@
+[identity]
+name     = "nano"
+version  = "7.x"
+category = "editors"
+summary  = "GNU nano — simple terminal text editor with syntax highlighting."
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "nano --version | head -1",
+    "mkdir -p /root /etc",
+    "sh -c 'cat > /root/.nanorc << NANORC\nset tabsize 4\nset autoindent\nset linenumbers\nset mouse\nset softwrap\nset historylog\nset positionlog\nset smarthome\nset afterends\nNANORC'",
+    "sh -c 'nano --version | head -2'",
+    "sh -c 'echo NANO_SETUP_OK'",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = ["/", "/root", "/etc"]
+[policy.network]
+outbound     = false
+capabilities = []

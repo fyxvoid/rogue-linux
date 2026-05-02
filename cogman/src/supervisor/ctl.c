@@ -179,6 +179,26 @@ cmd_stop(int fd, const char *name)
 }
 
 static void
+cmd_stop_all(int fd)
+{
+    int stopped = 0;
+    for (int i = g_sup.count - 1; i >= 0; i--) {
+        struct service *s = &g_sup.table[i];
+        if (s->state == SVC_RUNNING || s->state == SVC_STARTING ||
+            s->state == SVC_RESTARTING) {
+            svc_restart_t saved = s->restart;
+            s->restart = SVC_RESTART_NEVER;
+            svc_stop(s);
+            s->restart = saved;
+            stopped++;
+        }
+    }
+    char buf[64];
+    snprintf(buf, sizeof(buf), "stopped %d service(s)\nOK\n", stopped);
+    send_str(fd, buf);
+}
+
+static void
 cmd_restart(int fd, const char *name)
 {
     struct service *s = find_svc(name);
@@ -250,6 +270,8 @@ dispatch(int fd, char *line)
     } else if (strcmp(verb, "restart") == 0) {
         if (!arg || !*arg) { send_str(fd, "ERR usage: restart <name>\n"); return; }
         cmd_restart(fd, arg);
+    } else if (strcmp(verb, "stop-all") == 0) {
+        cmd_stop_all(fd);
     } else {
         char buf[128];
         snprintf(buf, sizeof(buf), "ERR unknown command '%s'\n", verb);

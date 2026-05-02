@@ -1,0 +1,19 @@
+#!/bin/sh
+# udhcpc hook script — called by udhcpc on lease events
+
+case "$1" in
+    bound|renew)
+        [ -n "$ip" ]      && ip addr add "$ip/$mask" dev "$interface" 2>/dev/null || true
+        [ -n "$router" ]  && ip route add default via "$router" 2>/dev/null || true
+        if [ -n "$dns" ]; then
+            printf '' > /etc/resolv.conf
+            [ -n "$domain" ] && echo "domain $domain" >> /etc/resolv.conf
+            for server in $dns; do
+                echo "nameserver $server" >> /etc/resolv.conf
+            done
+        fi
+        ;;
+    deconfig)
+        ip addr flush dev "$interface" 2>/dev/null || true
+        ;;
+esac

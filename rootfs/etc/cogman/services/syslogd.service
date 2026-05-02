@@ -1,0 +1,7 @@
+[service]
+name          = syslogd
+command       = /sbin/syslogd -n -O /var/log/syslog -s 1024 -b 3
+type          = process
+restart       = always
+restart_delay = 2
+depends       = rcs

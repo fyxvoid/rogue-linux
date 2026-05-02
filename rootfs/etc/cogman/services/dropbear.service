@@ -1,0 +1,7 @@
+[service]
+name          = dropbear
+command       = /usr/sbin/dropbear -F -E -p 22
+type          = process
+restart       = always
+restart_delay = 3
+depends       = dropbear-keygen

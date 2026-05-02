@@ -1,23 +1,27 @@
 #!/bin/sh
-# Rogue Linux system initialization
+# Rogue Linux system initialization — runs on every boot path.
 
-mount -t proc proc /proc
-mount -t sysfs sysfs /sys
-mount -t devtmpfs devtmpfs /dev 2>/dev/null || mdev -s
+# Re-mount virtual filesystems in case /init didn't already do so
+# (idempotent: already-mounted mounts are skipped silently).
+mount -t proc     proc     /proc    2>/dev/null || true
+mount -t sysfs    sysfs    /sys     2>/dev/null || true
+mount -t devtmpfs devtmpfs /dev     2>/dev/null || mdev -s
 mkdir -p /dev/pts /dev/shm
-mount -t devpts devpts /dev/pts
-mount -t tmpfs shm /dev/shm
+mount -t devpts   devpts   /dev/pts 2>/dev/null || true
+mount -t tmpfs    shm      /dev/shm 2>/dev/null || true
 chmod 1777 /dev/shm
-mount -t tmpfs tmpfs /tmp
+
+# Mount /tmp as tmpfs only if not already a tmpfs.
+mountpoint -q /tmp 2>/dev/null || mount -t tmpfs tmpfs /tmp
 chmod 1777 /tmp
 
-# /run is NOT re-mounted: cogman-supervisor creates its socket there at startup
-# and a tmpfs remount would hide the socket. initramfs /run is already in RAM.
+# /run is pre-mounted as tmpfs by /init before cogman-supervisor starts,
+# so the socket is already in place.  Just ensure the subdirs exist.
 mkdir -p /run/cogman /run/lock
-touch /run/utmp
-chmod 664 /run/utmp
+touch /run/utmp    2>/dev/null || true
+chmod 664 /run/utmp 2>/dev/null || true
 
-# Loopback network interface
+# Loopback
 ip link set lo up 2>/dev/null || true
 
 hostname rogue
