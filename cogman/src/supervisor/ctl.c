@@ -93,6 +93,39 @@ cmd_list(int fd)
 }
 
 static void
+cmd_list_pkgs(int fd)
+{
+    FILE *f = fopen("/var/lib/cogman/installed.db", "r");
+    if (!f) {
+        send_str(fd, "(no packages installed)\n");
+        send_str(fd, "OK\n");
+        return;
+    }
+
+    char line[256];
+    while (fgets(line, sizeof(line), f)) {
+        /* Skip blank lines */
+        if (line[0] == '\n' || line[0] == '\0')
+            continue;
+        /* line is "name\tversion\n" — format it nicely */
+        char *tab = strchr(line, '\t');
+        char *nl  = strchr(line, '\n');
+        if (nl) *nl = '\0';
+        if (tab) {
+            *tab = '\0';
+            char out[512];
+            snprintf(out, sizeof(out), "%-24s  %s\n", line, tab + 1);
+            send_str(fd, out);
+        } else {
+            send_str(fd, line);
+            send_str(fd, "\n");
+        }
+    }
+    fclose(f);
+    send_str(fd, "OK\n");
+}
+
+static void
 cmd_status(int fd, const char *name)
 {
     struct service *s = find_svc(name);
@@ -272,6 +305,8 @@ dispatch(int fd, char *line)
         cmd_restart(fd, arg);
     } else if (strcmp(verb, "stop-all") == 0) {
         cmd_stop_all(fd);
+    } else if (strcmp(verb, "list-pkgs") == 0) {
+        cmd_list_pkgs(fd);
     } else {
         char buf[128];
         snprintf(buf, sizeof(buf), "ERR unknown command '%s'\n", verb);

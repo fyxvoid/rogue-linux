@@ -1,0 +1,35 @@
+#!/usr/sbin/nft -f
+flush ruleset
+
+table inet filter {
+    chain input {
+        type filter hook input priority 0; policy drop;
+
+        # Accept loopback
+        iif lo accept
+
+        # Accept established/related connections
+        ct state established,related accept
+
+        # Accept ICMP (ping)
+        ip  protocol icmp  accept
+        ip6 nexthdr  icmpv6 accept
+
+        # Accept SSH (port 22)
+        tcp dport 22 ct state new accept
+
+        # Accept cogman dashboard (port 7070) from localhost only
+        tcp dport 7070 ip saddr 127.0.0.1 accept
+
+        # Drop everything else
+        drop
+    }
+
+    chain output {
+        type filter hook output priority 0; policy accept;
+    }
+
+    chain forward {
+        type filter hook forward priority 0; policy drop;
+    }
+}

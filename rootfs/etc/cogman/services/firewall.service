@@ -1,0 +1,5 @@
+[service]
+name     = firewall
+type     = oneshot
+command  = /sbin/nft -f /etc/cogman/firewall.nft
+depends  = rcs

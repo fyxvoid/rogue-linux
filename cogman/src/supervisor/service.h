@@ -112,4 +112,11 @@ int svc_stop(struct service *svc);
 int svc_deps_satisfied(struct service *svc,
                        struct service *table, int n);
 
+/*
+ * svc_check_cycles — detect dependency cycles using DFS.
+ * Returns 0 if the dependency graph is acyclic, -1 if a cycle exists.
+ * Logs the offending edge to stderr.
+ */
+int svc_check_cycles(const struct service *table, int n);
+
 #endif /* COGMAN_SERVICE_H */

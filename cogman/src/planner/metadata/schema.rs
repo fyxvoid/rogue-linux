@@ -22,6 +22,9 @@ pub struct PackageMetadata {
     pub build: Builder,
     /// Post-build installation steps
     pub installer: Installer,
+    /// Optional steps to reverse the installation
+    #[serde(default)]
+    pub uninstaller: Option<Uninstaller>,
     /// Security and system policies
     #[serde(default)]
     pub policy: Policy,
@@ -113,6 +116,12 @@ pub struct Installer {
     pub steps: Vec<String>,
     #[serde(default)]
     pub verify: Option<Verify>,
+}
+
+#[derive(Debug, Deserialize, Serialize, Clone, Default)]
+pub struct Uninstaller {
+    #[serde(default)]
+    pub steps: Vec<String>,
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone)]

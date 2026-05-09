@@ -32,3 +32,6 @@ write = ["/", "/etc/vim", "/root", "/usr/bin"]
 [policy.network]
 outbound     = false
 capabilities = []
+
+[uninstaller]
+steps = []

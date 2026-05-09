@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/mman.h>
+#include <sys/stat.h>
 #include <signal.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -166,15 +167,44 @@ execute_step(const void *base, const struct plan_header *hdr,
     return 0;
 }
 
+static void
+record_installed(const char *name, const char *version)
+{
+    if (!name || !version)
+        return;
+
+    /* Ensure the directory exists */
+    mkdir("/var/lib/cogman", 0755);
+
+    FILE *f = fopen("/var/lib/cogman/installed.db", "a");
+    if (!f) {
+        log_warn("Could not open installed.db for writing: %s", strerror(errno));
+        return;
+    }
+    /* Format: name\tversion\n */
+    fprintf(f, "%s\t%s\n", name, version);
+    fclose(f);
+    log_info("Recorded package '%s' version '%s' in installed.db", name, version);
+}
+
 int
 main(int argc, char **argv)
 {
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s <plan-file>\n", argv[0]);
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <plan-file> [--pkg-name <name> --pkg-version <ver>]\n", argv[0]);
         return 1;
     }
 
-    const char *plan_path = argv[1];
+    const char *plan_path   = argv[1];
+    const char *pkg_name    = NULL;
+    const char *pkg_version = NULL;
+
+    for (int i = 2; i < argc - 1; i++) {
+        if (strcmp(argv[i], "--pkg-name") == 0)
+            pkg_name = argv[++i];
+        else if (strcmp(argv[i], "--pkg-version") == 0)
+            pkg_version = argv[++i];
+    }
     size_t file_size;
     void *base = plan_open(plan_path, &file_size);
 
@@ -232,5 +262,6 @@ main(int argc, char **argv)
     }
 
     log_ok("All %u steps executed successfully", step_count);
+    record_installed(pkg_name, pkg_version);
     return 0;
 }

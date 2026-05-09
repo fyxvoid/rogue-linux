@@ -35,3 +35,6 @@ write = ["/", "/etc/curl", "/root", "/tmp"]
 [policy.network]
 outbound     = false
 capabilities = []
+
+[uninstaller]
+steps = []

@@ -170,6 +170,51 @@ svc_parse_file(struct service *svc, const char *path)
     return 0;
 }
 
+/* ── Cycle detection ─────────────────────────────────────────────────── */
+
+/* DFS visitor — returns -1 if a cycle is found */
+static int
+dfs_visit(const struct service *table, int n, int i,
+          unsigned char *color)
+{
+    color[i] = 1; /* gray — currently on DFS stack */
+    for (int d = 0; d < table[i].ndeps; d++) {
+        const char *dep_name = table[i].deps[d];
+        int j = -1;
+        for (int k = 0; k < n; k++) {
+            if (strcmp(table[k].name, dep_name) == 0) { j = k; break; }
+        }
+        if (j < 0) continue; /* unknown dep — deps_satisfied will catch it */
+        if (color[j] == 1) {
+            fprintf(stderr,
+                    "cogman: dependency cycle detected: '%s' -> '%s'\n",
+                    table[i].name, table[j].name);
+            return -1;
+        }
+        if (color[j] == 0 && dfs_visit(table, n, j, color) < 0)
+            return -1;
+    }
+    color[i] = 2; /* black — fully visited */
+    return 0;
+}
+
+/*
+ * svc_check_cycles — scan the service table for dependency cycles.
+ * Returns 0 if no cycles are found, -1 if any cycle is detected.
+ * Logs the offending edge on stderr.
+ */
+int
+svc_check_cycles(const struct service *table, int n)
+{
+    unsigned char color[MAX_SERVICES];
+    memset(color, 0, sizeof(color));
+    for (int i = 0; i < n; i++) {
+        if (color[i] == 0 && dfs_visit(table, n, i, color) < 0)
+            return -1;
+    }
+    return 0;
+}
+
 /* ── svc_load_dir ────────────────────────────────────────────────────── */
 
 int

@@ -1,0 +1,6 @@
+[service]
+name     = dashboard
+type     = process
+command  = /usr/sbin/httpd -f -p 7070 -h /usr/lib/cogman/dashboard
+restart  = always
+depends  = rcs

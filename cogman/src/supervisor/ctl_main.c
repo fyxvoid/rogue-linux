@@ -39,7 +39,8 @@ usage(const char *prog)
             "  start  <name>      start a stopped service\n"
             "  stop   <name>      stop a running service\n"
             "  restart <name>     restart a service\n"
-            "  stop-all           stop all running services\n",
+            "  stop-all           stop all running services\n"
+            "  list-pkgs          list installed packages\n",
             prog);
 }
 

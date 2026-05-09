@@ -333,6 +333,12 @@ main(int argc, char **argv)
         n = 0;
     }
     g_sup.count = n;
+
+    if (svc_check_cycles(g_sup.table, g_sup.count) < 0) {
+        fprintf(stderr, "cogman-supervisor: aborting — dependency cycle in service definitions\n");
+        return 1;
+    }
+
     fprintf(stderr, "cogman-supervisor: loaded %d service(s)\n", n);
 
     /* ── Set up signal handlers ──────────────────────────────────────── */

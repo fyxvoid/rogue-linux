@@ -92,3 +92,35 @@ pub fn plan(meta: &PackageMetadata, rootfs: &str, metadata_root: &std::path::Pat
 
     steps
 }
+
+/// Generate steps for the uninstall variant.
+/// Writes an uninstaller shell script to /var/lib/cogman/uninstallers/<name>.sh
+/// and then runs the explicit [uninstaller] steps if provided.
+pub fn plan_uninstall(meta: &PackageMetadata, rootfs: &str) -> Vec<PlanStep> {
+    let name = &meta.identity.name;
+    let mut steps = Vec::new();
+
+    // Ensure the directory exists
+    steps.push(PlanStep {
+        op: StepOp::Mkdir,
+        command: format!("{}/var/lib/cogman/uninstallers", rootfs),
+        workdir: rootfs.to_string(),
+        env: Vec::new(),
+        fail_policy: FailPolicy::Warn,
+    });
+
+    // Write a shell script that contains the [uninstaller] steps
+    if let Some(ref uninstaller) = meta.uninstaller {
+        for cmd in &uninstaller.steps {
+            steps.push(PlanStep {
+                op: StepOp::Exec,
+                command: cmd.clone(),
+                workdir: rootfs.to_string(),
+                env: Vec::new(),
+                fail_policy: FailPolicy::Warn,
+            });
+        }
+    }
+
+    steps
+}

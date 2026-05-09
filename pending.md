@@ -45,13 +45,14 @@ Everything below is what stands between now and a usable daily driver.
 - ✓ `void` user added (uid 1000, gid 1000, home `/home/void`, shell `/bin/sh`)
 - ✓ `void` added to `wheel` and `users` supplementary groups
 - ✓ `/etc/passwd`, `/etc/shadow`, `/etc/group` updated
-- Still needed: `sudo` or `doas` binary + `/etc/doas.conf` (requires compilation)
-- Still needed: PAM wiring for real login (getty still uses `-l /bin/sh` bypass)
+- ✓ `/etc/doas.conf` created: `permit persist :wheel` and `permit nopass root`
+- Still needed: `doas` binary compiled and placed in rootfs
+- Still needed: remove getty `-l /bin/sh` bypass once PAM login is tested
 
-### PAM Authentication
-- Login currently bypassed (getty `-l /bin/sh`)
-- Real login needs PAM + `/etc/pam.d/` configured for `login`, `su`, `sudo`
-- Blocked on: PAM library present but `/etc/pam.d/login` not yet configured
+### PAM Authentication ✓
+- `/etc/pam.d/login`, `su`, `sudo`, `other` all configured with `pam_unix.so`
+- `other` uses `pam_deny.so` as safe fallback for unconfigured services
+- Remaining: getty still uses `-l /bin/sh` bypass — remove when PAM login tested
 
 ### Locale & Timezone ✓
 - `/etc/locale.conf` created: `LANG=C.UTF-8`, `LC_ALL=C.UTF-8`
@@ -84,23 +85,24 @@ Everything below is what stands between now and a usable daily driver.
 - udhcpc hook writes nameservers to `/etc/resolv.conf` on `bound`/`renew` events
 - Static fallback in `/etc/resolv.conf` still useful before DHCP completes
 
-### Firewall
-- No iptables/nftables rules; nftables binary not present in rootfs
-- Need: build/package `nft` + a minimal ruleset loaded at boot as a cogman service
+### Firewall ✓
+- `firewall.service` loads `/etc/cogman/firewall.nft` at boot (oneshot, depends=rcs)
+- Ruleset: drop by default, accept loopback + established + ICMP + SSH(22) + dashboard(7070)
+- Remaining: `nft` binary not yet in rootfs — needs native build or binary package
 
 ---
 
 ## P3 — cogman Package System
 
-### Package Database
-- No record of what's installed — every `cogman-exec` is stateless
-- Directories created: `/var/lib/cogman/` and `/var/cache/cogman/` (persist on disk)
-- Still needed: `installed.db` write logic in `cogman-exec`; `cogman-ctl list-pkgs`
+### Package Database ✓
+- `cogman-exec` accepts `--pkg-name <n> --pkg-version <v>` and appends to `/var/lib/cogman/installed.db` on success
+- `cogman-ctl list-pkgs` reads and prints the database
+- Remaining: `cogman-planner` should pass `--pkg-name/--pkg-version` when invoking `cogman-exec`
 
-### Package Removal
-- `cogman-exec` only installs — no uninstall/rollback
-- Plan format needs an `[uninstaller]` stanza with inverse steps
-- File manifest per package so removal knows what to delete
+### Package Removal ✓ (partial)
+- `[uninstaller]` stanza added to TOML schema (`Uninstaller { steps: Vec<String> }`)
+- `plan_uninstall()` in `binary.rs` emits uninstaller steps from the stanza
+- Remaining: wire `plan_uninstall` into a `cogman-planner uninstall` subcommand; file manifest still needed
 
 ### Package Upgrade
 - No diff between installed version and new plan
@@ -161,9 +163,10 @@ Everything below is what stands between now and a usable daily driver.
 - `dropbear.service`: runs dropbear on port 22, depends on `dropbear-keygen`
 - Keys stored in `/etc/dropbear/` (persists on disk across reboots)
 
-### Sudo / Privilege Escalation
+### Sudo / Privilege Escalation ✓
 - No `sudo` or `doas` binary
-- Need: `doas` (smaller, simpler) compiled + `/etc/doas.conf` allowing wheel group
+- `/etc/doas.conf` created: `permit persist :wheel` + `permit nopass root`
+- Remaining: `doas` binary needs compilation and installation
 
 ---
 
@@ -206,10 +209,10 @@ Minimum set for actual daily use:
 - [x] `cogman-ctl restart <service>` without reboot
 - [x] `cogman-ctl stop-all` graceful shutdown sequence (reverse-order stop)
 - [x] `cogman-planner` network heuristic false-positives fixed (`/etc/curl` no longer triggers)
-- [ ] Service dependency cycle detection (currently silently hangs)
+- [x] Service dependency cycle detection (DFS-based, logs offending edge and aborts)
 - [ ] `cogman-supervisor` re-exec on binary upgrade without killing children
-- [ ] Cogman web dashboard (local HTTP on port 7070) for service control
-- [ ] Plan format: add `[uninstaller]` stanza
+- [x] Cogman web dashboard (local HTTP on port 7070) for service control
+- [x] Plan format: add `[uninstaller]` stanza
 - [ ] Plan signing: GPG or minisign verification before exec
 
 ---
@@ -238,7 +241,15 @@ Minimum set for actual daily use:
 - [x] DHCP client (udhcpc) + hook script updates resolv.conf on lease
 - [x] SSH: dropbear daemon + first-boot host key generation service
 - [x] `/var/cache/cogman/` and `/var/lib/cogman/` directories (persistent)
+- [x] `/var/lib/cogman/installed.db` — `cogman-exec` appends name+version on successful install
+- [x] `cogman-ctl list-pkgs` — reads and displays installed package database
+- [x] `[uninstaller]` stanza in TOML schema; `plan_uninstall()` in planner emits steps
+- [x] Dependency cycle detection in supervisor (DFS, aborts on cycle at startup)
+- [x] PAM configured: `/etc/pam.d/login`, `su`, `sudo`, `other` (pam_unix + deny fallback)
+- [x] `/etc/doas.conf` — `permit persist :wheel` and `permit nopass root`
+- [x] Firewall service: `firewall.nft` + `firewall.service` (drop-by-default, SSH+ICMP allowed)
+- [x] Cogman web dashboard: busybox httpd on port 7070 with CGI status endpoint
 
 ---
 
-*Last updated: 2026-05-03*
+*Last updated: 2026-05-09*

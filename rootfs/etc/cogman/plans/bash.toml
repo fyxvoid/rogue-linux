@@ -35,3 +35,8 @@ write = ["/", "/root", "/etc"]
 [policy.network]
 outbound     = false
 capabilities = []
+
+[uninstaller]
+steps = [
+    "sh -c 'sed -i \"s|/bin/bash|/bin/sh|\" /etc/passwd || true'",
+]

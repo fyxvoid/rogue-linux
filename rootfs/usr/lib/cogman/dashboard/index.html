@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="5">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cogman Dashboard</title>
+<style>
+  body { font-family: monospace; background: #0d1117; color: #c9d1d9; margin: 2em; }
+  h1 { color: #58a6ff; border-bottom: 1px solid #30363d; padding-bottom: 0.5em; }
+  table { border-collapse: collapse; width: 100%; margin-top: 1em; }
+  th { background: #161b22; color: #8b949e; text-align: left; padding: 8px 12px; border-bottom: 2px solid #30363d; }
+  td { padding: 6px 12px; border-bottom: 1px solid #21262d; }
+  .running  { color: #3fb950; }
+  .stopped  { color: #8b949e; }
+  .failed   { color: #f85149; }
+  .done     { color: #58a6ff; }
+  .restarting { color: #d29922; }
+  .footer { margin-top: 2em; color: #484f58; font-size: 0.85em; }
+</style>
+</head>
+<body>
+<h1>&#9881; Cogman Service Dashboard</h1>
+<p>Auto-refreshes every 5 seconds. Host: <strong id="host"></strong></p>
+<script>document.getElementById('host').textContent = location.host;</script>
+<table>
+  <thead><tr><th>Service</th><th>State</th><th>PID</th><th>Restarts</th></tr></thead>
+  <tbody id="tbody">
+    <tr><td colspan="4">Loading...</td></tr>
+  </tbody>
+</table>
+<div class="footer">Rogue Linux &bull; cogman-supervisor &bull; <a href="/cgi-bin/status.cgi" style="color:#58a6ff">raw status</a></div>
+<script>
+fetch('/cgi-bin/status.cgi').then(r=>r.text()).then(text=>{
+  const rows = text.trim().split('\n').filter(l=>l&&!l.startsWith('OK'));
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = rows.map(line=>{
+    const parts = line.trim().split(/\s+/);
+    const name = parts[0]||'';
+    const state = parts[1]||'';
+    const pid = (parts[2]||'').replace('pid=','');
+    const restarts = (parts[3]||'').replace('restarts=','');
+    return `<tr><td>${name}</td><td class="${state}">${state}</td><td>${pid}</td><td>${restarts}</td></tr>`;
+  }).join('');
+});
+</script>
+</body>
+</html>
