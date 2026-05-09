@@ -1,0 +1,24 @@
+#!/bin/sh
+# cogman-install <plan.toml> [--rootfs /] — plan, execute, and record a package
+# Wraps cogman-planner + cogman-exec with automatic installed.db tracking
+set -e
+
+TOML="$1"
+ROOTFS="${2:-/}"
+PLAN="/tmp/cogman-install-$$.plan"
+
+[ -z "$TOML" ] && { echo "Usage: cogman-install <package.toml> [rootfs]"; exit 1; }
+[ -f "$TOML" ] || { echo "Error: $TOML not found"; exit 1; }
+
+# Extract name and version from TOML
+NAME=$(grep '^name' "$TOML" | head -1 | sed 's/.*= *"\(.*\)"/\1/')
+VER=$(grep '^version' "$TOML" | head -1 | sed 's/.*= *"\(.*\)"/\1/')
+
+echo "==> Planning $NAME-$VER..."
+cogman-planner install --metadata "$TOML" --output "$PLAN" --rootfs "$ROOTFS"
+
+echo "==> Executing plan..."
+cogman-exec "$PLAN" --pkg-name "$NAME" --pkg-version "$VER"
+
+rm -f "$PLAN"
+echo "==> Installed $NAME-$VER"

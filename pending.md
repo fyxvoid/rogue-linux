@@ -63,7 +63,7 @@ Everything below is what stands between now and a usable daily driver.
 ### System Logging ✓
 - `syslogd.service`: busybox syslogd → `/var/log/syslog` (1 MB max, 3 rotations)
 - `klogd.service`: kernel log daemon, depends on `syslogd`
-- Remaining: logrotate for long-running installs
+- ✓ logrotate.conf written
 
 ### Time Sync ✓
 - `ntpd.service`: busybox ntpd against `pool.ntp.org`, restarts on failure
@@ -130,9 +130,9 @@ Everything below is what stands between now and a usable daily driver.
 - No `fontconfig` or `freetype` → applications that need fonts fail silently
 - Need: `fontconfig`, a base font set (DejaVu or Noto), `fc-cache` run at install
 
-### ncurses / TERM ✓ (partial)
+### ncurses / TERM ✓
 - `/etc/profile` now exports `TERM=xterm-256color` for interactive sessions
-- Remaining: proper `terminfo` database and `ncurses` linked against running libc
+- ✓ Full terminfo database copied from host into rootfs
 
 ### X11 / Wayland ✓
 - `Xorg` and `i3` binaries exist in rootfs but untested on real hardware

@@ -1,4 +1,5 @@
 /bin/sh
 /bin/ash
 /bin/bash
+/usr/bin/bash
 /bin/busybox

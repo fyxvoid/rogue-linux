@@ -12,3 +12,12 @@ alias grep='grep --color=auto'
 alias df='df -h'
 alias free='free -h'
 alias ..='cd ..'
+
+# Rogue Linux aliases
+alias services='cogman-ctl list'
+alias pkgs='cogman-ctl list-pkgs'
+alias slog='tail -f /var/log/syslog'
+alias install='cogman-install'
+alias df='df -h'
+alias free='free -h'
+alias vi='vim'

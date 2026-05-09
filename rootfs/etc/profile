@@ -9,3 +9,7 @@ export PAGER=less
 alias ll='ls -la'
 alias la='ls -A'
 alias grep='grep --color=auto'
+
+# terminfo database location
+export TERMINFO=/usr/share/terminfo
+export TERMINFO_DIRS=/usr/share/terminfo:/lib/terminfo
