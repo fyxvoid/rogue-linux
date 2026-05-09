@@ -254,12 +254,90 @@ Minimum set for actual daily use:
 
 ---
 
-*Last updated: 2026-05-09*
-
-
-### X11 + Input — Working ✓ (2026-05-09)
+### X11 + Input ✓ (2026-05-09)
 - evdev_drv.so installed (extracted from xserver-xorg-input-evdev deb)
 - xorg.conf: explicit InputDevice sections, Driver "evdev", /dev/input/event1+event2
 - QEMU: -device virtio-keyboard-pci + virtio-mouse-pci (CONFIG_VIRTIO_INPUT=y)
 - QEMU: -display gtk,zoom-to-fit=on (no input grab issues)
 - dwm 6.5 running with keyboard + mouse confirmed working
+
+---
+
+## Daily Driver Gap Analysis — Priority Order (2026-05-09)
+
+### CRITICAL — Blocks daily use
+
+#### 1. Real PAM login
+- Getty still bypasses PAM with `-l /bin/sh` — anyone can log in without a password
+- Fix: remove bypass from tty services, set password for `void`, test PAM login end-to-end
+
+#### 2. `doas` binary
+- `/etc/doas.conf` exists but no binary in rootfs — `void` cannot escalate privileges
+- Fix: cross-compile OpenDoas, place in `/usr/bin/doas`
+
+#### 3. `terminfo` / ncurses
+- `TERM=xterm-256color` is set but no terminfo database in rootfs
+- `vim`, `less`, `htop` all break or render incorrectly without it
+- Fix: copy `/usr/share/terminfo/` from host into rootfs
+
+#### 4. Kernel rebuild
+- Current kernel (Apr 26) was built before DRM/audio/USB config additions
+- Still missing: `CONFIG_DM_CRYPT` (LUKS), `CONFIG_USB_XHCI_HCD` (USB 3), `CONFIG_SND_*` (audio)
+- Fix: `sudo bash build/setup-deps.sh` then `bash build/build-kernel.sh`
+
+---
+
+### IMPORTANT — Makes it usable day-to-day
+
+#### 5. `nft` binary for firewall
+- `firewall.nft` ruleset is written and service runs, but `nft` binary is missing from rootfs
+- Service silently skips loading rules — system is unprotected
+- Fix: build or package `nft` binary and add to rootfs
+
+#### 6. WiFi stack
+- No `iwd`, `wpa_supplicant`, or kernel WiFi drivers
+- Complete blocker on any laptop; defer only for wired-only desktop use
+- Fix: compile `iwd`, add kernel `CONFIG_MAC80211` + hardware driver modules
+
+#### 7. Audio
+- No ALSA, no PipeWire, no kernel sound modules — nothing can produce audio
+- Fix: kernel `CONFIG_SND_HDA_INTEL` / `CONFIG_SND_VIRTIO` + `alsa-utils` binary + PipeWire cogman service
+
+#### 8. Package upgrade path
+- `cogman-exec` upserts installed.db but `cogman-planner` has no `upgrade` subcommand
+- Installed packages can never be updated without reinstalling
+- Fix: add version comparison in `cogman-planner` + `upgrade` subcommand
+
+---
+
+### NICE-TO-HAVE — Quality of life
+
+#### 9. Online package repository
+- All installs use local TOML files only — no remote fetch
+- Fix: host a package index (JSON/TOML), implement `cogman-planner fetch <name>` with signature verification
+
+#### 10. Developer toolchain (P7)
+- `gcc`, `make`, `python3`, `git`, `pkg-config`, `patch` missing from rootfs
+- Cannot build or compile anything inside the distro
+- Fix: package each tool as a cogman binary plan
+
+#### 11. Daily apps in rootfs (P8)
+- cogman plans exist for `tmux`, `htop`, `w3m`, `mpv` but binaries not yet in rootfs
+- Fix: build binaries on host, add to rootfs, register in installed.db
+
+#### 12. Plan signing
+- `cogman-exec` trusts any `.plan` file — no integrity check
+- Fix: minisign verification step in `cogman-exec` before execution
+
+---
+
+### Suggested order of attack
+
+```
+Week 1:  terminfo + doas binary + real PAM login    → usable console
+Week 2:  kernel rebuild (audio/USB/LUKS) + nft      → hardware support
+Week 3:  WiFi (iwd) + daily apps in rootfs          → laptop viable
+Week 4:  online repo + package upgrade path         → self-hosting distro
+```
+
+*Last updated: 2026-05-09*
