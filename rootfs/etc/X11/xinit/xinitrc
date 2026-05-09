@@ -1,5 +1,18 @@
 #!/bin/sh
-# Rogue Linux xinitrc — starts i3
-xsetroot -solid "#1e1e2e" 2>/dev/null || true
-export I3SOCK=/tmp/i3-socket
-exec /usr/bin/i3 -c /etc/i3/config
+# Rogue Linux xinitrc — starts dwm
+
+xsetroot -solid "#0d1117" 2>/dev/null || true
+xsetroot -cursor_name left_ptr 2>/dev/null || true
+xset r rate 300 40 2>/dev/null || true
+xset -b 2>/dev/null || true
+
+# Status bar — writes CPU/MEM/time to dwm's title bar via xsetroot -name
+(while true; do
+    MEM=$(awk '/MemAvailable/{printf "%.0fM", $2/1024}' /proc/meminfo 2>/dev/null)
+    CPU=$(awk '{printf "%.0f%%", $1*100}' /proc/loadavg 2>/dev/null)
+    TIME=$(date "+%a %b %d %H:%M" 2>/dev/null)
+    xsetroot -name "| CPU: $CPU  MEM: $MEM  $TIME" 2>/dev/null
+    sleep 5
+done) &
+
+exec /usr/bin/dwm

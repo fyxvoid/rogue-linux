@@ -1,5 +1,5 @@
 [service]
 name     = firewall
 type     = oneshot
-command  = /sbin/nft -f /etc/cogman/firewall.nft
+command  = /bin/sh -c 'if command -v nft >/dev/null 2>&1; then nft -f /etc/cogman/firewall.nft; else echo "firewall: nft not found, skipping"; fi'
 depends  = rcs
