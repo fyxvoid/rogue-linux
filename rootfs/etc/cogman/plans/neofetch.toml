@@ -1,0 +1,24 @@
+[identity]
+name     = "neofetch"
+version  = "7.1.0"
+category = "utility"
+summary  = "System info display script"
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "sh -c 'mkdir -p /usr/bin && cat > /usr/bin/neofetch << NEOFETCH_EOF\n#!/bin/sh\necho \"\"\necho \" ██████╗  ██████╗  ██████╗ ██╗   ██╗███████╗\"\necho \" ██╔══██╗██╔═══██╗██╔════╝ ██║   ██║██╔════╝\"\necho \" ██████╔╝██║   ██║██║  ███╗██║   ██║█████╗\"\necho \" ██╔══██╗██║   ██║██║   ██║██║   ██║██╔══╝\"\necho \" ██║  ██║╚██████╔╝╚██████╔╝╚██████╔╝███████╗\"\necho \" ╚═╝  ╚═╝ ╚═════╝  ╚═════╝  ╚═════╝ ╚══════╝\"\necho \"\"\necho \" OS: Rogue Linux 1.0\"\necho \" Kernel: \\$(uname -r)\"\necho \" Shell: \\$(basename \\$SHELL)\"\necho \" WM: dwm\"\necho \" Terminal: st\"\necho \" Uptime: \\$(uptime -p 2>/dev/null || cat /proc/uptime | awk \"{printf \\\"%.0f min\\\", \\$1/60}\")\"\necho \"\"\nNEOFETCH_EOF\nchmod +x /usr/bin/neofetch'",
+    "neofetch",
+]
+
+[uninstaller]
+steps = ["rm -f /usr/bin/neofetch"]

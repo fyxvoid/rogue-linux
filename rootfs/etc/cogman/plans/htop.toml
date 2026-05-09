@@ -1,0 +1,23 @@
+[identity]
+name     = "htop"
+version  = "3.3.0"
+category = "monitoring"
+summary  = "Interactive process viewer and resource monitor"
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "sh -c 'htop --version 2>/dev/null | head -1 || echo htop-not-found'",
+]
+
+[uninstaller]
+steps = []

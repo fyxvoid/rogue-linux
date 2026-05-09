@@ -1,0 +1,24 @@
+[identity]
+name     = "nftables"
+version  = "1.0.9"
+category = "security"
+summary  = "Netfilter packet filtering framework (nft binary)"
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "sh -c 'nft --version 2>/dev/null || echo nft-not-found-needs-binary-install'",
+    "sh -c 'if command -v nft >/dev/null 2>&1; then nft -f /etc/cogman/firewall.nft && echo firewall-loaded; fi'",
+]
+
+[uninstaller]
+steps = []

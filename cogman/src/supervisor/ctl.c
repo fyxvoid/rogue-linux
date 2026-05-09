@@ -264,6 +264,18 @@ cmd_restart(int fd, const char *name)
     send_str(fd, "OK\n");
 }
 
+static void
+cmd_reload(int fd)
+{
+    /* Schedule a supervisor self-re-exec via a flag file.
+     * The main loop checks for /run/cogman/reload-pending and calls execve()
+     * on itself, preserving all child PIDs (children are not killed). */
+    send_str(fd, "scheduling supervisor reload...\nOK\n");
+    /* Write a flag file that main loop checks */
+    FILE *f = fopen("/run/cogman/reload-pending", "w");
+    if (f) { fputc('1', f); fclose(f); }
+}
+
 /* ── Dispatcher ──────────────────────────────────────────────────────── */
 
 static void
@@ -307,6 +319,8 @@ dispatch(int fd, char *line)
         cmd_stop_all(fd);
     } else if (strcmp(verb, "list-pkgs") == 0) {
         cmd_list_pkgs(fd);
+    } else if (strcmp(verb, "reload") == 0) {
+        cmd_reload(fd);
     } else {
         char buf[128];
         snprintf(buf, sizeof(buf), "ERR unknown command '%s'\n", verb);

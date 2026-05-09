@@ -271,6 +271,51 @@ fn run_plan(
     }
 }
 
+fn run_uninstall(metadata_path_raw: PathBuf, output: Option<PathBuf>, rootfs: &str) {
+    let metadata_path = match std::fs::canonicalize(&metadata_path_raw) {
+        Ok(p) => p,
+        Err(e) => die(&format!("Cannot access metadata path {}: {}", metadata_path_raw.display(), e)),
+    };
+
+    butler::info(format!("Loading package definition for uninstall: {}", metadata_path.display()));
+    let meta = match metadata::load_metadata(&metadata_path) {
+        Ok(m) => m,
+        Err(e) => {
+            butler::bad_metadata(&metadata_path.display().to_string(), &e.to_string());
+            process::exit(1);
+        }
+    };
+
+    if meta.uninstaller.is_none() || meta.uninstaller.as_ref().map(|u| u.steps.is_empty()).unwrap_or(true) {
+        butler::warn(format!("Package '{}' has no [uninstaller] stanza — nothing to do", meta.identity.name));
+        process::exit(0);
+    }
+
+    let steps = variants::binary::plan_uninstall(&meta, rootfs);
+
+    butler::info(format!("Uninstall plan: {} step(s) for '{}'", steps.len(), meta.identity.name));
+
+    match output {
+        Some(ref path) => {
+            let mut buf: Vec<u8> = Vec::new();
+            if let Err(e) = plan::emit_plan(&steps, plan::Variant::Binary, &mut buf) {
+                die(&format!("Failed to serialise uninstall plan: {}", e));
+            }
+            if let Err(e) = std::fs::write(path, &buf) {
+                die(&format!("Cannot write plan file {}: {}", path.display(), e));
+            }
+            butler::plan_written(&path.display().to_string(), steps.len());
+        }
+        None => {
+            let mut stdout = std::io::stdout().lock();
+            if let Err(e) = plan::emit_plan(&steps, plan::Variant::Binary, &mut stdout) {
+                die(&format!("Failed to write uninstall plan to stdout: {}", e));
+            }
+        }
+    }
+    butler::farewell();
+}
+
 fn main() {
     let cli = Cli::parse();
 
@@ -296,6 +341,10 @@ fn main() {
             rootfs,
         } => {
             run_plan(metadata, Variant::Binary, false, false, output, &rootfs, false, false);
+        }
+
+        Command::Uninstall { metadata, output, rootfs } => {
+            run_uninstall(metadata, output, &rootfs);
         }
 
         Command::Deploy {

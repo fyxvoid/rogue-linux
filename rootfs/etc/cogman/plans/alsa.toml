@@ -1,0 +1,23 @@
+[identity]
+name     = "alsa"
+version  = "1.2.11"
+category = "audio"
+summary  = "ALSA utilities for audio control"
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "sh -c 'amixer 2>/dev/null | head -1 || echo alsa-not-present'",
+]
+
+[uninstaller]
+steps = []

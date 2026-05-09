@@ -187,6 +187,8 @@ These are needed to build cogman packages from source inside the distro:
 
 ## P8 — Daily Use Applications
 
+- tmux, htop, less, neofetch, alsa cogman plans added
+
 Minimum set for actual daily use:
 
 | Category | Package | Notes |
@@ -210,7 +212,7 @@ Minimum set for actual daily use:
 - [x] `cogman-ctl stop-all` graceful shutdown sequence (reverse-order stop)
 - [x] `cogman-planner` network heuristic false-positives fixed (`/etc/curl` no longer triggers)
 - [x] Service dependency cycle detection (DFS-based, logs offending edge and aborts)
-- [ ] `cogman-supervisor` re-exec on binary upgrade without killing children
+- [x] `cogman-supervisor` re-exec on binary upgrade without killing children
 - [x] Cogman web dashboard (local HTTP on port 7070) for service control
 - [x] Plan format: add `[uninstaller]` stanza
 - [ ] Plan signing: GPG or minisign verification before exec
@@ -253,3 +255,4 @@ Minimum set for actual daily use:
 ---
 
 *Last updated: 2026-05-09*
+

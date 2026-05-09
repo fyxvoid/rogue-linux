@@ -28,6 +28,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/select.h>
+#include <sys/stat.h>
 #include <sys/time.h>
 
 #include "service.h"
@@ -381,6 +382,27 @@ main(int argc, char **argv)
 
         /* 4. Start any service whose dependencies just became satisfied */
         sup_start_ready();
+
+        /* 4b. Check for pending reload (written by cmd_reload) */
+        {
+            struct stat st;
+            if (stat("/run/cogman/reload-pending", &st) == 0) {
+                unlink("/run/cogman/reload-pending");
+                fprintf(stderr, "cogman-supervisor: reloading (re-exec)\n");
+                /* Close control socket before re-exec */
+                if (g_sup.ctl_fd >= 0) {
+                    close(g_sup.ctl_fd);
+                    unlink(CTL_SOCK_PATH);
+                    g_sup.ctl_fd = -1;
+                }
+                /* Re-exec self — children keep running */
+                extern char **environ;
+                execve("/proc/self/exe", argv, environ);
+                perror("reload: execve failed");
+                /* If execve fails, continue normally */
+                g_sup.ctl_fd = ctl_init();
+            }
+        }
 
         /* 5. As PID 1, reap any orphaned processes (zombie prevention) */
         {

@@ -1,0 +1,23 @@
+[identity]
+name     = "tmux"
+version  = "3.4"
+category = "terminal"
+summary  = "Terminal multiplexer — sessions survive disconnect"
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "sh -c 'tmux -V 2>/dev/null || echo tmux-not-found'",
+]
+
+[uninstaller]
+steps = []

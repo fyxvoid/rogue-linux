@@ -1,6 +1,5 @@
 [service]
 name    = mdev
-command = /sbin/mdev -s && echo /sbin/mdev > /proc/sys/kernel/hotplug
 type    = oneshot
-restart = never
+command = /bin/sh -c 'echo /sbin/mdev > /proc/sys/kernel/hotplug 2>/dev/null; mdev -s; mdev -d 2>/dev/null || true'
 depends = rcs

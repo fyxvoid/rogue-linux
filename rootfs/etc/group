@@ -13,8 +13,9 @@ cdrom:x:11:
 dialout:x:18:
 floppy:x:19:
 audio:x:29:
-video:x:33:
+video:x:44:void
 usb:x:85:
 users:x:100:void
 nobody:x:65534:
 void:x:1000:
+input:x:101:void,root

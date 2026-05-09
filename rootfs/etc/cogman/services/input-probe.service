@@ -1,0 +1,5 @@
+[service]
+name    = input-probe
+type    = oneshot
+command = /bin/sh -c 'ls /dev/input/event* 2>/dev/null | while read d; do echo "input: $d"; done; echo input-probe-done'
+depends = mdev

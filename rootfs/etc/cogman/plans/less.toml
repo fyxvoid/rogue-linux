@@ -1,0 +1,23 @@
+[identity]
+name     = "less"
+version  = "643"
+category = "pager"
+summary  = "Full-featured pager (busybox less replacement)"
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = []
+
+[installer]
+steps = [
+    "sh -c 'less --version 2>/dev/null | head -1 || echo less-not-found'",
+]
+
+[uninstaller]
+steps = []

@@ -76,6 +76,17 @@ pub enum Command {
         rootfs: String,
     },
 
+    /// Generate an uninstaller plan from a package's [uninstaller] stanza
+    #[command(name = "uninstall", about = "Generate an uninstaller plan from a package's [uninstaller] stanza")]
+    Uninstall {
+        #[arg(short, long, value_name = "FILE", help = "Path to the package .toml file")]
+        metadata: PathBuf,
+        #[arg(short, long, value_name = "FILE", help = "Output plan file (default: stdout)")]
+        output: Option<PathBuf>,
+        #[arg(long, default_value = "/", help = "Rootfs target prefix")]
+        rootfs: String,
+    },
+
     /// Plan a full deployment
     Deploy {
         /// Path to package .toml metadata

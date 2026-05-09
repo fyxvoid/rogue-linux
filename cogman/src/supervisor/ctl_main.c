@@ -40,7 +40,8 @@ usage(const char *prog)
             "  stop   <name>      stop a running service\n"
             "  restart <name>     restart a service\n"
             "  stop-all           stop all running services\n"
-            "  list-pkgs          list installed packages\n",
+            "  list-pkgs          list installed packages\n"
+            "  reload             reload supervisor (re-exec preserving children)\n",
             prog);
 }
 

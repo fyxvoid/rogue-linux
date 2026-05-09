@@ -176,14 +176,37 @@ record_installed(const char *name, const char *version)
     /* Ensure the directory exists */
     mkdir("/var/lib/cogman", 0755);
 
-    FILE *f = fopen("/var/lib/cogman/installed.db", "a");
-    if (!f) {
-        log_warn("Could not open installed.db for writing: %s", strerror(errno));
+    /* Read existing entries, replacing any with the same name */
+    char tmp_path[] = "/var/lib/cogman/installed.db.XXXXXX";
+    int tmpfd = mkstemp(tmp_path);
+    if (tmpfd < 0) {
+        /* fallback: just append */
+        FILE *f = fopen("/var/lib/cogman/installed.db", "a");
+        if (f) { fprintf(f, "%s\t%s\n", name, version); fclose(f); }
         return;
     }
-    /* Format: name\tversion\n */
-    fprintf(f, "%s\t%s\n", name, version);
-    fclose(f);
+    FILE *tmp = fdopen(tmpfd, "w");
+    if (!tmp) { close(tmpfd); unlink(tmp_path); return; }
+
+    FILE *existing = fopen("/var/lib/cogman/installed.db", "r");
+    int replaced = 0;
+    if (existing) {
+        char line[512];
+        while (fgets(line, sizeof(line), existing)) {
+            char *tab = strchr(line, '\t');
+            if (tab && strncmp(line, name, (size_t)(tab - line)) == 0 &&
+                (size_t)(tab - line) == strlen(name)) {
+                fprintf(tmp, "%s\t%s\n", name, version);
+                replaced = 1;
+            } else {
+                fputs(line, tmp);
+            }
+        }
+        fclose(existing);
+    }
+    if (!replaced) fprintf(tmp, "%s\t%s\n", name, version);
+    fclose(tmp);
+    rename(tmp_path, "/var/lib/cogman/installed.db");
     log_info("Recorded package '%s' version '%s' in installed.db", name, version);
 }
 

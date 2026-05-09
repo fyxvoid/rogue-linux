@@ -26,3 +26,10 @@ ip link set lo up 2>/dev/null || true
 
 hostname rogue
 echo "Rogue Linux 1.0 — booted OK"
+
+# X11 socket directories (required before Xorg starts)
+install -d -m 1777 /tmp/.X11-unix
+install -d -m 1777 /tmp/.ICE-unix
+
+# XDG runtime dir for void user
+install -d -m 0700 -o 1000 /tmp/xdg-void 2>/dev/null || install -d -m 0700 /tmp/xdg-void
