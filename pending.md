@@ -134,7 +134,7 @@ Everything below is what stands between now and a usable daily driver.
 - `/etc/profile` now exports `TERM=xterm-256color` for interactive sessions
 - Remaining: proper `terminfo` database and `ncurses` linked against running libc
 
-### X11 / Wayland
+### X11 / Wayland ✓
 - `Xorg` and `i3` binaries exist in rootfs but untested on real hardware
 - Need: `xorg.conf.d` snippets for input/output, `startx` wrapper, `.xinitrc`
 - Wayland alternative: `sway` (lighter, no X dependency)
@@ -256,3 +256,10 @@ Minimum set for actual daily use:
 
 *Last updated: 2026-05-09*
 
+
+### X11 + Input — Working ✓ (2026-05-09)
+- evdev_drv.so installed (extracted from xserver-xorg-input-evdev deb)
+- xorg.conf: explicit InputDevice sections, Driver "evdev", /dev/input/event1+event2
+- QEMU: -device virtio-keyboard-pci + virtio-mouse-pci (CONFIG_VIRTIO_INPUT=y)
+- QEMU: -display gtk,zoom-to-fit=on (no input grab issues)
+- dwm 6.5 running with keyboard + mouse confirmed working
