@@ -59,6 +59,42 @@ lastchat
 *.docx
 *.pdf
 
+# ── rootfs tool binaries (install via cogman plans, not committed) ────────────
+# Toolchain — large, host-dependent, built/installed via plan
+rootfs/usr/bin/gcc
+rootfs/usr/bin/gcc-15
+rootfs/usr/bin/x86_64-linux-gnu-gcc-15
+rootfs/usr/bin/ld
+rootfs/usr/bin/x86_64-linux-gnu-ld.bfd
+rootfs/usr/bin/as
+rootfs/usr/bin/x86_64-linux-gnu-as
+rootfs/usr/bin/ar
+rootfs/usr/bin/x86_64-linux-gnu-ar
+rootfs/usr/bin/nm
+rootfs/usr/bin/x86_64-linux-gnu-nm
+rootfs/usr/bin/objdump
+rootfs/usr/bin/x86_64-linux-gnu-objdump
+rootfs/usr/bin/readelf
+rootfs/usr/bin/x86_64-linux-gnu-readelf
+rootfs/usr/bin/x86_64-linux-gnu-strings
+rootfs/usr/bin/make
+# Python — large runtime, install via plan
+rootfs/usr/bin/python
+rootfs/usr/bin/python3
+rootfs/usr/bin/python3.13
+# Pentest tools — install via plans/pentest/
+rootfs/usr/bin/nmap
+# System tools that should come from plans
+rootfs/usr/bin/gawk
+rootfs/usr/bin/pkg-config
+rootfs/usr/bin/pkgconf
+rootfs/usr/bin/fdisk
+rootfs/usr/bin/lsblk
+rootfs/usr/bin/ss
+rootfs/usr/bin/agetty
+rootfs/usr/bin/udevadm
+rootfs/usr/bin/file
+
 # ── Legacy / moved paths ──────────────────────────────────────────────────────
 /packages
 packages/toolchain/*/tar/*.xz
