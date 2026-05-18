@@ -33,3 +33,5 @@ install -d -m 1777 /tmp/.ICE-unix
 
 # XDG runtime dir for void user
 install -d -m 0700 -o 1000 /tmp/xdg-void 2>/dev/null || install -d -m 0700 /tmp/xdg-void
+
+ldconfig -q 2>/dev/null || true

@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <signal.h>
@@ -210,23 +211,109 @@ record_installed(const char *name, const char *version)
     log_info("Recorded package '%s' version '%s' in installed.db", name, version);
 }
 
+/*
+ * Verify a .plan file against a minisig signature using the minisign CLI.
+ * pubkey_file: path to the minisign public key (e.g. /etc/cogman/cogman.pub)
+ * plan_path:   path to the .plan file
+ * sig_path:    path to the .plan.minisig file (auto-derived if NULL)
+ * Returns 0 on success, -1 on failure.
+ */
+static int
+verify_plan_signature(const char *pubkey_file, const char *plan_path, const char *sig_path)
+{
+    char auto_sig[4096];
+    if (!sig_path) {
+        snprintf(auto_sig, sizeof(auto_sig), "%s.minisig", plan_path);
+        sig_path = auto_sig;
+    }
+
+    /* Check both files exist before forking */
+    if (access(pubkey_file, R_OK) != 0) {
+        log_err("minisign pubkey not found: %s", pubkey_file);
+        return -1;
+    }
+    if (access(sig_path, R_OK) != 0) {
+        log_err("plan signature not found: %s (expected alongside plan file)", sig_path);
+        return -1;
+    }
+
+    pid_t pid = fork();
+    if (pid < 0) {
+        log_err("fork() failed for minisign: %s", strerror(errno));
+        return -1;
+    }
+    if (pid == 0) {
+        /* Redirect stdout/stderr to /dev/null — minisign is verbose on success */
+        int null_fd = open("/dev/null", O_WRONLY);
+        if (null_fd >= 0) {
+            dup2(null_fd, STDOUT_FILENO);
+            dup2(null_fd, STDERR_FILENO);
+            close(null_fd);
+        }
+        execlp("minisign", "minisign",
+               "-V",
+               "-p", pubkey_file,
+               "-m", plan_path,
+               "-x", sig_path,
+               NULL);
+        _exit(127);
+    }
+
+    int status;
+    waitpid(pid, &status, 0);
+
+    if (!WIFEXITED(status) || WEXITSTATUS(status) != 0) {
+        log_err("minisign verification FAILED for %s", plan_path);
+        log_err("  pubkey: %s", pubkey_file);
+        log_err("  sigfile: %s", sig_path);
+        return -1;
+    }
+
+    log_ok("Plan signature verified: %s", plan_path);
+    return 0;
+}
+
 int
 main(int argc, char **argv)
 {
     if (argc < 2) {
-        fprintf(stderr, "Usage: %s <plan-file> [--pkg-name <name> --pkg-version <ver>]\n", argv[0]);
+        fprintf(stderr,
+            "Usage: %s <plan-file> [--pkg-name <name>] [--pkg-version <ver>]\n"
+            "                     [--pubkey <path>] [--sig <path>]\n",
+            argv[0]);
         return 1;
     }
 
     const char *plan_path   = argv[1];
     const char *pkg_name    = NULL;
     const char *pkg_version = NULL;
+    const char *pubkey_path = NULL;
+    const char *sig_path    = NULL;
 
     for (int i = 2; i < argc - 1; i++) {
         if (strcmp(argv[i], "--pkg-name") == 0)
             pkg_name = argv[++i];
         else if (strcmp(argv[i], "--pkg-version") == 0)
             pkg_version = argv[++i];
+        else if (strcmp(argv[i], "--pubkey") == 0)
+            pubkey_path = argv[++i];
+        else if (strcmp(argv[i], "--sig") == 0)
+            sig_path = argv[++i];
+    }
+
+    /* Verify signature before executing anything */
+    if (pubkey_path) {
+        if (verify_plan_signature(pubkey_path, plan_path, sig_path) != 0) {
+            log_err("Refusing to execute unsigned or tampered plan.");
+            return 1;
+        }
+    } else {
+        /* Check if default pubkey exists — warn but don't block (transition period) */
+        const char *default_pubkey = "/etc/cogman/cogman.pub";
+        if (access(default_pubkey, R_OK) == 0) {
+            log_warn("Default pubkey found at %s but --pubkey not passed. "
+                     "Pass --pubkey to enforce signature verification.", default_pubkey);
+        }
     }
     size_t file_size;
     void *base = plan_open(plan_path, &file_size);

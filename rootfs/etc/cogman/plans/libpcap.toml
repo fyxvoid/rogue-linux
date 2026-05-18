@@ -1,0 +1,42 @@
+[identity]
+name     = "libpcap"
+version  = "1.10.4"
+category = "library"
+summary  = "Packet capture library — required by nmap, tcpdump, scapy"
+
+[identity.source]
+kind    = "tarball"
+url     = "https://www.tcpdump.org/release/libpcap-1.10.4.tar.gz"
+sha256  = "a0de9e512a0b4c06b7c3a09d83b4b57d30b97a0beea0fb20b6b77e538b7fa8c9"
+
+[identity.depends]
+build = []
+
+[build]
+system = "autoconf"
+steps  = [
+    "curl -L https://www.tcpdump.org/release/libpcap-1.10.4.tar.gz -o /tmp/libpcap.tar.gz",
+    "tar -xzf /tmp/libpcap.tar.gz -C /tmp",
+    "sh -c 'cd /tmp/libpcap-1.10.4 && ./configure --prefix=/usr --enable-shared && make -j$(nproc) && make install'",
+    "ldconfig",
+]
+
+[installer]
+steps = [
+    "sh -c 'ldconfig && ldconfig -p | grep libpcap && echo LIBPCAP_OK'",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = ["/usr/lib", "/usr/include"]
+[policy.network]
+outbound     = true
+capabilities = []
+
+[uninstaller]
+steps = [
+    "rm -f /usr/lib/x86_64-linux-gnu/libpcap.so* /usr/lib/libpcap.so*",
+    "rm -f /usr/include/pcap.h /usr/include/pcap",
+    "ldconfig",
+]

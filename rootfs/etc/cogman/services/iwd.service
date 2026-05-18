@@ -1,0 +1,10 @@
+[service]
+name          = iwd
+type          = process
+command       = /usr/libexec/iwd
+restart       = on-failure
+restart_delay = 5
+depends       = rcs, mdev
+
+[env]
+PATH = /usr/bin:/bin:/usr/sbin:/sbin

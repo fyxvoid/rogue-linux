@@ -1,0 +1,10 @@
+[service]
+name    = "udev"
+type    = "forking"
+# mdevd: udev-compatible device manager (replaces busybox mdev)
+# -O4: rebroadcast netlink events to group 4 (udevd-compat layer)
+# -b 200000: 200 KB kernel netlink buffer
+# coldplug runs after daemon starts to replay existing /sys events
+command = "/bin/sh -c '/sbin/mdevd -O4 -b 200000 & sleep 0.5 && /sbin/mdevd-coldplug -O4'"
+depends = ["rcs"]
+restart = "on-failure"

@@ -1,0 +1,38 @@
+[identity]
+name     = "pip"
+version  = "24.0"
+category = "python"
+summary  = "Python package installer — unlocks pwntools, scapy, impacket, sqlmap"
+
+[identity.source]
+kind = "script"
+url  = "https://bootstrap.pypa.io/get-pip.py"
+
+[identity.depends]
+build = []
+
+[build]
+system = "custom"
+steps  = [
+    "curl -L https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py",
+    "python3 /tmp/get-pip.py",
+    "pip3 --version",
+]
+
+[installer]
+steps = [
+    "pip3 --version && echo PIP_OK",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = ["/usr/lib/python3", "/usr/bin", "/usr/local"]
+[policy.network]
+outbound     = true
+capabilities = []
+
+[uninstaller]
+steps = [
+    "rm -f /usr/bin/pip3 /usr/bin/pip",
+]

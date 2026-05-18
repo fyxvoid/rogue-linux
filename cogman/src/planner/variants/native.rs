@@ -127,6 +127,22 @@ pub fn plan(
         fail_policy: FailPolicy::Abort,
     });
 
+    // Phase 5.5: SHA-256 checksum verify steps declared in [checksums].
+    // Format understood by verify_step() in verify.c: sha256:<64hexhash>:<filepath>
+    if let Some(ref checksums) = meta.checksums {
+        let mut sorted: Vec<(&String, &String)> = checksums.iter().collect();
+        sorted.sort_by_key(|(k, _)| k.as_str());
+        for (path, hash) in sorted {
+            steps.push(PlanStep {
+                op: StepOp::Verify,
+                command: format!("sha256:{}:{}", hash, path),
+                workdir: rootfs.to_string(),
+                env: Vec::new(),
+                fail_policy: FailPolicy::Abort,
+            });
+        }
+    }
+
     // Phase 6: Cleanup temporary directory
     steps.push(PlanStep {
         op: StepOp::Cleanup,

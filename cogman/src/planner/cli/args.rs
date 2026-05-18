@@ -76,6 +76,26 @@ pub enum Command {
         rootfs: String,
     },
 
+    /// Upgrade an already-installed package (checks installed.db)
+    Upgrade {
+        /// Package name (must match installed.db entry)
+        name: String,
+
+        /// New version to upgrade to
+        version: String,
+
+        /// Path to package .toml metadata
+        plan_path: PathBuf,
+
+        /// Output plan file path
+        #[arg(short, long)]
+        output: Option<PathBuf>,
+
+        /// Target rootfs directory
+        #[arg(long, default_value = "/mnt/rogue")]
+        rootfs: String,
+    },
+
     /// Generate an uninstaller plan from a package's [uninstaller] stanza
     #[command(name = "uninstall", about = "Generate an uninstaller plan from a package's [uninstaller] stanza")]
     Uninstall {

@@ -1,14 +1,15 @@
 [service]
 name          = x11
 type          = process
-command       = /usr/bin/startx
+command       = /bin/sh -c '/usr/bin/startx >/dev/ttyS0 2>&1; echo "=X11-EXIT-$?=" >/dev/ttyS0'
 restart       = on-failure
 restart_delay = 5
 depends       = rcs, mdev, input-probe
 
 [env]
-PATH    = /usr/bin:/bin:/usr/sbin:/sbin
-HOME    = /home/void
-USER    = void
-LOGNAME = void
-TERM    = xterm-256color
+PATH                  = /usr/bin:/bin:/usr/sbin:/sbin
+HOME                  = /home/void
+USER                  = void
+LOGNAME               = void
+TERM                  = xterm-256color
+LIBINPUT_QUIRKS_DIR   = /usr/share/libinput

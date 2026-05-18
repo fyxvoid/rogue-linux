@@ -90,6 +90,49 @@ pub fn plan(meta: &PackageMetadata, rootfs: &str, metadata_root: &std::path::Pat
         }
     }
 
+    // Emit SHA-256 checksum verify steps declared in [checksums].
+    // Format understood by verify_step() in verify.c: sha256:<64hexhash>:<filepath>
+    if let Some(ref checksums) = meta.checksums {
+        let mut sorted: Vec<(&String, &String)> = checksums.iter().collect();
+        sorted.sort_by_key(|(k, _)| k.as_str());
+        for (path, hash) in sorted {
+            steps.push(PlanStep {
+                op: StepOp::Verify,
+                command: format!("sha256:{}:{}", hash, path),
+                workdir: rootfs.to_string(),
+                env: Vec::new(),
+                fail_policy: FailPolicy::Abort,
+            });
+        }
+    }
+
+    // Emit a manifest-write step for any declared [installer.manifest] files.
+    // Writes /var/lib/cogman/manifests/<name>.manifest so uninstall can clean up
+    // without relying solely on the author-provided [uninstaller] stanza.
+    if !meta.installer.manifest.is_empty() {
+        let manifest_dir  = format!("{}/var/lib/cogman/manifests", rootfs);
+        let manifest_path = format!("{}/{}.manifest", manifest_dir, name);
+        steps.push(PlanStep {
+            op: StepOp::Mkdir,
+            command: manifest_dir,
+            workdir: rootfs.to_string(),
+            env: Vec::new(),
+            fail_policy: FailPolicy::Warn,
+        });
+        let file_list = meta.installer.manifest
+            .iter()
+            .map(|f| f.as_str())
+            .collect::<Vec<_>>()
+            .join("\n");
+        steps.push(PlanStep {
+            op: StepOp::Exec,
+            command: format!("printf '%s\\n' {} > {}", file_list, manifest_path),
+            workdir: rootfs.to_string(),
+            env: Vec::new(),
+            fail_policy: FailPolicy::Warn,
+        });
+    }
+
     steps
 }
 
@@ -109,7 +152,7 @@ pub fn plan_uninstall(meta: &PackageMetadata, rootfs: &str) -> Vec<PlanStep> {
         fail_policy: FailPolicy::Warn,
     });
 
-    // Write a shell script that contains the [uninstaller] steps
+    // Run explicit [uninstaller] steps first (author-defined removal).
     if let Some(ref uninstaller) = meta.uninstaller {
         for cmd in &uninstaller.steps {
             steps.push(PlanStep {
@@ -120,6 +163,23 @@ pub fn plan_uninstall(meta: &PackageMetadata, rootfs: &str) -> Vec<PlanStep> {
                 fail_policy: FailPolicy::Warn,
             });
         }
+    }
+
+    // Auto-remove files declared in [installer.manifest] that weren't
+    // already covered by the [uninstaller] stanza.
+    if !meta.installer.manifest.is_empty() {
+        let manifest_path = format!("{}/var/lib/cogman/manifests/{}.manifest", rootfs, name);
+        // Remove every file listed in the manifest (one per line).
+        steps.push(PlanStep {
+            op: StepOp::Exec,
+            command: format!(
+                "[ -f {mp} ] && xargs -a {mp} -I{{}} rm -f -- {{}} ; rm -f {mp}",
+                mp = manifest_path
+            ),
+            workdir: rootfs.to_string(),
+            env: Vec::new(),
+            fail_policy: FailPolicy::Warn,
+        });
     }
 
     steps

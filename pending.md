@@ -267,32 +267,32 @@ Minimum set for actual daily use:
 
 ### CRITICAL — Blocks daily use
 
-#### 1. Real PAM login
-- Getty still bypasses PAM with `-l /bin/sh` — anyone can log in without a password
-- Fix: remove bypass from tty services, set password for `void`, test PAM login end-to-end
+#### 1. Real PAM login ✓ (2026-05-09)
+- tty1-tty6 use standard `getty -L ttyN 0 linux` (no bypass)
+- `void` password set to **rogue** (SHA-512 hash in /etc/shadow)
+- pam_faildelay + pam_motd removed (missing modules); pam_unix only
+- Test: boot ISO → tty login → user: void / pass: rogue
 
-#### 2. `doas` binary
-- `/etc/doas.conf` exists but no binary in rootfs — `void` cannot escalate privileges
-- Fix: cross-compile OpenDoas, place in `/usr/bin/doas`
+#### 2. `doas` binary ✓ (2026-05-09)
+- OpenDoas 6.8.2 compiled, installed at `/usr/bin/doas` (setuid 4755)
+- libcrypt.so.1 added to rootfs (`/lib/x86_64-linux-gnu/`)
+- `/etc/doas.conf`: `permit persist :wheel` + `permit nopass root`
 
-#### 3. `terminfo` / ncurses
-- `TERM=xterm-256color` is set but no terminfo database in rootfs
-- `vim`, `less`, `htop` all break or render incorrectly without it
-- Fix: copy `/usr/share/terminfo/` from host into rootfs
+#### 3. `terminfo` / ncurses ✓
+- Full terminfo DB copied from host in a previous session
 
-#### 4. Kernel rebuild
-- Current kernel (Apr 26) was built before DRM/audio/USB config additions
-- Still missing: `CONFIG_DM_CRYPT` (LUKS), `CONFIG_USB_XHCI_HCD` (USB 3), `CONFIG_SND_*` (audio)
-- Fix: `sudo bash build/setup-deps.sh` then `bash build/build-kernel.sh`
+#### 4. Kernel rebuild ✓ (2026-05-09)
+- New bzImage compiled 2026-05-09 with updated config
+- CONFIG_SND_HDA_INTEL, CONFIG_USB_XHCI_HCD, CONFIG_NF_TABLES all enabled
+- Modules installed to rootfs/lib/modules/6.6.75/
 
 ---
 
 ### IMPORTANT — Makes it usable day-to-day
 
-#### 5. `nft` binary for firewall
-- `firewall.nft` ruleset is written and service runs, but `nft` binary is missing from rootfs
-- Service silently skips loading rules — system is unprotected
-- Fix: build or package `nft` binary and add to rootfs
+#### 5. `nft` binary for firewall ✓ (2026-05-09)
+- `nft` binary + all libs (libnftables, libmnl, libnftnl, libgmp, etc.) copied to rootfs
+- `firewall.service` will now actually load rules on boot
 
 #### 6. WiFi stack
 - No `iwd`, `wpa_supplicant`, or kernel WiFi drivers
@@ -303,10 +303,10 @@ Minimum set for actual daily use:
 - No ALSA, no PipeWire, no kernel sound modules — nothing can produce audio
 - Fix: kernel `CONFIG_SND_HDA_INTEL` / `CONFIG_SND_VIRTIO` + `alsa-utils` binary + PipeWire cogman service
 
-#### 8. Package upgrade path
-- `cogman-exec` upserts installed.db but `cogman-planner` has no `upgrade` subcommand
-- Installed packages can never be updated without reinstalling
-- Fix: add version comparison in `cogman-planner` + `upgrade` subcommand
+#### 8. Package upgrade path ✓ (2026-05-09)
+- `cogman-planner upgrade <name> <version> <plan.toml>` implemented
+- Checks installed.db: errors if not installed, skips if same version, compiles if newer
+- New cogman-planner binary deployed to rootfs/usr/bin/
 
 ---
 
@@ -316,14 +316,15 @@ Minimum set for actual daily use:
 - All installs use local TOML files only — no remote fetch
 - Fix: host a package index (JSON/TOML), implement `cogman-planner fetch <name>` with signature verification
 
-#### 10. Developer toolchain (P7)
-- `gcc`, `make`, `python3`, `git`, `pkg-config`, `patch` missing from rootfs
-- Cannot build or compile anything inside the distro
-- Fix: package each tool as a cogman binary plan
+#### 10. Developer toolchain (P7) ✓ (2026-05-09, partial)
+- `gcc` (15), `make`, `python3.13` binaries added to rootfs
+- `ld`, `as`, `ar` (binutils), `libgcc_s.so.1`, `crt*.o` added
+- `git` was already present
+- Still missing: pkg-config, patch, full python stdlib, cmake
 
-#### 11. Daily apps in rootfs (P8)
-- cogman plans exist for `tmux`, `htop`, `w3m`, `mpv` but binaries not yet in rootfs
-- Fix: build binaries on host, add to rootfs, register in installed.db
+#### 11. Daily apps in rootfs (P8) ✓ (2026-05-09)
+- `tmux`, `htop`, `w3m`, `less`, `feh` binaries + all shared libs copied to rootfs
+- Still missing: `mpv` (large deps), `ranger`/`lf` (file manager)
 
 #### 12. Plan signing
 - `cogman-exec` trusts any `.plan` file — no integrity check
@@ -340,4 +341,37 @@ Week 3:  WiFi (iwd) + daily apps in rootfs          → laptop viable
 Week 4:  online repo + package upgrade path         → self-hosting distro
 ```
 
-*Last updated: 2026-05-09*
+---
+
+## Pentest Distro Infrastructure — Done (2026-05-10)
+
+- [x] Kernel: CONFIG_PACKET, CONFIG_TUN, CONFIG_BPF_SYSCALL/JIT, CONFIG_USER_NS, CONFIG_NET_NS, CONFIG_PID_NS, CONFIG_UNIX_DIAG, CONFIG_INET_DIAG, CONFIG_CRYPTO_USER_API_*, CONFIG_NF_CONNTRACK, CONFIG_CGROUPS, CONFIG_KPROBES, CONFIG_FTRACE, CONFIG_MAC80211
+- [x] ldconfig: /etc/ld.so.conf + /etc/ld.so.conf.d/ + ldconfig binary + runs at boot via rcS
+- [x] GNU coreutils (ls,cp,mv,grep,sed,awk,find,sort,etc.) replacing busybox equivalents
+- [x] util-linux: agetty, login, lsblk, fdisk, mount, umount, ss, free, ps, kill
+- [x] iproute2: full `ip` command, `ss`
+- [x] Binary analysis: strace, file, strings, objdump, nm, readelf
+- [x] Dev headers: libpcap, openssl, zlib, readline + .a/.so + pkgconfig files
+- [x] pkg-config binary in rootfs
+- [x] cogman-planner: sha256 checksums field in plan TOML (emits OP_VERIFY steps)
+- [x] cogman-planner: build_deps field — checks installed.db before compiling
+- [x] cogman-planner: upgrade subcommand with version comparison
+- [x] build/install-to-disk.sh — GPT partition + format + rsync + GRUB install
+- [x] mdev.conf: tun/tap, ttyUSB, ttyACM, crypto device rules added
+
+## Pentest Distro — Still Needed
+
+### Build from source inside distro (cogman plans):
+- [ ] GNU coreutils plan (so it's managed, not just copied from host)
+- [ ] libpcap plan (needed by nmap, tcpdump)
+- [ ] nmap plan
+- [ ] tcpdump plan
+- [ ] netcat-openbsd plan
+- [ ] socat plan
+- [ ] python3-pip plan
+- [ ] cmake + meson + ninja plans (build system deps)
+- [ ] eudev plan (replace mdev with persistent device naming)
+- [ ] john / hashcat plans
+- [ ] gdb + pwndbg plans
+
+*Last updated: 2026-05-10*

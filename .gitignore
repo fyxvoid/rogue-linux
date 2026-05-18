@@ -1,11 +1,65 @@
-/packages
-cogman/src/target/
-**/__pycache__/
-*.pyc
-*.o
-cogman/src/executor/cogman-exec
-cogman/src/executor/verify/verify.o
-logs/
-packages/toolchain/*/tar/*.xz
+# ── Build outputs ────────────────────────────────────────────────────────────
+build/*.iso
 build/*.img
 build/*.cpio.gz
+build/iso-staging/
+
+# ── Kernel source tree (multi-gigabyte; download separately) ─────────────────
+build/kernel/linux-*/
+
+# ── Third-party source tarballs / extractions ────────────────────────────────
+build/dropbear/dropbear-*/
+build/dropbear/*.tar.bz2
+build/dropbear/*.tar.gz
+
+# ── Rust build cache ──────────────────────────────────────────────────────────
+cogman/src/target/
+# Note: Cargo.lock is intentionally tracked — cogman-planner is a binary crate
+
+# ── C compiled objects / intermediates ───────────────────────────────────────
+*.o
+*.a
+cogman/src/executor/cogman-exec
+cogman/src/executor/verify/verify.o
+
+# ── Python ────────────────────────────────────────────────────────────────────
+**/__pycache__/
+*.pyc
+*.pyo
+
+# ── Compiled binaries (produced by build scripts, not source) ─────────────────
+/bin/
+
+# ── AI model weights ─────────────────────────────────────────────────────────
+*.gguf
+*.ggml
+
+# ── Benchmark / session artifacts ────────────────────────────────────────────
+benchmark_results.csv
+cmd_history.txt
+build-plan.bin
+
+# ── Editor / IDE ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS noise ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Downloaded packages / debs (fetch at build time, don't commit) ────────────
+*.deb
+*.rpm
+
+# ── Session / personal artifacts ──────────────────────────────────────────────
+lastchat
+*.docx
+*.pdf
+
+# ── Legacy / moved paths ──────────────────────────────────────────────────────
+/packages
+packages/toolchain/*/tar/*.xz
+logs/

@@ -1,9 +1,17 @@
 kernel/fs/efivarfs/efivarfs.ko:
+kernel/lib/crypto/libarc4.ko:
+kernel/drivers/virtio/virtio_balloon.ko:
 kernel/drivers/thermal/intel/x86_pkg_temp_thermal.ko:
 kernel/net/netfilter/nf_log_syslog.ko:
+kernel/net/netfilter/nft_reject.ko:
+kernel/net/netfilter/nft_reject_inet.ko: kernel/net/netfilter/nft_reject.ko
 kernel/net/netfilter/xt_mark.ko:
 kernel/net/netfilter/xt_nat.ko:
 kernel/net/netfilter/xt_LOG.ko:
 kernel/net/netfilter/xt_MASQUERADE.ko:
 kernel/net/netfilter/xt_addrtype.ko:
+kernel/net/ipv4/netfilter/nft_reject_ipv4.ko: kernel/net/netfilter/nft_reject.ko
 kernel/net/ipv4/netfilter/iptable_nat.ko:
+kernel/net/ipv6/netfilter/nft_reject_ipv6.ko: kernel/net/netfilter/nft_reject.ko
+kernel/net/wireless/cfg80211.ko:
+kernel/net/mac80211/mac80211.ko: kernel/lib/crypto/libarc4.ko kernel/net/wireless/cfg80211.ko

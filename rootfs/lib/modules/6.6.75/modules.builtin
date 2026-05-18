@@ -65,6 +65,10 @@ kernel/crypto/rng.ko
 kernel/crypto/drbg.ko
 kernel/crypto/jitterentropy_rng.ko
 kernel/crypto/ghash-generic.ko
+kernel/crypto/af_alg.ko
+kernel/crypto/algif_hash.ko
+kernel/crypto/algif_skcipher.ko
+kernel/crypto/algif_aead.ko
 kernel/crypto/asymmetric_keys/public_key.ko
 kernel/crypto/asymmetric_keys/x509_key_parser.ko
 kernel/crypto/asymmetric_keys/pkcs7_message.ko
@@ -74,7 +78,6 @@ kernel/block/kyber-iosched.ko
 kernel/lib/math/rational.ko
 kernel/lib/crypto/libcryptoutils.ko
 kernel/lib/crypto/libaes.ko
-kernel/lib/crypto/libarc4.ko
 kernel/lib/crypto/gf128mul.ko
 kernel/lib/crypto/libsha1.ko
 kernel/lib/crypto/libsha256.ko
@@ -83,6 +86,7 @@ kernel/lib/bitrev.ko
 kernel/lib/crc-ccitt.ko
 kernel/lib/crc16.ko
 kernel/lib/crc32.ko
+kernel/lib/libcrc32c.ko
 kernel/lib/xxhash.ko
 kernel/lib/zlib_inflate/zlib_inflate.ko
 kernel/lib/zlib_deflate/zlib_deflate.ko
@@ -99,6 +103,16 @@ kernel/lib/oid_registry.ko
 kernel/lib/ucs2_string.ko
 kernel/drivers/video/console/vgacon.ko
 kernel/drivers/video/backlight/backlight.ko
+kernel/drivers/video/fbdev/core/fb.ko
+kernel/drivers/video/fbdev/core/cfbfillrect.ko
+kernel/drivers/video/fbdev/core/cfbcopyarea.ko
+kernel/drivers/video/fbdev/core/cfbimgblt.ko
+kernel/drivers/video/fbdev/core/fb_io_fops.ko
+kernel/drivers/video/fbdev/core/sysfillrect.ko
+kernel/drivers/video/fbdev/core/syscopyarea.ko
+kernel/drivers/video/fbdev/core/sysimgblt.ko
+kernel/drivers/video/fbdev/core/fb_sys_fops.ko
+kernel/drivers/video/fbdev/vesafb.ko
 kernel/drivers/acpi/ac.ko
 kernel/drivers/acpi/button.ko
 kernel/drivers/acpi/fan.ko
@@ -172,6 +186,7 @@ kernel/drivers/net/phy/fixed_phy.ko
 kernel/drivers/net/phy/realtek.ko
 kernel/drivers/net/mdio/acpi_mdio.ko
 kernel/drivers/net/mdio/fwnode_mdio.ko
+kernel/drivers/net/tun.ko
 kernel/drivers/net/virtio_net.ko
 kernel/drivers/net/ethernet/broadcom/tg3.ko
 kernel/drivers/net/ethernet/intel/e100.ko
@@ -208,6 +223,7 @@ kernel/drivers/input/ff-memless.ko
 kernel/drivers/input/sparse-keymap.ko
 kernel/drivers/input/vivaldi-fmap.ko
 kernel/drivers/input/input-leds.ko
+kernel/drivers/input/mousedev.ko
 kernel/drivers/input/evdev.ko
 kernel/drivers/input/keyboard/atkbd.ko
 kernel/drivers/input/mouse/psmouse.ko
@@ -288,6 +304,8 @@ kernel/net/netfilter/nf_nat.ko
 kernel/net/netfilter/nf_nat_ftp.ko
 kernel/net/netfilter/nf_nat_irc.ko
 kernel/net/netfilter/nf_nat_sip.ko
+kernel/net/netfilter/nf_tables.ko
+kernel/net/netfilter/nft_ct.ko
 kernel/net/netfilter/x_tables.ko
 kernel/net/netfilter/xt_tcpudp.ko
 kernel/net/netfilter/xt_CONNSECMARK.ko
@@ -305,10 +323,13 @@ kernel/net/ipv4/netfilter/ip_tables.ko
 kernel/net/ipv4/netfilter/iptable_filter.ko
 kernel/net/ipv4/netfilter/iptable_mangle.ko
 kernel/net/ipv4/netfilter/ipt_REJECT.ko
+kernel/net/ipv4/inet_diag.ko
+kernel/net/ipv4/tcp_diag.ko
 kernel/net/ipv4/tcp_cubic.ko
 kernel/net/xfrm/xfrm_algo.ko
 kernel/net/xfrm/xfrm_user.ko
 kernel/net/unix/unix.ko
+kernel/net/unix/unix_diag.ko
 kernel/net/ipv6/ipv6.ko
 kernel/net/ipv6/ah6.ko
 kernel/net/ipv6/esp6.ko
@@ -324,10 +345,9 @@ kernel/net/packet/af_packet.ko
 kernel/net/sunrpc/sunrpc.ko
 kernel/net/sunrpc/auth_gss/auth_rpcgss.ko
 kernel/net/sunrpc/auth_gss/rpcsec_gss_krb5.ko
-kernel/net/wireless/cfg80211.ko
-kernel/net/mac80211/mac80211.ko
 kernel/net/rfkill/rfkill.ko
 kernel/net/9p/9pnet.ko
 kernel/net/9p/9pnet_fd.ko
 kernel/net/9p/9pnet_virtio.ko
 kernel/net/dns_resolver/dns_resolver.ko
+kernel/arch/x86/video/fbdev.ko

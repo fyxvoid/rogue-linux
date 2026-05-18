@@ -43,6 +43,28 @@ fn die(msg: &str) -> ! {
 /// 
 /// This function coordinates the loading, validation, and resolution of metadata,
 /// and finally emits a binary execution plan.
+fn invoke_executor(plan_path: &std::path::Path, name: &str, version: &str) {
+    butler::info(format!("Invoking cogman-exec for '{}' v{}...", name, version));
+    let status = std::process::Command::new("cogman-exec")
+        .arg(plan_path)
+        .arg("--pkg-name").arg(name)
+        .arg("--pkg-version").arg(version)
+        .status();
+    match status {
+        Ok(s) if s.success() => {
+            butler::success(format!("Package '{}' v{} installed and recorded.", name, version));
+        }
+        Ok(s) => {
+            butler::warn(format!("cogman-exec exited with code {}", s.code().unwrap_or(-1)));
+            process::exit(s.code().unwrap_or(1));
+        }
+        Err(e) => {
+            butler::warn(format!("Failed to launch cogman-exec: {}", e));
+            process::exit(1);
+        }
+    }
+}
+
 fn run_plan(
     metadata_path_raw: PathBuf,
     variant: Variant,
@@ -52,6 +74,7 @@ fn run_plan(
     rootfs: &str,
     explain: bool,
     no_cache: bool,
+    execute_after: bool,
 ) {
     let metadata_path = match std::fs::canonicalize(&metadata_path_raw) {
         Ok(p) => p,
@@ -87,6 +110,29 @@ fn run_plan(
             process::exit(1);
         }
     };
+
+    // Step 1.5: Check build_deps — every declared dependency must be installed.
+    if let Some(ref deps) = meta.build_deps {
+        if !deps.is_empty() {
+            let mut missing: Vec<&str> = Vec::new();
+            for dep in deps {
+                if lookup_installed_version(dep).is_none() {
+                    missing.push(dep.as_str());
+                }
+            }
+            if !missing.is_empty() {
+                for dep in &missing {
+                    eprintln!("ERR: missing build dependency '{}' — install it first", dep);
+                }
+                process::exit(1);
+            }
+            butler::smooth(format!(
+                "All {} build dependenc{} satisfied.",
+                deps.len(),
+                if deps.len() == 1 { "y" } else { "ies" }
+            ));
+        }
+    }
 
     // Step 2: Semantic validation
     butler::check(format!("Validating package schema for '{}'", meta.identity.name));
@@ -257,18 +303,83 @@ fn run_plan(
                 ));
             }
             butler::plan_written(&path.display().to_string(), all_steps.len());
+            if execute_after {
+                invoke_executor(path, &meta.identity.name, &meta.identity.version);
+            }
             butler::farewell();
         }
         None => {
-            // stdout output — no caching (non-deterministic consumer).
-            let mut stdout = std::io::stdout().lock();
-            if let Err(e) = plan::emit_plan(&all_steps, variant, &mut stdout) {
-                die(&format!("Failed to write plan to standard output: {}", e));
+            if execute_after {
+                // No output path given — write to a temp file, execute, then clean up.
+                let mut tmp = tempfile::NamedTempFile::new()
+                    .unwrap_or_else(|e| die(&format!("Cannot create temp plan file: {}", e)));
+                if let Err(e) = plan::emit_plan(&all_steps, variant, tmp.as_file_mut()) {
+                    die(&format!("Failed to serialise plan to temp file: {}", e));
+                }
+                let tmp_path = tmp.path().to_path_buf();
+                invoke_executor(&tmp_path, &meta.identity.name, &meta.identity.version);
+                butler::farewell();
+            } else {
+                let mut stdout = std::io::stdout().lock();
+                if let Err(e) = plan::emit_plan(&all_steps, variant, &mut stdout) {
+                    die(&format!("Failed to write plan to standard output: {}", e));
+                }
+                butler::success("The plan has been emitted to standard output, sir. Receiving process may proceed.");
+                butler::farewell();
             }
-            butler::success("The plan has been emitted to standard output, sir. Receiving process may proceed.");
-            butler::farewell();
         }
     }
+}
+
+// ── Upgrade pipeline ───────────────────────────────────────────────
+
+const INSTALLED_DB: &str = "/var/lib/cogman/installed.db";
+
+/// Read the installed.db and return the installed version for `name`, if any.
+fn lookup_installed_version(name: &str) -> Option<String> {
+    let contents = match std::fs::read_to_string(INSTALLED_DB) {
+        Ok(c) => c,
+        Err(_) => return None, // file absent → not installed
+    };
+    for line in contents.lines() {
+        let mut parts = line.splitn(2, '\t');
+        let pkg_name = parts.next().unwrap_or("").trim();
+        let pkg_ver  = parts.next().unwrap_or("").trim();
+        if pkg_name == name {
+            return Some(pkg_ver.to_string());
+        }
+    }
+    None
+}
+
+fn run_upgrade(
+    name: &str,
+    new_version: &str,
+    plan_path_raw: PathBuf,
+    output: Option<PathBuf>,
+    rootfs: &str,
+) {
+    // Step 1: check installed.db
+    let installed_ver = match lookup_installed_version(name) {
+        Some(v) => v,
+        None => {
+            eprintln!("ERR: {} is not installed, use install instead", name);
+            process::exit(1);
+        }
+    };
+
+    // Step 2: already at requested version?
+    if installed_ver == new_version {
+        println!("already at {}, nothing to do", new_version);
+        process::exit(0);
+    }
+
+    // Step 3: compile the plan (reuse install path — binary variant, no cache)
+    butler::info(format!(
+        "Upgrading '{}': {} → {}",
+        name, installed_ver, new_version
+    ));
+    run_plan(plan_path_raw, Variant::Binary, false, false, output, rootfs, false, true, true);
 }
 
 fn run_uninstall(metadata_path_raw: PathBuf, output: Option<PathBuf>, rootfs: &str) {
@@ -332,7 +443,7 @@ fn main() {
             no_cache,
         } => {
             let variant = if build_native { Variant::Native } else { Variant::Binary };
-            run_plan(metadata, variant, native, keep_tmp, output, &rootfs, explain, no_cache);
+            run_plan(metadata, variant, native, keep_tmp, output, &rootfs, explain, no_cache, false);
         }
 
         Command::Install {
@@ -340,7 +451,19 @@ fn main() {
             output,
             rootfs,
         } => {
-            run_plan(metadata, Variant::Binary, false, false, output, &rootfs, false, false);
+            // Install compiles the plan AND invokes cogman-exec with --pkg-name/--pkg-version
+            // so the package is recorded in installed.db.
+            run_plan(metadata, Variant::Binary, false, false, output, &rootfs, false, false, true);
+        }
+
+        Command::Upgrade {
+            name,
+            version,
+            plan_path,
+            output,
+            rootfs,
+        } => {
+            run_upgrade(&name, &version, plan_path, output, &rootfs);
         }
 
         Command::Uninstall { metadata, output, rootfs } => {
@@ -359,7 +482,7 @@ fn main() {
             no_cache,
         } => {
             let variant = if build_native { Variant::Native } else { Variant::Binary };
-            run_plan(metadata, variant, native, keep_tmp, output, &rootfs, explain, no_cache);
+            run_plan(metadata, variant, native, keep_tmp, output, &rootfs, explain, no_cache, false);
         }
     }
 }

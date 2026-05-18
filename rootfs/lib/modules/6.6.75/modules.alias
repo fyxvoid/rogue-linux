@@ -1,5 +1,6 @@
 # Aliases extracted from modules themselves.
 alias fs-efivarfs efivarfs
+alias virtio:d00000005v* virtio_balloon
 alias cpu:type:x86,ven0000fam*mod*:feature:*01C6* x86_pkg_temp_thermal
 alias nf-logger-10-0 nf_log_syslog
 alias nf-logger-5-0 nf_log_syslog
@@ -11,6 +12,7 @@ alias nf_log_ipv6 nf_log_syslog
 alias nf_log_ipv4 nf_log_syslog
 alias nf_log_bridge nf_log_syslog
 alias nf_log_arp nf_log_syslog
+alias nft-expr-1-reject nft_reject_inet
 alias arpt_MARK xt_mark
 alias ip6t_MARK xt_mark
 alias ipt_MARK xt_mark
@@ -26,3 +28,6 @@ alias ipt_MASQUERADE xt_MASQUERADE
 alias ip6t_MASQUERADE xt_MASQUERADE
 alias ip6t_addrtype xt_addrtype
 alias ipt_addrtype xt_addrtype
+alias nft-expr-2-reject nft_reject_ipv4
+alias nft-expr-10-reject nft_reject_ipv6
+alias net-pf-16-proto-16-family-nl80211 cfg80211

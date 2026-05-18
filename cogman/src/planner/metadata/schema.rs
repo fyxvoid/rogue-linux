@@ -8,6 +8,7 @@
  * definitions in the Rogue Linux ecosystem.
  */
 
+use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 /// Top-level package metadata (single .toml file).
@@ -28,6 +29,14 @@ pub struct PackageMetadata {
     /// Security and system policies
     #[serde(default)]
     pub policy: Policy,
+    /// SHA-256 checksums to verify after installation: filename → sha256hex.
+    /// Each entry will be emitted as a VERIFY step with the sha256:<hash>:<path> format.
+    #[serde(default)]
+    pub checksums: Option<HashMap<String, String>>,
+    /// Packages that must already be installed before this plan can run.
+    /// The planner checks /var/lib/cogman/installed.db and aborts if any are missing.
+    #[serde(default)]
+    pub build_deps: Option<Vec<String>>,
 }
 
 #[allow(dead_code)]
@@ -116,6 +125,11 @@ pub struct Installer {
     pub steps: Vec<String>,
     #[serde(default)]
     pub verify: Option<Verify>,
+    /// Files this package installs, relative to rootfs (e.g. "/usr/bin/nmap").
+    /// Written to /var/lib/cogman/manifests/<name>.manifest on install;
+    /// used by the auto-generated uninstall path to remove exactly these files.
+    #[serde(default)]
+    pub manifest: Vec<String>,
 }
 
 #[derive(Debug, Deserialize, Serialize, Clone, Default)]

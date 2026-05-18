@@ -1,0 +1,85 @@
+[identity]
+name    = "iwd"
+version = "2.21"
+category = "base"
+summary = "iNet Wireless Daemon — WPA2/WPA3 WiFi management with D-Bus interface"
+
+[identity.source]
+kind = "none"
+
+[build]
+system = "autotools"
+steps  = []
+
+[installer]
+steps = [
+    """
+    set -e
+    cd /tmp
+    rm -rf iwd-2.21
+
+    # Build deps: ell (Embedded Linux Library) is required by iwd
+    rm -rf ell-0.68
+    wget -q https://www.kernel.org/pub/linux/libs/ell/ell-0.68.tar.xz -O ell-0.68.tar.xz
+    tar -xJf ell-0.68.tar.xz
+    cd ell-0.68
+    ./configure --prefix=/usr
+    make -j$(nproc)
+    make install
+    cd /tmp
+
+    wget -q https://www.kernel.org/pub/linux/network/wireless/iwd-2.21.tar.xz \
+         -O iwd-2.21.tar.xz
+    tar -xJf iwd-2.21.tar.xz
+    cd iwd-2.21
+    ./configure --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --enable-wired \
+        --disable-systemd-service \
+        --with-dbus-datadir=/usr/share
+    make -j$(nproc)
+    make install
+
+    # Create required runtime directories
+    mkdir -p /var/lib/iwd
+    mkdir -p /etc/iwd
+
+    # Write default main.conf
+    cat > /etc/iwd/main.conf <<'CONF'
+[General]
+EnableNetworkConfiguration=true
+
+[Network]
+NameResolvingService=none
+CONF
+
+    rm -rf /tmp/iwd-2.21 /tmp/iwd-2.21.tar.xz \
+           /tmp/ell-0.68 /tmp/ell-0.68.tar.xz
+    """,
+]
+
+manifest = [
+    "/usr/bin/iwctl",
+    "/usr/libexec/iwd",
+    "/usr/lib/ell/libsell.so",
+    "/etc/iwd/main.conf",
+    "/usr/share/dbus-1/system-services/net.connman.iwd.service",
+]
+
+[uninstaller]
+steps = [
+    "rm -f /usr/bin/iwctl /usr/libexec/iwd",
+    "rm -rf /usr/lib/iwd /usr/lib/ell",
+    "rm -f /usr/share/dbus-1/system-services/net.connman.iwd.service",
+    "rm -rf /etc/iwd /var/lib/iwd",
+]
+
+[policy]
+
+[policy.filesystem]
+read  = ["/"]
+write = ["/usr", "/etc", "/var", "/tmp"]
+
+[policy.network]
+outbound = true

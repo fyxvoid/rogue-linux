@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# build-iso.sh — Create a bootable hybrid ISO (BIOS + UEFI) from the Rogue Linux rootfs
+# build-iso.sh — Create a bootable hybrid ISO (BIOS + UEFI) for Rogue Linux
 #
-# Requires: grub-mkrescue, xorriso, mtools, kernel already built
+# Boot model: kernel + initramfs loaded by GRUB from ISO9660.
+#   /init detects no root= on cmdline → stays in RAM (cpio rootfs).
+#   This is simpler than live-boot overlayfs and works on the first try.
+#
+# Requires: grub-mkrescue, xorriso, kernel already built
 # Usage: sudo bash build/build-iso.sh [output.iso]
-#
-# The ISO uses a small squashfs-compressed rootfs overlaid at boot,
-# with a live-style layout compatible with GRUB's iso9660 module.
 
 set -euo pipefail
 
@@ -13,14 +14,14 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 ROOTFS="$ROOT/rootfs"
 BUILD="$ROOT/build"
 ISO_OUT="${1:-$BUILD/rogue-linux.iso}"
-STAGING="$BUILD/iso-staging"
+STAGING="$(mktemp -d /tmp/rogue-staging.XXXXX)"
+trap 'rm -rf "$STAGING"' EXIT
 KERNEL="$ROOTFS/boot/vmlinuz-6.6.75"
-INITRAMFS="$BUILD/rogue-linux.cpio.gz"
 
 # ── preflight ────────────────────────────────────────────────────────────────
-[ "$(id -u)" = "0" ] || { echo "ERROR: run with sudo"; exit 1; }
+# root check removed — grub-mkrescue works as non-root
 [ -f "$KERNEL" ] || { echo "ERROR: kernel not found — run build-kernel.sh first"; exit 1; }
-for cmd in grub-mkrescue xorriso mtools; do
+for cmd in grub-mkrescue xorriso; do
     command -v $cmd >/dev/null || { echo "ERROR: $cmd not found — run setup-deps.sh first"; exit 1; }
 done
 
@@ -35,39 +36,33 @@ echo "[1/5] Preparing ISO staging area..."
 rm -rf "$STAGING"
 mkdir -p "$STAGING/boot/grub"
 
-# ── step 2: copy kernel and initramfs ────────────────────────────────────────
+# ── step 2: copy kernel ──────────────────────────────────────────────────────
 echo "[2/5] Copying kernel..."
 cp "$KERNEL" "$STAGING/boot/vmlinuz"
 echo "  vmlinuz: $(du -h "$STAGING/boot/vmlinuz" | cut -f1)"
 
-if [ -f "$INITRAMFS" ]; then
-    cp "$INITRAMFS" "$STAGING/boot/initramfs.cpio.gz"
-    echo "  initramfs: $(du -h "$STAGING/boot/initramfs.cpio.gz" | cut -f1)"
-else
-    echo "  initramfs: not found — will boot without initramfs"
+# ── step 3: pack fresh initramfs from rootfs ─────────────────────────────────
+echo "[3/5] Packing rootfs into initramfs (cpio.gz)..."
+INITRAMFS="$STAGING/boot/initramfs.cpio.gz"
+
+# Ensure /init exists in rootfs
+if [ ! -e "$ROOTFS/init" ]; then
+    ln -sf usr/bin/cogman-supervisor "$ROOTFS/init"
 fi
 
-# ── step 3: pack rootfs as squashfs ──────────────────────────────────────────
-echo "[3/5] Compressing rootfs into squashfs..."
-mkdir -p "$STAGING/live"
-if command -v mksquashfs >/dev/null 2>&1; then
-    mksquashfs "$ROOTFS" "$STAGING/live/filesystem.squashfs" \
-        -comp xz -Xbcj x86 \
-        -e boot \
-        -no-progress 2>&1 | tail -3
-    echo "  squashfs: $(du -h "$STAGING/live/filesystem.squashfs" | cut -f1)"
-else
-    echo "  squashfs: mksquashfs not found — copying rootfs directly (no compression)"
-    cp -a "$ROOTFS/." "$STAGING/"
-fi
+cd "$ROOTFS"
+find . | cpio --quiet -H newc -o | gzip -9 > "$INITRAMFS"
+cd - >/dev/null
+echo "  initramfs: $(du -h "$INITRAMFS" | cut -f1)"
 
 # ── step 4: write GRUB config ────────────────────────────────────────────────
 echo "[4/5] Writing GRUB config..."
-INITRD_LINE=""
-[ -f "$STAGING/boot/initramfs.cpio.gz" ] && INITRD_LINE="  initrd /boot/initramfs.cpio.gz"
 
-cat > "$STAGING/boot/grub/grub.cfg" << GRUBCFG
-# Rogue Linux — GRUB ISO configuration
+cat > "$STAGING/boot/grub/grub.cfg" << 'GRUBCFG'
+# Rogue Linux — GRUB ISO boot config
+# Boot model: kernel + initramfs, rootfs in RAM (no root= needed).
+# /init script detects no root= and boots cogman directly from ramfs.
+
 set default=0
 set timeout=5
 set timeout_style=menu
@@ -76,35 +71,32 @@ insmod all_video
 insmod gfxterm
 terminal_output gfxterm
 
-insmod png
-
 set menu_color_normal=white/black
 set menu_color_highlight=black/light-blue
 
-menuentry "Rogue Linux (dwm + X11)" {
-    linux  /boot/vmlinuz \\
-           root=live:LABEL=ROGUE_LINUX \\
-           init=/init \\
-           console=tty1 \\
+menuentry "Rogue Linux — dwm + X11" {
+    linux  /boot/vmlinuz \
+           init=/init \
+           console=tty1 \
+           quiet \
            -- --services-dir /etc/cogman/services
-${INITRD_LINE}
+    initrd /boot/initramfs.cpio.gz
     echo "Booting Rogue Linux..."
 }
 
-menuentry "Rogue Linux (console only)" {
-    linux  /boot/vmlinuz \\
-           root=live:LABEL=ROGUE_LINUX \\
-           init=/init \\
-           console=ttyS0,115200 \\
+menuentry "Rogue Linux — console only" {
+    linux  /boot/vmlinuz \
+           init=/init \
+           console=tty1 console=ttyS0,115200 \
            -- --services-dir /etc/cogman/services-minimal
-${INITRD_LINE}
+    initrd /boot/initramfs.cpio.gz
 }
 
-menuentry "Rogue Linux (single user / rescue)" {
-    linux  /boot/vmlinuz \\
-           root=live:LABEL=ROGUE_LINUX \\
-           init=/bin/sh \\
+menuentry "Rogue Linux — single user (rescue)" {
+    linux  /boot/vmlinuz \
+           init=/bin/sh \
            console=tty1
+    initrd /boot/initramfs.cpio.gz
 }
 GRUBCFG
 
@@ -115,17 +107,17 @@ grub-mkrescue \
     "$STAGING" \
     -- \
     -volid "ROGUE_LINUX" \
-    2>&1 | tail -5
+    2>&1 | grep -v "^$" | tail -8
 
 echo ""
 echo "ISO BUILD OK"
 echo "  iso    : $ISO_OUT  ($(du -h "$ISO_OUT" | cut -f1))"
 echo ""
-echo "  Boot in QEMU (UEFI):"
+echo "  Boot (UEFI + KVM):"
 echo "    qemu-system-x86_64 -m 1G -smp 2 -enable-kvm \\"
-echo "      -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE.fd \\"
-echo "      -cdrom $ISO_OUT -boot d -vga virtio -display sdl"
+echo "      -drive if=pflash,format=raw,readonly=on,file=/usr/share/ovmf/OVMF.fd \\"
+echo "      -cdrom $ISO_OUT -boot d -vga virtio -display sdl -usb -device usb-tablet"
 echo ""
-echo "  Boot in QEMU (BIOS/legacy):"
+echo "  Boot (BIOS + KVM):"
 echo "    qemu-system-x86_64 -m 1G -smp 2 -enable-kvm \\"
-echo "      -cdrom $ISO_OUT -boot d -vga virtio -display sdl"
+echo "      -cdrom $ISO_OUT -boot d -vga virtio -display sdl -usb -device usb-tablet"
