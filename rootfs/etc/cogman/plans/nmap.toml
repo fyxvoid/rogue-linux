@@ -1,33 +1,32 @@
 [identity]
 name     = "nmap"
-version  = ""
-category = "network"
-summary  = "Network scanner — port scan, service detection, NSE scripting"
+version  = "7.99"
+category = "pentest"
+summary  = "Network mapper — port scan, service/OS detection, NSE scripting"
 
 [identity.source]
-kind   = "tarball"
-url    = "https://nmap.org/dist/nmap-.tar.bz2"
+kind = "none"
 
 [identity.depends]
-build = ["libpcap"]
+build   = []
+runtime = ["libpcap"]
 
 [build]
-system = "autoconf"
-steps  = [
-    "curl -L https://nmap.org/dist/nmap-.tar.bz2 -o /tmp/nmap.tar.bz2",
-    "tar -xjf /tmp/nmap.tar.bz2 -C /tmp",
-    "sh -c 'cd /tmp/nmap- && ./configure --prefix=/usr --without-zenmap --without-ncat --without-ndiff && make -j$(nproc) && make install'",
-]
+system = "none"
+steps  = []
 
 [installer]
 steps = [
-    "nmap --version && echo NMAP_OK",
+    "sh -c 'ls -la /usr/lib/nmap/nmap && echo NMAP_BINARY_OK'",
+    "nmap --version",
+    "sh -c 'nmap -sT -p 22 --host-timeout 5s localhost 2>&1 | grep -q Nmap && echo NMAP_SCAN_OK'",
+    "sh -c 'ls -la /usr/bin/nmap && echo NMAP_WRAPPER_OK'",
 ]
 
 [policy]
 [policy.filesystem]
 read  = ["/"]
-write = ["/usr/bin", "/usr/share/nmap"]
+write = ["/usr/bin", "/usr/lib/nmap", "/usr/share/nmap"]
 [policy.network]
 outbound     = true
 capabilities = ["cap_net_raw", "cap_net_admin"]
@@ -35,5 +34,6 @@ capabilities = ["cap_net_raw", "cap_net_admin"]
 [uninstaller]
 steps = [
     "rm -f /usr/bin/nmap /usr/bin/nping",
+    "rm -f /usr/lib/nmap/nmap",
     "rm -rf /usr/share/nmap",
 ]

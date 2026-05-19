@@ -1,7 +1,7 @@
 [service]
 name          = x11
 type          = process
-command       = /bin/sh -c '/usr/bin/startx >/dev/ttyS0 2>&1; echo "=X11-EXIT-$?=" >/dev/ttyS0'
+command       = /usr/bin/startx
 restart       = on-failure
 restart_delay = 5
 depends       = rcs, mdev, input-probe

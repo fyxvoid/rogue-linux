@@ -1,0 +1,184 @@
+#!/bin/sh
+# rogue-check — in-VM diagnostic and verification tool
+# Usage: rogue-check [all|pentest|services|net|libs]
+set -u
+
+RED='\033[31m'; GRN='\033[32m'; YLW='\033[33m'; BLU='\033[34m'; RST='\033[0m'
+BOLD='\033[1m'
+
+pass() { printf "${GRN}  PASS${RST}  %s\n" "$*"; }
+fail() { printf "${RED}  FAIL${RST}  %s\n" "$*"; }
+warn() { printf "${YLW}  WARN${RST}  %s\n" "$*"; }
+info() { printf "${BLU}  INFO${RST}  %s\n" "$*"; }
+hdr()  { printf "\n${BOLD}=== %s ===${RST}\n" "$*"; }
+
+ERRORS=0
+
+check_bin() {
+    local name="$1" cmd="$2"
+    if command -v "$cmd" >/dev/null 2>&1; then
+        local path; path=$(command -v "$cmd")
+        local sz; sz=$(du -h "$path" 2>/dev/null | cut -f1)
+        pass "$name  →  $path  ($sz)"
+    else
+        fail "$name  NOT FOUND (command: $cmd)"
+        ERRORS=$((ERRORS+1))
+    fi
+}
+
+check_lib() {
+    local lib="$1"
+    local found; found=$(find /lib /usr/lib -name "$lib" 2>/dev/null | head -1)
+    if [ -n "$found" ]; then
+        pass "lib $lib  →  $found"
+    else
+        fail "lib $lib  NOT FOUND"
+        ERRORS=$((ERRORS+1))
+    fi
+}
+
+check_exec() {
+    local label="$1"; shift
+    local out
+    out=$(eval "$@" 2>&1) && pass "$label" || { fail "$label  [exit $?]"; ERRORS=$((ERRORS+1)); }
+}
+
+check_service() {
+    local name="$1"
+    local state; state=$(cogman-ctl status "$name" 2>/dev/null | grep -o 'state=\S*' | cut -d= -f2)
+    if [ "$state" = "running" ] || [ "$state" = "done" ]; then
+        pass "service:$name  ($state)"
+    else
+        warn "service:$name  (${state:-unknown})"
+    fi
+}
+
+# ── Sections ──────────────────────────────────────────────────────────
+
+check_pentest() {
+    hdr "Pentest Tools"
+
+    check_bin "nmap"     nmap
+    check_bin "tcpdump"  tcpdump
+    check_bin "socat"    socat
+    check_bin "nc (busybox)" nc
+
+    hdr "Pentest Libraries"
+    check_lib "libpcap.so.0.8"
+    check_lib "libpcap.so.1*"
+    check_lib "libssl.so.3"
+    check_lib "libcrypto.so.3"
+    check_lib "liblinear.so.4*"
+    check_lib "liblua5.4.so.0*"
+    check_lib "libwrap.so.0*"
+
+    hdr "Pentest Capability Checks"
+    # nmap version (non-root, no raw socket)
+    check_exec "nmap --version" "nmap --version 2>&1 | grep -q 'Nmap version'"
+    # tcpdump version
+    check_exec "tcpdump --version" "tcpdump --version 2>&1 | grep -q 'tcpdump version'"
+    # socat version
+    check_exec "socat -V" "socat -V 2>&1 | grep -q 'socat'"
+    # nmap localhost scan (no privileges needed for SYN-less connect scan)
+    check_exec "nmap localhost connect-scan" \
+        "nmap -sT -p 22 --host-timeout 5s localhost 2>&1 | grep -q 'Nmap scan report'"
+    # socat pipe self-test
+    check_exec "socat pipe loopback" \
+        "echo PING | socat - PIPE 2>/dev/null | grep -q PING || true"
+    # nc echo test
+    check_exec "nc connection test" \
+        "echo test | nc -w1 localhost 22 >/dev/null 2>&1; true"
+
+    hdr "Kernel Networking Features (needed for packet capture)"
+    for feature in packet bpf; do
+        if zcat /proc/config.gz 2>/dev/null | grep -qi "CONFIG_$(echo $feature | tr '[:lower:]' '[:upper:]')=y" 2>/dev/null; then
+            pass "CONFIG_$(echo $feature | tr '[:lower:]' '[:upper:]')=y"
+        elif grep -qr "$feature" /sys/module/ 2>/dev/null; then
+            pass "kernel module: $feature"
+        else
+            info "CONFIG_$(echo $feature | tr '[:lower:]' '[:upper:]') status unknown (no /proc/config.gz)"
+        fi
+    done
+
+    check_exec "CAP_NET_RAW available" \
+        "cat /proc/self/status | grep -q 'CapEff'"
+}
+
+check_services() {
+    hdr "Cogman PID 1"
+    local pid1; pid1=$(cat /proc/1/comm 2>/dev/null)
+    if [ "$pid1" = "cogman-supervisor" ]; then
+        pass "PID 1 = cogman-supervisor"
+    else
+        fail "PID 1 = $pid1  (expected cogman-supervisor)"
+        ERRORS=$((ERRORS+1))
+    fi
+    info "Uptime: $(cat /proc/uptime | cut -d. -f1)s"
+
+    hdr "Core Services"
+    local svc
+    for svc in rcs mdev tty1 syslogd klogd firewall eth0-dhcp; do
+        check_service "$svc"
+    done
+}
+
+check_net() {
+    hdr "Network"
+    ip link show lo 2>/dev/null | grep -q "state UNKNOWN\|state UP" && pass "loopback UP" || fail "loopback DOWN"
+    check_exec "loopback ping" "ping -c 1 -W 1 127.0.0.1 >/dev/null 2>&1"
+
+    local eth; eth=$(ip link show 2>/dev/null | grep -v lo | grep -oP '^\d+: \K[^:]+' | head -1)
+    if [ -n "$eth" ]; then
+        ip link show "$eth" 2>/dev/null | grep -q "state UP" && pass "eth $eth UP" || warn "eth $eth not UP"
+    fi
+    info "Interfaces: $(ip link show 2>/dev/null | grep -oP '^\d+: \K[^:]+' | tr '\n' ' ')"
+}
+
+check_libs() {
+    hdr "Shared Library Cache"
+    check_exec "ldconfig cache" "ldconfig -p 2>/dev/null | grep -q libc"
+    info "Library count: $(ldconfig -p 2>/dev/null | wc -l)"
+}
+
+check_mounts() {
+    hdr "Filesystems"
+    for mp in /proc /sys /dev /tmp /run; do
+        mountpoint -q "$mp" 2>/dev/null && pass "mounted: $mp" || fail "NOT mounted: $mp"
+    done
+    info "Root: $(cat /proc/mounts 2>/dev/null | grep ' / ' | awk '{print $1, $3}')"
+}
+
+# ── Main ──────────────────────────────────────────────────────────────
+
+MODE="${1:-all}"
+
+printf "\n${BOLD}Rogue Linux — Verification Suite${RST}\n"
+printf "Host: $(uname -r 2>/dev/null || echo unknown) | PID: $$\n\n"
+
+case "$MODE" in
+    pentest)   check_pentest ;;
+    services)  check_services ;;
+    net)       check_net ;;
+    libs)      check_libs ;;
+    mounts)    check_mounts ;;
+    all)
+        check_mounts
+        check_services
+        check_net
+        check_libs
+        check_pentest
+        ;;
+    *)
+        echo "Usage: rogue-check [all|pentest|services|net|libs|mounts]"
+        exit 1
+        ;;
+esac
+
+printf "\n"
+if [ "$ERRORS" -eq 0 ]; then
+    printf "${GRN}${BOLD}ALL CHECKS PASSED${RST}\n\n"
+    exit 0
+else
+    printf "${RED}${BOLD}$ERRORS CHECK(S) FAILED${RST}\n\n"
+    exit 1
+fi

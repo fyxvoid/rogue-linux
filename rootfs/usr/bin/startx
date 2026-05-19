@@ -2,15 +2,136 @@
 mkdir -p /tmp/.X11-unix /tmp/.ICE-unix /var/log
 chmod 1777 /tmp/.X11-unix /tmp/.ICE-unix
 
-xinit /etc/X11/xinit/xinitrc -- /usr/lib/xorg/Xorg :0 vt1 \
+# Reinstall xkbcomp shim on every start — drain stdin, copy precompiled keymap.
+cat > /usr/bin/xkbcomp << 'SHIM'
+#!/bin/sh
+cat > /dev/null
+eval "LAST=\${$#}"
+cp /etc/X11/us-pc105.xkm "$LAST" && exit 0
+exit 1
+SHIM
+chmod 755 /usr/bin/xkbcomp
+
+# Dynamically detect virtio input event nodes from /proc/bus/input/devices.
+# QEMU with -nodefaults PS/2 fallback devices can push virtio devices to
+# event2, event3, etc.  Hardcoded paths in xorg.conf are unreliable.
+KBD_EV=""
+PTR_EV=""
+in_kbd=0
+in_ptr=0
+while IFS= read -r line; do
+    case "$line" in
+        N:*[Kk]ey*|N:*keyboard*)      in_kbd=1; in_ptr=0 ;;
+        N:*[Mm]ouse*|N:*[Pp]oint*|N:*[Tt]ouch*|N:*[Tt]ablet*)
+                                        in_kbd=0; in_ptr=1 ;;
+        N:*)                            in_kbd=0; in_ptr=0 ;;
+        H:*Handlers*)
+            ev=$(printf '%s' "$line" | grep -oE 'event[0-9]+' | head -1)
+            [ -n "$ev" ] && [ "$in_kbd" = 1 ] && [ -z "$KBD_EV" ] && KBD_EV=$ev
+            [ -n "$ev" ] && [ "$in_ptr" = 1 ] && [ -z "$PTR_EV" ] && PTR_EV=$ev
+            ;;
+    esac
+done < /proc/bus/input/devices
+
+# Fallback: if detection failed, scan /sys by device name
+if [ -z "$KBD_EV" ]; then
+    for d in /dev/input/event*; do
+        nm=$(cat "/sys/class/input/$(basename "$d")/device/name" 2>/dev/null)
+        case "$nm" in *eyboard*|*KEY*) KBD_EV=$(basename "$d"); break ;; esac
+    done
+fi
+if [ -z "$PTR_EV" ]; then
+    for d in /dev/input/event*; do
+        nm=$(cat "/sys/class/input/$(basename "$d")/device/name" 2>/dev/null)
+        case "$nm" in *ouse*|*ointer*) PTR_EV=$(basename "$d"); break ;; esac
+    done
+fi
+
+# Hard fallback values if everything else fails
+[ -z "$KBD_EV" ] && KBD_EV=event0
+[ -z "$PTR_EV" ] && PTR_EV=event1
+
+echo "startx: kbd=/dev/input/$KBD_EV  ptr=/dev/input/$PTR_EV"
+
+# Generate a runtime xorg config with the detected input device paths.
+# This avoids the stale hardcoded paths in /etc/X11/xorg.conf and lets us
+# boot cleanly on any event numbering QEMU produces.
+cat > /tmp/xorg-runtime.conf << XORGEOF
+Section "ServerFlags"
+  Option "AutoAddDevices"    "false"
+  Option "AutoEnableDevices" "false"
+  Option "AllowEmptyInput"   "false"
+EndSection
+
+Section "Device"
+  Identifier "gpu0"
+  Driver     "modesetting"
+  Option     "AccelMethod" "none"
+EndSection
+
+Section "Monitor"
+  Identifier "Monitor0"
+  Option     "DPMS" "false"
+EndSection
+
+Section "Screen"
+  Identifier "Screen0"
+  Device     "gpu0"
+  Monitor    "Monitor0"
+  DefaultDepth 24
+  SubSection "Display"
+    Depth 24
+    Modes "1280x800" "1024x768" "800x600"
+  EndSubSection
+EndSection
+
+Section "InputDevice"
+  Identifier  "vkbd"
+  Driver      "evdev"
+  Option      "Device"      "/dev/input/$KBD_EV"
+  Option      "XkbRules"    "evdev"
+  Option      "XkbModel"    "pc105"
+  Option      "XkbLayout"   "us"
+  Option      "XkbVariant"  ""
+  Option      "XkbOptions"  ""
+EndSection
+
+Section "InputDevice"
+  Identifier  "vmouse"
+  Driver      "evdev"
+  Option      "Device"      "/dev/input/$PTR_EV"
+  Option      "Protocol"    "auto"
+EndSection
+
+Section "ServerLayout"
+  Identifier   "Layout0"
+  Screen       "Screen0"
+  InputDevice  "vkbd"    "CoreKeyboard"
+  InputDevice  "vmouse"  "CorePointer"
+EndSection
+
+Section "Module"
+  Disable "glx"
+  Disable "dri"
+  Disable "dri2"
+  Disable "dri3"
+EndSection
+XORGEOF
+
+# Switch to vt7 before Xorg starts — standard Linux X VT; tty1-tty6 remain
+# as text fallback consoles.  chvt ensures the GTK window shows X immediately.
+chvt 7 2>/dev/null || true
+
+xinit /etc/X11/xinit/xinitrc -- /usr/lib/xorg/Xorg :0 vt7 \
   -nolisten tcp -novtswitch \
+  -config /tmp/xorg-runtime.conf \
   -logfile /tmp/Xorg.log \
   -logverbose 3
 
 RC=$?
 if [ $RC -ne 0 ]; then
-    echo "=== Xorg failed (exit $RC) ==="
-    grep -E "EE|WW|Fatal|error|Screen|DRM|drm|Cannot|failed|modesetting|No screens" \
-        /tmp/Xorg.log 2>/dev/null | head -30
+    echo "=== Xorg failed (exit $RC) ===" >&2
+    grep -E "\(EE\)|\(WW\)|Fatal|Cannot|No screens|modesetting|evdev" \
+        /tmp/Xorg.log 2>/dev/null | head -40 >&2
 fi
 exit $RC

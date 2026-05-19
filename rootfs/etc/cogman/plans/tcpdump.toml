@@ -1,0 +1,34 @@
+[identity]
+name     = "tcpdump"
+version  = "4.99.6"
+category = "pentest"
+summary  = "Packet capture and analysis — captures raw network frames"
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build   = ["libpcap"]
+runtime = ["libpcap"]
+
+[build]
+system = "none"
+steps  = []
+
+[installer]
+steps = [
+    "tcpdump --version",
+    "sh -c 'ls -la /usr/bin/tcpdump && echo TCPDUMP_BINARY_OK'",
+    "sh -c 'tcpdump -D 2>&1 | head -5 && echo TCPDUMP_IFACES_OK || echo TCPDUMP_IFACES_WARN'",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = []
+[policy.network]
+outbound     = false
+capabilities = ["cap_net_raw", "cap_net_admin"]
+
+[uninstaller]
+steps = ["rm -f /usr/bin/tcpdump"]

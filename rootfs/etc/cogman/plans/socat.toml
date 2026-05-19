@@ -1,0 +1,34 @@
+[identity]
+name     = "socat"
+version  = "1.8.1.1"
+category = "pentest"
+summary  = "Multipurpose relay — TCP/UDP tunnels, port forwarding, reverse shells"
+
+[identity.source]
+kind = "none"
+
+[identity.depends]
+build   = []
+runtime = []
+
+[build]
+system = "none"
+steps  = []
+
+[installer]
+steps = [
+    "socat -V",
+    "sh -c 'ls -la /usr/bin/socat && echo SOCAT_BINARY_OK'",
+    "sh -c 'echo TEST | socat - PIPE 2>/dev/null && echo SOCAT_PIPE_OK || echo SOCAT_PIPE_FAIL'",
+]
+
+[policy]
+[policy.filesystem]
+read  = ["/"]
+write = []
+[policy.network]
+outbound     = true
+capabilities = ["cap_net_raw"]
+
+[uninstaller]
+steps = ["rm -f /usr/bin/socat"]
