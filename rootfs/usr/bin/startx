@@ -1,137 +1,115 @@
 #!/bin/sh
+# Output goes to the inherited stderr/stdout from cogman-supervisor (= ttyS0).
+# Do NOT redirect to /dev/console — with -vga virtio that goes to the
+# framebuffer, not the serial port that headless verification captures.
+# NOTE: run via "sh -c '... && /usr/bin/startx'" not as a bare command,
+# so busybox ash doesn't exec-optimize (which also loses the correct ttyS0 fd).
+
+echo "startx: starting at $(date)"
 mkdir -p /tmp/.X11-unix /tmp/.ICE-unix /var/log
 chmod 1777 /tmp/.X11-unix /tmp/.ICE-unix
+echo "startx: dirs ready"
 
-# Reinstall xkbcomp shim on every start — drain stdin, copy precompiled keymap.
-cat > /usr/bin/xkbcomp << 'SHIM'
-#!/bin/sh
-cat > /dev/null
-eval "LAST=\${$#}"
-cp /etc/X11/us-pc105.xkm "$LAST" && exit 0
-exit 1
-SHIM
+# Write xkbcomp shim via printf (avoids heredoc + stdin=/dev/null issues).
+# Drains stdin, copies precompiled US pc105 keymap — no runtime xkbcomp compile.
+printf '#!/bin/sh\ncat>/dev/null\nfor _a in "$@"; do _o="$_a"; done\ncp /etc/X11/us-pc105.xkm "$_o" && exit 0\nexit 1\n' \
+    > /usr/bin/xkbcomp
 chmod 755 /usr/bin/xkbcomp
+echo "startx: xkbcomp shim installed"
 
-# Dynamically detect virtio input event nodes from /proc/bus/input/devices.
-# QEMU with -nodefaults PS/2 fallback devices can push virtio devices to
-# event2, event3, etc.  Hardcoded paths in xorg.conf are unreliable.
+# Detect virtio input event nodes via /sys (safer than /proc/bus/input/devices
+# which can block in QEMU with virtio input devices).
 KBD_EV=""
 PTR_EV=""
-in_kbd=0
-in_ptr=0
-while IFS= read -r line; do
-    case "$line" in
-        N:*[Kk]ey*|N:*keyboard*)      in_kbd=1; in_ptr=0 ;;
-        N:*[Mm]ouse*|N:*[Pp]oint*|N:*[Tt]ouch*|N:*[Tt]ablet*)
-                                        in_kbd=0; in_ptr=1 ;;
-        N:*)                            in_kbd=0; in_ptr=0 ;;
-        H:*Handlers*)
-            ev=$(printf '%s' "$line" | grep -oE 'event[0-9]+' | head -1)
-            [ -n "$ev" ] && [ "$in_kbd" = 1 ] && [ -z "$KBD_EV" ] && KBD_EV=$ev
-            [ -n "$ev" ] && [ "$in_ptr" = 1 ] && [ -z "$PTR_EV" ] && PTR_EV=$ev
-            ;;
+for d in /dev/input/event*; do
+    [ -e "$d" ] || continue
+    name=$(cat "/sys/class/input/$(basename "$d")/device/name" 2>/dev/null)
+    case "$name" in
+        *[Kk]eyboard*|*[Kk]ey*)
+            [ -z "$KBD_EV" ] && KBD_EV=$(basename "$d") ;;
+        *[Mm]ouse*|*[Pp]ointer*|*[Tt]ouch*|*[Tt]ablet*)
+            [ -z "$PTR_EV" ] && PTR_EV=$(basename "$d") ;;
     esac
-done < /proc/bus/input/devices
+done
 
-# Fallback: if detection failed, scan /sys by device name
-if [ -z "$KBD_EV" ]; then
-    for d in /dev/input/event*; do
-        nm=$(cat "/sys/class/input/$(basename "$d")/device/name" 2>/dev/null)
-        case "$nm" in *eyboard*|*KEY*) KBD_EV=$(basename "$d"); break ;; esac
-    done
-fi
-if [ -z "$PTR_EV" ]; then
-    for d in /dev/input/event*; do
-        nm=$(cat "/sys/class/input/$(basename "$d")/device/name" 2>/dev/null)
-        case "$nm" in *ouse*|*ointer*) PTR_EV=$(basename "$d"); break ;; esac
-    done
-fi
-
-# Hard fallback values if everything else fails
+# Hard fallback — virtio-keyboard-pci is typically event0, mouse event1
 [ -z "$KBD_EV" ] && KBD_EV=event0
 [ -z "$PTR_EV" ] && PTR_EV=event1
 
 echo "startx: kbd=/dev/input/$KBD_EV  ptr=/dev/input/$PTR_EV"
 
-# Generate a runtime xorg config with the detected input device paths.
-# This avoids the stale hardcoded paths in /etc/X11/xorg.conf and lets us
-# boot cleanly on any event numbering QEMU produces.
-cat > /tmp/xorg-runtime.conf << XORGEOF
-Section "ServerFlags"
-  Option "AutoAddDevices"    "false"
-  Option "AutoEnableDevices" "false"
-  Option "AllowEmptyInput"   "false"
-EndSection
+# Generate runtime xorg.conf with detected devices (printf, no heredocs).
+{
+printf 'Section "ServerFlags"\n'
+printf '  Option "AutoAddDevices"    "false"\n'
+printf '  Option "AutoEnableDevices" "false"\n'
+printf '  Option "AllowEmptyInput"   "false"\n'
+printf 'EndSection\n\n'
+printf 'Section "Device"\n'
+printf '  Identifier "gpu0"\n'
+printf '  Driver     "modesetting"\n'
+printf '  Option     "AccelMethod" "none"\n'
+printf 'EndSection\n\n'
+printf 'Section "Monitor"\n'
+printf '  Identifier "Monitor0"\n'
+printf '  Option     "DPMS" "false"\n'
+printf 'EndSection\n\n'
+printf 'Section "Screen"\n'
+printf '  Identifier "Screen0"\n'
+printf '  Device     "gpu0"\n'
+printf '  Monitor    "Monitor0"\n'
+printf '  DefaultDepth 24\n'
+printf '  SubSection "Display"\n'
+printf '    Depth 24\n'
+printf '    Modes "1280x800" "1024x768" "800x600"\n'
+printf '  EndSubSection\n'
+printf 'EndSection\n\n'
+printf 'Section "InputDevice"\n'
+printf '  Identifier  "vkbd"\n'
+printf '  Driver      "evdev"\n'
+printf '  Option      "Device"      "/dev/input/%s"\n' "$KBD_EV"
+printf '  Option      "XkbRules"    "evdev"\n'
+printf '  Option      "XkbModel"    "pc105"\n'
+printf '  Option      "XkbLayout"   "us"\n'
+printf '  Option      "XkbVariant"  ""\n'
+printf '  Option      "XkbOptions"  ""\n'
+printf 'EndSection\n\n'
+printf 'Section "InputDevice"\n'
+printf '  Identifier  "vmouse"\n'
+printf '  Driver      "evdev"\n'
+printf '  Option      "Device"      "/dev/input/%s"\n' "$PTR_EV"
+printf '  Option      "Protocol"    "auto"\n'
+printf 'EndSection\n\n'
+printf 'Section "ServerLayout"\n'
+printf '  Identifier   "Layout0"\n'
+printf '  Screen       "Screen0"\n'
+printf '  InputDevice  "vkbd"    "CoreKeyboard"\n'
+printf '  InputDevice  "vmouse"  "CorePointer"\n'
+printf 'EndSection\n\n'
+printf 'Section "Module"\n'
+printf '  Disable "glx"\n'
+printf '  Disable "dri"\n'
+printf '  Disable "dri2"\n'
+printf '  Disable "dri3"\n'
+printf 'EndSection\n'
+} > /tmp/xorg-runtime.conf
+echo "startx: xorg-runtime.conf written (kbd=$KBD_EV ptr=$PTR_EV)"
 
-Section "Device"
-  Identifier "gpu0"
-  Driver     "modesetting"
-  Option     "AccelMethod" "none"
-EndSection
+# Switch to VT7 — skip gracefully in headless/container environments.
+chvt 7 2>/dev/null || echo "startx: chvt 7 skipped (headless or no VT)"
 
-Section "Monitor"
-  Identifier "Monitor0"
-  Option     "DPMS" "false"
-EndSection
-
-Section "Screen"
-  Identifier "Screen0"
-  Device     "gpu0"
-  Monitor    "Monitor0"
-  DefaultDepth 24
-  SubSection "Display"
-    Depth 24
-    Modes "1280x800" "1024x768" "800x600"
-  EndSubSection
-EndSection
-
-Section "InputDevice"
-  Identifier  "vkbd"
-  Driver      "evdev"
-  Option      "Device"      "/dev/input/$KBD_EV"
-  Option      "XkbRules"    "evdev"
-  Option      "XkbModel"    "pc105"
-  Option      "XkbLayout"   "us"
-  Option      "XkbVariant"  ""
-  Option      "XkbOptions"  ""
-EndSection
-
-Section "InputDevice"
-  Identifier  "vmouse"
-  Driver      "evdev"
-  Option      "Device"      "/dev/input/$PTR_EV"
-  Option      "Protocol"    "auto"
-EndSection
-
-Section "ServerLayout"
-  Identifier   "Layout0"
-  Screen       "Screen0"
-  InputDevice  "vkbd"    "CoreKeyboard"
-  InputDevice  "vmouse"  "CorePointer"
-EndSection
-
-Section "Module"
-  Disable "glx"
-  Disable "dri"
-  Disable "dri2"
-  Disable "dri3"
-EndSection
-XORGEOF
-
-# Switch to vt7 before Xorg starts — standard Linux X VT; tty1-tty6 remain
-# as text fallback consoles.  chvt ensures the GTK window shows X immediately.
-chvt 7 2>/dev/null || true
-
+echo "startx: launching xinit → Xorg :0 vt7"
 xinit /etc/X11/xinit/xinitrc -- /usr/lib/xorg/Xorg :0 vt7 \
-  -nolisten tcp -novtswitch \
-  -config /tmp/xorg-runtime.conf \
-  -logfile /tmp/Xorg.log \
-  -logverbose 3
+    -nolisten tcp \
+    -novtswitch \
+    -config /tmp/xorg-runtime.conf \
+    -logfile /tmp/Xorg.log \
+    -logverbose 3
 
 RC=$?
+echo "startx: xinit exited (code=$RC)"
 if [ $RC -ne 0 ]; then
-    echo "=== Xorg failed (exit $RC) ===" >&2
-    grep -E "\(EE\)|\(WW\)|Fatal|Cannot|No screens|modesetting|evdev" \
-        /tmp/Xorg.log 2>/dev/null | head -40 >&2
+    echo "=== Xorg.log tail ==="
+    tail -40 /tmp/Xorg.log 2>/dev/null
 fi
 exit $RC

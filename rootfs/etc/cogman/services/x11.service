@@ -1,7 +1,7 @@
 [service]
 name          = x11
 type          = process
-command       = /usr/bin/startx
+command       = sh -c '/usr/bin/startx; exit $?'
 restart       = on-failure
 restart_delay = 5
 depends       = rcs, mdev, input-probe

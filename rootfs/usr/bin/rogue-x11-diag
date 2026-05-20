@@ -1,0 +1,13 @@
+#!/bin/sh
+# rogue-x11-diag — X11 startup diagnostic, outputs to serial for headless verify.
+sleep 6
+{
+    echo "=== X11-DIAG START ==="
+    echo "Time: $(date)"
+    echo "X lock : $(ls /tmp/.X*-lock 2>/dev/null || echo none)"
+    echo "X sock : $(ls /tmp/.X11-unix/ 2>/dev/null || echo none)"
+    echo "X procs: $(ps 2>/dev/null | grep -E '[Xx]org|xinit|dwm|startx' | head -5 || echo none)"
+    echo "--- Xorg.log tail ---"
+    tail -20 /tmp/Xorg.log 2>/dev/null || echo "(no Xorg.log yet)"
+    echo "=== X11-DIAG END ==="
+} >/dev/ttyS0 2>&1

@@ -1,0 +1,10 @@
+[service]
+name    = x11-diag
+type    = oneshot
+restart = never
+depends = x11
+
+command = /usr/bin/rogue-x11-diag
+
+[env]
+PATH = /usr/bin:/bin:/usr/sbin:/sbin

@@ -39,6 +39,6 @@ ldconfig -q 2>/dev/null || true
 # xkbcomp shim — written at runtime so it survives any disk image state.
 # xkbcomp exits 0 even on geometry errors but produces a broken XKM in
 # this VM environment.  Drain stdin, copy the precompiled keymap, done.
-printf '#!/bin/sh\ncat>/dev/null\neval "LAST=\\${$#}"\ncp /etc/X11/us-pc105.xkm "$LAST"&&exit 0\nexit 1\n' \
+printf '#!/bin/sh\ncat>/dev/null\nfor _a in "$@"; do _o="$_a"; done\ncp /etc/X11/us-pc105.xkm "$_o"&&exit 0\nexit 1\n' \
     > /usr/bin/xkbcomp
 chmod 755 /usr/bin/xkbcomp

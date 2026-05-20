@@ -16,11 +16,12 @@
 #   iso         Build hybrid BIOS/UEFI ISO                [needs sudo]
 #   pentest     Verify pentest tools (nmap/tcpdump/socat) are in rootfs with all deps
 #   verify      Headless QEMU boot verification (boot → milestone checks → pass/fail)
+#   verify-x11  Headless X11 verification (Xorg+DWM running checks)
 #   test        Run cogman test suite
-#   boot        Launch QEMU
-#   all         Run: cogman kernel sync initramfs disk iso
+#   boot        Launch QEMU (--mode x11 for initramfs X11 graphical)
+#   all         Run: cogman kernel sync pentest initramfs disk iso
 #   rebuild     Clean everything, then run: all
-#   ci          Run: cogman kernel test sync initramfs verify
+#   ci          Run: cogman kernel test sync pentest initramfs verify verify-x11
 #
 # Flags:
 #   --force         Rebuild even if artifacts are up to date
@@ -340,6 +341,23 @@ stage_verify() {
     fi
 }
 
+# ── Stage: verify-x11 ────────────────────────────────────────────────────────
+stage_verify_x11() {
+    log "Running headless X11 verification (Xorg+DWM, timeout=${VERIFY_TIMEOUT}s)..."
+    [ -f "$BUILD/rogue-linux.cpio.gz" ] || die "initramfs not found — run: ./pipeline.sh initramfs"
+    [ -f "$ROOTFS/boot/vmlinuz-6.6.75" ] || die "kernel not found — run: ./pipeline.sh kernel"
+
+    local extra=""
+    [ "$VERBOSE" = "1" ] && extra="--debug"
+
+    if bash "$BUILD/verify-x11-headless.sh" --timeout "$VERIFY_TIMEOUT" $extra; then
+        ok "X11 verification PASSED — Xorg+DWM confirmed running"
+    else
+        err "X11 verification FAILED — see $BUILD/verify-x11.log"
+        return 1
+    fi
+}
+
 # ── Stage: initramfs ─────────────────────────────────────────────────────────
 stage_initramfs() {
     local OUT="$BUILD/rogue-linux.cpio.gz"
@@ -393,6 +411,11 @@ stage_boot() {
             [ -f "$ROOTFS/boot/vmlinuz-6.6.75" ] || die "kernel not found — run: ./pipeline.sh kernel"
             [ -f "$BUILD/rogue-linux-disk.img"  ] || die "disk not found — run: ./pipeline.sh disk"
             exec bash "$BUILD/boot-x11.sh"
+            ;;
+        x11-init)
+            [ -f "$ROOTFS/boot/vmlinuz-6.6.75" ] || die "kernel not found — run: ./pipeline.sh kernel"
+            [ -f "$BUILD/rogue-linux.cpio.gz"   ] || die "initramfs not found — run: ./pipeline.sh initramfs"
+            exec bash "$BUILD/boot-x11-init.sh"
             ;;
         disk)
             [ -f "$BUILD/rogue-linux-disk.img" ] || die "disk not found — run: ./pipeline.sh disk"
@@ -562,6 +585,7 @@ run_stage() {
         disk)       stage_disk ;;
         iso)        stage_iso ;;
         verify)     stage_verify ;;
+        verify-x11) stage_verify_x11 ;;
         test)       stage_test ;;
         boot)       stage_boot ;;  # exec — never returns
         status)     stage_status; return 0 ;;
@@ -577,7 +601,7 @@ expand_stage() {
     case "$1" in
         all)     echo "cogman kernel sync pentest initramfs disk iso" ;;
         rebuild) echo "_clean_all cogman kernel sync pentest initramfs disk iso" ;;
-        ci)      echo "cogman kernel test sync pentest initramfs verify" ;;
+        ci)      echo "cogman kernel test sync pentest initramfs verify verify-x11" ;;
         images)  echo "sync initramfs disk iso" ;;
         check)   echo "pentest verify" ;;
         *)       echo "$1" ;;
