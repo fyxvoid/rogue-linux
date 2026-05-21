@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head>
+<body style="background:#F8F9FA"><div style="padding:28px 36px;min-width:1400px">
+<h1 style="font-size:17px;font-weight:700;color:#1A3A5C;text-align:center;margin-bottom:22px">Figure 7.9 — Minimal Rootfs Directory Layout  (6.3 MB total)</h1>
+
+<div style="display:flex;gap:24px">
+<!-- Tree -->
+<div style="flex:1;font-family:monospace;font-size:12.5px;line-height:1.9;border:1.5px solid #dee2e6;border-radius:8px;padding:16px 20px;background:#fff">
+<span style="font-size:15px;font-weight:700;color:#1C2833">/</span>
+<div style="margin-left:14px">
+  <div><span style="color:#0E6655;font-weight:700">├─ sbin/</span></div>
+  <div style="margin-left:22px"><span style="color:#0E6655">└─ init</span> <span style="color:#5D6D7E;font-size:11px">→ symlink to cogman-supervisor</span></div>
+  <div><span style="color:#1A3A5C;font-weight:700">├─ bin/</span></div>
+  <div style="margin-left:22px"><span style="color:#1A3A5C">├─ sh</span> <span style="color:#5D6D7E;font-size:11px">→ symlink to /bin/busybox</span></div>
+  <div style="margin-left:22px"><span style="color:#1A3A5C">└─ busybox</span> <span style="color:#5D6D7E;font-size:11px">1.1 MB · multi-call binary</span></div>
+  <div><span style="color:#1A3A5C;font-weight:700">├─ usr/bin/</span></div>
+  <div style="margin-left:22px"><span style="color:#0E6655">├─ cogman-supervisor</span> <span style="color:#5D6D7E;font-size:11px">312 KB · PID 1</span></div>
+  <div style="margin-left:22px"><span style="color:#0E6655">├─ cogman-executor</span> <span style="color:#5D6D7E;font-size:11px">180 KB</span></div>
+  <div style="margin-left:22px"><span style="color:#C0392B">├─ cogman-planner</span> <span style="color:#5D6D7E;font-size:11px">1.4 MB (Rust)</span></div>
+  <div style="margin-left:22px"><span style="color:#1E8449">└─ cogman-ctl</span> <span style="color:#5D6D7E;font-size:11px">45 KB</span></div>
+  <div><span style="color:#6C3483;font-weight:700">├─ etc/cogman/services/</span></div>
+  <div style="margin-left:22px"><span style="color:#1E8449">├─ hello.service</span> <span style="color:#5D6D7E;font-size:11px">oneshot · no deps</span></div>
+  <div style="margin-left:22px"><span style="color:#1E8449">├─ heartbeat.service</span> <span style="color:#5D6D7E;font-size:11px">process · restart=always</span></div>
+  <div style="margin-left:22px"><span style="color:#1E8449">├─ ctl-probe.service</span> <span style="color:#5D6D7E;font-size:11px">oneshot · after=heartbeat</span></div>
+  <div style="margin-left:22px"><span style="color:#1E8449">└─ shutdown.service</span> <span style="color:#5D6D7E;font-size:11px">oneshot · last</span></div>
+  <div><span style="color:#5D6D7E;font-weight:700">├─ proc/</span> <span style="color:#5D6D7E;font-size:11px">← procfs mount</span></div>
+  <div><span style="color:#5D6D7E;font-weight:700">├─ sys/</span>  <span style="color:#5D6D7E;font-size:11px">← sysfs mount</span></div>
+  <div><span style="color:#5D6D7E;font-weight:700">├─ dev/</span>  <span style="color:#5D6D7E;font-size:11px">← devtmpfs mount</span></div>
+  <div><span style="color:#CA6F1E;font-weight:700">├─ run/</span>  <span style="color:#5D6D7E;font-size:11px">← tmpfs mount</span></div>
+  <div style="margin-left:22px"><span style="color:#CA6F1E">└─ cogman-supervisor.sock</span> <span style="color:#5D6D7E;font-size:11px">AF_UNIX control socket</span></div>
+  <div><span style="color:#9A7D0A;font-weight:700">├─ lib/</span></div>
+  <div style="margin-left:22px"><span style="color:#9A7D0A">└─ libc.so</span> <span style="color:#5D6D7E;font-size:11px">→ musl-libc · 90 KB</span></div>
+  <div><span style="color:#5D6D7E;font-weight:700">└─ tmp/</span></div>
+</div>
+</div>
+
+<!-- Right: size panel + boot note -->
+<div style="min-width:320px;display:flex;flex-direction:column;gap:14px">
+  <div style="border:1.5px solid #1A3A5C;border-radius:8px;padding:14px;background:#fff">
+    <div style="font-size:13px;font-weight:700;color:#1A3A5C;margin-bottom:12px">Binary Sizes  (stripped ELF)</div>
+    <table style="width:100%;font-size:12px;border-collapse:collapse">
+      <tr><td style="padding:6px 0;color:#C0392B;font-weight:600">cogman-planner</td><td style="padding:6px 0;text-align:right;color:#C0392B;font-weight:700">1.40 MB</td></tr>
+      <tr style="border-top:1px solid #eee"><td style="padding:6px 0;color:#1A3A5C;font-weight:600">busybox</td><td style="padding:6px 0;text-align:right;color:#1A3A5C;font-weight:700">1.10 MB</td></tr>
+      <tr style="border-top:1px solid #eee"><td style="padding:6px 0;color:#0E6655;font-weight:600">cogman-supervisor</td><td style="padding:6px 0;text-align:right;color:#0E6655;font-weight:700">312 KB</td></tr>
+      <tr style="border-top:1px solid #eee"><td style="padding:6px 0;color:#0E6655;font-weight:600">cogman-executor</td><td style="padding:6px 0;text-align:right;color:#0E6655;font-weight:700">180 KB</td></tr>
+      <tr style="border-top:1px solid #eee"><td style="padding:6px 0;color:#1E8449;font-weight:600">cogman-ctl</td><td style="padding:6px 0;text-align:right;color:#1E8449;font-weight:700">45 KB</td></tr>
+      <tr style="border-top:1px solid #eee"><td style="padding:6px 0;color:#9A7D0A;font-weight:600">musl-libc</td><td style="padding:6px 0;text-align:right;color:#9A7D0A;font-weight:700">90 KB</td></tr>
+      <tr style="border-top:1px solid #eee"><td style="padding:6px 0;color:#6C3483;font-weight:600">service files (×4)</td><td style="padding:6px 0;text-align:right;color:#6C3483;font-weight:700">&lt;1 KB</td></tr>
+      <tr style="border-top:2px solid #1A3A5C"><td style="padding:8px 0;color:#1C2833;font-weight:700;font-size:13px">Total rootfs</td><td style="padding:8px 0;text-align:right;color:#1C2833;font-weight:700;font-size:13px">6.30 MB</td></tr>
+    </table>
+  </div>
+  <div style="border:1.5px solid #0E6655;border-radius:8px;padding:14px;background:#0E66550A;font-size:11.5px;color:#5D6D7E;line-height:1.7">
+    <strong style="color:#0E6655">Boot sequence:</strong><br>
+    kernel → <code>execve(/sbin/init)</code><br>
+    → cogman-supervisor (PID 1)<br>
+    → mount {proc, sys, dev, run}<br>
+    → parse /etc/cogman/services/<br>
+    → start 4 verification services<br>
+    → all PASS → enter main loop
+  </div>
+</div>
+</div>
+
+</div></body></html>

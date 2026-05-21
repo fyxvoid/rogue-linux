@@ -1,0 +1,37 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="common.css">
+<style>
+.flow { display:flex; align-items:stretch; justify-content:center; gap:0; margin-top:10px; }
+.box { min-width:160px; min-height:90px; display:flex; flex-direction:column; justify-content:center; }
+.arrow { min-width:80px; }
+.ann-row { display:flex; justify-content:center; gap:160px; margin-top:16px; }
+.ann { border-radius:8px; border:1.5px solid; padding:7px 14px; font-size:11px; text-align:center; line-height:1.4; }
+.host-wrap { border:2px dashed var(--gray); border-radius:12px; padding:18px 22px; display:inline-block; }
+.host-lbl { font-size:11px; color:var(--gray); font-style:italic; margin-bottom:10px; }
+</style></head><body><div class="page">
+<h1 class="fig-title">Figure 1.1 — Rogue Linux Build Pipeline Overview</h1>
+
+<div class="host-wrap">
+  <div class="host-lbl">HOST BUILD MACHINE</div>
+  <div class="flow">
+    <div class="box rust" style="min-width:140px">TOML<br>Package<br>Metadata<br><small style="font-weight:400;font-size:10px;color:var(--gray)">packages/foo.toml</small></div>
+    <div class="arrow">→<div class="lbl">parse &amp;<br>validate</div></div>
+    <div class="box rust" style="min-width:160px">cogman-planner<br>(Rust)<br><small style="font-weight:400;font-size:10px;color:var(--gray)">serde+toml → DAG</small></div>
+    <div class="arrow">→<div class="lbl">emit binary<br>plan</div></div>
+    <div class="box navy" style="min-width:155px">CGM2PLAN<br>Binary File<br><small style="font-weight:400;font-size:10px;color:var(--gray)">64-byte hdr + step[]</small></div>
+    <div class="arrow">→<div class="lbl">mmap &amp;<br>dispatch</div></div>
+    <div class="box teal" style="min-width:160px">cogman-executor<br>(C11)<br><small style="font-weight:400;font-size:10px;color:var(--gray)">step dispatch table</small></div>
+    <div class="arrow">→<div class="lbl">install<br>steps</div></div>
+    <div class="box green" style="min-width:140px">Staged<br>Root FS<br><small style="font-weight:400;font-size:10px;color:var(--gray)">/tmp/staging/</small></div>
+  </div>
+
+  <div class="ann-row">
+    <div class="ann" style="color:var(--gold);border-color:var(--gold);background:#9A7D0A0F">
+      ↑ FNV-1a cache hit<br>→ skip re-plan
+    </div>
+    <div class="ann" style="color:var(--red);border-color:var(--red);background:#922B210F">
+      ↑ path traversal guard<br>on every OP_COPY
+    </div>
+  </div>
+</div>
+</div></body></html>

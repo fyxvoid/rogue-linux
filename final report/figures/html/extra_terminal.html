@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#1a1a2e; font-family:'Courier New',monospace; width:1200px; }
+.terminal { background:#0d1117; border:2px solid #30363d; border-radius:10px; overflow:hidden; margin:16px; }
+.titlebar { background:#161b22; height:32px; display:flex; align-items:center; padding:0 14px; border-bottom:1px solid #30363d; }
+.btn { width:13px; height:13px; border-radius:50%; margin-right:7px; }
+.btn.r{background:#ff5f57;} .btn.y{background:#febc2e;} .btn.g{background:#28c840;}
+.wname { flex:1; text-align:center; font-size:12px; color:#8b949e; }
+.body { padding:14px 18px; font-size:12.5px; line-height:1.75; color:#e2e8f0; }
+.p { color:#4ecca3; } .s { color:#e2e8f0; } .g { color:#28c840; }
+.d { color:#a0aec0; } .w { color:#febc2e; } .e { color:#ff5f57; }
+.dim { color:#8888aa; }
+</style></head><body>
+<div class="terminal">
+<div class="titlebar">
+  <div class="btn r"></div><div class="btn y"></div><div class="btn g"></div>
+  <div class="wname">st — void@rogue-linux: ~</div>
+</div>
+<div class="body">
+<span class="p">void@rogue-linux:~$ </span><span class="s">uname -a</span><br>
+<span class="d">Linux rogue-linux 6.1.0 #1 SMP x86_64 GNU/Linux</span><br>
+<br>
+<span class="p">void@rogue-linux:~$ </span><span class="s">cogman-planner --meta packages/cogman.toml --out /tmp/cogman.bin</span><br>
+<br>
+<span class="g">&nbsp;&nbsp;✓&nbsp;&nbsp;cogman  v0.9.0</span><br>
+<span class="d">&nbsp;&nbsp;→&nbsp;&nbsp;loading metadata &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;packages/cogman.toml</span><br>
+<span class="d">&nbsp;&nbsp;→&nbsp;&nbsp;validating schema &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OK</span><br>
+<span class="d">&nbsp;&nbsp;→&nbsp;&nbsp;resolving dependencies &nbsp;musl-libc → linux-headers → kernel</span><br>
+<span class="d">&nbsp;&nbsp;→&nbsp;&nbsp;topological sort &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6 packages in order</span><br>
+<span class="d">&nbsp;&nbsp;→&nbsp;&nbsp;enforcing policy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow_write=[/tmp,/usr]  ✓</span><br>
+<span class="d">&nbsp;&nbsp;→&nbsp;&nbsp;checking FNV-1a cache &nbsp;&nbsp;hash=0xdeadbeef  (cache miss)</span><br>
+<span class="g">&nbsp;&nbsp;✓&nbsp;&nbsp;plan written &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/tmp/cogman.bin  (2048 bytes · 14 steps)</span><br>
+<span class="d">&nbsp;&nbsp;→&nbsp;&nbsp;elapsed: 8 ms &nbsp;&nbsp;peak_mem: 4.1 MB</span><br>
+<br>
+<span class="p">void@rogue-linux:~$ </span><span class="s">cogman-executor /tmp/cogman.bin</span><br>
+<br>
+<span class="d">&nbsp;&nbsp;→&nbsp;&nbsp;mmap /tmp/cogman.bin &nbsp;&nbsp;&nbsp;(PROT_READ · MAP_PRIVATE)</span><br>
+<span class="d">&nbsp;&nbsp;→&nbsp;&nbsp;magic=CGM2PLAN &nbsp;version=1 &nbsp;steps=14</span><br>
+<span class="d">&nbsp;&nbsp;step &nbsp;1/14 &nbsp;OP_MKDIR &nbsp;&nbsp;/tmp/staging/usr/bin</span><br>
+<span class="d">&nbsp;&nbsp;step &nbsp;2/14 &nbsp;OP_MKDIR &nbsp;&nbsp;/tmp/staging/etc/cogman/services</span><br>
+<span class="d">&nbsp;&nbsp;step &nbsp;3/14 &nbsp;OP_EXEC &nbsp;&nbsp;&nbsp;./configure --prefix=/usr</span><br>
+<span class="d">&nbsp;&nbsp;step &nbsp;4/14 &nbsp;OP_EXEC &nbsp;&nbsp;&nbsp;make -j$(nproc)</span><br>
+<span class="d">&nbsp;&nbsp;step &nbsp;5/14 &nbsp;OP_EXEC &nbsp;&nbsp;&nbsp;make install DESTDIR=/tmp/staging</span><br>
+<span class="d">&nbsp;&nbsp;step &nbsp;6/14 &nbsp;OP_COPY &nbsp;&nbsp;&nbsp;cogman-supervisor → /tmp/staging/usr/bin/</span><br>
+<span class="d">&nbsp;&nbsp;step &nbsp;7/14 &nbsp;OP_COPY &nbsp;&nbsp;&nbsp;cogman-executor &nbsp;&nbsp;→ /tmp/staging/usr/bin/</span><br>
+<span class="d">&nbsp;&nbsp;step &nbsp;8/14 &nbsp;OP_SYMLINK /tmp/staging/sbin/init → cogman-supervisor</span><br>
+<span class="d">&nbsp;&nbsp;step &nbsp;9/14 &nbsp;OP_CHMOD &nbsp;&nbsp;/tmp/staging/usr/bin/cogman-supervisor 0755</span><br>
+<span class="g">&nbsp;&nbsp;step 10/14 &nbsp;OP_COPY &nbsp;&nbsp;&nbsp;hello.service → /tmp/staging/etc/cogman/services/</span><br>
+<span class="g">&nbsp;&nbsp;step 11/14 &nbsp;OP_COPY &nbsp;&nbsp;&nbsp;heartbeat.service → /tmp/staging/etc/cogman/services/</span><br>
+<span class="g">&nbsp;&nbsp;step 12/14 &nbsp;OP_COPY &nbsp;&nbsp;&nbsp;ctl-probe.service → /tmp/staging/etc/cogman/services/</span><br>
+<span class="g">&nbsp;&nbsp;step 13/14 &nbsp;OP_COPY &nbsp;&nbsp;&nbsp;shutdown.service  → /tmp/staging/etc/cogman/services/</span><br>
+<span class="g">&nbsp;&nbsp;step 14/14 &nbsp;OP_EXEC &nbsp;&nbsp;&nbsp;mksquashfs /tmp/staging rootfs.sqsh</span><br>
+<br>
+<span class="g">&nbsp;&nbsp;✓&nbsp;&nbsp;all 14 steps completed &nbsp;exit=0</span><br>
+<br>
+<span class="p">void@rogue-linux:~$ </span><span class="s">ls -lh rootfs.sqsh</span><br>
+<span class="s">-rw-r--r-- 1 void void 6.3M May 20 14:32 rootfs.sqsh</span><br>
+<br>
+<span class="p">void@rogue-linux:~$ </span><span style="display:inline-block;width:9px;height:15px;background:#4ecca3;vertical-align:-3px"></span>
+</div>
+</div>
+</body></html>

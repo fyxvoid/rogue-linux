@@ -1,0 +1,110 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#1a1a2e; font-family: 'Courier New', monospace; color:#e2e8f0; width:1920px; height:1080px; overflow:hidden; }
+#bar { background:#16213e; height:26px; display:flex; align-items:center; border-bottom:1.5px solid #4ecca3; padding:0 6px; gap:0; position:fixed; top:0; left:0; right:0; z-index:100; }
+.tag { width:24px; height:22px; display:flex; align-items:center; justify-content:center; font-size:12px; color:#8888aa; cursor:pointer; border-radius:3px; }
+.tag.active { color:#4ecca3; background:#0f3460; font-weight:700; }
+#layout-sym { color:#4ecca3; font-size:12px; font-weight:700; padding:0 10px; border-left:1px solid #4ecca350; border-right:1px solid #4ecca350; margin:0 4px; }
+#win-title { flex:1; text-align:center; font-size:12px; color:#e2e8f0; }
+#status { font-size:11px; color:#a0aec0; padding-right:8px; white-space:nowrap; }
+#windows { display:flex; gap:2px; position:absolute; top:28px; left:0; right:0; bottom:0; }
+.win { background:#0d1117; border:1.5px solid #30363d; display:flex; flex-direction:column; }
+.win.focused { border-color:#4ecca3; }
+.titlebar { background:#161b22; height:26px; display:flex; align-items:center; padding:0 10px; gap:0; border-bottom:1px solid #30363d; flex-shrink:0; }
+.btn { width:13px; height:13px; border-radius:50%; margin-right:6px; }
+.btn.r { background:#ff5f57; } .btn.y { background:#febc2e; } .btn.g { background:#28c840; }
+.win-name { flex:1; text-align:center; font-size:11px; color:#8b949e; }
+.term { flex:1; padding:10px 14px; font-size:11.5px; line-height:1.7; overflow:hidden; font-family:'Courier New',monospace; }
+</style></head><body>
+<div id="bar">
+  <div class="tag active">1</div>
+  <div class="tag">2</div><div class="tag">3</div><div class="tag">4</div>
+  <div class="tag">5</div><div class="tag">6</div><div class="tag">7</div>
+  <div class="tag">8</div><div class="tag">9</div>
+  <div id="layout-sym">[]=</div>
+  <div id="win-title">cogman-supervisor — Rogue Linux  [RUNNING · 4 services]</div>
+  <div id="status">CPU 0.1%  MEM 4.2MB  [heartbeat ✓] [ctl-probe ✓]  2025-05-20 14:32:18</div>
+</div>
+<div id="windows">
+  <!-- LEFT window: supervisor log -->
+  <div class="win focused" style="width:58%">
+    <div class="titlebar">
+      <div class="btn r"></div><div class="btn y"></div><div class="btn g"></div>
+      <div class="win-name">st — void@rogue-linux: ~  [cogman-supervisor PID=1]</div>
+    </div>
+    <div class="term">
+<span style="color:#4ecca3">cogman-supervisor v0.9.0 starting (PID 1)</span><br>
+<span style="color:#8888aa">→ mounting /proc      [procfs]</span><br>
+<span style="color:#8888aa">→ mounting /sys       [sysfs]</span><br>
+<span style="color:#8888aa">→ mounting /dev       [devtmpfs]</span><br>
+<span style="color:#8888aa">→ mounting /run       [tmpfs]</span><br>
+<span style="color:#4ecca3">→ loading services from /etc/cogman/services/</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;found: hello.service       [oneshot]</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;found: heartbeat.service   [process, restart=always]</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;found: ctl-probe.service   [oneshot, after=heartbeat]</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;found: shutdown.service    [oneshot]</span><br>
+<span style="color:#4ecca3">→ dependency graph resolved — 4 services</span><br>
+<span style="color:#e2e8f0">&nbsp;&nbsp;starting: hello.service</span><br>
+<span style="color:#28c840">&nbsp;&nbsp;✓ hello.service       DONE  (exit=0, elapsed=2ms)</span><br>
+<span style="color:#e2e8f0">&nbsp;&nbsp;starting: heartbeat.service</span><br>
+<span style="color:#28c840">&nbsp;&nbsp;✓ heartbeat.service   RUNNING  (pid=42)</span><br>
+<span style="color:#e2e8f0">&nbsp;&nbsp;starting: ctl-probe.service</span><br>
+<span style="color:#28c840">&nbsp;&nbsp;✓ ctl-probe.service   DONE  (exit=0)</span><br>
+<span style="color:#28c840">&nbsp;&nbsp;✓ shutdown.service    DONE  (exit=0)</span><br>
+<span style="color:#4ecca3">→ all 4 verification stages passed ✓</span><br>
+<span style="color:#8888aa">──────────────────────────────────────────────────────</span><br>
+<span style="color:#e2e8f0">supervisor entering main loop (100ms poll)</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;select(pipe_r=3, ctl_fd=4, timeout=100ms)</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;[heartbeat] pid=42  state=RUNNING  restarts=0</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;[heartbeat] pid=42  state=RUNNING  restarts=0</span><br>
+<span style="color:#febc2e">&nbsp;&nbsp;[heartbeat] SIGCHLD received  pid=42 exit=0</span><br>
+<span style="color:#febc2e">&nbsp;&nbsp;[heartbeat] restart=always → RESTARTING (delay=500ms)</span><br>
+<span style="color:#28c840">&nbsp;&nbsp;[heartbeat] restarted  new_pid=43  restarts=1</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;[heartbeat] pid=43  state=RUNNING  restarts=1</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;[heartbeat] pid=43  state=RUNNING  restarts=1</span><br>
+<span style="color:#4ecca3">$</span><span style="display:inline-block;width:8px;height:14px;background:#4ecca3;vertical-align:-2px"></span>
+    </div>
+  </div>
+
+  <!-- RIGHT window: cogman-ctl -->
+  <div class="win" style="flex:1">
+    <div class="titlebar">
+      <div class="btn r"></div><div class="btn y"></div><div class="btn g"></div>
+      <div class="win-name">st — void@rogue-linux: ~  [cogman-ctl]</div>
+    </div>
+    <div class="term">
+<span style="color:#a0aec0">void@rogue-linux:~$ </span><span style="color:#e2e8f0">cogman-ctl list</span><br>
+<br>
+<span style="color:#4ecca3">NAME               STATE       PID    RESTARTS</span><br>
+<span style="color:#4ecca3">─────────────────────────────────────────────</span><br>
+<span style="color:#28c840">heartbeat          RUNNING     43     1</span><br>
+<span style="color:#a0aec0">hello              DONE        —      0</span><br>
+<span style="color:#a0aec0">ctl-probe          DONE        —      0</span><br>
+<span style="color:#a0aec0">shutdown           DONE        —      0</span><br>
+<br>
+<span style="color:#a0aec0">void@rogue-linux:~$ </span><span style="color:#e2e8f0">cogman-ctl status heartbeat</span><br>
+<br>
+<span style="color:#4ecca3">Service:     heartbeat</span><br>
+<span style="color:#a0aec0">State:       RUNNING</span><br>
+<span style="color:#a0aec0">PID:         43</span><br>
+<span style="color:#a0aec0">Command:     /usr/bin/heartbeat</span><br>
+<span style="color:#a0aec0">Type:        process</span><br>
+<span style="color:#a0aec0">Restart:     always</span><br>
+<span style="color:#a0aec0">Restarts:    1</span><br>
+<span style="color:#a0aec0">Started:     2025-05-20 14:32:01</span><br>
+<br>
+<span style="color:#a0aec0">void@rogue-linux:~$ </span><span style="color:#e2e8f0">free -h</span><br>
+<span style="color:#4ecca3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total&nbsp;&nbsp;&nbsp;used&nbsp;&nbsp;&nbsp;free</span><br>
+<span style="color:#a0aec0">Mem:&nbsp;&nbsp;&nbsp;&nbsp;128Mi&nbsp;&nbsp;&nbsp;4.2Mi&nbsp;&nbsp;123Mi</span><br>
+<br>
+<span style="color:#a0aec0">void@rogue-linux:~$ </span><span style="color:#e2e8f0">ps aux</span><br>
+<span style="color:#4ecca3">PID&nbsp;&nbsp;COMM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RSS</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;1&nbsp;&nbsp;cogman-supervisor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;312K</span><br>
+<span style="color:#a0aec0">&nbsp;&nbsp;43 heartbeat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;148K</span><br>
+<br>
+<span style="color:#a0aec0">void@rogue-linux:~$ </span><span style="display:inline-block;width:8px;height:14px;background:#4ecca3;vertical-align:-2px"></span>
+    </div>
+  </div>
+</div>
+</body></html>

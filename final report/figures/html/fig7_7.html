@@ -1,0 +1,58 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head>
+<body style="background:#F8F9FA"><div style="padding:28px 36px;min-width:1400px">
+<h1 style="font-size:17px;font-weight:700;color:#1A3A5C;text-align:center;margin-bottom:22px">Figure 7.7 — cogman-ctl Unix Domain Socket Protocol</h1>
+
+<div style="display:flex;gap:24px;align-items:flex-start">
+
+<!-- Left: protocol exchange -->
+<div style="flex:1">
+<div style="display:flex;gap:0;align-items:stretch;margin-bottom:16px">
+  <div style="border:2.5px solid #1E8449;border-radius:8px;padding:14px 18px;background:#1E84490D;font-size:12.5px;font-weight:700;color:#1E8449;text-align:center;min-width:180px">cogman-ctl<br><small style="font-weight:400;font-size:10.5px;color:#5D6D7E">client</small></div>
+  <div style="flex:1;border-top:2px solid #6C3483;border-bottom:2px solid #6C3483;background:#6C34830A;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;font-size:10.5px;color:#6C3483;font-weight:600">/run/cogman-supervisor.sock<br>AF_UNIX · SOCK_STREAM · chmod 0666</div>
+  <div style="border:2.5px solid #0E6655;border-radius:8px;padding:14px 18px;background:#0E66550D;font-size:12.5px;font-weight:700;color:#0E6655;text-align:center;min-width:180px">cogman-supervisor<br><small style="font-weight:400;font-size:10.5px;color:#5D6D7E">server (PID 1)</small></div>
+</div>
+
+<table style="width:100%;border-collapse:collapse;font-size:12px">
+  <tr style="background:#1A3A5C12">
+    <th style="padding:8px 12px;text-align:left;color:#1A3A5C;border-bottom:2px solid #1A3A5C;font-size:11px">Step</th>
+    <th style="padding:8px 12px;text-align:left;color:#1A3A5C;border-bottom:2px solid #1A3A5C;font-size:11px">Direction</th>
+    <th style="padding:8px 12px;text-align:left;color:#1A3A5C;border-bottom:2px solid #1A3A5C;font-size:11px">Data</th>
+  </tr>
+  <tr><td style="padding:9px 12px;color:#1E8449;font-weight:700">1</td><td style="padding:9px 12px;color:#1E8449">client → server</td><td style="padding:9px 12px;font-family:monospace;color:#1C2833">connect()</td></tr>
+  <tr style="background:#F8F8F8"><td style="padding:9px 12px;color:#1E8449;font-weight:700">2</td><td style="padding:9px 12px;color:#1E8449">client → server</td><td style="padding:9px 12px;font-family:monospace;color:#1C2833">"list
+"  <em style="font-size:10px;color:#5D6D7E">(newline-terminated command)</em></td></tr>
+  <tr><td style="padding:9px 12px;color:#0E6655;font-weight:700">3</td><td style="padding:9px 12px;color:#0E6655">server → client</td><td style="padding:9px 12px;font-family:monospace;color:#1C2833">"heartbeat RUNNING pid=42
+hello DONE
+...
+OK
+"</td></tr>
+  <tr style="background:#F8F8F8"><td style="padding:9px 12px;color:#1E8449;font-weight:700">4</td><td style="padding:9px 12px;color:#1E8449">client → server</td><td style="padding:9px 12px;font-family:monospace;color:#1C2833">close()</td></tr>
+</table>
+</div>
+
+<!-- Right: two info boxes -->
+<div style="min-width:340px;display:flex;flex-direction:column;gap:14px">
+  <div style="border:1.5px solid #1E8449;border-radius:8px;padding:14px;background:#1E84490D">
+    <div style="font-size:12.5px;font-weight:700;color:#1E8449;margin-bottom:10px">Client commands</div>
+    <table style="font-size:11px;font-family:monospace;border-collapse:collapse;width:100%">
+      <tr><td style="padding:4px 0;color:#1E8449;font-weight:700">list</td><td style="padding:4px 8px;color:#5D6D7E">print all services + state</td></tr>
+      <tr><td style="padding:4px 0;color:#1E8449;font-weight:700">status &lt;name&gt;</td><td style="padding:4px 8px;color:#5D6D7E">detailed info for one service</td></tr>
+      <tr><td style="padding:4px 0;color:#1E8449;font-weight:700">start  &lt;name&gt;</td><td style="padding:4px 8px;color:#5D6D7E">start a STOPPED service</td></tr>
+      <tr><td style="padding:4px 0;color:#1E8449;font-weight:700">stop   &lt;name&gt;</td><td style="padding:4px 8px;color:#5D6D7E">SIGTERM then SIGKILL</td></tr>
+      <tr><td style="padding:4px 0;color:#1E8449;font-weight:700">restart &lt;name&gt;</td><td style="padding:4px 8px;color:#5D6D7E">stop then start</td></tr>
+    </table>
+  </div>
+  <div style="border:1.5px solid #0E6655;border-radius:8px;padding:14px;background:#0E66550D">
+    <div style="font-size:12.5px;font-weight:700;color:#0E6655;margin-bottom:10px">Server socket settings</div>
+    <div style="font-size:11px;color:#5D6D7E;line-height:1.8">
+      • <code>SO_RCVTIMEO = 2 s</code><br>
+      • Non-blocking accept (one per loop tick)<br>
+      • <code>chmod 0666</code> (operator readable)<br>
+      • One connection handled per 100 ms tick<br>
+      • Bind: <code>/run/cogman-supervisor.sock</code>
+    </div>
+  </div>
+</div>
+</div>
+
+</div></body></html>

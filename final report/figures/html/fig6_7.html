@@ -1,0 +1,73 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css">
+<style></style></head><body><div class="page">
+<h1 class="fig-title">Figure 6.7 — Class Diagram: cogman-planner (Rust)</h1>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+  <!-- row 1 -->
+  <div style="display:flex;gap:16px;align-items:flex-start;justify-content:center">
+    <table style="border:2.5px solid #C0392B;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:190px;background:#fff">
+  <tr><td style="background:#C0392B22;padding:8px 10px;font-size:12px;font-weight:700;color:#C0392B;text-align:center;border-radius:5px 5px 0 0">Cli</td></tr>
+  <tr><td style="border-top:2px solid #C0392B;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">cmd: Command</td></tr><tr><td style="border-top:1px dashed #C0392B;padding:0"></td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+run() → Result&lt;(),Error&gt;</td></tr>
+</table>
+    <div style="font-size:20px;color:var(--gray);align-self:center;padding:0 4px">→</div>
+    <table style="border:2.5px solid #C0392B;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:280px;background:#fff">
+  <tr><td style="background:#C0392B22;padding:8px 10px;font-size:12px;font-weight:700;color:#C0392B;text-align:center;border-radius:5px 5px 0 0">Command</td></tr>
+  <tr><td style="border-top:2px solid #C0392B;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">Build { meta: PathBuf, out: PathBuf }</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">Install { meta: PathBuf }</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">Deploy  { plan: PathBuf }</td></tr>
+</table>
+    <div style="font-size:20px;color:var(--gray);align-self:center;padding:0 4px">→</div>
+    <table style="border:2.5px solid #1A3A5C;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:260px;background:#fff">
+  <tr><td style="background:#1A3A5C22;padding:8px 10px;font-size:12px;font-weight:700;color:#1A3A5C;text-align:center;border-radius:5px 5px 0 0">PackageMetadata</td></tr>
+  <tr><td style="border-top:2px solid #1A3A5C;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">identity: Identity</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">builder:  Builder</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">installer: Installer</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">policy:   Policy</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">depends:  Vec&lt;String&gt;</td></tr><tr><td style="border-top:1px dashed #1A3A5C;padding:0"></td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+validate() → Result</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+load(path) → Result</td></tr>
+</table>
+    <div style="font-size:20px;color:var(--gray);align-self:center;padding:0 4px">→</div>
+    <table style="border:2.5px solid #1A3A5C;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:220px;background:#fff">
+  <tr><td style="background:#1A3A5C22;padding:8px 10px;font-size:12px;font-weight:700;color:#1A3A5C;text-align:center;border-radius:5px 5px 0 0">Identity</td></tr>
+  <tr><td style="border-top:2px solid #1A3A5C;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">name:     String</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">version:  String</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">category: String</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">source:   String</td></tr>
+</table>
+  </div>
+  <!-- row 2 -->
+  <div style="display:flex;gap:16px;align-items:flex-start;justify-content:center">
+    <table style="border:2.5px solid #0E6655;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:280px;background:#fff">
+  <tr><td style="background:#0E665522;padding:8px 10px;font-size:12px;font-weight:700;color:#0E6655;text-align:center;border-radius:5px 5px 0 0">RecursiveLoader</td></tr>
+  <tr><td style="border-top:2px solid #0E6655;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">visited:  HashSet&lt;String&gt;</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">base_dir: PathBuf</td></tr><tr><td style="border-top:1px dashed #0E6655;padding:0"></td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+load(pkg) → PackageMetadata</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+load_all() → Vec&lt;PackageMetadata&gt;</td></tr>
+</table>
+    <div style="font-size:20px;color:var(--gray);align-self:center;padding:0 4px">→</div>
+    <table style="border:2.5px solid #0E6655;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:280px;background:#fff">
+  <tr><td style="background:#0E665522;padding:8px 10px;font-size:12px;font-weight:700;color:#0E6655;text-align:center;border-radius:5px 5px 0 0">DependencyGraph</td></tr>
+  <tr><td style="border-top:2px solid #0E6655;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">nodes: HashMap&lt;String,Node&gt;</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">edges: Vec&lt;(String,String)&gt;</td></tr><tr><td style="border-top:1px dashed #0E6655;padding:0"></td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+add_node(name: &amp;str)</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+add_edge(a,b: &amp;str)</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+topo_sort() → Vec&lt;String&gt;</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+has_cycle() → bool</td></tr>
+</table>
+    <div style="font-size:20px;color:var(--gray);align-self:center;padding:0 4px">→</div>
+    <table style="border:2.5px solid #1E8449;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:280px;background:#fff">
+  <tr><td style="background:#1E844922;padding:8px 10px;font-size:12px;font-weight:700;color:#1E8449;text-align:center;border-radius:5px 5px 0 0">PlanWriter</td></tr>
+  <tr><td style="border-top:2px solid #1E8449;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">steps:  Vec&lt;PlanStep&gt;</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">strtab: Vec&lt;u8&gt;</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">cache:  FnvHashMap&lt;u64,PathBuf&gt;</td></tr><tr><td style="border-top:1px dashed #1E8449;padding:0"></td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+add_step(s: PlanStep)</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+emit(path: &amp;Path) → Result</td></tr>
+</table>
+  </div>
+  <!-- row 3 -->
+  <div style="display:flex;gap:16px;align-items:flex-start;justify-content:center">
+    <table style="border:2.5px solid #CA6F1E;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:240px;background:#fff">
+  <tr><td style="background:#CA6F1E22;padding:8px 10px;font-size:12px;font-weight:700;color:#CA6F1E;text-align:center;border-radius:5px 5px 0 0">Policy</td></tr>
+  <tr><td style="border-top:2px solid #CA6F1E;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">allow_write:   Vec&lt;PathBuf&gt;</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">allow_network: bool</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">allow_exec:    Vec&lt;String&gt;</td></tr><tr><td style="border-top:1px dashed #CA6F1E;padding:0"></td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+check_path(p) → bool</td></tr>
+</table>
+    <div style="font-size:20px;color:var(--gray);align-self:center;padding:0 4px">→</div>
+    <table style="border:2.5px solid #1E8449;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:240px;background:#fff">
+  <tr><td style="background:#1E844922;padding:8px 10px;font-size:12px;font-weight:700;color:#1E8449;text-align:center;border-radius:5px 5px 0 0">PlanStep</td></tr>
+  <tr><td style="border-top:2px solid #1E8449;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">op:          OpCode</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">fail_policy: FailPolicy</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">cmd_off:     u32</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">workdir_off: u32</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">env_off:     u32</td></tr>
+</table>
+    <div style="font-size:20px;color:var(--gray);align-self:center;padding:0 4px">→</div>
+    <table style="border:2.5px solid #1E8449;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:200px;background:#fff">
+  <tr><td style="background:#1E844922;padding:8px 10px;font-size:12px;font-weight:700;color:#1E8449;text-align:center;border-radius:5px 5px 0 0">OpCode</td></tr>
+  <tr><td style="border-top:2px solid #1E8449;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">OP_EXEC    = 0</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">OP_MKDIR   = 1</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">OP_COPY    = 2</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">OP_CHMOD   = 3</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">OP_SYMLINK = 4</td></tr>
+</table>
+  </div>
+</div>
+</div></body></html>

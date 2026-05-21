@@ -1,0 +1,57 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage[a4paper, left=1.5in, right=1in, top=1in, bottom=1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+\setmainfont[
+  Script=Tamil,
+  UprightFont={file:/usr/share/fonts/truetype/noto/NotoSansTamilUI-Regular.ttf},
+  BoldFont={file:/usr/share/fonts/truetype/noto/NotoSansTamil-Bold.ttf}
+]{NotoSansTamilUI}
+
+\begin{document}
+\thispagestyle{plain}
+\pagenumbering{gobble}
+
+\begin{center}
+  {\large\bfseries சுருக்கம் (ABSTRACT -- TAMIL)}
+\end{center}
+\vspace{10pt}
+
+இந்தத் திட்டம் \textbf{Rogue Linux} என்ற நோக்கத்துக்கென உருவாக்கப்பட்ட குறைந்தபட்ச
+Linux விநியோகத்தை முன்வைக்கிறது. இது இணையப் பாதுகாப்பு செயல்பாடுகளான நெட்வொர்க்
+பாதுகாப்பு மதிப்பீடு, ஊடுருவல் சோதனை மற்றும் இரும நேர்மை பகுப்பாய்வு ஆகியவற்றிற்காக
+சிறப்பாக வடிவமைக்கப்பட்டுள்ளது. இந்த விநியோகம் \textbf{Cogman (Cognitive Manager)}
+கருவித்தொகுப்பைப் பயன்படுத்தி கட்டமைக்கப்பட்டுள்ளது -- இது Rust மற்றும் C11 மொழிகளில்
+செயல்படுத்தப்பட்ட ஒரு ஒருங்கிணைந்த உருவாக்கம் மற்றும் இயக்க நேர அமைப்பு ஆகும். rootfs
+இல் தொழில்துறை-தரமான பாதுகாப்பு கருவிகளான nmap 7.99, tcpdump 4.99.6, socat 1.8.1.1,
+பைனரி பகுப்பாய்வு பயன்பாடுகள் (strace, strings, objdump, readelf), X11/DWM வரைகலை
+சூழல், Dropbear SSH மற்றும் nftables திட்டச்சுவர் ஆகியவை உள்ளன. அணுக்கரு
+CONFIG PACKET, CONFIG TUN, CONFIG BPF SYSCALL, CONFIG MAC80211 மற்றும் நெட்வொர்க்
+பெயர்வெளி ஆதரவுடன் கட்டமைக்கப்பட்டு முழு தொழில்முறை பாதுகாப்புக் கருவித் தொகுப்பை
+இயக்க உதவுகிறது.
+
+\vspace{8pt}
+Cogman கருவித்தொகுப்பு வெளி சார்பு இல்லாமல் உருவாக்கம் மற்றும் இயக்க நேர கட்டங்களை
+ஒருங்கிணைக்கிறது. \textbf{cogman-planner} (Rust) அறிவிப்பு வடிவ TOML தொகுப்பு
+வரையறைகளை DAG அடிப்படையிலான இடவரிசை வரிசைப்படுத்தல் மூலம் CGM2PLAN வடிவ பைனரி
+செயல்திட்டங்களாக தொகுக்கிறது. \textbf{cogman-executor} (C11) செயல்திட்டத்தை நினைவக
+வரைபடம் செய்து ஒவ்வொரு நகல் செயல்பாட்டிலும் பாதை கடப்பு பாதுகாப்புடன்
+செயல்படுத்துகிறது. \textbf{cogman-supervisor} PID 1 ஆக செயல்பட்டு, SIGCHLD சுய-குழாய்
+குழந்தை அறுவடை, சார்பு வரிசை தொடக்கம் மற்றும் மூன்று கட்டமைக்கக்கூடிய மறுதொடக்க
+கொள்கைகளுடன் அனைத்து கணினி சேவைகளையும் நிர்வகிக்கிறது. இயக்க நேர கட்டுப்பாடு Unix
+டொமைன் சாக்கெட் வழியாக \textbf{cogman-ctl} மூலம் வழங்கப்படுகிறது.
+
+\vspace{8pt}
+செயல்திறன் மதிப்பீடு திட்ட தீர்வு நேரத்தில் 56 மடங்கு மேம்பாடு (8 ms மேலும் 450 ms),
+உச்ச நினைவகத்தில் 21 மடங்கு குறைப்பு (4 MB மேலும் 85 MB) மற்றும் படி-மேல்-நிலைச்
+சுமையில் 50 மடங்கு குறைப்பை நிரூபிக்கிறது. தோராயமாக 6.3 MB அளவிலான துவக்கக்கூடிய
+rootfs QEMU இல் அனைத்து 40 சோதனை வழக்குகளும் தேர்ச்சி பெற்று சரிபார்க்கப்பட்டது.
+
+\vspace{10pt}
+\noindent\textbf{திறவுச்சொற்கள்:} குறைந்தபட்ச Linux, இணையப் பாதுகாப்பு, ஊடுருவல்
+சோதனை, Cogman, PID 1, nmap, tcpdump, X11, DWM, TOML, Rust, C11, CGM2PLAN, QEMU,
+nftables, Dropbear.
+
+\end{document}

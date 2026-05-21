@@ -1,0 +1,880 @@
+[    0.000000] Linux version 6.6.75 (void@anthus) (gcc (Debian 15.2.0-17) 15.2.0, GNU ld (GNU Binutils for Debian) 2.46) #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026
+[    0.000000] Command line: rdinit=/init console=ttyS0 -- --services-dir /etc/cogman/services
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x000000003ffdffff] usable
+[    0.000000] BIOS-e820: [mem 0x000000003ffe0000-0x000000003fffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] APIC: Static calls initialized
+[    0.000000] SMBIOS 2.8 present.
+[    0.000000] DMI: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.17.0-debian-1.17.0-1 04/01/2014
+[    0.000000] Hypervisor detected: KVM
+[    0.000000] kvm-clock: Using msrs 4b564d01 and 4b564d00
+[    0.000001] kvm-clock: using sched offset of 399195622 cycles
+[    0.000003] clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+[    0.000006] tsc: Detected 1895.997 MHz processor
+[    0.000724] last_pfn = 0x3ffe0 max_arch_pfn = 0x400000000
+[    0.000760] MTRR map: 4 entries (3 fixed + 1 variable; max 19), built from 8 variable MTRRs
+[    0.000763] x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+[    0.007766] found SMP MP-table at [mem 0x000f5440-0x000f544f]
+[    0.007788] Using GB pages for direct mapping
+[    0.007870] RAMDISK: [mem 0x38863000-0x3ffdffff]
+[    0.007880] ACPI: Early table checksum verification disabled
+[    0.007883] ACPI: RSDP 0x00000000000F5270 000014 (v00 BOCHS )
+[    0.007890] ACPI: RSDT 0x000000003FFE2381 000034 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.007896] ACPI: FACP 0x000000003FFE222D 000074 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.007904] ACPI: DSDT 0x000000003FFE0040 0021ED (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.007908] ACPI: FACS 0x000000003FFE0000 000040
+[    0.007911] ACPI: APIC 0x000000003FFE22A1 000080 (v03 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.007914] ACPI: HPET 0x000000003FFE2321 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.007918] ACPI: WAET 0x000000003FFE2359 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.007920] ACPI: Reserving FACP table memory at [mem 0x3ffe222d-0x3ffe22a0]
+[    0.007922] ACPI: Reserving DSDT table memory at [mem 0x3ffe0040-0x3ffe222c]
+[    0.007923] ACPI: Reserving FACS table memory at [mem 0x3ffe0000-0x3ffe003f]
+[    0.007923] ACPI: Reserving APIC table memory at [mem 0x3ffe22a1-0x3ffe2320]
+[    0.007924] ACPI: Reserving HPET table memory at [mem 0x3ffe2321-0x3ffe2358]
+[    0.007925] ACPI: Reserving WAET table memory at [mem 0x3ffe2359-0x3ffe2380]
+[    0.008506] No NUMA configuration found
+[    0.008507] Faking a node at [mem 0x0000000000000000-0x000000003ffdffff]
+[    0.008510] NODE_DATA(0) allocated [mem 0x3885f000-0x38862fff]
+[    0.008559] Zone ranges:
+[    0.008560]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+[    0.008562]   DMA32    [mem 0x0000000001000000-0x000000003ffdffff]
+[    0.008563]   Normal   empty
+[    0.008564] Movable zone start for each node
+[    0.008565] Early memory node ranges
+[    0.008565]   node   0: [mem 0x0000000000001000-0x000000000009efff]
+[    0.008566]   node   0: [mem 0x0000000000100000-0x000000003ffdffff]
+[    0.008568] Initmem setup node 0 [mem 0x0000000000001000-0x000000003ffdffff]
+[    0.008581] On node 0, zone DMA: 1 pages in unavailable ranges
+[    0.008759] On node 0, zone DMA: 97 pages in unavailable ranges
+[    0.020120] On node 0, zone DMA32: 32 pages in unavailable ranges
+[    0.020979] ACPI: PM-Timer IO Port: 0x608
+[    0.020992] ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+[    0.021035] IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+[    0.021039] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+[    0.021041] ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+[    0.021042] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+[    0.021043] ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+[    0.021044] ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+[    0.021048] ACPI: Using ACPI (MADT) for SMP configuration information
+[    0.021049] ACPI: HPET id: 0x8086a201 base: 0xfed00000
+[    0.021053] TSC deadline timer available
+[    0.021054] smpboot: Allowing 2 CPUs, 0 hotplug CPUs
+[    0.021071] kvm-guest: APIC: eoi() replaced with kvm_guest_apic_eoi_write()
+[    0.021085] kvm-guest: KVM setup pv remote TLB flush
+[    0.021088] kvm-guest: setup PV sched yield
+[    0.021094] PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+[    0.021096] PM: hibernation: Registered nosave memory: [mem 0x0009f000-0x0009ffff]
+[    0.021096] PM: hibernation: Registered nosave memory: [mem 0x000a0000-0x000effff]
+[    0.021097] PM: hibernation: Registered nosave memory: [mem 0x000f0000-0x000fffff]
+[    0.021098] [mem 0x40000000-0xfeffbfff] available for PCI devices
+[    0.021099] Booting paravirtualized kernel on KVM
+[    0.021101] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1910969940391419 ns
+[    0.026483] setup_percpu: NR_CPUS:64 nr_cpumask_bits:2 nr_cpu_ids:2 nr_node_ids:1
+[    0.027857] percpu: Embedded 56 pages/cpu s191016 r8192 d30168 u1048576
+[    0.027894] Kernel command line: rdinit=/init console=ttyS0 -- --services-dir /etc/cogman/services
+[    0.027939] random: crng init done
+[    0.028697] Dentry cache hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[    0.028725] Inode-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.028787] Fallback order for Node 0: 0 
+[    0.028789] Built 1 zonelists, mobility grouping on.  Total pages: 257760
+[    0.028790] Policy zone: DMA32
+[    0.028791] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.031320] Memory: 867388K/1048056K available (18432K kernel code, 2581K rwdata, 6540K rodata, 2700K init, 1856K bss, 180408K reserved, 0K cma-reserved)
+[    0.031358] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+[    0.031372] Kernel/User page tables isolation: enabled
+[    0.032443] Dynamic Preempt: voluntary
+[    0.032483] rcu: Preemptible hierarchical RCU implementation.
+[    0.032483] rcu: 	RCU event tracing is enabled.
+[    0.032484] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=2.
+[    0.032485] 	Trampoline variant of Tasks RCU enabled.
+[    0.032485] 	Tracing variant of Tasks RCU enabled.
+[    0.032486] rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+[    0.032487] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=2
+[    0.035670] NR_IRQS: 4352, nr_irqs: 440, preallocated irqs: 16
+[    0.035870] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.045974] Console: colour VGA+ 80x25
+[    0.046038] printk: console [ttyS0] enabled
+[    0.200623] ACPI: Core revision 20230628
+[    0.201792] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+[    0.204203] APIC: Switch to symmetric I/O mode setup
+[    0.205473] kvm-guest: APIC: send_IPI_mask() replaced with kvm_send_ipi_mask()
+[    0.207236] kvm-guest: APIC: send_IPI_mask_allbutself() replaced with kvm_send_ipi_mask_allbutself()
+[    0.209413] kvm-guest: setup PV IPIs
+[    0.211574] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+[    0.213030] clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x36a8cd570f7, max_idle_ns: 881590638222 ns
+[    0.215621] Calibrating delay loop (skipped) preset value.. 3791.99 BogoMIPS (lpj=1895997)
+[    0.216724] x86/cpu: User Mode Instruction Prevention (UMIP) activated
+[    0.217703] Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+[    0.218620] Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+[    0.219630] Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+[    0.220622] Spectre V2 : Spectre BHI mitigation: SW BHB clearing on vm exit
+[    0.221619] Spectre V2 : Spectre BHI mitigation: SW BHB clearing on syscall
+[    0.222619] Spectre V2 : Mitigation: IBRS
+[    0.223619] Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+[    0.224619] Spectre V2 : Spectre v2 / SpectreRSB : Filling RSB on VMEXIT
+[    0.225619] RETBleed: Mitigation: IBRS
+[    0.226510] Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+[    0.226620] Speculative Store Bypass: Mitigation: Speculative Store Bypass disabled via prctl
+[    0.227628] MDS: Mitigation: Clear CPU buffers
+[    0.228620] MMIO Stale Data: Mitigation: Clear CPU buffers
+[    0.229620] SRBDS: Unknown: Dependent on hypervisor status
+[    0.230638] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.231621] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.232619] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.233620] x86/fpu: Supporting XSAVE feature 0x008: 'MPX bounds registers'
+[    0.234623] x86/fpu: Supporting XSAVE feature 0x010: 'MPX CSR'
+[    0.235620] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.236619] x86/fpu: xstate_offset[3]:  832, xstate_sizes[3]:   64
+[    0.237619] x86/fpu: xstate_offset[4]:  896, xstate_sizes[4]:   64
+[    0.238619] x86/fpu: Enabled xstate features 0x1f, context size is 960 bytes, using 'compacted' format.
+[    0.265880] Freeing SMP alternatives memory: 48K
+[    0.266620] pid_max: default: 32768 minimum: 301
+[    0.267634] LSM: initializing lsm=capability,selinux,integrity
+[    0.268621] SELinux:  Initializing.
+[    0.269656] Mount-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.270631] Mountpoint-cache hash table entries: 2048 (order: 2, 16384 bytes, linear)
+[    0.272035] smpboot: CPU0: Intel(R) Core(TM) i5-8350U CPU @ 1.70GHz (family: 0x6, model: 0x8e, stepping: 0xa)
+[    0.272860] RCU Tasks: Setting shift to 1 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=2.
+[    0.273648] RCU Tasks Trace: Setting shift to 1 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=2.
+[    0.274654] Performance Events: Skylake events, full-width counters, Intel PMU driver.
+[    0.275627] ... version:                2
+[    0.276569] ... bit width:              48
+[    0.276620] ... generic registers:      4
+[    0.277563] ... value mask:             0000ffffffffffff
+[    0.277621] ... max period:             00007fffffffffff
+[    0.278620] ... fixed-purpose events:   3
+[    0.279561] ... event mask:             000000070000000f
+[    0.279754] signal: max sigframe size: 2032
+[    0.280680] rcu: Hierarchical SRCU implementation.
+[    0.281621] rcu: 	Max phase no-delay instances is 400.
+[    0.282873] smp: Bringing up secondary CPUs ...
+[    0.283804] smpboot: x86: Booting SMP configuration:
+[    0.284622] .... node  #0, CPUs:      #1
+[    0.284792] smp: Brought up 1 node, 2 CPUs
+[    0.286573] smpboot: Max logical packages: 1
+[    0.286622] smpboot: Total of 2 processors activated (7583.98 BogoMIPS)
+[    0.287859] devtmpfs: initialized
+[    0.288798] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+[    0.289624] futex hash table entries: 512 (order: 3, 32768 bytes, linear)
+[    0.290773] PM: RTC time: 00:18:30, date: 2026-05-20
+[    0.293245] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.293711] audit: initializing netlink subsys (disabled)
+[    0.294657] audit: type=2000 audit(1779236310.905:1): state=initialized audit_enabled=0 res=1
+[    0.294712] thermal_sys: Registered thermal governor 'step_wise'
+[    0.295620] thermal_sys: Registered thermal governor 'user_space'
+[    0.296630] cpuidle: using governor menu
+[    0.298780] PCI: Using configuration type 1 for base access
+[    0.299821] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.301811] HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.303621] HugeTLB: 28 KiB vmemmap can be freed for a 2.00 MiB page
+[    0.305751] ACPI: Added _OSI(Module Device)
+[    0.306621] ACPI: Added _OSI(Processor Device)
+[    0.307623] ACPI: Added _OSI(3.0 _SCP Extensions)
+[    0.308621] ACPI: Added _OSI(Processor Aggregator Device)
+[    0.310311] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    0.315342] ACPI: _OSC evaluation for CPUs failed, trying _PDC
+[    0.316710] ACPI: Interpreter enabled
+[    0.317581] ACPI: PM: (supports S0 S3 S4 S5)
+[    0.318621] ACPI: Using IOAPIC for interrupt routing
+[    0.319645] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    0.321620] PCI: Using E820 reservations for host bridge windows
+[    0.322709] ACPI: Enabled 2 GPEs in block 00 to 0F
+[    0.326642] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+[    0.328624] acpi PNP0A03:00: _OSC: OS supports [ASPM ClockPM Segments MSI HPX-Type3]
+[    0.329621] acpi PNP0A03:00: _OSC: not requesting OS control; OS requires [ExtendedConfig ASPM ClockPM MSI]
+[    0.332628] acpi PNP0A03:00: fail to add MMCONFIG information, can't access extended configuration space under this bridge
+[    0.334764] PCI host bridge to bus 0000:00
+[    0.336623] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+[    0.338622] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+[    0.340622] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+[    0.342622] pci_bus 0000:00: root bus resource [mem 0x40000000-0xfebfffff window]
+[    0.344626] pci_bus 0000:00: root bus resource [mem 0x100000000-0x17fffffff window]
+[    0.346624] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    0.347720] pci 0000:00:00.0: [8086:1237] type 00 class 0x060000
+[    0.350783] pci 0000:00:01.0: [8086:7000] type 00 class 0x060100
+[    0.353670] pci 0000:00:01.1: [8086:7010] type 00 class 0x010180
+[    0.359049] pci 0000:00:01.1: reg 0x20: [io  0xc020-0xc02f]
+[    0.362078] pci 0000:00:01.1: legacy IDE quirk: reg 0x10: [io  0x01f0-0x01f7]
+[    0.363621] pci 0000:00:01.1: legacy IDE quirk: reg 0x14: [io  0x03f6]
+[    0.364621] pci 0000:00:01.1: legacy IDE quirk: reg 0x18: [io  0x0170-0x0177]
+[    0.366622] pci 0000:00:01.1: legacy IDE quirk: reg 0x1c: [io  0x0376]
+[    0.368918] pci 0000:00:01.3: [8086:7113] type 00 class 0x068000
+[    0.370507] pci 0000:00:01.3: quirk: [io  0x0600-0x063f] claimed by PIIX4 ACPI
+[    0.372636] pci 0000:00:01.3: quirk: [io  0x0700-0x070f] claimed by PIIX4 SMB
+[    0.375197] pci 0000:00:02.0: [1af4:1050] type 00 class 0x030000
+[    0.379480] pci 0000:00:02.0: reg 0x10: [mem 0xfe000000-0xfe7fffff pref]
+[    0.386653] pci 0000:00:02.0: reg 0x18: [mem 0xfe800000-0xfe803fff 64bit pref]
+[    0.391650] pci 0000:00:02.0: reg 0x20: [mem 0xfebd0000-0xfebd0fff]
+[    0.397463] pci 0000:00:02.0: reg 0x30: [mem 0xfebc0000-0xfebcffff pref]
+[    0.399805] pci 0000:00:02.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+[    0.403078] pci 0000:00:03.0: [1af4:1052] type 00 class 0x090000
+[    0.406624] pci 0000:00:03.0: reg 0x14: [mem 0xfebd1000-0xfebd1fff]
+[    0.411625] pci 0000:00:03.0: reg 0x20: [mem 0xfe804000-0xfe807fff 64bit pref]
+[    0.417306] pci 0000:00:04.0: [1af4:1052] type 00 class 0x090200
+[    0.420621] pci 0000:00:04.0: reg 0x14: [mem 0xfebd2000-0xfebd2fff]
+[    0.426625] pci 0000:00:04.0: reg 0x20: [mem 0xfe808000-0xfe80bfff 64bit pref]
+[    0.431177] pci 0000:00:05.0: [1af4:1000] type 00 class 0x020000
+[    0.434406] pci 0000:00:05.0: reg 0x10: [io  0xc000-0xc01f]
+[    0.437621] pci 0000:00:05.0: reg 0x14: [mem 0xfebd3000-0xfebd3fff]
+[    0.443624] pci 0000:00:05.0: reg 0x20: [mem 0xfe80c000-0xfe80ffff 64bit pref]
+[    0.446622] pci 0000:00:05.0: reg 0x30: [mem 0xfeb80000-0xfebbffff pref]
+[    0.450985] ACPI: PCI: Interrupt link LNKA configured for IRQ 10
+[    0.452758] ACPI: PCI: Interrupt link LNKB configured for IRQ 10
+[    0.454755] ACPI: PCI: Interrupt link LNKC configured for IRQ 11
+[    0.455757] ACPI: PCI: Interrupt link LNKD configured for IRQ 11
+[    0.457712] ACPI: PCI: Interrupt link LNKS configured for IRQ 9
+[    0.459098] iommu: Default domain type: Translated
+[    0.460624] iommu: DMA domain TLB invalidation policy: lazy mode
+[    0.461855] SCSI subsystem initialized
+[    0.463768] ACPI: bus type USB registered
+[    0.464662] usbcore: registered new interface driver usbfs
+[    0.465643] usbcore: registered new interface driver hub
+[    0.466642] usbcore: registered new device driver usb
+[    0.467649] pps_core: LinuxPPS API ver. 1 registered
+[    0.468621] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.469624] PTP clock support registered
+[    0.470697] Advanced Linux Sound Architecture Driver Initialized.
+[    0.472001] NetLabel: Initializing
+[    0.472620] NetLabel:  domain hash size = 128
+[    0.473621] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    0.474658] NetLabel:  unlabeled traffic allowed by default
+[    0.475709] PCI: Using ACPI for IRQ routing
+[    0.476897] pci 0000:00:02.0: vgaarb: setting as boot VGA device
+[    0.477618] pci 0000:00:02.0: vgaarb: bridge control possible
+[    0.477618] pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+[    0.477622] vgaarb: loaded
+[    0.478455] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+[    0.478620] hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+[    0.483704] clocksource: Switched to clocksource kvm-clock
+[    0.485234] VFS: Disk quotas dquot_6.6.0
+[    0.486192] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.487869] pnp: PnP ACPI init
+[    0.488976] pnp: PnP ACPI: found 6 devices
+[    0.498208] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+[    0.500396] NET: Registered PF_INET protocol family
+[    0.501677] IP idents hash table entries: 16384 (order: 5, 131072 bytes, linear)
+[    0.503736] tcp_listen_portaddr_hash hash table entries: 512 (order: 1, 8192 bytes, linear)
+[    0.505715] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.507584] TCP established hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.509449] TCP bind hash table entries: 8192 (order: 6, 262144 bytes, linear)
+[    0.511284] TCP: Hash tables configured (established 8192 bind 8192)
+[    0.512994] UDP hash table entries: 512 (order: 2, 16384 bytes, linear)
+[    0.514592] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes, linear)
+[    0.516318] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.518071] RPC: Registered named UNIX socket transport module.
+[    0.519457] RPC: Registered udp transport module.
+[    0.520569] RPC: Registered tcp transport module.
+[    0.521685] RPC: Registered tcp-with-tls transport module.
+[    0.522961] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.524474] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+[    0.525910] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+[    0.527369] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+[    0.529047] pci_bus 0000:00: resource 7 [mem 0x40000000-0xfebfffff window]
+[    0.530649] pci_bus 0000:00: resource 8 [mem 0x100000000-0x17fffffff window]
+[    0.532430] pci 0000:00:01.0: PIIX3: Enabling Passive Release
+[    0.533864] pci 0000:00:00.0: Limiting direct PCI/PCI transfers
+[    0.535377] PCI: CLS 0 bytes, default 64
+[    0.536653] Unpacking initramfs...
+[    0.538827] RAPL PMU: API unit is 2^-32 Joules, 0 fixed counters, 10737418240 ms ovfl timer
+[    0.540802] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x36a8cd570f7, max_idle_ns: 881590638222 ns
+[    0.543719] Initialise system trusted keyrings
+[    0.544860] workingset: timestamp_bits=56 max_order=18 bucket_order=0
+[    0.546532] NFS: Registering the id_resolver key type
+[    0.547726] Key type id_resolver registered
+[    0.549072] Key type id_legacy registered
+[    0.550131] 9p: Installing v9fs 9p2000 file system support
+[    0.558542] NET: Registered PF_ALG protocol family
+[    0.559697] Key type asymmetric registered
+[    0.560755] Asymmetric key parser 'x509' registered
+[    0.561945] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+[    0.563719] io scheduler mq-deadline registered
+[    0.564855] io scheduler kyber registered
+[    0.566118] input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input0
+[    0.568042] ACPI: button: Power Button [PWRF]
+[    0.569920] ACPI: \_SB_.LNKB: Enabled at IRQ 10
+[    0.573628] ACPI: \_SB_.LNKC: Enabled at IRQ 11
+[    0.577078] ACPI: \_SB_.LNKD: Enabled at IRQ 11
+[    0.580560] ACPI: \_SB_.LNKA: Enabled at IRQ 10
+[    0.585462] input: QEMU Virtio Keyboard as /devices/pci0000:00/0000:00:03.0/virtio1/input/input1
+[    0.589666] input: QEMU Virtio Mouse as /devices/pci0000:00/0000:00:04.0/virtio2/input/input2
+[    0.592171] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    0.594007] 00:04: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+[    0.596388] Non-volatile memory driver v1.3
+[    0.597406] Linux agpgart interface v0.103
+[    0.598459] ACPI: bus type drm_connector registered
+[    0.599858] [drm] pci: virtio-vga detected at 0000:00:02.0
+[    0.601206] virtio-pci 0000:00:02.0: vgaarb: deactivate vga console
+[    0.607331] Console: switching to colour dummy device 80x25
+[    0.609011] [drm] features: -virgl +edid -resource_blob -host_visible
+[    0.609013] [drm] features: -context_init
+[    0.612559] [drm] number of scanouts: 1
+[    0.613491] [drm] number of cap sets: 0
+[    0.614773] [drm] Initialized virtio_gpu 0.1.0 0 for 0000:00:02.0 on minor 0
+[    0.621377] fbcon: virtio_gpudrmfb (fb0) is primary device
+[    0.625541] Console: switching to colour frame buffer device 160x50
+[    0.630751] virtio-pci 0000:00:02.0: [drm] fb0: virtio_gpudrmfb frame buffer device
+[    0.634402] loop: module loaded
+[    0.636224] scsi host0: ata_piix
+[    0.637108] scsi host1: ata_piix
+[    0.637921] ata1: PATA max MWDMA2 cmd 0x1f0 ctl 0x3f6 bmdma 0xc020 irq 14
+[    0.639509] ata2: PATA max MWDMA2 cmd 0x170 ctl 0x376 bmdma 0xc028 irq 15
+[    0.641344] tun: Universal TUN/TAP device driver, 1.6
+[    0.644531] e100: Intel(R) PRO/100 Network Driver
+[    0.645685] e100: Copyright(c) 1999-2006 Intel Corporation
+[    0.647093] e1000: Intel(R) PRO/1000 Network Driver
+[    0.648270] e1000: Copyright (c) 1999-2006 Intel Corporation.
+[    0.649735] e1000e: Intel(R) PRO/1000 Network Driver
+[    0.650979] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+[    0.652469] sky2: driver version 1.30
+[    0.653503] usbcore: registered new interface driver usblp
+[    0.654823] usbcore: registered new interface driver usb-storage
+[    0.656302] i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+[    0.659147] serio: i8042 KBD port at 0x60,0x64 irq 1
+[    0.660348] serio: i8042 AUX port at 0x60,0x64 irq 12
+[    0.661791] mousedev: PS/2 mouse device common for all mice
+[    0.663314] rtc_cmos 00:05: RTC can wake from S4
+[    0.665212] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input3
+[    0.667580] rtc_cmos 00:05: registered as rtc0
+[    0.668772] rtc_cmos 00:05: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+[    0.672864] device-mapper: ioctl: 4.48.0-ioctl (2023-03-01) initialised: dm-devel@redhat.com
+[    0.675524] intel_pstate: CPU model not supported
+[    0.676750] hid: raw HID events driver (C) Jiri Kosina
+[    0.678083] usbcore: registered new interface driver usbhid
+[    0.679391] usbhid: USB HID core driver
+[    0.680797] Initializing XFRM netlink socket
+[    0.681839] NET: Registered PF_INET6 protocol family
+[    0.683462] Segment Routing with IPv6
+[    0.684407] In-situ OAM (IOAM) with IPv6
+[    0.685385] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    0.686931] NET: Registered PF_PACKET protocol family
+[    0.688181] 9pnet: Installing 9P2000 support
+[    0.689215] Key type dns_resolver registered
+[    0.690499] IPI shorthand broadcast: enabled
+[    0.694179] sched_clock: Marking stable (521001788, 172741683)->(747932544, -54189073)
+[    0.696252] registered taskstats version 1
+[    0.697268] Loading compiled-in X.509 certificates
+[    0.700192] PM:   Magic number: 10:763:304
+[    0.701326] tty tty33: hash matches
+[    0.702187] printk: console [netcon0] enabled
+[    0.703233] netconsole: network logging started
+[    0.704387] ALSA device list:
+[    0.705114]   No soundcards found.
+[    0.800073] ata2: found unknown device (class 0)
+[    0.802112] ata2.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100
+[    0.804838] scsi 1:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5
+[    0.817529] sr 1:0:0:0: [sr0] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray
+[    0.819140] cdrom: Uniform CD-ROM driver Revision: 3.20
+[    0.825890] sr 1:0:0:0: Attached scsi generic sg0 type 5
+[    1.297414] input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input5
+[    2.121625] Freeing initrd memory: 122356K
+[    2.124292] Freeing unused kernel image (initmem) memory: 2700K
+[    2.165198] Write protecting the kernel read-only data: 26624k
+[    2.167519] Freeing unused kernel image (rodata/data gap) memory: 1652K
+[    2.215575] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+[    2.216697] x86/mm: Checking user space page tables
+[    2.259767] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+[    2.260857] Run /init as init process
+cogman-supervisor starting (pid=1)
+svc_load_dir: loaded service '"udev"' from /etc/cogman/services/udev.service
+svc_load_dir: loaded service 'exec-probe' from /etc/cogman/services/exec-probe.service
+svc_load_dir: loaded service 'pkg-test' from /etc/cogman/services/pkg-test.service
+svc_load_dir: loaded service 'dropbear' from /etc/cogman/services/dropbear.service
+svc_load_dir: loaded service 'dashboard' from /etc/cogman/services/dashboard.service
+svc_load_dir: loaded service 'tty6' from /etc/cogman/services/tty6.service
+svc_load_dir: loaded service 'rcs' from /etc/cogman/services/rcs.service
+svc_load_dir: loaded service 'x11-diag' from /etc/cogman/services/x11-diag.service
+svc_load_dir: loaded service 'ctl-probe' from /etc/cogman/services/ctl-probe.service
+svc_load_dir: loaded service 'firewall' from /etc/cogman/services/firewall.service
+svc_load_dir: loaded service 'iwd' from /etc/cogman/services/iwd.service
+svc_load_dir: loaded service 'dropbear-keygen' from /etc/cogman/services/dropbear-keygen.service
+svc_load_dir: loaded service 'klogd' from /etc/cogman/services/klogd.service
+svc_load_dir: loaded service 'input-probe' from /etc/cogman/services/input-probe.service
+svc_load_dir: loaded service 'ntpd' from /etc/cogman/services/ntpd.service
+svc_load_dir: loaded service 'hello' from /etc/cogman/services/hello.service
+svc_load_dir: loaded service 'heartbeat' from /etc/cogman/services/heartbeat.service
+svc_load_dir: loaded service 'tty3' from /etc/cogman/services/tty3.service
+svc_load_dir: loaded service 'tty5' from /etc/cogman/services/tty5.service
+svc_load_dir: loaded service 'tty1' from /etc/cogman/services/tty1.service
+svc_load_dir: loaded service 'tty4' from /etc/cogman/services/tty4.service
+svc_load_dir: loaded service 'eth0-dhcp' from /etc/cogman/services/eth0-dhcp.service
+svc_load_dir: loaded service 'mdev' from /etc/cogman/services/mdev.service
+svc_load_dir: loaded service 'syslogd' from /etc/cogman/services/syslogd.service
+svc_load_dir: loaded service 'pentest-check' from /etc/cogman/services/pentest-check.service
+svc_load_dir: loaded service 'tty2' from /etc/cogman/services/tty2.service
+svc_load_dir: loaded service 'x11' from /etc/cogman/services/x11.service
+cogman-supervisor: loaded 27 service(s)
+ctl_init: listening on /run/cogman-supervisor.sock
+sup: starting 'rcs'
+svc_spawn: started rcs pid=53
+[    2.308861] mount (54) used greatest stack depth: 13792 bytes left
+[    2.309891] mount (55) used greatest stack depth: 13632 bytes left
+Rogue Linux 1.0 — booted OK
+sup: service 'rcs' pid=53 exited, code=0
+sup: starting 'pkg-test'
+svc_spawn: started pkg-test pid=74
+sup: starting 'dashboard'
+============================================
+ Rogue Linux 1.0 — Package Stability Test
+============================================
+
+[1] Shell & Core Utils
+  PASS: busybox applets
+  PASS: sh arithmetic
+svc_spawn: start[    2.331389] bash (77) used greatest stack depth: 13504 bytes left
+ed dashboard pid=79
+sup: starting 'tty6'
+svc_spawn: started tty6 pid=80
+sup: starting 'ctl-probe'
+svc_spawn: started ctl-probe pid=81
+sup: starting 'firewall'
+  PASS: bash version
+svc_spawn: started firewall pid=82
+sup: starting 'dropbear-keygen'
+  PASS: bash arithmetic
+svc_spawn: started dropbear-keygen pid=86
+sup: starting 'ntpd'
+svc_spawn: started ntpd pid=89
+  PASS: bash arrays
+ntpd: applet not[    2.346060] nft (82) used greatest stack depth: 13456 bytes left
+ found
+sup: starting 'hello'
+svc_spawn: started hello pid=92
+sup: starting 'heartbeat'
+[SERVICE:hello] cogman-supervisor is alive, sir.
+Generating 2048 bit rsa key, this may take a while...
+[SERVICE:heartbeat] tick 0
+svc_spawn: started heartbeat pid=95
+  PASS: cat/echo/grep
+sup: starting 'tty3'
+svc_spawn: started tty3 pid=100
+  PASS: sed substitution
+sup: starting 'tty5'
+svc_spawn: started tty5 pid=104
+  PASS: awk field split
+sup: starting 'tty1'
+svc_spawn: started tty1 pid=107
+sup: starting 'tty4'
+  PASS: find files
+svc_spawn: started tty4 pid=108
+sup: starting 'mdev'
+  PASS: wc line count
+svc_spawn: started mdev pid=117
+sup: starting 'syslogd'
+svc_spawn: started syslogd pid=118
+sup: starting 'tty2'
+/bin/sh: can't create /proc/sys/kernel/hotplug: nonexistent directory
+  PASS: sort+uniq
+mdev: unknown user/group 'root:netdev' on line 18
+svc_spawn: started tty2 pid=122
+sup: service 'firewall' pid=82 exited, code=0
+  PASS: tar list
+
+[2] Text Editors
+  PASS: vim binary
+sup: service 'ntpd' pid=89 exited, code=127
+mdev: unknown user/group 'root:netdev' on line 19
+mdev: unknown user/group 'root:netdev' on line 20
+sup: will restart 'ntpd' in 30s
+sup: service 'hello' pid=92 exited, code=0
+  PASS: vim --version
+  PASS: nano binary
+mdev: unknown user/group 'root:netdev' on line 43
+mdev: unknown user/group 'root:plugdev' on line 52
+mdev: unknown user/group 'root:i2c' on line 76
+mdev: unknown user/group 'root:spi' on line 77
+  PASS: nano --version
+  PASS: vi (busybox)
+
+[3] Network Tools
+  PASS: curl binary
+  PASS: curl --version
+  PASS: curl HTTPS support
+  PASS: wget (busybox)
+  PASS: ping binary
+  PASS: ifconfig (busybox)
+  PASS: ip (busybox)
+  PASS: netstat (busybox)
+  PASS: nc (busybox)
+
+[4] SSH (Dropbear)
+  PASS: dropbear server
+  PASS: dropbear version
+  PASS: ssh client binary
+  PASS: scp binary
+  PASS: dropbearkey
+  PASS: etc/dropbear dir
+
+[5] Package Manager (Cogman)
+  PASS: cogman daemon
+  PASS: cogman-planner
+  PASS: cogman-supervisor
+  PASS: cogman-ctl
+  PASS: cogman-exec
+sup: service 'mdev' pid=117 exited, code=0
+sup: starting 'iwd'
+svc_spawn: started iwd pid=153
+sup: starting 'klogd'
+svc_spawn: started klogd pid=154
+sup: starting 'input-probe'
+svc_spawn: started input-probe pid=155
+sup: starting 'eth0-dhcp'
+svc_spawn: started eth0-dhcp pid=156
+sup: starting 'pentest-check'
+/bin/sh: /usr/libexec/iwd: not found
+svc_spawn: started pentest-check pid=159
+sup: service 'iwd' pid=153 exited, code=127
+sup: will restart 'iwd' in 5s
+input: /dev/input/event0
+input: /dev/input/event1
+input: /dev/input/event2
+input: /dev/input/event3
+input: /dev/input/event4
+input-probe-done
+sup: service 'input-probe' pid=155 exited, code=0
+sup: starting 'x11'
+svc_spawn: started x11 pid=160
+  PASS: service files
+  PASS: smoke plan exists
+
+[6] System & Filesystem
+  PASS: proc mounted
+  PASS: sys mounted
+  PASS: dev populated
+
+[1mRogue Linux — Verification Suite[0m
+udhcpc: started, v1.37.0
+Host: 6.6.75 | PID: 159
+
+
+[1m=== Pentest Tools ===[0m
+  PASS: tmp writable
+startx: starting at Wed May 20 00:18:33 UTC 2026
+[32m  PASS[0m  nmap  →  /usr/bin/nmap  (4.0K)
+[32m  PASS[0m  tcpdump  →  /usr/bin/tcpdump  (1.2M)
+  PASS: etc/passwd
+  PASS: etc/hosts
+udhcpc: broadcasting discover
+startx: dirs ready
+startx: xkbcomp shim installed
+  PASS: kernel version 6.6
+  PASS: kernel modules dir
+[32m  PASS[0m  socat  →  /usr/bin/socat  (504.0K)
+udhcpc: sendto: Network is down
+udhcpc: read error: Network is down, reopening socket
+  PASS: hostname rogue
+  PASS: ld.so.cache
+  PASS: glibc present
+  PASS: libgcc present
+
+[7] Build System Integration
+[32m  PASS[0m  nc (busybox)  →  /usr/bin/nc  (0)
+
+[1m=== Pentest Libraries ===[0m
+[32m  PASS[0m  lib libpcap.so.0.8  →  /lib/x86_64-linux-gnu/libpcap.so.0.8
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+[32m  PASS[0m  lib libpcap.so.1*  →  /lib/x86_64-linux-gnu/libpcap.so.1.10.6
+
+
+X.Org X Server 1.21.1[32m  PASS[0m  lib libssl.so.3  →  /lib/x86_64-linux-gnu/libssl.so.3
+.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+  PASS: cogman plan+exec
+
+============================================
+ Results: 52 passed, 0 failed
+ STATUS: STABLE — ready for daily driver use
+============================================
+[32m  PASS[0m  lib libcrypto.so.3  →  /lib/x86_64-linux-gnu/libcrypto.so.3
+sup: service 'pkg-test' pid=74 exited, code=0
+sup: starting 'x11-diag'
+svc_spawn: started x11-diag pid=236
+Kernel command line: rdinit=/init console=ttyS0 -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+[32m  PASS[0m  lib liblinear.so.4*  →  /lib/x86_64-linux-gnu/liblinear.so.4.2.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	[32m  PASS[0m  lib liblua5.4.so.0*  →  /lib/x86_64-linux-gnu/liblua5.4.so.0.0.0
+(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:18:33 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+[32m  PASS[0m  lib libwrap.so.0*  →  /lib/x86_64-linux-gnu/libwrap.so.0.7.6
+
+[1m=== Pentest Capability Checks ===[0m
+[31m  FAIL[0m  nmap --version  [exit 1]
+[32m  PASS[0m  tcpdump --version
+[32m  PASS[0m  socat -V
+[31m  FAIL[0m  nmap localhost connect-scan  [exit 1]
+[32m  PASS[0m  socat pipe loopback
+[32m  PASS[0m  nc connection test
+
+[1m=== Kernel Networking Features (needed for packet capture) ===[0m
+[34m  INFO[0m  CONFIG_PACKET status unknown (no /proc/config.gz)
+[34m  INFO[0m  CONFIG_BPF status unknown (no /proc/config.gz)
+[32m  PASS[0m  CAP_NET_RAW available
+
+Public key portion is:
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWQXGGoRnI0chJvqs+dy8AoG091Wbztk05MHCj5OIg16G/MJ6j9TWUk0xeLn3WqIcF4ZBviOtyD4b9v1qBxpubK3xaXlmTCjSxDYqSOnmO4BWKf91e1DnQS7KrPfBCx4xuZcUA2ReB1cFwsdqBjiUKvZrMJ/hDw/yqmvvKQwq0FF2hJMwU/DEjLS9+kQqw8Ue8HvV6JUwcsvKFp9xmT1ActhNz4tWXe9cWLFaRmUk9Ar9jI0rw6/F4yZHDfgJ0i0M3gDX+U7beA7B5SExdpqr3dEwpCaxwWGlU6HE0olHo7pqokOVhEdUUPcdKMw2ZoiUdo/iq9TEX9c/VkZ/D73Ln root@rogue
+Fingerprint: SHA256:yQf/lWdExhluhI6e2+eGhLCWTdMDu1awtkGeOfeNIg0
+[31m[1m2 CHECK(S) FAILED[0m
+
+sup: service 'pentest-check' pid=159 exited, code=1
+Generating 256 bit ecdsa key, this may take a while...
+Public key portion is:
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBF1iMkS4lf1fXQ6vjQ4HZENWd9AWYqoQJycECQvIFRGmYPyPfbN3vbOMHa4wEmMzjl3KagHiEWglC9BSZMZUce0= root@rogue
+Fingerprint: SHA256:aAbbKlWpank2onusaFlEPdPX/mS8dU+K3wgUCqMlvC4
+sup: service 'dropbear-keygen' pid=86 exited, code=0
+sup: starting 'dropbear'
+svc_spawn: started dropbear pid=298
+[298] May 20 00:18:33 Failed loading /etc/dropbear/dropbear_ed25519_host_key
+[298] May 20 00:18:33 Not backgrounding
+"udev"                    stopped       pid=-1       restarts=0
+exec-probe                stopped       pid=-1       restarts=0
+pkg-test                  done          pid=-1       restarts=0
+dropbear                  running       pid=298      restarts=0
+dashboard                 running       pid=79       restarts=0
+tty6                      running       pid=80       restarts=0
+rcs                       done          pid=-1       restarts=0
+x11-diag                  running       pid=236      restarts=0
+ctl-probe                 running       pid=81       restarts=0
+firewall                  done          pid=-1       restarts=0
+iwd                       restarting    pid=-1       restarts=0
+dropbear-keygen           done          pid=-1       restarts=0
+klogd                     running       pid=154      restarts=0
+input-probe               done          pid=-1       restarts=0
+ntpd                      restarting    pid=-1       restarts=0
+hello                     done          pid=-1       restarts=0
+heartbeat                 running       pid=95       restarts=0
+tty3                      running       pid=100      restarts=0
+tty5                      running       pid=104      restarts=0
+tty1                      running       pid=107      restarts=0
+tty4                      running       pid=108      restarts=0
+eth0-dhcp                 running       pid=156      restarts=0
+mdev                      done          pid=-1       restarts=0
+syslogd                   running       pid=118      restarts=0
+pentest-check             failed        pid=-1       restarts=0
+tty2                      running       pid=122      restarts=0
+x11                       running       pid=160      restarts=0
+OK
+[SERVICE:ctl-probe] control socket OK, sir.
+sup: service 'ctl-probe' pid=81 exited, code=0
+sup: starting 'exec-probe'
+svc_spawn: started exec-probe pid=308
+
+[1m[96m  ╔══════════════════════════════════════════════════╗[0m
+[1m[96m  ║         ▐ C O G M A N ▌  Build Steward          ║[0m
+[96m[90m  ║    Your faithful systems butler, at your service. ║[0m
+[1m[96m  ╚══════════════════════════════════════════════════╝[0m
+
+[90m[00:18:35][0m [1m[96m[0m▐ PLAN ▌[0m [97mIf I may, sir — Loading package definition: /etc/cogman/plans/smoke.toml[0m
+[90m[00:18:35][0m [1m[96m[0m▐  CHK ▌[0m [97mPray allow me to verify, sir — Validating package schema for 'smoke'[0m
+[90m[00:18:35][0m [1m[92m[0m▐  OK  ▌[0m [97mQuite effortlessly done, your grace. 'smoke' passed schema validation without a single complaint.[0m
+[90m[00:18:35][0m [1m[96m[0m▐ PLAN ▌[0m [97mIf I may, sir — Resolving the dependency graph — tracing the full lineage of requirements...[0m
+[90m[00:18:35][0m [1m[92m[0m▐  OK  ▌[0m [97mVery good, sir. Dependency graph resolved. A solitary package stands ready, sir.[0m
+[90m[00:18:35][0m [1m[96m[0m▐  CHK ▌[0m [97mPray allow me to verify, sir — Enforcing package policies — security boundaries are not optional[0m
+[90m[00:18:35][0m [1m[92m[0m▐  OK  ▌[0m [97mVery good, sir. All 1 package cleared policy inspection, your excellency. The estate is secure.[0m
+[90m[00:18:35][0m [1m[96m[0m▐ PLAN ▌[0m [97mIf I may, sir — Assembling the execution plan for 1 package(s)...[0m
+[90m[00:18:35][0m [1m[90m[0m▐ EXEC ▌[0m [90m[1m  ▶  Planning steps for 'test/smoke'[0m
+[90m[00:18:35][0m [1m[96m[0m▐ PLAN ▌[0m [97mIf I may, sir — Plan assembled — 5 step(s) ready for emission.[0m
+[90m[00:18:35][0m [1m[92m[0m▐ CACH ▌[0m [97mI took the liberty of consulting my records, your grace. An identical plan was on file. Served from cache → /tmp/smoke.plan[0m
+
+[90m[90m  ▐ COGMAN ▌  Duties discharged. Good day, sir.[0m
+
+[94m[1m▐ COGMAN II ▌[0m [92mMessenger: Broker initialized at /tmp/cogman.sock. Quite satisfactory, sir.[0m
+[94m[1m▐ COGMAN II ▌[0m [92mSupervisor mode active. Monitoring heartbeat.. Quite satisfactory, sir.[0m
+[94m[1m▐ COGMAN II ▌[0m [97mExecuting binary plan with 5 step(s), sir.[0m
+[94m[1m▐ COGMAN II ▌[0m [97mStep 1/5 [EXEC]: echo '[SMOKE] step-1: OP_EXEC works', sir.[0m
+[SMOKE] step-1: OP_EXEC works
+[94m[1m▐ COGMAN II ▌[0m [97mStep 2/5 [EXEC]: mkdir -p /tmp/cogman-smoke, sir.[0m
+[94m[1m▐ COGMAN II ▌[0m [97mStep 3/5 [EXEC]: echo '[SMOKE] step-3: directory created, writing marker', sir.[0m
+[SMOKE] step-3: directory created, writing marker
+[94m[1m▐ COGMAN II ▌[0m [97mStep 4/5 [EXEC]: sh -c 'echo smoke-ok > /tmp/cogman-smoke/result', sir.[0m
+[94m[1m▐ COGMAN II ▌[0m [97mStep 5/5 [EXEC]: sh -c 'grep smoke-ok /tmp/cogman-smoke/result && echo "[SMOK..., sir.[0m
+smoke-ok
+[SMOKE] OP_VERIFY analogue passed
+[94m[1m▐ COGMAN II ▌[0m [92mAll 5 steps executed successfully. Quite satisfactory, sir.[0m
+[SERVICE:exec-probe] plan execution OK, sir.
+sup: service 'exec-probe' pid=308 exited, code=0
+udhcpc: read error: Network is down, reopening socket
+[SERVICE:heartbeat] tick 1
+sup: restarting 'iwd' (attempt 1)
+svc_spawn: started iwd pid=318
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=318 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+=== X11-DIAG START ===
+Time: Wed May 20 00:18:39 UTC 2026
+X lock : /tmp/.X0-lock
+X sock : X0
+X procs:   160 root     sh -c /usr/bin/startx; exit $?
+  165 root     {startx} /bin/sh /usr/bin/startx
+  223 root     xinit /etc/X11/xinit/xinitrc -- /usr/lib/xorg/Xorg :0 vt7 -nolisten tcp -novtswitch -config /tmp/xorg-runtime.conf -logfile /tmp/Xorg.log -logverbose 3
+  229 root     /usr/lib/xorg/Xorg :0 vt7 -nolisten tcp -novtswitch -config /tmp/xorg-runtime.conf -logfile /tmp/Xorg.log -logverbose 3
+  295 root     /usr/bin/dwm
+--- Xorg.log tail ---
+[     2.443] (II) Using input driver 'evdev' for 'vmouse'
+[     2.443] (**) Option "CorePointer"
+[     2.443] (**) vmouse: always reports core events
+[     2.443] (**) evdev: vmouse: Device: "/dev/input/event2"
+[     2.443] (--) evdev: vmouse: Vendor 0x627 Product 0x2
+[     2.443] (--) evdev: vmouse: Found 9 mouse buttons
+[     2.443] (--) evdev: vmouse: Found scroll wheel(s)
+[     2.443] (--) evdev: vmouse: Found relative axes
+[     2.443] (--) evdev: vmouse: Found x and y relative axes
+[     2.443] (II) evdev: vmouse: Configuring as mouse
+[     2.443] (II) evdev: vmouse: Adding scrollwheel support
+[     2.443] (**) evdev: vmouse: YAxisMapping: buttons 4 and 5
+[     2.443] (**) evdev: vmouse: EmulateWheelButton: 4, EmulateWheelInertia: 10, EmulateWheelTimeout: 200
+[     2.443] (II) XINPUT: Adding extended input device "vmouse" (type: MOUSE, id 7)
+[     2.443] (II) evdev: vmouse: initialized for relative axes.
+[     2.443] (**) vmouse: (accel) keeping acceleration scheme 1
+[     2.443] (**) vmouse: (accel) acceleration profile 0
+[     2.443] (**) vmouse: (accel) acceleration factor: 2.000
+[     2.443] (**) vmouse: (accel) acceleration threshold: 4
+[     2.497] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+=== X11-DIAG END ===
+sup: service 'x11-diag' pid=236 exited, code=0
+udhcpc: read error: Network is down, reopening socket
+[SERVICE:heartbeat] tick 2
+sup: restarting 'iwd' (attempt 2)
+svc_spawn: started iwd pid=335
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=335 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+[SERVICE:heartbeat] tick 3
+sup: restarting 'iwd' (attempt 3)
+svc_spawn: started iwd pid=342
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=342 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+[SERVICE:heartbeat] tick 4
+sup: restarting 'iwd' (attempt 4)
+svc_spawn: started iwd pid=349
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=349 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+[SERVICE:heartbeat] tick 5
+sup: restarting 'iwd' (attempt 5)
+svc_spawn: started iwd pid=356
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=356 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'ntpd' (attempt 1)
+svc_spawn: started ntpd pid=362
+ntpd: applet not found
+sup: service 'ntpd' pid=362 exited, code=127
+sup: will restart 'ntpd' in 30s
+[SERVICE:heartbeat] tick 6
+sup: restarting 'iwd' (attempt 6)
+svc_spawn: started iwd pid=364
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=364 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+[SERVICE:heartbeat] tick 7
+sup: restarting 'iwd' (attempt 7)
+svc_spawn: started iwd pid=371
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=371 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+[SERVICE:heartbeat] tick 8
+sup: restarting 'iwd' (attempt 8)
+svc_spawn: started iwd pid=378
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=378 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+[SERVICE:heartbeat] tick 9
+sup: restarting 'iwd' (attempt 9)
+svc_spawn: started iwd pid=385
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=385 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 10)
+svc_spawn: started iwd pid=391
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=391 exited, code=127
+sup: will restart 'iwd' in 5s
+[SERVICE:heartbeat] tick 10
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 11)
+[SERVICE:heartbeat] tick 11
+svc_spawn: started iwd pid=399
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=399 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'ntpd' (attempt 2)
+svc_spawn: started ntpd pid=405
+ntpd: applet not found
+sup: service 'ntpd' pid=405 exited, code=127
+sup: will restart 'ntpd' in 30s
+sup: restarting 'iwd' (attempt 12)
+svc_spawn: started iwd pid=406
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=406 exited, code=127
+sup: will restart 'iwd' in 5s
+[SERVICE:heartbeat] tick 12
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 13)
+[SERVICE:heartbeat] tick 13
+svc_spawn: started iwd pid=414
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=414 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 14)
+svc_spawn: started iwd pid=420
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=420 exited, code=127
+sup: will restart 'iwd' in 5s
+[SERVICE:heartbeat] tick 14
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 15)
+svc_spawn: started iwd pid=427
+/bin/sh: /usr/libexec/iwd: not found
+[SERVICE:heartbeat] tick 15
+sup: service 'iwd' pid=427 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 16)
+svc_spawn: started iwd pid=434
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=434 exited, code=127
+sup: will restart 'iwd' in 5s
+[SERVICE:heartbeat] tick 16
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 17)
+svc_spawn: started iwd pid=441
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=441 exited, code=127
+sup: will restart 'iwd' in 5s
+[SERVICE:heartbeat] tick 17

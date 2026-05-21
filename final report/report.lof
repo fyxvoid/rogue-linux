@@ -1,0 +1,32 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Cogman Build Pipeline --- from TOML package definitions to bootable rootfs}}{2}{figure.caption.1}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Runtime Architecture --- cogman-supervisor as PID\,1 with service lifecycle management}}{2}{figure.caption.2}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces System Architecture --- Cogman Build System and Init Architecture}}{24}{figure.caption.7}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces CGM2PLAN Binary Format --- Visual Layout showing Header, Step Records, and String Table}}{25}{figure.caption.8}%
+\contentsline {figure}{\numberline {6.3}{\ignorespaces DFD Level\,0 --- Context Diagram}}{26}{figure.caption.9}%
+\contentsline {figure}{\numberline {6.4}{\ignorespaces DFD Level\,1 --- Build Subsystem showing seven internal processes}}{26}{figure.caption.10}%
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Use Case Diagrams --- Build Subsystem (left) and Runtime Subsystem (right)}}{27}{figure.caption.12}%
+\contentsline {figure}{\numberline {6.6}{\ignorespaces Class Diagrams --- cogman-planner (left) and cogman-supervisor (right)}}{28}{figure.caption.13}%
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Sequence Diagrams --- Build Flow (left) and Supervisor Start (right)}}{28}{figure.caption.14}%
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Component Diagram --- Cogman binary interfaces and data flows}}{29}{figure.caption.15}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Dependency Graph (left) and Topological Sort visualisation (right)}}{31}{figure.caption.17}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Executor Main Loop (left) and Path Traversal Guard logic (right)}}{33}{figure.caption.18}%
+\contentsline {figure}{\numberline {7.3}{\ignorespaces SIGCHLD Self-Pipe Pattern (left) and Service State Machine (right)}}{34}{figure.caption.19}%
+\contentsline {figure}{\numberline {7.4}{\ignorespaces cogman-ctl Text Protocol --- command/response over Unix domain socket}}{34}{figure.caption.20}%
+\contentsline {figure}{\numberline {7.5}{\ignorespaces Messenger IPC --- TLV header protocol and message routing}}{35}{figure.caption.21}%
+\contentsline {figure}{\numberline {7.6}{\ignorespaces Rootfs Layout --- directory structure of the minimal Rogue Linux rootfs}}{36}{figure.caption.22}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Four-Stage Boot Sequence verified under QEMU}}{37}{figure.caption.23}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {B.1}{\ignorespaces DWM Window Manager running on Rogue Linux under QEMU with X11}}{59}{figure.caption.31}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Terminal Environment --- cogman-ctl commands and BusyBox shell session}}{60}{figure.caption.32}%

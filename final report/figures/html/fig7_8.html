@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head>
+<body style="background:#F8F9FA"><div style="padding:28px 36px;min-width:1400px">
+<h1 style="font-size:17px;font-weight:700;color:#1A3A5C;text-align:center;margin-bottom:22px">Figure 7.8 — Messenger IPC Protocol: Fixed Header + Variable Payload</h1>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+
+<!-- Header diagram -->
+<div>
+  <div style="font-size:13px;font-weight:700;color:#6C3483;margin-bottom:10px">16-byte Fixed Header</div>
+  <div style="display:flex;gap:0;align-items:stretch;font-size:12px;font-family:monospace">
+    <div style="border:2.5px solid #6C3483;border-radius:6px 0 0 6px;padding:12px 16px;background:#6C34830D;text-align:center;min-width:140px">
+      <div style="font-weight:700;color:#6C3483">magic[4]</div>
+      <div style="font-size:10px;color:#5D6D7E">0x434F4731</div>
+      <div style="font-size:10px;color:#5D6D7E">"COG1"</div>
+      <div style="font-size:9px;color:#9A9A9A;margin-top:4px">bytes 0–3</div>
+    </div>
+    <div style="border:2.5px solid #1A3A5C;border-left:none;padding:12px 16px;background:#1A3A5C0D;text-align:center;min-width:100px">
+      <div style="font-weight:700;color:#1A3A5C">version</div>
+      <div style="font-size:10px;color:#5D6D7E">u16 = 1</div>
+      <div style="font-size:9px;color:#9A9A9A;margin-top:4px">bytes 4–5</div>
+    </div>
+    <div style="border:2.5px solid #1A3A5C;border-left:none;padding:12px 16px;background:#1A3A5C0D;text-align:center;min-width:110px">
+      <div style="font-weight:700;color:#1A3A5C">msg_type</div>
+      <div style="font-size:10px;color:#5D6D7E">u16</div>
+      <div style="font-size:9px;color:#9A9A9A;margin-top:4px">bytes 6–7</div>
+    </div>
+    <div style="border:2.5px solid #0E6655;border-left:none;padding:12px 16px;background:#0E66550D;text-align:center;min-width:130px">
+      <div style="font-weight:700;color:#0E6655">payload_len</div>
+      <div style="font-size:10px;color:#5D6D7E">u32</div>
+      <div style="font-size:9px;color:#9A9A9A;margin-top:4px">bytes 8–11</div>
+    </div>
+    <div style="border:2.5px solid #0E6655;border-left:none;border-radius:0 6px 6px 0;padding:12px 16px;background:#0E66550D;text-align:center;min-width:120px">
+      <div style="font-weight:700;color:#0E6655">src_pid</div>
+      <div style="font-size:10px;color:#5D6D7E">u32</div>
+      <div style="font-size:9px;color:#9A9A9A;margin-top:4px">bytes 12–15</div>
+    </div>
+    <div style="margin-left:8px;border:2.5px dashed #1E8449;border-radius:6px;padding:12px 16px;background:#1E84490D;text-align:center;flex:1">
+      <div style="font-weight:700;color:#1E8449">Variable Payload</div>
+      <div style="font-size:10px;color:#5D6D7E">0 … payload_len bytes</div>
+      <div style="font-size:9px;color:#9A9A9A;margin-top:4px">bytes 16 … 16+N</div>
+    </div>
+  </div>
+</div>
+
+<!-- Two columns: types + topology -->
+<div style="display:flex;gap:20px">
+  <div style="flex:1;border:1.5px solid #1A3A5C;border-radius:8px;padding:16px;background:#1A3A5C0A">
+    <div style="font-size:13px;font-weight:700;color:#1A3A5C;margin-bottom:12px">Message Types  (msg_type field)</div>
+    <table style="width:100%;font-size:11.5px;border-collapse:collapse">
+      <tr style="border-bottom:1px solid #dee2e6"><td style="padding:7px 6px;font-family:monospace;color:#6C3483;font-weight:700">0</td><td style="padding:7px 6px;font-family:monospace;color:#1C2833">MSG_HEARTBEAT</td><td style="padding:7px 6px;color:#5D6D7E">Keepalive ping</td></tr>
+      <tr style="border-bottom:1px solid #dee2e6"><td style="padding:7px 6px;font-family:monospace;color:#6C3483;font-weight:700">1</td><td style="padding:7px 6px;font-family:monospace;color:#1C2833">MSG_HUD_ALERT</td><td style="padding:7px 6px;color:#5D6D7E">Status alert to terminal</td></tr>
+      <tr style="border-bottom:1px solid #dee2e6"><td style="padding:7px 6px;font-family:monospace;color:#6C3483;font-weight:700">2</td><td style="padding:7px 6px;font-family:monospace;color:#1C2833">MSG_POLICY_REQ</td><td style="padding:7px 6px;color:#5D6D7E">Policy enforcement check</td></tr>
+      <tr style="border-bottom:1px solid #dee2e6"><td style="padding:7px 6px;font-family:monospace;color:#6C3483;font-weight:700">3</td><td style="padding:7px 6px;font-family:monospace;color:#1C2833">MSG_DATA_XFER</td><td style="padding:7px 6px;color:#5D6D7E">Binary data transfer</td></tr>
+      <tr><td style="padding:7px 6px;font-family:monospace;color:#6C3483;font-weight:700">4</td><td style="padding:7px 6px;font-family:monospace;color:#1C2833">MSG_LOG_INFO</td><td style="padding:7px 6px;color:#5D6D7E">Structured log record</td></tr>
+    </table>
+  </div>
+  <div style="flex:1;border:1.5px solid #6C3483;border-radius:8px;padding:16px;background:#6C34830A">
+    <div style="font-size:13px;font-weight:700;color:#6C3483;margin-bottom:12px">Broker Topology</div>
+    <div style="text-align:center;margin-bottom:10px">
+      <div style="display:inline-block;border:2.5px solid #6C3483;border-radius:8px;padding:10px 20px;background:#6C348318;font-size:12px;font-weight:700;color:#6C3483">messenger broker<br><small style="font-weight:400;font-size:10px">TCP :7201</small></div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <div style="border:2px solid #0E6655;border-radius:6px;padding:8px 10px;background:#0E66550D;font-size:11px;font-weight:700;color:#0E6655;text-align:center">cogman-sup<br><small style="font-weight:400">publisher</small></div>
+      <div style="border:2px solid #C0392B;border-radius:6px;padding:8px 10px;background:#C0392B0D;font-size:11px;font-weight:700;color:#C0392B;text-align:center">cogman-exec<br><small style="font-weight:400">publisher</small></div>
+      <div style="border:2px solid #1E8449;border-radius:6px;padding:8px 10px;background:#1E84490D;font-size:11px;font-weight:700;color:#1E8449;text-align:center">log-collector<br><small style="font-weight:400">subscriber</small></div>
+    </div>
+    <div style="text-align:center;font-size:11px;color:#5D6D7E;margin-top:8px">All components ⇄ broker via TCP TLV messages</div>
+  </div>
+</div>
+</div>
+
+</div></body></html>

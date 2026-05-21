@@ -1,0 +1,52 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head>
+<body style="background:#F8F9FA"><div style="padding:28px 36px;min-width:1400px">
+<h1 style="font-size:17px;font-weight:700;color:#1A3A5C;text-align:center;margin-bottom:22px">Figure 7.5 — cogman-supervisor: SIGCHLD Self-Pipe Pattern</h1>
+
+<div style="display:flex;flex-direction:column;gap:0">
+
+<!-- Swim lane: Kernel -->
+<div style="border:2px solid #5D6D7E;border-radius:10px 10px 0 0;background:#5D6D7E0A;padding:14px 20px;border-bottom:none">
+  <div style="font-size:11.5px;font-weight:700;color:#5D6D7E;margin-bottom:10px">Linux Kernel  /  Signal Delivery</div>
+  <div style="display:flex;align-items:center;gap:16px">
+    <div style="border:2px solid #5D6D7E;border-radius:8px;padding:10px 16px;background:#5D6D7E15;font-size:12px;font-weight:700;color:#5D6D7E">child process exits</div>
+    <div style="font-size:22px;color:#5D6D7E">→</div>
+    <div style="font-size:12px;color:#5D6D7E">kernel delivers SIGCHLD to PID 1</div>
+    <div style="font-size:22px;color:#5D6D7E">→</div>
+    <div style="font-size:12px;color:#5D6D7E">registered handler fires</div>
+  </div>
+</div>
+
+<!-- Swim lane: Handler -->
+<div style="border:2px solid #CA6F1E;border-left:2px solid #CA6F1E;border-right:2px solid #CA6F1E;background:#CA6F1E0A;padding:14px 20px;border-bottom:none">
+  <div style="font-size:11.5px;font-weight:700;color:#CA6F1E;margin-bottom:10px">SIGCHLD Handler  (async · only async-signal-safe functions allowed)</div>
+  <div style="display:flex;align-items:center;gap:16px">
+    <div style="border:2px solid #CA6F1E;border-radius:8px;padding:10px 16px;background:#CA6F1E15;font-size:11.5px;font-weight:700;color:#CA6F1E">sigaction(SIGCHLD, handler, SA_RESTART)</div>
+    <div style="font-size:22px;color:#CA6F1E">→</div>
+    <div style="border:2px solid #CA6F1E;border-radius:8px;padding:10px 16px;background:#CA6F1E15;font-size:11.5px;font-weight:700;color:#CA6F1E">write(pipe_w, "", 1)<br><small style="font-weight:400;font-size:10px">async-signal-safe ✓</small></div>
+    <div style="font-size:22px;color:#CA6F1E">→</div>
+    <div style="border:1.5px dashed #CA6F1E;border-radius:8px;padding:10px 16px;background:#CA6F1E0D;font-size:11.5px;color:#CA6F1E">pipe [ pipe_r ←——— pipe_w ]</div>
+  </div>
+</div>
+
+<!-- Swim lane: Main Loop -->
+<div style="border:2px solid #0E6655;border-radius:0 0 10px 10px;background:#0E66550A;padding:14px 20px">
+  <div style="font-size:11.5px;font-weight:700;color:#0E6655;margin-bottom:10px">Main Loop  (select() · 100 ms timeout)</div>
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <div style="border:2px solid #0E6655;border-radius:8px;padding:10px 16px;background:#0E665515;font-size:11.5px;font-weight:700;color:#0E6655">select(pipe_r, ctl_fd,<br>timeout=100ms)</div>
+    <div style="font-size:22px;color:#0E6655">→ pipe_r readable →</div>
+    <div style="border:2px solid #0E6655;border-radius:8px;padding:10px 16px;background:#0E665515;font-size:11.5px;font-weight:700;color:#0E6655">read(pipe_r, buf, 1)<br><small style="font-weight:400;font-size:10px">drain byte</small></div>
+    <div style="font-size:22px;color:#0E6655">→</div>
+    <div style="border:2px solid #0E6655;border-radius:8px;padding:10px 16px;background:#0E665515;font-size:11.5px;font-weight:700;color:#0E6655">waitpid(-1, WNOHANG)<br><small style="font-weight:400;font-size:10px">reap all dead children</small></div>
+    <div style="font-size:22px;color:#0E6655">→</div>
+    <div style="border:2px solid #1E8449;border-radius:8px;padding:10px 16px;background:#1E844915;font-size:11.5px;font-weight:700;color:#1E8449">update service<br>state table</div>
+  </div>
+</div>
+
+<div style="margin-top:16px;border:1.5px solid #9A7D0A;border-radius:8px;padding:12px 18px;background:#9A7D0A0D;font-size:11.5px;color:#5D6D7E;line-height:1.7">
+  <strong style="color:#9A7D0A">Key invariant:</strong>
+  <code style="color:#1A3A5C">write()</code> is async-signal-safe (POSIX).
+  <code style="color:#C0392B">waitpid()</code> is <em>not</em> called from the signal handler — avoids reentrancy and interrupted-syscall issues.
+  <code style="color:#0E6655">select()</code> wakes immediately when <code>pipe_r</code> becomes readable, so child reaping happens within the same main-loop tick.
+</div>
+
+</div></body></html>

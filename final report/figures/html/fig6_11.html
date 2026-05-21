@@ -1,0 +1,65 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head>
+<body style="background:#F8F9FA"><div style="padding:28px 36px;min-width:1400px">
+<h1 style="font-size:17px;font-weight:700;color:#1A3A5C;text-align:center;margin-bottom:24px">Figure 6.11 — Component Diagram</h1>
+
+<div style="display:flex;gap:24px;align-items:stretch">
+
+  <!-- HOST ENV -->
+  <div style="border:2.5px dashed #C0392B;border-radius:12px;padding:18px 20px;min-width:280px">
+    <div style="font-size:12px;font-weight:700;color:#C0392B;margin-bottom:14px;text-align:center">Host Build Environment</div>
+    <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+      <div style="border:2.5px solid #C0392B;border-radius:8px;padding:12px 16px;background:#C0392B0D;text-align:center;width:220px">
+        <div style="font-size:12px;font-weight:700;color:#C0392B">⚙ cogman-planner</div>
+        <div style="font-size:10.5px;color:#5D6D7E">Rust · ~1200 LOC</div>
+      </div>
+      <div style="font-size:18px;color:#9A7D0A">↓ emits</div>
+      <div style="border:2.5px solid #9A7D0A;border-radius:8px;padding:10px 16px;background:#9A7D0A0D;text-align:center;width:220px">
+        <div style="font-size:12px;font-weight:700;color:#9A7D0A">📄 CGM2PLAN .bin</div>
+        <div style="font-size:10.5px;color:#5D6D7E">64-byte hdr + step[]</div>
+      </div>
+      <div style="font-size:18px;color:#0E6655">↓ reads</div>
+      <div style="border:2.5px solid #0E6655;border-radius:8px;padding:12px 16px;background:#0E66550D;text-align:center;width:220px">
+        <div style="font-size:12px;font-weight:700;color:#0E6655">⚙ cogman-executor</div>
+        <div style="font-size:10.5px;color:#5D6D7E">C11 · ~1144 LOC</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:16px;font-size:22px;color:#9A7D0A">⟶ deploy rootfs ⟶</div>
+  </div>
+
+  <!-- TARGET ROOTFS -->
+  <div style="border:2.5px dashed #0E6655;border-radius:12px;padding:18px 20px;flex:1">
+    <div style="font-size:12px;font-weight:700;color:#0E6655;margin-bottom:14px;text-align:center">Target Rootfs (/)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="border:2.5px solid #0E6655;border-radius:8px;padding:12px;background:#0E66550D">
+        <div style="font-size:12px;font-weight:700;color:#0E6655">⚙ cogman-supervisor</div>
+        <div style="font-size:10.5px;color:#5D6D7E">PID 1 · C11 · 1561 LOC<br>/sbin/init → symlink</div>
+        <div style="margin-top:8px;font-size:10px;color:#0E6655">Provides: fork/exec services<br>Listens: /run/cogman-supervisor.sock</div>
+      </div>
+      <div style="border:2.5px solid #C0392B;border-radius:8px;padding:12px;background:#C0392B0D">
+        <div style="font-size:12px;font-weight:700;color:#C0392B">▶ Service Processes</div>
+        <div style="font-size:10.5px;color:#5D6D7E">heartbeat, hello,<br>ctl-probe, shutdown</div>
+        <div style="margin-top:8px;font-size:10px;color:#C0392B">Spawned by: cogman-supervisor<br>Sends: SIGCHLD on exit</div>
+      </div>
+      <div style="border:2.5px solid #1E8449;border-radius:8px;padding:12px;background:#1E84490D">
+        <div style="font-size:12px;font-weight:700;color:#1E8449">⚙ cogman-ctl</div>
+        <div style="font-size:10.5px;color:#5D6D7E">client · C11 · 142 LOC</div>
+        <div style="margin-top:8px;font-size:10px;color:#1E8449">Connects to: supervisor.sock<br>Commands: list start stop status</div>
+      </div>
+      <div style="border:2.5px solid #6C3483;border-radius:8px;padding:12px;background:#6C34830D">
+        <div style="font-size:12px;font-weight:700;color:#6C3483">⚙ messenger broker</div>
+        <div style="font-size:10.5px;color:#5D6D7E">IPC · TLV protocol · :7201</div>
+        <div style="margin-top:8px;font-size:10px;color:#6C3483">Header: COG1 magic + msg_type<br>Payload: 0–N bytes</div>
+      </div>
+      <div style="border:2.5px solid #1A3A5C;border-radius:8px;padding:10px 12px;background:#1A3A5C0D">
+        <div style="font-size:11.5px;font-weight:700;color:#1A3A5C">📁 /etc/cogman/services/</div>
+        <div style="font-size:10px;color:#5D6D7E">*.service  (INI format)<br>4 verification services</div>
+      </div>
+      <div style="border:2.5px solid #5D6D7E;border-radius:8px;padding:10px 12px;background:#5D6D7E0D">
+        <div style="font-size:11.5px;font-weight:700;color:#5D6D7E">📁 Virtual Filesystems</div>
+        <div style="font-size:10px;color:#5D6D7E">/proc  /sys  /dev  /run<br>mounted by PID 1 on boot</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div></body></html>

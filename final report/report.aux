@@ -1,0 +1,245 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\providecommand \oddpage@label [2]{}
+\@writefile{toc}{\contentsline {chapter}{Acknowledgement}{ii}{Doc-Start}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Abstract}{vi}{Doc-Start}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Abstract (Tamil)}{vii}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Abbreviations}{xi}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {1.1}General Introduction}{1}{section.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.1}{\ignorespaces Cogman Build Pipeline --- from TOML package definitions to bootable rootfs}}{2}{figure.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:build_pipeline}{{1.1}{2}{Cogman Build Pipeline --- from TOML package definitions to bootable rootfs}{figure.caption.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.2}{\ignorespaces Runtime Architecture --- cogman-supervisor as PID\,1 with service lifecycle management}}{2}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:runtime_arch}{{1.2}{2}{Runtime Architecture --- cogman-supervisor as PID\,1 with service lifecycle management}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Importance of the Study}{2}{section.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.3}Problem Statement}{3}{section.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.4}Aim and Objective}{4}{section.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.5}Scope and Limitation of the Study}{4}{section.1.5}\protected@file@percent }
+\citation{buildroot}
+\citation{yocto}
+\citation{nix}
+\citation{repro}
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Literature Review}{6}{chapter.2}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Embedded Linux Build Systems}{6}{section.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Reproducible Package Management}{6}{section.2.2}\protected@file@percent }
+\citation{systemd}
+\citation{s6}
+\@writefile{toc}{\contentsline {section}{\numberline {2.3}Init Systems and Service Managers}{7}{section.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Signal Handling in PID\,1 --- POSIX Correctness}{7}{section.2.4}\protected@file@percent }
+\citation{daemontools}
+\citation{bazel}
+\citation{kerrisk}
+\citation{qwen}
+\citation{llamacpp}
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Binary Plan Formats and Build Caching}{8}{section.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.6}LLM Integration in System Tooling}{8}{section.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2.7}Gap Analysis}{9}{section.2.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Comparison of Related Systems}}{9}{table.caption.4}\protected@file@percent }
+\newlabel{tab:comparison}{{2.1}{9}{Comparison of Related Systems}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}System Analysis}{10}{chapter.3}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Existing System}{10}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Key Features of the Existing System}{10}{subsection.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Advantages of the Existing System}{11}{subsection.3.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Disadvantages of the Existing System}{11}{subsection.3.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Proposed System}{11}{section.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Data Collection and Input}{11}{subsection.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Dependency Graph Resolution}{12}{subsection.3.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Binary Plan Emission and Execution}{12}{subsection.3.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}PID\,1 Service Supervisor}{12}{subsection.3.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.5}Advantages of the Proposed System}{12}{subsection.3.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.6}Performance and Architecture Comparison}{13}{subsection.3.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.7}Summary of Design Goals}{14}{subsection.3.2.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}System Specification}{15}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Hardware Requirements}{15}{section.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Hardware Requirements --- Build Host and QEMU Target}}{15}{table.caption.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Software Requirements}{15}{section.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Software Requirements}}{15}{table.caption.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Functional Requirements}{16}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Non-Functional Requirements}{16}{section.4.4}\protected@file@percent }
+\citation{rust}
+\citation{c11}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Software Description}{18}{chapter.5}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Rust Programming Language}{18}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}C11 Programming Language}{18}{section.5.2}\protected@file@percent }
+\citation{toml}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}TOML Package Definition Format}{19}{section.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}CGM2PLAN Binary Format}{19}{section.5.4}\protected@file@percent }
+\citation{qemu}
+\@writefile{lot}{\contentsline {table}{\numberline {5.1}{\ignorespaces CGM2PLAN Binary Format --- Header Layout}}{20}{table.caption.7}\protected@file@percent }
+\newlabel{tab:cgm2plan}{{5.1}{20}{CGM2PLAN Binary Format --- Header Layout}{table.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.5}QEMU}{20}{section.5.5}\protected@file@percent }
+\citation{llamacpp}
+\citation{qwen}
+\@writefile{toc}{\contentsline {section}{\numberline {5.6}Qwen2.5-3B AI Advisor}{21}{section.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}System Design}{23}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Overall Architecture}{23}{section.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces System Architecture --- Cogman Build System and Init Architecture}}{23}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:sysarch}{{6.1}{23}{System Architecture --- Cogman Build System and Init Architecture}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}CGM2PLAN Binary Format --- Detailed Layout}{24}{section.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces CGM2PLAN Binary Format --- Visual Layout showing Header, Step Records, and String Table}}{24}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:cgm2plan}{{6.2}{24}{CGM2PLAN Binary Format --- Visual Layout showing Header, Step Records, and String Table}{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Data Flow Diagrams}{24}{section.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}DFD Level\,0 --- Context Diagram}{24}{subsection.6.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces DFD Level\,0 --- Context Diagram}}{25}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:dfd0}{{6.3}{25}{DFD Level\,0 --- Context Diagram}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}DFD Level\,1 --- Build Subsystem}{25}{subsection.6.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces DFD Level\,1 --- Build Subsystem showing seven internal processes}}{25}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:dfd1}{{6.4}{25}{DFD Level\,1 --- Build Subsystem showing seven internal processes}{figure.caption.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces DFD Level\,1 Process Summary}}{26}{table.caption.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.4}Use Case Diagrams}{26}{section.6.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.5}{\ignorespaces Use Case Diagram --- Build Subsystem}}{26}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:usecase_build}{{6.5}{26}{Use Case Diagram --- Build Subsystem}{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.6}{\ignorespaces Use Case Diagram --- Runtime Subsystem}}{26}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:usecase_runtime}{{6.6}{26}{Use Case Diagram --- Runtime Subsystem}{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4.1}Security Constraints at Use Case Boundaries}{27}{subsection.6.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6.2}{\ignorespaces Use Cases, Actors, and Preconditions}}{28}{table.caption.15}\protected@file@percent }
+\newlabel{tab:usecases}{{6.2}{28}{Use Cases, Actors, and Preconditions}{table.caption.15}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.5}Class Diagrams}{29}{section.6.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.7}{\ignorespaces Class Diagram --- cogman-planner}}{29}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:class_planner}{{6.7}{29}{Class Diagram --- cogman-planner}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.8}{\ignorespaces Class Diagram --- cogman-supervisor}}{29}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:class_supervisor}{{6.8}{29}{Class Diagram --- cogman-supervisor}{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.6}Sequence Diagrams}{30}{section.6.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.9}{\ignorespaces Sequence Diagram --- Build Flow}}{30}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:seq_build}{{6.9}{30}{Sequence Diagram --- Build Flow}{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.10}{\ignorespaces Sequence Diagram --- Supervisor Start}}{30}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:seq_start}{{6.10}{30}{Sequence Diagram --- Supervisor Start}{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.7}Component Diagram}{31}{section.6.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.11}{\ignorespaces Component Diagram --- Cogman binary interfaces and data flows}}{31}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:component}{{6.11}{31}{Component Diagram --- Cogman binary interfaces and data flows}{figure.caption.20}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.8}Service Lifecycle State Machine}{32}{section.6.8}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6.3}{\ignorespaces Service State Machine Transitions}}{32}{table.caption.21}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Module Description}{34}{chapter.7}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}cogman-planner Module (Rust)}{34}{section.7.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Dependency Graph}}{35}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:dep_graph}{{7.1}{35}{Dependency Graph}{figure.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces Topological Sort Visualisation}}{35}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:topo_sort}{{7.2}{35}{Topological Sort Visualisation}{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}cogman-executor Module (C11)}{35}{section.7.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces Executor Main Loop}}{36}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:executor_loop}{{7.3}{36}{Executor Main Loop}{figure.caption.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.4}{\ignorespaces Path Traversal Guard Logic}}{37}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:path_guard}{{7.4}{37}{Path Traversal Guard Logic}{figure.caption.25}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}cogman-supervisor Module (C11)}{37}{section.7.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.5}{\ignorespaces SIGCHLD Self-Pipe Pattern}}{38}{figure.caption.26}\protected@file@percent }
+\newlabel{fig:sigchld}{{7.5}{38}{SIGCHLD Self-Pipe Pattern}{figure.caption.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.6}{\ignorespaces Service State Machine}}{38}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:state_machine}{{7.6}{38}{Service State Machine}{figure.caption.27}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.4}cogman-ctl Module (C11)}{38}{section.7.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.7}{\ignorespaces cogman-ctl Text Protocol --- command/response over Unix domain socket}}{39}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:ctl}{{7.7}{39}{cogman-ctl Text Protocol --- command/response over Unix domain socket}{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.5}Messenger IPC Module (C)}{39}{section.7.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.8}{\ignorespaces Messenger IPC --- TLV header protocol and message routing}}{39}{figure.caption.29}\protected@file@percent }
+\newlabel{fig:messenger}{{7.8}{39}{Messenger IPC --- TLV header protocol and message routing}{figure.caption.29}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.6}Rootfs Bootstrap Module}{39}{section.7.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.9}{\ignorespaces Rootfs Layout --- directory structure of the minimal Rogue Linux rootfs}}{40}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:rootfs}{{7.9}{40}{Rootfs Layout --- directory structure of the minimal Rogue Linux rootfs}{figure.caption.30}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Implementation}{41}{chapter.8}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {8.1}Boot Sequence}{41}{section.8.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8.1}{\ignorespaces Four-Stage Boot Sequence verified under QEMU}}{41}{figure.caption.31}\protected@file@percent }
+\newlabel{fig:boot}{{8.1}{41}{Four-Stage Boot Sequence verified under QEMU}{figure.caption.31}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8.2}Kahn's Topological Sort (Rust)}{42}{section.8.2}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8.1}{\ignorespaces Topological Sort --- cogman/src/graph/topo.rs}}{42}{lstlisting.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.3}Path Traversal Guard (C)}{44}{section.8.3}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8.2}{\ignorespaces path\_has\_traversal() and usage --- executor/ops/copy.c}}{44}{lstlisting.8.2}\protected@file@percent }
+\citation{posix}
+\@writefile{toc}{\contentsline {section}{\numberline {8.4}SIGCHLD Self-Pipe (C)}{45}{section.8.4}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8.3}{\ignorespaces SIGCHLD self-pipe setup and main-loop reaping --- supervisor/supervisor.c}}{45}{lstlisting.8.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.5}Service State Machine --- sup\_handle\_dead() (C)}{46}{section.8.5}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8.4}{\ignorespaces sup\_handle\_dead() --- service state transitions on child exit}}{46}{lstlisting.8.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.6}Plan Validation (C)}{47}{section.8.6}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8.5}{\ignorespaces plan\_validate() --- binary plan integrity check --- executor/plan/plan.c}}{47}{lstlisting.8.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.7}Technology Stack Summary}{48}{section.8.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8.1}{\ignorespaces Technology Stack}}{48}{table.caption.32}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {9}System Testing}{49}{chapter.9}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {9.1}Planner Unit Tests --- Schema Validation}{49}{section.9.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9.1}{\ignorespaces Planner Schema Validation Test Cases}}{49}{table.caption.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.2}Executor Unit Tests --- Step Operations}{50}{section.9.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9.2}{\ignorespaces Executor Step Operation Test Cases}}{50}{table.caption.34}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.3}Supervisor Test Cases --- Service Lifecycle}{51}{section.9.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9.3}{\ignorespaces Supervisor Service Lifecycle Test Cases}}{51}{table.caption.35}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.4}End-to-End Boot Tests (QEMU)}{51}{section.9.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9.4}{\ignorespaces QEMU End-to-End Boot Test Cases}}{51}{table.caption.36}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9.5}User Acceptance Testing}{52}{section.9.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9.5}{\ignorespaces User Acceptance Test Cases}}{52}{table.caption.37}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {10}Performance Analysis}{54}{chapter.10}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {10.1}Plan Resolution Time}{54}{section.10.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.2}Memory Usage}{54}{section.10.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.3}Per-Step Execution Overhead}{56}{section.10.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.4}Performance Summary}{57}{section.10.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10.1}{\ignorespaces Performance Comparison: Rogue Linux vs.\ Legacy Python Baseline}}{57}{table.caption.38}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.5}Build System Comparison}{57}{section.10.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {10.6}Rootfs Size Analysis}{57}{section.10.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {11}Conclusion and Future Work}{58}{chapter.11}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {11.1}Conclusion}{58}{section.11.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.2}Summary of Technical Contributions}{59}{section.11.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {11.3}Future Work}{59}{section.11.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Source Code Listings}{62}{appendix.A}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {A.1}Package Metadata Schema --- Rust Struct Definitions (schema.rs)}{62}{section.A.1}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.1}{\ignorespaces PackageMetadata and related struct definitions --- cogman/src/schema.rs}}{62}{lstlisting.A.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.2}Example Package Definition --- busybox.toml}{63}{section.A.2}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.2}{\ignorespaces BusyBox package definition --- packages/busybox/package.toml}}{63}{lstlisting.A.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.3}Example Service Definition --- heartbeat.service}{65}{section.A.3}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.3}{\ignorespaces Heartbeat longrun service definition --- /etc/cogman/services/heartbeat.service}}{65}{lstlisting.A.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.4}Example Service Definition --- dropbear.service}{65}{section.A.4}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.4}{\ignorespaces Dropbear SSH daemon service definition --- /etc/cogman/services/dropbear.service}}{65}{lstlisting.A.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A.5}Example Service Definition --- firewall.service}{66}{section.A.5}\protected@file@percent }
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.5}{\ignorespaces nftables firewall service definition --- /etc/cogman/services/firewall.service}}{66}{lstlisting.A.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {B}Screenshots}{67}{appendix.B}\protected@file@percent }
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.1}{\ignorespaces DWM Window Manager running on Rogue Linux under QEMU with X11}}{67}{figure.caption.39}\protected@file@percent }
+\newlabel{fig:dwm}{{B.1}{67}{DWM Window Manager running on Rogue Linux under QEMU with X11}{figure.caption.39}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.2}{\ignorespaces Terminal Environment --- cogman-ctl commands and BusyBox shell session}}{68}{figure.caption.40}\protected@file@percent }
+\newlabel{fig:terminal}{{B.2}{68}{Terminal Environment --- cogman-ctl commands and BusyBox shell session}{figure.caption.40}{}}
+\@writefile{toc}{\contentsline {chapter}{Appendix C: Internship Certificates}{69}{section*.41}\protected@file@percent }
+\bibcite{buildroot}{1}
+\bibcite{yocto}{2}
+\bibcite{nix}{3}
+\bibcite{systemd}{4}
+\bibcite{daemontools}{5}
+\bibcite{s6}{6}
+\bibcite{rust}{7}
+\bibcite{serde}{8}
+\bibcite{qemu}{9}
+\bibcite{qwen}{10}
+\bibcite{llamacpp}{11}
+\bibcite{c11}{12}
+\bibcite{kerrisk}{13}
+\bibcite{stevens}{14}
+\@writefile{toc}{\contentsline {chapter}{References}{73}{figure.caption.45}\protected@file@percent }
+\bibcite{repro}{15}
+\bibcite{busybox}{16}
+\bibcite{bazel}{17}
+\bibcite{posix}{18}
+\bibcite{toml}{19}
+\bibcite{linux}{20}
+\@writefile{toc}{\contentsline {chapter}{Program Outcomes and Course Outcomes}{75}{section*.47}\protected@file@percent }
+\gdef \@abspage@last{88}

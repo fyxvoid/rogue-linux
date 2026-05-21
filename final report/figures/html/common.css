@@ -1,0 +1,103 @@
+/* shared palette & base styles */
+:root {
+  --bg:    #F8F9FA;
+  --rust:  #C0392B;
+  --teal:  #0E6655;
+  --navy:  #1A3A5C;
+  --gray:  #5D6D7E;
+  --green: #1E8449;
+  --org:   #CA6F1E;
+  --red:   #922B21;
+  --purp:  #6C3483;
+  --gold:  #9A7D0A;
+  --blk:   #1C2833;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  font-family: 'Segoe UI', 'DejaVu Sans', Arial, sans-serif;
+  color: var(--blk);
+}
+.page {
+  padding: 32px 40px 36px;
+  min-width: 1400px;
+}
+h1.fig-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 28px;
+  letter-spacing: 0.3px;
+}
+
+/* ── generic box ── */
+.box {
+  border-radius: 8px;
+  border: 2.5px solid;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  background: #fff;
+}
+.box.rust  { color:var(--rust);  border-color:var(--rust);  background:#C0392B0D; }
+.box.teal  { color:var(--teal);  border-color:var(--teal);  background:#0E66550D; }
+.box.navy  { color:var(--navy);  border-color:var(--navy);  background:#1A3A5C0D; }
+.box.gray  { color:var(--gray);  border-color:var(--gray);  background:#5D6D7E0D; }
+.box.green { color:var(--green); border-color:var(--green); background:#1E84490D; }
+.box.org   { color:var(--org);   border-color:var(--org);   background:#CA6F1E0D; }
+.box.red   { color:var(--red);   border-color:var(--red);   background:#922B210D; }
+.box.purp  { color:var(--purp);  border-color:var(--purp);  background:#6C34830D; }
+.box.gold  { color:var(--gold);  border-color:var(--gold);  background:#9A7D0A0D; }
+
+/* ── arrow ── */
+.arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  color: var(--gray);
+  font-size: 22px;
+  line-height: 1;
+  min-width: 60px;
+}
+.arrow .lbl {
+  font-size: 10px;
+  color: var(--gray);
+  text-align: center;
+  white-space: nowrap;
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+/* ── section label ── */
+.sec-label {
+  font-size: 10.5px;
+  color: var(--gray);
+  font-style: italic;
+  margin-bottom: 6px;
+}
+
+/* ── boundary dashed box ── */
+.boundary {
+  border: 2px dashed var(--gray);
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+
+/* ── annotation bubble ── */
+.note {
+  border-radius: 8px;
+  border: 1.5px solid;
+  padding: 7px 12px;
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.4;
+}
+.note.gold  { color:var(--gold);  border-color:var(--gold);  background:#9A7D0A12; }
+.note.red   { color:var(--red);   border-color:var(--red);   background:#922B2112; }
+.note.teal  { color:var(--teal);  border-color:var(--teal);  background:#0E665512; }
+.note.green { color:var(--green); border-color:var(--green); background:#1E844912; }

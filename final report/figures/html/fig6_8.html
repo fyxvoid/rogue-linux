@@ -1,0 +1,48 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css">
+<style></style></head><body><div class="page">
+<h1 class="fig-title">Figure 6.8 — Class Diagram: cogman-supervisor (C11)</h1>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;gap:16px;align-items:flex-start;justify-content:center">
+    <table style="border:2.5px solid #0E6655;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:260px;background:#fff">
+  <tr><td style="background:#0E665522;padding:8px 10px;font-size:12px;font-weight:700;color:#0E6655;text-align:center;border-radius:5px 5px 0 0">Supervisor [singleton]</td></tr>
+  <tr><td style="border-top:2px solid #0E6655;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">svc_table[64]: Service</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">svc_count:     int</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">sigchld_pipe:  int[2]</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">ctl_fd:        int</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">running:       bool</td></tr><tr><td style="border-top:1px dashed #0E6655;padding:0"></td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+init()</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+run_loop()</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+drain_sigchld()</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+reap_children()</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+shutdown()</td></tr>
+</table>
+    <div style="font-size:20px;color:var(--gray);align-self:center;padding:0 4px">→ owns 0..*</div>
+    <table style="border:2.5px solid #1A3A5C;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:280px;background:#fff">
+  <tr><td style="background:#1A3A5C22;padding:8px 10px;font-size:12px;font-weight:700;color:#1A3A5C;text-align:center;border-radius:5px 5px 0 0">Service</td></tr>
+  <tr><td style="border-top:2px solid #1A3A5C;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">name[64]:       char</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">command[256]:   char</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">type:           SvcType</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">restart:        SvcRestart</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">state:          SvcState</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">pid:            pid_t</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">restart_count:  int</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">deps[8][64]:    char</td></tr><tr><td style="border-top:1px dashed #1A3A5C;padding:0"></td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+start(sup: *Supervisor)</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+stop()</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+on_exit(status: int)</td></tr>
+</table>
+    <div style="font-size:20px;color:var(--gray);align-self:center;padding:0 4px">→ parsed by</div>
+    <table style="border:2.5px solid #5D6D7E;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:240px;background:#fff">
+  <tr><td style="background:#5D6D7E22;padding:8px 10px;font-size:12px;font-weight:700;color:#5D6D7E;text-align:center;border-radius:5px 5px 0 0">ServiceFileParser</td></tr>
+  <tr><td style="border-top:2px solid #5D6D7E;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">path[256]: char</td></tr><tr><td style="border-top:1px dashed #5D6D7E;padding:0"></td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+parse(path) → Service</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+parse_all(dir) → int</td></tr>
+</table>
+  </div>
+  <div style="display:flex;gap:16px;align-items:flex-start;justify-content:center">
+    <table style="border:2.5px solid #0E6655;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:180px;background:#fff">
+  <tr><td style="background:#0E665522;padding:8px 10px;font-size:12px;font-weight:700;color:#0E6655;text-align:center;border-radius:5px 5px 0 0">SvcType [enum]</td></tr>
+  <tr><td style="border-top:2px solid #0E6655;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">PROCESS = 0</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">ONESHOT  = 1</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">FORKING  = 2</td></tr>
+</table>
+    <table style="border:2.5px solid #CA6F1E;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:170px;background:#fff">
+  <tr><td style="background:#CA6F1E22;padding:8px 10px;font-size:12px;font-weight:700;color:#CA6F1E;text-align:center;border-radius:5px 5px 0 0">SvcState [enum]</td></tr>
+  <tr><td style="border-top:2px solid #CA6F1E;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">STOPPED</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">STARTING</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">RUNNING</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">RESTARTING</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">FAILED</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">DONE</td></tr>
+</table>
+    <table style="border:2.5px solid #1E8449;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:190px;background:#fff">
+  <tr><td style="background:#1E844922;padding:8px 10px;font-size:12px;font-weight:700;color:#1E8449;text-align:center;border-radius:5px 5px 0 0">SvcRestart [enum]</td></tr>
+  <tr><td style="border-top:2px solid #1E8449;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">NEVER      = 0</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">ON_FAILURE = 1</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">ALWAYS     = 2</td></tr>
+</table>
+    <table style="border:2.5px solid #6C3483;border-radius:8px;border-collapse:separate;border-spacing:0;min-width:260px;background:#fff">
+  <tr><td style="background:#6C348322;padding:8px 10px;font-size:12px;font-weight:700;color:#6C3483;text-align:center;border-radius:5px 5px 0 0">CtlServer</td></tr>
+  <tr><td style="border-top:2px solid #6C3483;padding:0"></td></tr>
+  <tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">sock_fd:        int</td></tr><tr><td style="padding:3px 10px;font-size:10.5px;color:var(--blk);font-family:monospace">sock_path[128]: char</td></tr><tr><td style="border-top:1px dashed #6C3483;padding:0"></td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+ctl_init(path: char*)</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+ctl_accept(sup: *Supervisor)</td></tr><tr><td style="padding:3px 10px;font-size:10px;color:var(--gray);font-style:italic;font-family:monospace">+cmd_list/start/stop(fd)</td></tr>
+</table>
+  </div>
+</div>
+</div></body></html>

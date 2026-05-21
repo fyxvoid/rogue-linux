@@ -1,0 +1,208 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="common.css">
+<style>
+body { background:#F8F9FA; }
+.wrap { padding:32px 40px; }
+
+/* ── byte-layout ruler ── */
+.ruler { display:flex; gap:0; align-items:stretch; font-family:'Courier New',monospace; }
+.cell {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border:2px solid; padding:9px 6px; text-align:center; line-height:1.4;
+  font-size:11.5px; font-weight:700;
+}
+.cell small { font-size:9.5px; font-weight:400; display:block; margin-top:3px; }
+.cell.first { border-radius:8px 0 0 8px; }
+.cell.last  { border-radius:0 8px 8px 0; }
+.offset-row { display:flex; gap:0; }
+.offset-cell {
+  text-align:center; font-size:9px; color:#aaa; font-family:monospace;
+  border-right:1px solid #eee; padding:3px 0;
+}
+
+/* ── step record layout ── */
+.step-ruler { display:flex; gap:0; align-items:stretch; font-family:'Courier New',monospace; }
+.scell {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border:2px solid #1A3A5C; border-left:none; padding:8px 6px; text-align:center;
+  font-size:11px; font-weight:700; color:#1A3A5C; background:#1A3A5C0A; line-height:1.4;
+}
+.scell:first-child { border-left:2px solid #1A3A5C; border-radius:8px 0 0 8px; }
+.scell:last-child  { border-radius:0 8px 8px 0; }
+.scell small { font-size:9px; font-weight:400; color:#5D6D7E; display:block; margin-top:3px; }
+
+/* ── field table ── */
+table.ftable {
+  width:100%; border-collapse:collapse; font-size:12px;
+}
+table.ftable th {
+  background:#1A3A5C; color:#fff; padding:9px 12px; text-align:left;
+  font-size:11px; letter-spacing:.3px;
+}
+table.ftable th:first-child { border-radius:6px 0 0 0; }
+table.ftable th:last-child  { border-radius:0 6px 0 0; }
+table.ftable td { padding:8px 12px; border-bottom:1px solid #eee; vertical-align:top; }
+table.ftable tr:nth-child(even) td { background:#F0F4F8; }
+table.ftable td.field  { font-family:monospace; font-weight:700; color:#C0392B; }
+table.ftable td.offset { font-family:monospace; color:#9A7D0A; font-weight:700; }
+table.ftable td.size   { font-family:monospace; color:#0E6655; }
+
+/* ── op code table ── */
+table.optable { width:100%; border-collapse:collapse; font-size:12px; }
+table.optable th { background:#0E6655; color:#fff; padding:8px 12px; font-size:11px; }
+table.optable td { padding:7px 12px; border-bottom:1px solid #eee; }
+table.optable tr:nth-child(even) td { background:#F0F8F4; }
+table.optable td:first-child { font-family:monospace; font-weight:700; color:#0E6655; }
+table.optable td:nth-child(2) { font-family:monospace; color:#9A7D0A; font-weight:700; }
+</style>
+</head>
+<body><div class="wrap">
+
+<h1 class="fig-title">Figure 6.2 — CGM2PLAN Binary Plan Format</h1>
+
+<!-- ── File-level layout ───────────────────────────────────────── -->
+<div style="font-size:13px;font-weight:700;color:#1A3A5C;margin-bottom:10px">
+  File Layout  <span style="font-weight:400;font-size:11px;color:#5D6D7E">(zero-allocation, zero-parsing — executor casts mmap base directly to struct pointers)</span>
+</div>
+
+<div class="ruler">
+  <!-- magic -->
+  <div class="cell first" style="color:#6C3483;border-color:#6C3483;background:#6C34830D;min-width:120px">
+    magic[8]
+    <small>b"CGM2PLAN"</small>
+    <small style="color:#9A9A9A">bytes 0–7</small>
+  </div>
+  <!-- version -->
+  <div class="cell" style="color:#C0392B;border-color:#C0392B;border-left:none;background:#C0392B0D;min-width:90px">
+    version
+    <small>u32 = 1</small>
+    <small style="color:#9A9A9A">8–11</small>
+  </div>
+  <!-- step_count -->
+  <div class="cell" style="color:#C0392B;border-color:#C0392B;border-left:none;background:#C0392B0D;min-width:95px">
+    step_count
+    <small>u32</small>
+    <small style="color:#9A9A9A">12–15</small>
+  </div>
+  <!-- strtab_offset -->
+  <div class="cell" style="color:#0E6655;border-color:#0E6655;border-left:none;background:#0E66550D;min-width:110px">
+    strtab_offset
+    <small>u64</small>
+    <small style="color:#9A9A9A">16–23</small>
+  </div>
+  <!-- strtab_len -->
+  <div class="cell" style="color:#0E6655;border-color:#0E6655;border-left:none;background:#0E66550D;min-width:100px">
+    strtab_len
+    <small>u64</small>
+    <small style="color:#9A9A9A">24–31</small>
+  </div>
+  <!-- variant -->
+  <div class="cell" style="color:#9A7D0A;border-color:#9A7D0A;border-left:none;background:#9A7D0A0D;min-width:90px">
+    variant
+    <small>u32</small>
+    <small style="color:#9A9A9A">32–35</small>
+  </div>
+  <!-- flags -->
+  <div class="cell" style="color:#9A7D0A;border-color:#9A7D0A;border-left:none;background:#9A7D0A0D;min-width:80px">
+    flags
+    <small>u32</small>
+    <small style="color:#9A9A9A">36–39</small>
+  </div>
+  <!-- reserved -->
+  <div class="cell" style="color:#5D6D7E;border-color:#5D6D7E;border-left:none;background:#5D6D7E0D;min-width:110px">
+    reserved[24]
+    <small>pad to 64 B</small>
+    <small style="color:#9A9A9A">40–63</small>
+  </div>
+  <!-- step records -->
+  <div class="cell" style="color:#1A3A5C;border-color:#1A3A5C;border-left:none;background:#1A3A5C0D;flex:1">
+    step_records[ step_count ]
+    <small>128 bytes × N</small>
+    <small style="color:#9A9A9A">64 … 64+128N−1</small>
+  </div>
+  <!-- string table -->
+  <div class="cell last" style="color:#1E8449;border-color:#1E8449;border-left:none;background:#1E84490D;flex:1">
+    string_table
+    <small>NUL-terminated strings</small>
+    <small style="color:#9A9A9A">strtab_offset … EOF</small>
+  </div>
+</div>
+
+<!-- ── Field table ───────────────────────────────────────────────── -->
+<div style="display:flex;gap:22px;margin-top:20px;align-items:flex-start">
+
+  <div style="flex:1">
+    <div style="font-size:12.5px;font-weight:700;color:#1A3A5C;margin-bottom:8px">Header Fields  (64-byte fixed header)</div>
+    <table class="ftable">
+      <tr><th>Field</th><th>Offset</th><th>Size</th><th>Description</th></tr>
+      <tr><td class="field">magic</td><td class="offset">0</td><td class="size">8 bytes</td><td>b"CGM2PLAN" — file type identifier</td></tr>
+      <tr><td class="field">version</td><td class="offset">8</td><td class="size">4 bytes</td><td>Format version (currently 1)</td></tr>
+      <tr><td class="field">step_count</td><td class="offset">12</td><td class="size">4 bytes</td><td>Number of step records following the header</td></tr>
+      <tr><td class="field">strtab_offset</td><td class="offset">16</td><td class="size">8 bytes</td><td>Byte offset of string table from start of file</td></tr>
+      <tr><td class="field">strtab_len</td><td class="offset">24</td><td class="size">8 bytes</td><td>Length of string table in bytes</td></tr>
+      <tr><td class="field">variant</td><td class="offset">32</td><td class="size">4 bytes</td><td>0 = Binary package · 1 = Native source package</td></tr>
+      <tr><td class="field">flags</td><td class="offset">36</td><td class="size">4 bytes</td><td>Reserved for future use (must be zero)</td></tr>
+      <tr><td class="field">reserved</td><td class="offset">40</td><td class="size">24 bytes</td><td>Zero padding to align header to 64 bytes</td></tr>
+    </table>
+  </div>
+
+  <div style="min-width:280px">
+    <div style="font-size:12.5px;font-weight:700;color:#0E6655;margin-bottom:8px">OpCode Values</div>
+    <table class="optable">
+      <tr><th>OpCode</th><th>Value</th><th>Action</th></tr>
+      <tr><td>OP_EXEC</td><td>0</td><td>fork + exec /bin/sh -c cmd</td></tr>
+      <tr><td>OP_MKDIR</td><td>1</td><td>recursive mkdir_p(path)</td></tr>
+      <tr><td>OP_COPY</td><td>2</td><td>copy_recursive() + path guard</td></tr>
+      <tr><td>OP_CHMOD</td><td>3</td><td>chmod(path, mode)</td></tr>
+      <tr><td>OP_SYMLINK</td><td>4</td><td>symlink(target, path)</td></tr>
+    </table>
+    <div style="margin-top:12px">
+      <div style="font-size:12.5px;font-weight:700;color:#C0392B;margin-bottom:8px">FailPolicy Values</div>
+      <table class="optable" style="--hdr:#C0392B">
+        <tr><th style="background:#C0392B">Policy</th><th style="background:#C0392B">Value</th><th style="background:#C0392B">Behaviour</th></tr>
+        <tr><td style="color:#C0392B">FAIL_ABORT</td><td style="color:#9A7D0A">0</td><td>exit(2) on non-zero rc</td></tr>
+        <tr><td style="color:#C0392B">FAIL_WARN</td><td style="color:#9A7D0A">1</td><td>log warning, continue</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Step record layout ─────────────────────────────────────────── -->
+<div style="margin-top:20px">
+  <div style="font-size:12.5px;font-weight:700;color:#1A3A5C;margin-bottom:8px">
+    Step Record Layout &nbsp;<span style="font-weight:400;font-size:11px;color:#5D6D7E">(128 bytes fixed · executor indexes by offset arithmetic, no heap allocation)</span>
+  </div>
+  <div class="step-ruler">
+    <div class="scell" style="min-width:80px">op<small>u32 · 0–3</small></div>
+    <div class="scell" style="min-width:100px">fail_policy<small>u32 · 4–7</small></div>
+    <div class="scell" style="min-width:95px">cmd_off<small>u32 · 8–11<br>→ strtab</small></div>
+    <div class="scell" style="min-width:100px">workdir_off<small>u32 · 12–15<br>→ strtab</small></div>
+    <div class="scell" style="min-width:85px">env_off<small>u32 · 16–19<br>→ strtab</small></div>
+    <div class="scell" style="min-width:85px">mode<small>u32 · 20–23<br>chmod</small></div>
+    <div class="scell" style="min-width:80px">flags<small>u32 · 24–27</small></div>
+    <div class="scell" style="flex:1">reserved[ 100 bytes ]<small>28–127 · zero padding to 128 bytes</small></div>
+  </div>
+</div>
+
+<!-- ── Access pattern note ───────────────────────────────────────── -->
+<div style="margin-top:16px; display:flex; gap:16px">
+  <div style="flex:1; border:1.5px solid #9A7D0A; border-radius:8px; padding:12px 16px; background:#9A7D0A0D; font-size:11.5px; color:#5D6D7E; line-height:1.7">
+    <strong style="color:#9A7D0A">Zero-allocation read path (cogman-executor):</strong><br>
+    <code style="color:#1A3A5C">fd = open(path)</code> →
+    <code style="color:#1A3A5C">base = mmap(NULL, size, PROT_READ, MAP_PRIVATE, fd, 0)</code> →
+    cast <code style="color:#C0392B">base → struct plan_header*</code> →
+    validate magic + version →
+    index step records as <code style="color:#C0392B">base + 64 + i×128</code> →
+    resolve strings via <code style="color:#0E6655">base + strtab_offset + field_off</code>
+  </div>
+  <div style="min-width:280px; border:1.5px solid #0E6655; border-radius:8px; padding:12px 16px; background:#0E66550D; font-size:11.5px; color:#5D6D7E; line-height:1.7">
+    <strong style="color:#0E6655">String table deduplication (cogman-planner):</strong><br>
+    Identical strings (e.g. <code>workdir='/tmp/build'</code> shared by 40 steps)
+    are stored <em>once</em> in the string table.
+    All 40 step records point to the same offset.
+    FNV-1a hash of the full metadata file is used as the plan cache key.
+  </div>
+</div>
+
+</div></body></html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head>
+<body style="background:#F8F9FA"><div style="padding:28px 36px;min-width:1400px">
+<h1 style="font-size:17px;font-weight:700;color:#1A3A5C;text-align:center;margin-bottom:22px">Figure 8.1 — Service Boot Sequence on Minimal Rootfs  (QEMU Verified)</h1>
+
+<div style="display:flex;gap:22px">
+
+<!-- Timeline -->
+<div style="flex:1">
+<div style="font-size:12px;color:#5D6D7E;margin-bottom:8px;font-style:italic">Boot timeline  (QEMU x86_64 · -m 128M · single serial console)</div>
+<svg width="900" height="380" xmlns="http://www.w3.org/2000/svg" style="background:#fff;border:1px solid #dee2e6;border-radius:8px">
+<defs>
+  <marker id="ta" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#1C2833"/></marker>
+</defs>
+<!-- timeline bar -->
+<line x1="30" y1="200" x2="870" y2="200" stroke="#1C2833" stroke-width="3" marker-end="url(#ta)"/>
+<text x="880" y="204" font-size="11" fill="#5D6D7E" font-family="Segoe UI,sans-serif">time</text>
+
+<!-- Events: (x, label lines, y_box, color) alternating above/below -->
+<g font-family="Segoe UI,sans-serif">
+<!-- Kernel -->
+<line x1="60"  y1="200" x2="60"  y2="110" stroke="#5D6D7E" stroke-width="1.5" stroke-dasharray="4,3"/>
+<circle cx="60" cy="200" r="8" fill="#5D6D7E"/>
+<rect x="10"  y="68" width="100" height="42" rx="6" fill="#5D6D7E18" stroke="#5D6D7E" stroke-width="2"/>
+<text x="60"  y="84"  text-anchor="middle" font-size="10.5" font-weight="700" fill="#5D6D7E">Kernel boots</text>
+<text x="60"  y="100" text-anchor="middle" font-size="9.5"  fill="#5D6D7E">0 ms</text>
+
+<!-- execve init -->
+<line x1="170" y1="200" x2="170" y2="290" stroke="#0E6655" stroke-width="1.5" stroke-dasharray="4,3"/>
+<circle cx="170" cy="200" r="8" fill="#0E6655"/>
+<rect x="110" y="270" width="120" height="42" rx="6" fill="#0E665518" stroke="#0E6655" stroke-width="2"/>
+<text x="170" y="286" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0E6655">execve /sbin/init</text>
+<text x="170" y="302" text-anchor="middle" font-size="9.5"  fill="#0E6655">~50 ms · PID 1</text>
+
+<!-- mount vfs -->
+<line x1="290" y1="200" x2="290" y2="110" stroke="#1A3A5C" stroke-width="1.5" stroke-dasharray="4,3"/>
+<circle cx="290" cy="200" r="8" fill="#1A3A5C"/>
+<rect x="230" y="68" width="120" height="42" rx="6" fill="#1A3A5C18" stroke="#1A3A5C" stroke-width="2"/>
+<text x="290" y="84"  text-anchor="middle" font-size="10.5" font-weight="700" fill="#1A3A5C">mount vfs</text>
+<text x="290" y="100" text-anchor="middle" font-size="9.5"  fill="#1A3A5C">proc·sys·dev·run</text>
+
+<!-- parse services -->
+<line x1="410" y1="200" x2="410" y2="290" stroke="#6C3483" stroke-width="1.5" stroke-dasharray="4,3"/>
+<circle cx="410" cy="200" r="8" fill="#6C3483"/>
+<rect x="348" y="270" width="125" height="42" rx="6" fill="#6C348318" stroke="#6C3483" stroke-width="2"/>
+<text x="410" y="286" text-anchor="middle" font-size="10.5" font-weight="700" fill="#6C3483">parse services</text>
+<text x="410" y="302" text-anchor="middle" font-size="9.5"  fill="#6C3483">4 files loaded</text>
+
+<!-- hello DONE -->
+<line x1="510" y1="200" x2="510" y2="110" stroke="#1E8449" stroke-width="1.5" stroke-dasharray="4,3"/>
+<circle cx="510" cy="200" r="8" fill="#1E8449"/>
+<rect x="450" y="68" width="120" height="42" rx="6" fill="#1E844918" stroke="#1E8449" stroke-width="2"/>
+<text x="510" y="84"  text-anchor="middle" font-size="10.5" font-weight="700" fill="#1E8449">hello: DONE</text>
+<text x="510" y="100" text-anchor="middle" font-size="9.5"  fill="#1E8449">exit=0 ✓</text>
+
+<!-- heartbeat RUNNING -->
+<line x1="620" y1="200" x2="620" y2="290" stroke="#0E6655" stroke-width="1.5" stroke-dasharray="4,3"/>
+<circle cx="620" cy="200" r="8" fill="#0E6655"/>
+<rect x="555" y="270" width="130" height="42" rx="6" fill="#0E665518" stroke="#0E6655" stroke-width="2"/>
+<text x="620" y="286" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0E6655">heartbeat: RUNNING</text>
+<text x="620" y="302" text-anchor="middle" font-size="9.5"  fill="#0E6655">pid=42 ✓</text>
+
+<!-- ctl-probe + shutdown -->
+<line x1="730" y1="200" x2="730" y2="110" stroke="#1A3A5C" stroke-width="1.5" stroke-dasharray="4,3"/>
+<circle cx="730" cy="200" r="8" fill="#1A3A5C"/>
+<rect x="670" y="68" width="120" height="42" rx="6" fill="#1A3A5C18" stroke="#1A3A5C" stroke-width="2"/>
+<text x="730" y="84"  text-anchor="middle" font-size="10.5" font-weight="700" fill="#1A3A5C">ctl-probe: DONE</text>
+<text x="730" y="100" text-anchor="middle" font-size="9.5"  fill="#1A3A5C">exit=0 ✓</text>
+
+<!-- ALL PASS -->
+<line x1="830" y1="200" x2="830" y2="290" stroke="#1E8449" stroke-width="2" stroke-dasharray="4,3"/>
+<circle cx="830" cy="200" r="10" fill="#1E8449" stroke="#fff" stroke-width="2"/>
+<rect x="765" y="270" width="110" height="48" rx="6" fill="#1E844930" stroke="#1E8449" stroke-width="2.5"/>
+<text x="820" y="289" text-anchor="middle" font-size="11" font-weight="700" fill="#1E8449">ALL STAGES</text>
+<text x="820" y="306" text-anchor="middle" font-size="11" font-weight="700" fill="#1E8449">PASS ✓</text>
+
+<!-- time labels -->
+<text x="60"  y="220" text-anchor="middle" font-size="9" fill="#aaa">0</text>
+<text x="170" y="220" text-anchor="middle" font-size="9" fill="#aaa">50ms</text>
+<text x="290" y="220" text-anchor="middle" font-size="9" fill="#aaa">80ms</text>
+<text x="410" y="220" text-anchor="middle" font-size="9" fill="#aaa">90ms</text>
+<text x="510" y="220" text-anchor="middle" font-size="9" fill="#aaa">110ms</text>
+<text x="620" y="220" text-anchor="middle" font-size="9" fill="#aaa">130ms</text>
+<text x="730" y="220" text-anchor="middle" font-size="9" fill="#aaa">150ms</text>
+<text x="830" y="220" text-anchor="middle" font-size="9" fill="#aaa">~1.8s</text>
+
+<!-- Phase brackets -->
+<line x1="30"  y1="340" x2="380" y2="340" stroke="#5D6D7E" stroke-width="2"/>
+<line x1="30"  y1="335" x2="30"  y2="345" stroke="#5D6D7E" stroke-width="2"/>
+<line x1="380" y1="335" x2="380" y2="345" stroke="#5D6D7E" stroke-width="2"/>
+<text x="205" y="358" text-anchor="middle" font-size="10.5" fill="#5D6D7E" font-weight="600">Kernel init</text>
+
+<line x1="385" y1="340" x2="780" y2="340" stroke="#1E8449" stroke-width="2"/>
+<line x1="385" y1="335" x2="385" y2="345" stroke="#1E8449" stroke-width="2"/>
+<line x1="780" y1="335" x2="780" y2="345" stroke="#1E8449" stroke-width="2"/>
+<text x="582" y="358" text-anchor="middle" font-size="10.5" fill="#1E8449" font-weight="600">Service startup &amp; verification</text>
+
+<line x1="785" y1="340" x2="860" y2="340" stroke="#0E6655" stroke-width="2"/>
+<line x1="785" y1="335" x2="785" y2="345" stroke="#0E6655" stroke-width="2"/>
+<line x1="860" y1="335" x2="860" y2="345" stroke="#0E6655" stroke-width="2"/>
+<text x="822" y="358" text-anchor="middle" font-size="9" fill="#0E6655" font-weight="600">Main loop</text>
+</g>
+</svg>
+
+<!-- QEMU command -->
+<div style="margin-top:10px;border:1.5px solid #5D6D7E;border-radius:6px;padding:10px 14px;background:#5D6D7E0D;font-family:monospace;font-size:11px;color:#1C2833">
+qemu-system-x86_64 -kernel /boot/vmlinuz -drive file=rootfs.img,format=raw -append "console=ttyS0 root=/dev/sda rw init=/sbin/init quiet" -nographic -m 128M -serial mon:stdio
+</div>
+</div>
+
+<!-- Performance panel -->
+<div style="min-width:300px;border:2px solid #1E8449;border-radius:10px;padding:18px;background:#1E84490A">
+  <div style="font-size:13px;font-weight:700;color:#1E8449;margin-bottom:14px">Performance vs Python reference</div>
+  <table style="width:100%;font-size:12px;border-collapse:collapse">
+    <tr style="border-bottom:1px solid #dee2e6"><th style="padding:7px 0;text-align:left;color:#1A3A5C;font-size:11px">Metric</th><th style="padding:7px 0;text-align:right;color:#1A3A5C;font-size:11px">Ours</th><th style="padding:7px 0;text-align:right;color:#1A3A5C;font-size:11px">Ref</th><th style="padding:7px 0;text-align:right;color:#1A3A5C;font-size:11px">Gain</th></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px 0">Plan resolution</td><td style="padding:8px 0;text-align:right;color:#1E8449;font-weight:700">8 ms</td><td style="padding:8px 0;text-align:right;color:#922B21">450 ms</td><td style="padding:8px 0;text-align:right;color:#1E8449;font-weight:700">56×</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px 0">Peak memory</td><td style="padding:8px 0;text-align:right;color:#1E8449;font-weight:700">4 MB</td><td style="padding:8px 0;text-align:right;color:#922B21">85 MB</td><td style="padding:8px 0;text-align:right;color:#1E8449;font-weight:700">21×</td></tr>
+    <tr style="border-bottom:1px solid #eee"><td style="padding:8px 0">Per-step overhead</td><td style="padding:8px 0;text-align:right;color:#1E8449;font-weight:700">0.2 ms</td><td style="padding:8px 0;text-align:right;color:#922B21">10 ms</td><td style="padding:8px 0;text-align:right;color:#1E8449;font-weight:700">50×</td></tr>
+    <tr><td style="padding:8px 0">Rootfs size</td><td style="padding:8px 0;text-align:right;color:#1E8449;font-weight:700">6.3 MB</td><td style="padding:8px 0;text-align:right;color:#5D6D7E">N/A</td><td style="padding:8px 0;text-align:right;color:#1E8449;font-weight:700">—</td></tr>
+  </table>
+</div>
+</div>
+
+</div></body></html>

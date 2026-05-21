@@ -140,7 +140,7 @@ menuentry "Rogue Linux (cogman init)" {
            root=UUID=$ROOT_UUID rw \\
            init=/init \\
            console=ttyS0 \\
-           -- --services-dir /etc/cogman/services-minimal
+           -- --services-dir /etc/cogman/services
 ${INITRD_GRUB_LINE}
     echo "Booting Rogue Linux..."
 }

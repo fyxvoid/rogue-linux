@@ -1,0 +1,1914 @@
+c[?7l[2J[0mSeaBIOS (version 1.17.0-debian-1.17.0-1)
+
+
+iPXE (https://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+3EFC7AD0+3EB87AD0 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM...
+c[?7l[2Jcogman-supervisor starting (pid=1)
+svc_load_dir: loaded service '"udev"' from /etc/cogman/services/udev.service
+svc_load_dir: loaded service 'exec-probe' from /etc/cogman/services/exec-probe.service
+svc_load_dir: loaded service 'pkg-test' from /etc/cogman/services/pkg-test.service
+svc_load_dir: loaded service 'dropbear' from /etc/cogman/services/dropbear.service
+svc_load_dir: loaded service 'dashboard' from /etc/cogman/services/dashboard.service
+svc_load_dir: loaded service 'tty6' from /etc/cogman/services/tty6.service
+svc_load_dir: loaded service 'rcs' from /etc/cogman/services/rcs.service
+svc_load_dir: loaded service 'x11-diag' from /etc/cogman/services/x11-diag.service
+svc_load_dir: loaded service 'ctl-probe' from /etc/cogman/services/ctl-probe.service
+svc_load_dir: loaded service 'firewall' from /etc/cogman/services/firewall.service
+svc_load_dir: loaded service 'iwd' from /etc/cogman/services/iwd.service
+svc_load_dir: loaded service 'dropbear-keygen' from /etc/cogman/services/dropbear-keygen.service
+svc_load_dir: loaded service 'klogd' from /etc/cogman/services/klogd.service
+svc_load_dir: loaded service 'input-probe' from /etc/cogman/services/input-probe.service
+svc_load_dir: loaded service 'ntpd' from /etc/cogman/services/ntpd.service
+svc_load_dir: loaded service 'hello' from /etc/cogman/services/hello.service
+svc_load_dir: loaded service 'heartbeat' from /etc/cogman/services/heartbeat.service
+svc_load_dir: loaded service 'tty3' from /etc/cogman/services/tty3.service
+svc_load_dir: loaded service 'tty5' from /etc/cogman/services/tty5.service
+svc_load_dir: loaded service 'tty1' from /etc/cogman/services/tty1.service
+svc_load_dir: loaded service 'tty4' from /etc/cogman/services/tty4.service
+svc_load_dir: loaded service 'eth0-dhcp' from /etc/cogman/services/eth0-dhcp.service
+svc_load_dir: loaded service 'mdev' from /etc/cogman/services/mdev.service
+svc_load_dir: loaded service 'syslogd' from /etc/cogman/services/syslogd.service
+svc_load_dir: loaded service 'pentest-check' from /etc/cogman/services/pentest-check.service
+svc_load_dir: loaded service 'tty2' from /etc/cogman/services/tty2.service
+svc_load_dir: loaded service 'x11' from /etc/cogman/services/x11.service
+cogman-supervisor: loaded 27 service(s)
+ctl_init: listening on /run/cogman-supervisor.sock
+sup: starting 'rcs'
+svc_spawn: started rcs pid=54
+Rogue Linux 1.0 — booted OK
+sup: service 'rcs' pid=54 exited, code=0
+sup: starting 'pkg-test'
+svc_spawn: started pkg-test pid=75
+sup: starting 'dashboard'
+svc_spawn: started dashboard pid=76
+sup: starting 'tty6'
+svc_spawn: started tty6 pid=77
+sup: starting 'ctl-probe'
+============================================
+ Rogue Linux 1.0 — Package Stability Test
+svc_spawn: started ctl-probe pid=78
+sup: starting 'firewall'
+============================================
+
+[1] Shell & Core Utils
+svc_spawn: started firewall pid=82
+sup: starting 'dropbear-keygen'
+svc_spawn: started dropbear-keygen pid=83
+  PASS: busybox applets
+  PASS: sh arithmetic
+sup: starting 'ntpd'
+svc_spawn: started ntpd pid=87
+  PASS: bash version
+sup: starting 'hello'
+ntpd: applet not found
+svc_spawn: started hello pid=90
+sup: starting 'heartbeat'
+svc_spawn: started heartbeat pid=92
+Generating 2048 bit rsa key, this may take a while...
+  PASS: bash arithmetic
+[SERVICE:hello] cogman-supervisor is alive, sir.
+[SERVICE:heartbeat] tick 0
+sup: starting 'tty3'
+svc_spawn: started tty3 pid=96
+  PASS: bash arrays
+sup: starting 'tty5'
+  PASS: cat/echo/grep
+svc_spawn: started tty5 pid=99
+sup: starting 'tty1'
+svc_spawn: started tty1 pid=103
+  PASS: sed substitution
+sup: starting 'tty4'
+svc_spawn: started tty4 pid=107
+sup: starting 'mdev'
+  PASS: awk field split
+svc_spawn: started mdev pid=110
+sup: starting 'syslogd'
+/bin/sh: can't create /proc/sys/kernel/hotplug: nonexistent directory
+mdev: unknown user/group 'root:netdev' on line 18
+mdev: unknown user/group 'root:netdev' on line 19
+svc_spawn: started syslogd pid=112
+  PASS: find files
+mdev: unknown user/group 'root:netdev' on line 20
+sup: starting 'tty2'
+svc_spawn: started tty2 pid=116
+  PASS: wc line count
+sup: service 'firewall' pid=82 exited, code=0
+mdev: unknown user/group 'root:netdev' on line 43
+sup: service 'ntpd' pid=87 exited, code=127
+mdev: unknown user/group 'root:plugdev' on line 52
+  PASS: sort+uniq
+sup: will restart 'ntpd' in 30s
+sup: service 'hello' pid=90 exited, code=0
+mdev: unknown user/group 'root:i2c' on line 76
+mdev: unknown user/group 'root:spi' on line 77
+  PASS: tar list
+
+[2] Text Editors
+  PASS: vim binary
+  PASS: vim --version
+  PASS: nano binary
+  PASS: nano --version
+  PASS: vi (busybox)
+
+[3] Network Tools
+  PASS: curl binary
+  PASS: curl --version
+sup: service 'mdev' pid=110 exited, code=0
+  PASS: curl HTTPS support
+sup: starting 'iwd'
+svc_spawn: started iwd pid=137
+sup: starting 'klogd'
+svc_spawn: started klogd pid=138
+/bin/sh: /usr/libexec/iwd: not found
+  PASS: wget (busybox)
+  PASS: ping binary
+sup: starting 'input-probe'
+svc_spawn: started input-probe pid=141
+sup: starting 'eth0-dhcp'
+svc_spawn: started eth0-dhcp pid=142
+sup: starting 'pentest-check'
+svc_spawn: started pentest-check pid=143
+sup: service 'iwd' pid=137 exited, code=127
+sup: will restart 'iwd' in 5s
+udhcpc: started, v1.37.0
+  PASS: ifconfig (busybox)
+
+[1mRogue Linux — Verification Suite[0m
+  PASS: ip (busybox)
+input: /dev/input/event0
+input: /dev/input/event1
+input: /dev/input/event2
+Host: 6.6.75 | PID: 143
+
+
+[1m=== Pentest Tools ===[0m
+input-probe-done
+sup: service 'input-probe' pid=141 exited, code=0
+sup: starting 'x11'
+svc_spawn: started x11 pid=155
+udhcpc: broadcasting discover
+  PASS: netstat (busybox)
+[32m  PASS[0m  nmap  →  /usr/bin/nmap  (4.0K)
+startx: starting at Wed May 20 00:17:02 UTC 2026
+udhcpc: sendto: Network is down
+udhcpc: read error: Network is down, reopening socket
+  PASS: nc (busybox)
+
+[4] SSH (Dropbear)
+  PASS: dropbear server
+startx: dirs ready
+  PASS: dropbear version
+  PASS: ssh client binary
+[32m  PASS[0m  tcpdump  →  /usr/bin/tcpdump  (1.2M)
+startx: xkbcomp shim installed
+  PASS: scp binary
+  PASS: dropbearkey
+  PASS: etc/dropbear dir
+
+[5] Package Manager (Cogman)
+[32m  PASS[0m  socat  →  /usr/bin/socat  (504.0K)
+  PASS: cogman daemon
+[32m  PASS[0m  nc (busybox)  →  /usr/bin/nc  (0)
+
+[1m=== Pentest Libraries ===[0m
+  PASS: cogman-planner
+  PASS: cogman-supervisor
+  PASS: cogman-ctl
+  PASS: cogman-exec
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+  PASS: service files
+[32m  PASS[0m  lib libpcap.so.0.8  →  /lib/x86_64-linux-gnu/libpcap.so.0.8
+  PASS: smoke plan exists
+
+[6] System & Filesystem
+  PASS: proc mounted
+  PASS: sys mounted
+  PASS: dev populated
+[32m  PASS[0m  lib libpcap.so.1*  →  /lib/x86_64-linux-gnu/libpcap.so.1.10.6
+  PASS: tmp writable
+startx: launching xinit → Xorg :0 vt7
+  PASS: etc/passwd
+  PASS: etc/hosts
+
+  PASS: kernel version 6.6
+  PASS: kernel modules dir
+
+X.Org X Server 1.21.1  PASS: hostname rogue
+  PASS: ld.so.cache
+  PASS: glibc present
+  PASS: libgcc present
+
+[7] Build System Integration
+.21[32m  PASS[0m  lib libssl.so.3  →  /lib/x86_64-linux-gnu/libssl.so.3
+
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+[32m  PASS[0m  lib libcrypto.so.3  →  /lib/x86_64-linux-gnu/libcrypto.so.3
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, [32m  PASS[0m  lib liblinear.so.4*  →  /lib/x86_64-linux-gnu/liblinear.so.4.2.
+(EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:02 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+[32m  PASS[0m  lib liblua5.4.so.0*  →  /lib/x86_64-linux-gnu/liblua5.4.so.0.0.0
+sup: starting 'x11-diag'
+svc_spawn: started x11-diag pid=240
+  PASS: cogman plan+exec
+
+============================================
+[32m  PASS[0m  lib libwrap.so.0*  →  /lib/x86_64-linux-gnu/libwrap.so.0.7.6
+
+[1m=== Pentest Capability Checks ===[0m
+ Results: 52 passed, 0 failed
+[31m  FAIL[0m  nmap --version  [exit 1]
+ STATUS: STABLE — ready for daily driver use
+============================================
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+sup: service 'pkg-test' pid=75 exited, code=0
+[32m  PASS[0m  tcpdump --version
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE)[32m  PASS[0m  socat -V
+ Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+[31m  FAIL[0m  nmap localhost connect-scan  [exit 1]
+xinit: server error
+[32m  PASS[0m  socat pipe loopback
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[     2.050] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[     2.055] (++) using VT number 7
+
+[     2.055] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[     2.057] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[     2.057] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[     2.057] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[     2.057] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[     2.057] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[     2.057] (II) "glx" will be loaded even though the default is to disable it.
+[     2.057] (II) LoadModule: "modesetting"
+[     2.060] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[     2.060] (II) Module modesetting: vendor="X.Org Foundation"
+[     2.060] 	compiled for 1.21.1.21, module version = 1.21.1
+[     2.060] 	Module class: X.Org Video Driver
+[     2.060] 	ABI class: X.Org Video Driver, version 25.2
+[     2.060] (II) LoadModule: "evdev"
+[     2.060] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[     2.060] (II) Module evdev: vendor="X.Org Foundation"
+[     2.060] 	compiled for 1.21.1.15, module version = 2.11.0
+[     2.060] 	Module class: X.Org XInput Driver
+[     2.060] 	ABI class: X.Org XInput driver, version 24.4
+[     2.060] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[     2.060] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[     2.072] (EE) open /dev/dri/card0: No such file or directory
+[     2.072] (WW) Falling back to old probe method for modesetting
+[     2.072] (EE) open /dev/dri/card0: No such file or directory
+[     2.072] (EE) Screen 0 deleted because of no matching config section.
+[     2.072] (II) UnloadModule: "modesetting"
+[     2.072] (EE) Device(s) detected, but none match those in the config file.
+[     2.072] (EE) 
+Fatal server error:
+[     2.073] (EE) no screens found(EE) 
+[     2.076] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[     2.079] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[     2.080] (EE) 
+[     2.083] (EE) Server terminated with error (1). Closing log file.
+[32m  PASS[0m  nc connection test
+
+[1m=== Kernel Networking Features (needed for packet capture) ===[0m
+sup: service 'x11' pid=155 exited, code=1
+sup: will restart 'x11' in 5s
+[34m  INFO[0m  CONFIG_PACKET status unknown (no /proc/config.gz)
+[34m  INFO[0m  CONFIG_BPF status unknown (no /proc/config.gz)
+[32m  PASS[0m  CAP_NET_RAW available
+
+[31m[1m2 CHECK(S) FAILED[0m
+
+sup: service 'pentest-check' pid=143 exited, code=1
+Public key portion is:
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1U2THsbKuXTtzSQF7RrlgVrg/OTx6GDVvs7Ywqb1c8l6myyr8lgrAjwd2H+NWIUKp54xpiEWUl/GYS/1KSAFEFYczaxKOEb1h7a6NM15uGqtgd+fgeaRLHIhHi4ujWj5BirCwPZuqKgFKLr7uGMHu9yWBpTYaGNFxHgD8G2SGzTNVnHZYbjJzuSPYlRBWYX/BFSUHPdwrDLmrTAIKossU9n4HhiZJY1CGeb/P2LXK0bTBZGmEABQw4r8si+eTxdmSSEugEaiit3r/UcjJ4T/f/VA55RF8jr1y6dxSLlRYe7+HdynWP+fjFKSrPIkHXzDXE0k4Y6VVMkyZo9OBI8Of root@rogue
+Fingerprint: SHA256:rR7RJgCOr0eQm7aqlV9oZXNCTI8TqwQHkfkYEoJwlEY
+Generating 256 bit ecdsa key, this may take a while...
+Public key portion is:
+ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBBqBGnJQew5glYas/v+yICWz/UcmeOCo41RZW23fC8eAizOMDxbdtGTJeCOYLi0vXOAWyYv8aVtk3aMJzbkCJDE= root@rogue
+Fingerprint: SHA256:EthcfEKiO8xBCQK5iO0H2LvCrAsiyRn0jx5WjSWy8yk
+sup: service 'dropbear-keygen' pid=83 exited, code=0
+sup: starting 'dropbear'
+svc_spawn: started dropbear pid=285
+[285] May 20 00:17:03 Failed loading /etc/dropbear/dropbear_ed25519_host_key
+[285] May 20 00:17:03 Not backgrounding
+"udev"                    stopped       pid=-1       restarts=0
+exec-probe                stopped       pid=-1       restarts=0
+pkg-test                  done          pid=-1       restarts=0
+dropbear                  running       pid=285      restarts=0
+dashboard                 running       pid=76       restarts=0
+tty6                      running       pid=77       restarts=0
+rcs                       done          pid=-1       restarts=0
+x11-diag                  running       pid=240      restarts=0
+ctl-probe                 running       pid=78       restarts=0
+firewall                  done          pid=-1       restarts=0
+iwd                       restarting    pid=-1       restarts=0
+dropbear-keygen           done          pid=-1       restarts=0
+klogd                     running       pid=138      restarts=0
+input-probe               done          pid=-1       restarts=0
+ntpd                      restarting    pid=-1       restarts=0
+hello                     done          pid=-1       restarts=0
+heartbeat                 running       pid=92       restarts=0
+tty3                      running       pid=96       restarts=0
+tty5                      running       pid=99       restarts=0
+tty1                      running       pid=103      restarts=0
+tty4                      running       pid=107      restarts=0
+eth0-dhcp                 running       pid=142      restarts=0
+mdev                      done          pid=-1       restarts=0
+syslogd                   running       pid=112      restarts=0
+pentest-check             failed        pid=-1       restarts=0
+tty2                      running       pid=116      restarts=0
+x11                       restarting    pid=-1       restarts=0
+OK
+[SERVICE:ctl-probe] control socket OK, sir.
+sup: service 'ctl-probe' pid=78 exited, code=0
+sup: starting 'exec-probe'
+svc_spawn: started exec-probe pid=287
+
+[1m[96m  ╔══════════════════════════════════════════════════╗[0m
+[1m[96m  ║         ▐ C O G M A N ▌  Build Steward          ║[0m
+[96m[90m  ║    Your faithful systems butler, at your service. ║[0m
+[1m[96m  ╚══════════════════════════════════════════════════╝[0m
+
+[90m[00:17:04][0m [1m[96m[0m▐ PLAN ▌[0m [97mIf I may, sir — Loading package definition: /etc/cogman/plans/smoke.toml[0m
+[90m[00:17:04][0m [1m[96m[0m▐  CHK ▌[0m [97mPray allow me to verify, sir — Validating package schema for 'smoke'[0m
+[90m[00:17:04][0m [1m[92m[0m▐  OK  ▌[0m [97mQuite effortlessly done, your grace. 'smoke' passed schema validation without a single complaint.[0m
+[90m[00:17:04][0m [1m[96m[0m▐ PLAN ▌[0m [97mIf I may, sir — Resolving the dependency graph — tracing the full lineage of requirements...[0m
+[90m[00:17:04][0m [1m[92m[0m▐  OK  ▌[0m [97mVery good, sir. Dependency graph resolved. A solitary package stands ready, sir.[0m
+[90m[00:17:04][0m [1m[96m[0m▐  CHK ▌[0m [97mPray allow me to verify, sir — Enforcing package policies — security boundaries are not optional[0m
+[90m[00:17:04][0m [1m[92m[0m▐  OK  ▌[0m [97mVery good, sir. All 1 package cleared policy inspection, your excellency. The estate is secure.[0m
+[90m[00:17:04][0m [1m[96m[0m▐ PLAN ▌[0m [97mIf I may, sir — Assembling the execution plan for 1 package(s)...[0m
+[90m[00:17:04][0m [1m[90m[0m▐ EXEC ▌[0m [90m[1m  ▶  Planning steps for 'test/smoke'[0m
+[90m[00:17:04][0m [1m[96m[0m▐ PLAN ▌[0m [97mIf I may, sir — Plan assembled — 5 step(s) ready for emission.[0m
+[90m[00:17:04][0m [1m[92m[0m▐ CACH ▌[0m [97mI took the liberty of consulting my records, your grace. An identical plan was on file. Served from cache → /tmp/smoke.plan[0m
+
+[90m[90m  ▐ COGMAN ▌  Duties discharged. Good day, sir.[0m
+
+[94m[1m▐ COGMAN II ▌[0m [92mMessenger: Broker initialized at /tmp/cogman.sock. Quite satisfactory, sir.[0m
+[94m[1m▐ COGMAN II ▌[0m [92mSupervisor mode active. Monitoring heartbeat.. Quite satisfactory, sir.[0m
+[94m[1m▐ COGMAN II ▌[0m [97mExecuting binary plan with 5 step(s), sir.[0m
+[94m[1m▐ COGMAN II ▌[0m [97mStep 1/5 [EXEC]: echo '[SMOKE] step-1: OP_EXEC works', sir.[0m
+[SMOKE] step-1: OP_EXEC works
+[94m[1m▐ COGMAN II ▌[0m [97mStep 2/5 [EXEC]: mkdir -p /tmp/cogman-smoke, sir.[0m
+[94m[1m▐ COGMAN II ▌[0m [97mStep 3/5 [EXEC]: echo '[SMOKE] step-3: directory created, writing marker', sir.[0m
+[SMOKE] step-3: directory created, writing marker
+[94m[1m▐ COGMAN II ▌[0m [97mStep 4/5 [EXEC]: sh -c 'echo smoke-ok > /tmp/cogman-smoke/result', sir.[0m
+[94m[1m▐ COGMAN II ▌[0m [97mStep 5/5 [EXEC]: sh -c 'grep smoke-ok /tmp/cogman-smoke/result && echo "[SMOK..., sir.[0m
+smoke-ok
+[SMOKE] OP_VERIFY analogue passed
+[94m[1m▐ COGMAN II ▌[0m [92mAll 5 steps executed successfully. Quite satisfactory, sir.[0m
+[SERVICE:exec-probe] plan execution OK, sir.
+sup: service 'exec-probe' pid=287 exited, code=0
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 1)
+svc_spawn: started iwd pid=296
+sup: restarting 'x11' (attempt 1)
+svc_spawn: started x11 pid=297
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=296 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:17:07 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:07 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[     6.544] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[     6.544] (++) using VT number 7
+
+[     6.544] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[     6.548] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[     6.548] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[     6.548] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[     6.548] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[     6.548] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[     6.548] (II) "glx" will be loaded even though the default is to disable it.
+[     6.548] (II) LoadModule: "modesetting"
+[     6.548] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[     6.549] (II) Module modesetting: vendor="X.Org Foundation"
+[     6.549] 	compiled for 1.21.1.21, module version = 1.21.1
+[     6.549] 	Module class: X.Org Video Driver
+[     6.549] 	ABI class: X.Org Video Driver, version 25.2
+[     6.549] (II) LoadModule: "evdev"
+[     6.549] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[     6.549] (II) Module evdev: vendor="X.Org Foundation"
+[     6.549] 	compiled for 1.21.1.15, module version = 2.11.0
+[     6.549] 	Module class: X.Org XInput Driver
+[     6.549] 	ABI class: X.Org XInput driver, version 24.4
+[     6.549] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[     6.549] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[     6.561] (EE) open /dev/dri/card0: No such file or directory
+[     6.561] (WW) Falling back to old probe method for modesetting
+[     6.561] (EE) open /dev/dri/card0: No such file or directory
+[     6.561] (EE) Screen 0 deleted because of no matching config section.
+[     6.561] (II) UnloadModule: "modesetting"
+[     6.561] (EE) Device(s) detected, but none match those in the config file.
+[     6.561] (EE) 
+Fatal server error:
+[     6.561] (EE) no screens found(EE) 
+[     6.562] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[     6.562] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[     6.563] (EE) 
+[     6.568] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=297 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 1
+udhcpc: read error: Network is down, reopening socket
+=== X11-DIAG START ===
+Time: Wed May 20 00:17:08 UTC 2026
+X lock : none
+X sock : 
+X procs:   323 root     grep -E [Xx]org|xinit|dwm|startx
+--- Xorg.log tail ---
+[     6.549] 	Module class: X.Org XInput Driver
+[     6.549] 	ABI class: X.Org XInput driver, version 24.4
+[     6.549] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[     6.549] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[     6.561] (EE) open /dev/dri/card0: No such file or directory
+[     6.561] (WW) Falling back to old probe method for modesetting
+[     6.561] (EE) open /dev/dri/card0: No such file or directory
+[     6.561] (EE) Screen 0 deleted because of no matching config section.
+[     6.561] (II) UnloadModule: "modesetting"
+[     6.561] (EE) Device(s) detected, but none match those in the config file.
+[     6.561] (EE) 
+Fatal server error:
+[     6.561] (EE) no screens found(EE) 
+[     6.562] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[     6.562] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[     6.563] (EE) 
+[     6.568] (EE) Server terminated with error (1). Closing log file.
+=== X11-DIAG END ===
+sup: service 'x11-diag' pid=240 exited, code=0
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 2)
+svc_spawn: started iwd pid=326
+sup: restarting 'x11' (attempt 2)
+/bin/sh: /usr/libexec/iwd: not found
+svc_spawn: started x11 pid=327
+sup: service 'iwd' pid=326 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:17:12 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:12 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    11.590] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    11.590] (++) using VT number 7
+
+[    11.590] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    11.592] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    11.592] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    11.592] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    11.592] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    11.592] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    11.592] (II) "glx" will be loaded even though the default is to disable it.
+[    11.592] (II) LoadModule: "modesetting"
+[    11.592] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    11.592] (II) Module modesetting: vendor="X.Org Foundation"
+[    11.592] 	compiled for 1.21.1.21, module version = 1.21.1
+[    11.592] 	Module class: X.Org Video Driver
+[    11.592] 	ABI class: X.Org Video Driver, version 25.2
+[    11.592] (II) LoadModule: "evdev"
+[    11.592] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    11.592] (II) Module evdev: vendor="X.Org Foundation"
+[    11.592] 	compiled for 1.21.1.15, module version = 2.11.0
+[    11.592] 	Module class: X.Org XInput Driver
+[    11.592] 	ABI class: X.Org XInput driver, version 24.4
+[    11.592] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    11.592] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    11.599] (EE) open /dev/dri/card0: No such file or directory
+[    11.599] (WW) Falling back to old probe method for modesetting
+[    11.599] (EE) open /dev/dri/card0: No such file or directory
+[    11.599] (EE) Screen 0 deleted because of no matching config section.
+[    11.599] (II) UnloadModule: "modesetting"
+[    11.599] (EE) Device(s) detected, but none match those in the config file.
+[    11.599] (EE) 
+Fatal server error:
+[    11.600] (EE) no screens found(EE) 
+[    11.601] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    11.604] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    11.606] (EE) 
+[    11.609] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=327 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 2
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 3)
+svc_spawn: started iwd pid=346
+/bin/sh: /usr/libexec/iwd: not found
+sup: restarting 'x11' (attempt 3)
+svc_spawn: started x11 pid=347
+sup: service 'iwd' pid=346 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:17:17 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:17 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    16.568] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    16.568] (++) using VT number 7
+
+[    16.568] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    16.570] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    16.570] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    16.570] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    16.570] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    16.570] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    16.570] (II) "glx" will be loaded even though the default is to disable it.
+[    16.570] (II) LoadModule: "modesetting"
+[    16.570] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    16.570] (II) Module modesetting: vendor="X.Org Foundation"
+[    16.570] 	compiled for 1.21.1.21, module version = 1.21.1
+[    16.570] 	Module class: X.Org Video Driver
+[    16.570] 	ABI class: X.Org Video Driver, version 25.2
+[    16.570] (II) LoadModule: "evdev"
+[    16.570] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    16.571] (II) Module evdev: vendor="X.Org Foundation"
+[    16.571] 	compiled for 1.21.1.15, module version = 2.11.0
+[    16.571] 	Module class: X.Org XInput Driver
+[    16.571] 	ABI class: X.Org XInput driver, version 24.4
+[    16.571] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    16.571] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    16.578] (EE) open /dev/dri/card0: No such file or directory
+[    16.578] (WW) Falling back to old probe method for modesetting
+[    16.578] (EE) open /dev/dri/card0: No such file or directory
+[    16.578] (EE) Screen 0 deleted because of no matching config section.
+[    16.578] (II) UnloadModule: "modesetting"
+[    16.578] (EE) Device(s) detected, but none match those in the config file.
+[    16.578] (EE) 
+Fatal server error:
+[    16.579] (EE) no screens found(EE) 
+[    16.580] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    16.583] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    16.584] (EE) 
+[    16.587] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=347 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 3
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 4)
+svc_spawn: started iwd pid=366
+sup: restarting 'x11' (attempt 4)
+/bin/sh: /usr/libexec/iwd: not found
+svc_spawn: started x11 pid=367
+sup: service 'iwd' pid=366 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:17:22 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:22 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    21.554] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    21.554] (++) using VT number 7
+
+[    21.554] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    21.560] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    21.560] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    21.560] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    21.560] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    21.560] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    21.560] (II) "glx" will be loaded even though the default is to disable it.
+[    21.560] (II) LoadModule: "modesetting"
+[    21.560] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    21.560] (II) Module modesetting: vendor="X.Org Foundation"
+[    21.560] 	compiled for 1.21.1.21, module version = 1.21.1
+[    21.560] 	Module class: X.Org Video Driver
+[    21.560] 	ABI class: X.Org Video Driver, version 25.2
+[    21.560] (II) LoadModule: "evdev"
+[    21.560] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    21.560] (II) Module evdev: vendor="X.Org Foundation"
+[    21.560] 	compiled for 1.21.1.15, module version = 2.11.0
+[    21.560] 	Module class: X.Org XInput Driver
+[    21.560] 	ABI class: X.Org XInput driver, version 24.4
+[    21.560] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    21.560] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    21.575] (EE) open /dev/dri/card0: No such file or directory
+[    21.575] (WW) Falling back to old probe method for modesetting
+[    21.575] (EE) open /dev/dri/card0: No such file or directory
+[    21.575] (EE) Screen 0 deleted because of no matching config section.
+[    21.575] (II) UnloadModule: "modesetting"
+[    21.575] (EE) Device(s) detected, but none match those in the config file.
+[    21.575] (EE) 
+Fatal server error:
+[    21.575] (EE) no screens found(EE) 
+[    21.575] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    21.575] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    21.575] (EE) 
+[    21.581] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=367 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 4
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 5)
+svc_spawn: started iwd pid=386
+sup: restarting 'x11' (attempt 5)
+svc_spawn: started x11 pid=387
+/bin/sh: /usr/libexec/iwd: not foundstartx: starting at Wed May 20 00:17:27 UTC 2026
+
+sup: service 'iwd' pid=386 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:27 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    26.579] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    26.579] (++) using VT number 7
+
+[    26.579] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    26.585] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    26.585] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    26.585] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    26.585] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    26.585] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    26.585] (II) "glx" will be loaded even though the default is to disable it.
+[    26.585] (II) LoadModule: "modesetting"
+[    26.585] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    26.585] (II) Module modesetting: vendor="X.Org Foundation"
+[    26.585] 	compiled for 1.21.1.21, module version = 1.21.1
+[    26.585] 	Module class: X.Org Video Driver
+[    26.585] 	ABI class: X.Org Video Driver, version 25.2
+[    26.585] (II) LoadModule: "evdev"
+[    26.585] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    26.586] (II) Module evdev: vendor="X.Org Foundation"
+[    26.586] 	compiled for 1.21.1.15, module version = 2.11.0
+[    26.586] 	Module class: X.Org XInput Driver
+[    26.586] 	ABI class: X.Org XInput driver, version 24.4
+[    26.586] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    26.586] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    26.596] (EE) open /dev/dri/card0: No such file or directory
+[    26.596] (WW) Falling back to old probe method for modesetting
+[    26.596] (EE) open /dev/dri/card0: No such file or directory
+[    26.596] (EE) Screen 0 deleted because of no matching config section.
+[    26.596] (II) UnloadModule: "modesetting"
+[    26.596] (EE) Device(s) detected, but none match those in the config file.
+[    26.596] (EE) 
+Fatal server error:
+[    26.596] (EE) no screens found(EE) 
+[    26.597] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    26.598] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    26.598] (EE) 
+[    26.603] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=387 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 5
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 6)
+svc_spawn: started iwd pid=406
+sup: restarting 'ntpd' (attempt 1)
+svc_spawn: started ntpd pid=407
+ntpd: applet not found
+sup: restarting 'x11' (attempt 6)
+svc_spawn: started x11 pid=408
+sup: service 'ntpd' pid=407 exited, code=127
+sup: will restart 'ntpd' in 30s
+startx: starting at Wed May 20 00:17:32 UTC 2026
+/bin/sh: /usr/libexec/iwd: not foundstartx: dirs ready
+
+sup: service 'iwd' pid=406 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:32 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    31.550] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    31.550] (++) using VT number 7
+
+[    31.550] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    31.554] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    31.554] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    31.554] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    31.554] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    31.554] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    31.554] (II) "glx" will be loaded even though the default is to disable it.
+[    31.554] (II) LoadModule: "modesetting"
+[    31.554] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    31.554] (II) Module modesetting: vendor="X.Org Foundation"
+[    31.554] 	compiled for 1.21.1.21, module version = 1.21.1
+[    31.554] 	Module class: X.Org Video Driver
+[    31.554] 	ABI class: X.Org Video Driver, version 25.2
+[    31.554] (II) LoadModule: "evdev"
+[    31.554] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    31.555] (II) Module evdev: vendor="X.Org Foundation"
+[    31.555] 	compiled for 1.21.1.15, module version = 2.11.0
+[    31.555] 	Module class: X.Org XInput Driver
+[    31.555] 	ABI class: X.Org XInput driver, version 24.4
+[    31.555] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    31.555] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    31.567] (EE) open /dev/dri/card0: No such file or directory
+[    31.567] (WW) Falling back to old probe method for modesetting
+[    31.567] (EE) open /dev/dri/card0: No such file or directory
+[    31.567] (EE) Screen 0 deleted because of no matching config section.
+[    31.567] (II) UnloadModule: "modesetting"
+[    31.567] (EE) Device(s) detected, but none match those in the config file.
+[    31.567] (EE) 
+Fatal server error:
+[    31.567] (EE) no screens found(EE) 
+[    31.567] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    31.567] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    31.567] (EE) 
+[    31.572] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=408 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 6
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 7)
+svc_spawn: started iwd pid=427
+sup: restarting 'x11' (attempt 7)
+/bin/sh: /usr/libexec/iwd: not found
+svc_spawn: started x11 pid=428
+sup: service 'iwd' pid=427 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:17:37 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:37 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    36.635] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    36.635] (++) using VT number 7
+
+[    36.635] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    36.640] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    36.640] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    36.640] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    36.640] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    36.640] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    36.640] (II) "glx" will be loaded even though the default is to disable it.
+[    36.640] (II) LoadModule: "modesetting"
+[    36.640] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    36.640] (II) Module modesetting: vendor="X.Org Foundation"
+[    36.640] 	compiled for 1.21.1.21, module version = 1.21.1
+[    36.640] 	Module class: X.Org Video Driver
+[    36.640] 	ABI class: X.Org Video Driver, version 25.2
+[    36.640] (II) LoadModule: "evdev"
+[    36.640] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    36.640] (II) Module evdev: vendor="X.Org Foundation"
+[    36.640] 	compiled for 1.21.1.15, module version = 2.11.0
+[    36.640] 	Module class: X.Org XInput Driver
+[    36.640] 	ABI class: X.Org XInput driver, version 24.4
+[    36.640] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    36.640] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    36.654] (EE) open /dev/dri/card0: No such file or directory
+[    36.654] (WW) Falling back to old probe method for modesetting
+[    36.654] (EE) open /dev/dri/card0: No such file or directory
+[    36.654] (EE) Screen 0 deleted because of no matching config section.
+[    36.654] (II) UnloadModule: "modesetting"
+[    36.654] (EE) Device(s) detected, but none match those in the config file.
+[    36.654] (EE) 
+Fatal server error:
+[    36.654] (EE) no screens found(EE) 
+[    36.655] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    36.656] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    36.656] (EE) 
+[    36.661] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=428 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 7
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 8)
+svc_spawn: started iwd pid=447
+sup: restarting 'x11' (attempt 8)
+svc_spawn: started x11 pid=448
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=447 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:17:42 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:42 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    41.624] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    41.624] (++) using VT number 7
+
+[    41.624] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    41.626] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    41.626] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    41.626] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    41.626] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    41.626] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    41.626] (II) "glx" will be loaded even though the default is to disable it.
+[    41.626] (II) LoadModule: "modesetting"
+[    41.626] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    41.626] (II) Module modesetting: vendor="X.Org Foundation"
+[    41.626] 	compiled for 1.21.1.21, module version = 1.21.1
+[    41.626] 	Module class: X.Org Video Driver
+[    41.626] 	ABI class: X.Org Video Driver, version 25.2
+[    41.626] (II) LoadModule: "evdev"
+[    41.626] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    41.626] (II) Module evdev: vendor="X.Org Foundation"
+[    41.626] 	compiled for 1.21.1.15, module version = 2.11.0
+[    41.626] 	Module class: X.Org XInput Driver
+[    41.626] 	ABI class: X.Org XInput driver, version 24.4
+[    41.626] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    41.626] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    41.633] (EE) open /dev/dri/card0: No such file or directory
+[    41.633] (WW) Falling back to old probe method for modesetting
+[    41.633] (EE) open /dev/dri/card0: No such file or directory
+[    41.633] (EE) Screen 0 deleted because of no matching config section.
+[    41.633] (II) UnloadModule: "modesetting"
+[    41.633] (EE) Device(s) detected, but none match those in the config file.
+[    41.633] (EE) 
+Fatal server error:
+[    41.634] (EE) no screens found(EE) 
+[    41.635] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    41.638] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    41.640] (EE) 
+[    41.643] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=448 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 8
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 9)
+svc_spawn: started iwd pid=467
+sup: restarting 'x11' (attempt 9)
+/bin/sh: /usr/libexec/iwd: not found
+svc_spawn: started x11 pid=468
+sup: service 'iwd' pid=467 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:17:47 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:47 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    46.593] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    46.593] (++) using VT number 7
+
+[    46.593] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    46.599] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    46.599] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    46.599] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    46.599] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    46.599] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    46.599] (II) "glx" will be loaded even though the default is to disable it.
+[    46.599] (II) LoadModule: "modesetting"
+[    46.599] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    46.599] (II) Module modesetting: vendor="X.Org Foundation"
+[    46.599] 	compiled for 1.21.1.21, module version = 1.21.1
+[    46.599] 	Module class: X.Org Video Driver
+[    46.599] 	ABI class: X.Org Video Driver, version 25.2
+[    46.599] (II) LoadModule: "evdev"
+[    46.599] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    46.604] (II) Module evdev: vendor="X.Org Foundation"
+[    46.604] 	compiled for 1.21.1.15, module version = 2.11.0
+[    46.604] 	Module class: X.Org XInput Driver
+[    46.604] 	ABI class: X.Org XInput driver, version 24.4
+[    46.604] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    46.604] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    46.613] (EE) open /dev/dri/card0: No such file or directory
+[    46.613] (WW) Falling back to old probe method for modesetting
+[    46.613] (EE) open /dev/dri/card0: No such file or directory
+[    46.613] (EE) Screen 0 deleted because of no matching config section.
+[    46.613] (II) UnloadModule: "modesetting"
+[    46.613] (EE) Device(s) detected, but none match those in the config file.
+[    46.613] (EE) 
+Fatal server error:
+[    46.613] (EE) no screens found(EE) 
+[    46.613] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    46.614] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    46.615] (EE) 
+[    46.619] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=468 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 9
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 10)
+svc_spawn: started iwd pid=487
+sup: restarting 'x11' (attempt 10)
+svc_spawn: started x11 pid=488
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=487 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:17:52 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:52 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    51.627] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    51.627] (++) using VT number 7
+
+[    51.627] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    51.629] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    51.629] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    51.629] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    51.629] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    51.629] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    51.629] (II) "glx" will be loaded even though the default is to disable it.
+[    51.629] (II) LoadModule: "modesetting"
+[    51.629] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    51.630] (II) Module modesetting: vendor="X.Org Foundation"
+[    51.630] 	compiled for 1.21.1.21, module version = 1.21.1
+[    51.630] 	Module class: X.Org Video Driver
+[    51.630] 	ABI class: X.Org Video Driver, version 25.2
+[    51.630] (II) LoadModule: "evdev"
+[    51.630] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    51.630] (II) Module evdev: vendor="X.Org Foundation"
+[    51.630] 	compiled for 1.21.1.15, module version = 2.11.0
+[    51.630] 	Module class: X.Org XInput Driver
+[    51.630] 	ABI class: X.Org XInput driver, version 24.4
+[    51.630] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    51.630] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    51.637] (EE) open /dev/dri/card0: No such file or directory
+[    51.637] (WW) Falling back to old probe method for modesetting
+[    51.637] (EE) open /dev/dri/card0: No such file or directory
+[    51.637] (EE) Screen 0 deleted because of no matching config section.
+[    51.637] (II) UnloadModule: "modesetting"
+[    51.637] (EE) Device(s) detected, but none match those in the config file.
+[    51.638] (EE) 
+Fatal server error:
+[    51.638] (EE) no screens found(EE) 
+[    51.639] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    51.641] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    51.643] (EE) 
+[    51.646] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=488 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 10
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 11)
+svc_spawn: started iwd pid=507
+sup: restarting 'x11' (attempt 11)
+/bin/sh: /usr/libexec/iwd: not found
+svc_spawn: started x11 pid=508
+sup: service 'iwd' pid=507 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:17:57 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:17:57 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    56.627] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    56.627] (++) using VT number 7
+
+[    56.627] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    56.632] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    56.632] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    56.632] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    56.632] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    56.632] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    56.632] (II) "glx" will be loaded even though the default is to disable it.
+[    56.632] (II) LoadModule: "modesetting"
+[    56.632] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    56.632] (II) Module modesetting: vendor="X.Org Foundation"
+[    56.632] 	compiled for 1.21.1.21, module version = 1.21.1
+[    56.632] 	Module class: X.Org Video Driver
+[    56.632] 	ABI class: X.Org Video Driver, version 25.2
+[    56.632] (II) LoadModule: "evdev"
+[    56.632] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    56.633] (II) Module evdev: vendor="X.Org Foundation"
+[    56.633] 	compiled for 1.21.1.15, module version = 2.11.0
+[    56.633] 	Module class: X.Org XInput Driver
+[    56.633] 	ABI class: X.Org XInput driver, version 24.4
+[    56.633] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    56.633] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    56.645] (EE) open /dev/dri/card0: No such file or directory
+[    56.645] (WW) Falling back to old probe method for modesetting
+[    56.645] (EE) open /dev/dri/card0: No such file or directory
+[    56.645] (EE) Screen 0 deleted because of no matching config section.
+[    56.645] (II) UnloadModule: "modesetting"
+[    56.645] (EE) Device(s) detected, but none match those in the config file.
+[    56.645] (EE) 
+Fatal server error:
+[    56.645] (EE) no screens found(EE) 
+[    56.645] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    56.646] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    56.647] (EE) 
+[    56.652] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=508 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 11
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 12)
+svc_spawn: started iwd pid=527
+/bin/sh: /usr/libexec/iwd: not found
+sup: restarting 'ntpd' (attempt 2)
+svc_spawn: started ntpd pid=528
+sup: restarting 'x11' (attempt 12)
+ntpd: applet not found
+svc_spawn: started x11 pid=529
+sup: service 'iwd' pid=527 exited, code=127
+sup: will restart 'iwd' in 5s
+sup: service 'ntpd' pid=528 exited, code=127
+startx: starting at Wed May 20 00:18:02 UTC 2026
+sup: will restart 'ntpd' in 30s
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:18:02 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    61.576] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    61.576] (++) using VT number 7
+
+[    61.576] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    61.622] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    61.622] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    61.622] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    61.622] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    61.622] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    61.622] (II) "glx" will be loaded even though the default is to disable it.
+[    61.622] (II) LoadModule: "modesetting"
+[    61.622] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    61.622] (II) Module modesetting: vendor="X.Org Foundation"
+[    61.622] 	compiled for 1.21.1.21, module version = 1.21.1
+[    61.622] 	Module class: X.Org Video Driver
+[    61.622] 	ABI class: X.Org Video Driver, version 25.2
+[    61.622] (II) LoadModule: "evdev"
+[    61.622] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    61.622] (II) Module evdev: vendor="X.Org Foundation"
+[    61.622] 	compiled for 1.21.1.15, module version = 2.11.0
+[    61.622] 	Module class: X.Org XInput Driver
+[    61.622] 	ABI class: X.Org XInput driver, version 24.4
+[    61.622] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    61.622] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    61.634] (EE) open /dev/dri/card0: No such file or directory
+[    61.634] (WW) Falling back to old probe method for modesetting
+[    61.634] (EE) open /dev/dri/card0: No such file or directory
+[    61.634] (EE) Screen 0 deleted because of no matching config section.
+[    61.634] (II) UnloadModule: "modesetting"
+[    61.634] (EE) Device(s) detected, but none match those in the config file.
+[    61.634] (EE) 
+Fatal server error:
+[    61.634] (EE) no screens found(EE) 
+[    61.634] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    61.634] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    61.634] (EE) 
+[    61.638] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=529 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 12
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 13)
+svc_spawn: started iwd pid=548
+sup: restarting 'x11' (attempt 13)
+svc_spawn: started x11 pid=549
+/bin/sh: /usr/libexec/iwd: not foundstartx: starting at Wed May 20 00:18:07 UTC 2026
+
+sup: service 'iwd' pid=548 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:18:07 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    66.616] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    66.617] (++) using VT number 7
+
+[    66.617] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    66.619] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    66.619] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    66.619] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    66.619] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    66.619] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    66.619] (II) "glx" will be loaded even though the default is to disable it.
+[    66.619] (II) LoadModule: "modesetting"
+[    66.619] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    66.619] (II) Module modesetting: vendor="X.Org Foundation"
+[    66.619] 	compiled for 1.21.1.21, module version = 1.21.1
+[    66.619] 	Module class: X.Org Video Driver
+[    66.619] 	ABI class: X.Org Video Driver, version 25.2
+[    66.619] (II) LoadModule: "evdev"
+[    66.619] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    66.619] (II) Module evdev: vendor="X.Org Foundation"
+[    66.619] 	compiled for 1.21.1.15, module version = 2.11.0
+[    66.619] 	Module class: X.Org XInput Driver
+[    66.619] 	ABI class: X.Org XInput driver, version 24.4
+[    66.619] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    66.620] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    66.628] (EE) open /dev/dri/card0: No such file or directory
+[    66.628] (WW) Falling back to old probe method for modesetting
+[    66.628] (EE) open /dev/dri/card0: No such file or directory
+[    66.628] (EE) Screen 0 deleted because of no matching config section.
+[    66.628] (II) UnloadModule: "modesetting"
+[    66.628] (EE) Device(s) detected, but none match those in the config file.
+[    66.628] (EE) 
+Fatal server error:
+[    66.629] (EE) no screens found(EE) 
+[    66.630] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    66.633] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    66.635] (EE) 
+[    66.639] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=549 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 13
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 14)
+svc_spawn: started iwd pid=568
+sup: restarting 'x11' (attempt 14)
+/bin/sh: /usr/libexec/iwd: not found
+svc_spawn: started x11 pid=569
+sup: service 'iwd' pid=568 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:18:12 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:18:12 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    71.574] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    71.574] (++) using VT number 7
+
+[    71.574] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    71.577] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    71.577] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    71.577] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    71.577] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    71.577] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    71.577] (II) "glx" will be loaded even though the default is to disable it.
+[    71.577] (II) LoadModule: "modesetting"
+[    71.578] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    71.578] (II) Module modesetting: vendor="X.Org Foundation"
+[    71.578] 	compiled for 1.21.1.21, module version = 1.21.1
+[    71.578] 	Module class: X.Org Video Driver
+[    71.578] 	ABI class: X.Org Video Driver, version 25.2
+[    71.578] (II) LoadModule: "evdev"
+[    71.578] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    71.578] (II) Module evdev: vendor="X.Org Foundation"
+[    71.578] 	compiled for 1.21.1.15, module version = 2.11.0
+[    71.578] 	Module class: X.Org XInput Driver
+[    71.578] 	ABI class: X.Org XInput driver, version 24.4
+[    71.578] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    71.578] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    71.629] (EE) open /dev/dri/card0: No such file or directory
+[    71.629] (WW) Falling back to old probe method for modesetting
+[    71.629] (EE) open /dev/dri/card0: No such file or directory
+[    71.629] (EE) Screen 0 deleted because of no matching config section.
+[    71.629] (II) UnloadModule: "modesetting"
+[    71.629] (EE) Device(s) detected, but none match those in the config file.
+[    71.629] (EE) 
+Fatal server error:
+[    71.629] (EE) no screens found(EE) 
+[    71.629] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    71.629] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    71.629] (EE) 
+[    71.634] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=569 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 14
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 15)
+svc_spawn: started iwd pid=588
+sup: restarting 'x11' (attempt 15)
+/bin/sh: /usr/libexec/iwd: not found
+svc_spawn: started x11 pid=589
+sup: service 'iwd' pid=588 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:18:17 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:18:17 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    76.645] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    76.645] (++) using VT number 7
+
+[    76.645] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    76.647] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    76.647] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    76.647] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    76.647] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    76.647] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    76.647] (II) "glx" will be loaded even though the default is to disable it.
+[    76.647] (II) LoadModule: "modesetting"
+[    76.647] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    76.647] (II) Module modesetting: vendor="X.Org Foundation"
+[    76.647] 	compiled for 1.21.1.21, module version = 1.21.1
+[    76.647] 	Module class: X.Org Video Driver
+[    76.647] 	ABI class: X.Org Video Driver, version 25.2
+[    76.647] (II) LoadModule: "evdev"
+[    76.647] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    76.648] (II) Module evdev: vendor="X.Org Foundation"
+[    76.648] 	compiled for 1.21.1.15, module version = 2.11.0
+[    76.648] 	Module class: X.Org XInput Driver
+[    76.648] 	ABI class: X.Org XInput driver, version 24.4
+[    76.648] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    76.648] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    76.655] (EE) open /dev/dri/card0: No such file or directory
+[    76.655] (WW) Falling back to old probe method for modesetting
+[    76.655] (EE) open /dev/dri/card0: No such file or directory
+[    76.655] (EE) Screen 0 deleted because of no matching config section.
+[    76.655] (II) UnloadModule: "modesetting"
+[    76.655] (EE) Device(s) detected, but none match those in the config file.
+[    76.656] (EE) 
+Fatal server error:
+[    76.656] (EE) no screens found(EE) 
+[    76.657] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    76.660] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    76.662] (EE) 
+[    76.665] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=589 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 15
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 16)
+svc_spawn: started iwd pid=608
+sup: restarting 'x11' (attempt 16)
+svc_spawn: started x11 pid=609
+/bin/sh: /usr/libexec/iwd: not found
+sup: service 'iwd' pid=608 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: starting at Wed May 20 00:18:22 UTC 2026
+startx: dirs ready
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:18:22 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    81.573] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    81.573] (++) using VT number 7
+
+[    81.573] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    81.579] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    81.579] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    81.579] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    81.579] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    81.579] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    81.579] (II) "glx" will be loaded even though the default is to disable it.
+[    81.579] (II) LoadModule: "modesetting"
+[    81.579] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    81.579] (II) Module modesetting: vendor="X.Org Foundation"
+[    81.579] 	compiled for 1.21.1.21, module version = 1.21.1
+[    81.579] 	Module class: X.Org Video Driver
+[    81.579] 	ABI class: X.Org Video Driver, version 25.2
+[    81.579] (II) LoadModule: "evdev"
+[    81.579] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    81.579] (II) Module evdev: vendor="X.Org Foundation"
+[    81.579] 	compiled for 1.21.1.15, module version = 2.11.0
+[    81.579] 	Module class: X.Org XInput Driver
+[    81.579] 	ABI class: X.Org XInput driver, version 24.4
+[    81.579] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    81.579] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    81.594] (EE) open /dev/dri/card0: No such file or directory
+[    81.595] (WW) Falling back to old probe method for modesetting
+[    81.595] (EE) open /dev/dri/card0: No such file or directory
+[    81.595] (EE) Screen 0 deleted because of no matching config section.
+[    81.595] (II) UnloadModule: "modesetting"
+[    81.595] (EE) Device(s) detected, but none match those in the config file.
+[    81.595] (EE) 
+Fatal server error:
+[    81.631] (EE) no screens found(EE) 
+[    81.631] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    81.631] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    81.632] (EE) 
+[    81.635] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=609 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 16
+udhcpc: read error: Network is down, reopening socket
+udhcpc: read error: Network is down, reopening socket
+sup: restarting 'iwd' (attempt 17)
+svc_spawn: started iwd pid=628
+sup: restarting 'x11' (attempt 17)
+svc_spawn: started x11 pid=629
+/bin/sh: startx: starting at Wed May 20 00:18:27 UTC 2026
+/usr/libexec/iwd: not found
+startx: dirs ready
+sup: service 'iwd' pid=628 exited, code=127
+sup: will restart 'iwd' in 5s
+startx: xkbcomp shim installed
+startx: kbd=/dev/input/event1  ptr=/dev/input/event2
+startx: xorg-runtime.conf written (kbd=event1 ptr=event2)
+startx: launching xinit → Xorg :0 vt7
+
+
+X.Org X Server 1.21.1.21
+X Protocol Version 11, Revision 0
+Current Operating System: Linux rogue 6.6.75 #2 SMP PREEMPT_DYNAMIC Sun May 10 00:09:12 IST 2026 x86_64
+Kernel command line: rdinit=/init console=ttyS0 quiet  -- --services-dir /etc/cogman/services
+xorg-server 2:21.1.21-1 (https://www.debian.org/support) 
+Current version of pixman: 0.46.4
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(++) Log file: "/tmp/Xorg.log", Time: Wed May 20 00:18:27 2026
+(++) Using config file: "/tmp/xorg-runtime.conf"
+(EE) 
+Fatal server error:
+(EE) no screens found(EE) 
+(EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+(EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+(EE) 
+(EE) Server terminated with error (1). Closing log file.
+xinit: giving up
+xinit: unable to connect to X server: Connection refused
+xinit: server error
+startx: xinit exited (code=1)
+=== Xorg.log tail ===
+[    86.546] (EE) dbus-core: error connecting to system bus: org.freedesktop.DBus.Error.FileNotFound (Failed to connect to socket /run/dbus/system_bus_socket: No such file or directory)
+[    86.546] (++) using VT number 7
+
+[    86.546] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    86.548] (--) PCI:*(0@0:2:0) 1234:1111:1af4:1100 rev 2, Mem @ 0xfd000000/16777216, 0xfebd0000/4096, BIOS @ 0x????????/131072
+[    86.548] (WW) "glx" will not be loaded unless you've specified it to be loaded elsewhere.
+[    86.548] (WW) "dri" will not be loaded unless you've specified it to be loaded elsewhere.
+[    86.548] (WW) "dri2" will not be loaded unless you've specified it to be loaded elsewhere.
+[    86.548] (WW) "dri3" will not be loaded unless you've specified it to be loaded elsewhere.
+[    86.548] (II) "glx" will be loaded even though the default is to disable it.
+[    86.548] (II) LoadModule: "modesetting"
+[    86.549] (II) Loading /usr/lib/xorg/modules/drivers/modesetting_drv.so
+[    86.549] (II) Module modesetting: vendor="X.Org Foundation"
+[    86.549] 	compiled for 1.21.1.21, module version = 1.21.1
+[    86.549] 	Module class: X.Org Video Driver
+[    86.549] 	ABI class: X.Org Video Driver, version 25.2
+[    86.549] (II) LoadModule: "evdev"
+[    86.549] (II) Loading /usr/lib/xorg/modules/input/evdev_drv.so
+[    86.549] (II) Module evdev: vendor="X.Org Foundation"
+[    86.549] 	compiled for 1.21.1.15, module version = 2.11.0
+[    86.549] 	Module class: X.Org XInput Driver
+[    86.549] 	ABI class: X.Org XInput driver, version 24.4
+[    86.549] (II) modesetting: Driver for Modesetting Kernel Drivers: kms
+[    86.549] (WW) xf86OpenConsole: setsid failed: Operation not permitted
+[    86.559] (EE) open /dev/dri/card0: No such file or directory
+[    86.559] (WW) Falling back to old probe method for modesetting
+[    86.559] (EE) open /dev/dri/card0: No such file or directory
+[    86.559] (EE) Screen 0 deleted because of no matching config section.
+[    86.559] (II) UnloadModule: "modesetting"
+[    86.559] (EE) Device(s) detected, but none match those in the config file.
+[    86.559] (EE) 
+Fatal server error:
+[    86.559] (EE) no screens found(EE) 
+[    86.559] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[    86.559] (EE) Please also check the log file at "/tmp/Xorg.log" for additional information.
+[    86.559] (EE) 
+[    86.564] (EE) Server terminated with error (1). Closing log file.
+sup: service 'x11' pid=629 exited, code=1
+sup: will restart 'x11' in 5s
+[SERVICE:heartbeat] tick 17
+udhcpc: read error: Network is down, reopening socket
